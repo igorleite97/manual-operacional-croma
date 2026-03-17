@@ -1,283 +1,241 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manual de Compras</title>
-
-<!-- Evita flash de tema -->
-<script>
-(function(){
-  const saved = localStorage.getItem("theme");
-  if(saved==="dark"){
-    document.documentElement.setAttribute("data-theme","dark");
-  }
-})();
-</script>
-
-<style>
-
-/* =======================
-   DESIGN TOKENS (LIGHT)
-======================= */
-:root{
-  --bg:#f8fafc;
-  --bg2:#ffffff;
-  --bg3:#e2e8f0;
-
-  --text:#0f172a;
-  --text2:#475569;
-
-  --border:#e2e8f0;
-  --border2:#cbd5f5;
-
-  --accent:#2563eb;
-  --accent2:#3b82f6;
-
-  --shadow-md:0 4px 12px rgba(0,0,0,.08);
-}
-
-/* =======================
-   DARK MODE
-======================= */
-[data-theme="dark"]{
-  --bg:#0f1117;
-  --bg2:#161b27;
-  --bg3:#1e2535;
-
-  --text:#f1f5f9;
-  --text2:#94a3b8;
-
-  --border:#1e2535;
-  --border2:#2d3748;
-
-  --accent:#3b82f6;
-  --accent2:#60a5fa;
-}
-
-/* =======================
-   BASE
-======================= */
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  transition: background .25s, color .25s;
-}
-
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:16px;
-  background:var(--bg2);
-  border-bottom:1px solid var(--border);
-}
-
-/* =======================
-   BOTÃO TEMA
-======================= */
-.theme-toggle{
-  border:1px solid var(--border2);
-  background:var(--bg);
-  color:var(--text2);
-  padding:6px 10px;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-.theme-toggle:hover{
-  background:var(--bg3);
-  color:var(--text);
-}
-
-/* =======================
-   TABS
-======================= */
-.tabs{
-  display:flex;
-  gap:8px;
-  padding:16px;
-}
-
-.tab{
-  padding:8px 12px;
-  border-radius:8px;
-  background:var(--bg3);
-  cursor:pointer;
-}
-
-.tab.active{
-  background:var(--accent);
-  color:white;
-}
-
-/* =======================
-   CONTEÚDO
-======================= */
-.section{
-  display:none;
-  padding:16px;
-}
-
-.section.active{
-  display:block;
-}
-
-/* =======================
-   KANBAN
-======================= */
-.kanban{
-  display:flex;
-  gap:12px;
-}
-
-.kcol{
-  flex:1;
-  background:var(--bg2);
-  padding:10px;
-  border-radius:10px;
-  border:1px solid var(--border);
-}
-
-.kcard{
-  padding:10px;
-  background:var(--bg3);
-  border-radius:8px;
-  margin-bottom:8px;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.kcard:hover{
-  transform:translateY(-2px);
-  box-shadow:var(--shadow-md);
-}
-
-/* =======================
-   DETALHE
-======================= */
-.detail{
-  margin-top:16px;
-  padding:16px;
-  background:var(--bg2);
-  border:1px solid var(--border);
-  border-radius:10px;
-}
-
-</style>
-</head>
-
-<body>
-
-<header>
-  <h2>Manual de Compras</h2>
-  <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-</header>
-
-<!-- TABS -->
-<div class="tabs">
-  <div class="tab active" onclick="openTab(0)">Processo</div>
-  <div class="tab" onclick="openTab(1)">Checklist</div>
-</div>
-
-<!-- SEÇÕES -->
-<div class="section active">
-  <div class="kanban">
-
-    <div class="kcol">
-      <h4>Entrada</h4>
-      <div class="kcard" onclick="showDetail('c1')">Pedido B2B</div>
-    </div>
-
-    <div class="kcol">
-      <h4>Análise</h4>
-      <div class="kcard" onclick="showDetail('c2')">Validar orçamento</div>
-    </div>
-
-  </div>
-
-  <div id="detail" class="detail">Clique em um item...</div>
-</div>
-
-<div class="section">
-  <ul>
-    <li>✔ Verificar CNPJ</li>
-    <li>✔ Validar fornecedor</li>
-    <li>✔ Conferir preço</li>
-  </ul>
-</div>
-
 <script>
 
-/* =======================
-   TABS
-======================= */
-function openTab(i){
-  document.querySelectorAll(".tab").forEach((t,idx)=>{
-    t.classList.toggle("active", idx===i);
-  });
-
-  document.querySelectorAll(".section").forEach((s,idx)=>{
-    s.classList.toggle("active", idx===i);
-  });
-}
-
-/* =======================
-   DETALHES
-======================= */
+/* =========================
+    BASE DE DADOS DOS CARDS
+   Aqui eu centralizo tudo, facilita manutenção depois
+========================= */
 const DATA = {
-  c1:"Receber pedido do cliente e registrar no sistema.",
-  c2:"Validar orçamento e disponibilidade financeira."
+  c1:{
+    title:'Pedido B2B recebido — verificação inicial',
+    phase:'Aprov. Coordenador',
+    color:'var(--purple)',
+    steps:[
+      ['Receber ticket','Validar se o card veio do Comercial com contexto mínimo'],
+      ['Conferir dados','Cliente, produto, endereço e anexos obrigatórios'],
+      ['Classificar pedido','Identificar se é padrão ou triangulado']
+    ],
+    alert:'Sem dados completos, o fluxo para aqui. Não empurre problema pra frente.'
+  },
+
+  c2:{
+    title:'Pedido triangulado',
+    phase:'Aprov. Coordenador',
+    color:'var(--amber)',
+    steps:[
+      ['Validar modelo','Fornecedor entrega direto ao cliente'],
+      ['Checar endereço','Evitar erro de logística'],
+      ['Alinhar prazo','Fornecedor precisa garantir SLA']
+    ]
+  },
+
+  f1:{
+    title:'Análise financeira',
+    phase:'Financeiro',
+    color:'var(--green)',
+    steps:[
+      ['Verificar caixa','Se existe viabilidade'],
+      ['Validar condição','Prazo vs impacto financeiro'],
+      ['Aprovar ou reprovar','Seguir fluxo']
+    ]
+  },
+
+  d1:{
+    title:'Aprovação de margem',
+    phase:'Diretoria',
+    color:'var(--accent)',
+    steps:[
+      ['Analisar markup','Se está dentro da estratégia'],
+      ['Ajustar se necessário','Negociação ou recusa'],
+      ['Autorizar execução','Liberação final']
+    ]
+  },
+
+  b1:{
+    title:'Cotar e executar compra',
+    phase:'Comprador',
+    color:'var(--teal)',
+    steps:[
+      ['Buscar fornecedores','Sempre que possível, mais de 1'],
+      ['Negociar','Preço, prazo e condição'],
+      ['Fechar compra','Escolher melhor custo-benefício']
+    ]
+  },
+
+  b2:{
+    title:'Validar NF do fornecedor',
+    phase:'Comprador',
+    color:'var(--teal)',
+    steps:[
+      ['Conferir dados fiscais','CNPJ, valores e itens'],
+      ['Verificar impostos','Evitar erro contábil'],
+      ['Liberar envio','Encaminhar ao financeiro']
+    ]
+  },
+
+  p1:{
+    title:'Pendência / bloqueio',
+    phase:'Pendentes',
+    color:'var(--red)',
+    steps:[
+      ['Identificar problema','Falta de info ou atraso'],
+      ['Escalar','Avisar supervisor'],
+      ['Resolver','Voltar fluxo']
+    ]
+  },
+
+  o1:{
+    title:'Fechamento do ciclo',
+    phase:'Finalizado',
+    color:'var(--gray)',
+    steps:[
+      ['Atualizar controle','Planilha ou sistema'],
+      ['Confirmar entrega','Com logística'],
+      ['Encerrar card','Fluxo concluído']
+    ]
+  }
 };
 
-function showDetail(id){
-  document.getElementById("detail").innerText = DATA[id];
+
+/* =========================
+    DETALHE DO CARD
+   Aqui é onde a mágica acontece
+========================= */
+function det(id){
+
+  const d = DATA[id];
+  const el = document.getElementById('det-panel');
+
+  // remove seleção anterior
+  document.querySelectorAll('.kcard').forEach(c=>c.classList.remove('sel'));
+  document.querySelector(`[data-id="${id}"]`).classList.add('sel');
+
+  // monta steps
+  let stepsHTML = d.steps.map((s,i)=>`
+    <div class="step">
+      <div class="step-n" style="background:${d.color}20;color:${d.color}">${i+1}</div>
+      <div class="step-body">
+        <strong>${s[0]}</strong>
+        <p>${s[1]}</p>
+      </div>
+    </div>
+  `).join('');
+
+  el.innerHTML = `
+    <div class="detail-head">
+      <h3>${d.title}</h3>
+      <span class="dphase" style="background:${d.color}20;color:${d.color}">
+        ${d.phase}
+      </span>
+    </div>
+
+    <div class="steps">${stepsHTML}</div>
+
+    ${d.alert ? `
+      <div class="alert alert-warn">
+        <span class="alert-icon">⚠️</span>
+        <p>${d.alert}</p>
+      </div>
+    `:''}
+  `;
 }
 
-/* =======================
-   TEMA
-======================= */
-function toggleTheme(){
-  const current = document.documentElement.getAttribute("data-theme");
 
-  if(current === "dark"){
-    document.documentElement.removeAttribute("data-theme");
-    localStorage.setItem("theme","light");
-  }else{
-    document.documentElement.setAttribute("data-theme","dark");
-    localStorage.setItem("theme","dark");
-  }
+/* =========================
+    TABS
+========================= */
+function tab(name,el){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
 
-  updateIcon();
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
 }
 
-function loadTheme(){
-  const saved = localStorage.getItem("theme");
 
-  if(saved === "dark"){
-    document.documentElement.setAttribute("data-theme","dark");
-  }else if(saved === "light"){
-    document.documentElement.removeAttribute("data-theme");
-  }else{
-    if(window.matchMedia('(prefers-color-scheme: dark)').matches){
-      document.documentElement.setAttribute("data-theme","dark");
+/* =========================
+    FILTRO KANBAN
+========================= */
+function filt(col){
+
+  document.querySelectorAll('.kcol').forEach(c=>{
+    if(col==='all'){
+      c.style.display='block';
+    }else{
+      c.style.display = c.dataset.col===col ? 'block':'none';
     }
+  });
+
+}
+
+
+/* =========================
+    CHECKLIST
+========================= */
+function ck(el){
+  el.classList.toggle('done');
+  updateProgress();
+}
+
+function updateProgress(){
+  const items = document.querySelectorAll('#chklist .citem');
+  const done = document.querySelectorAll('#chklist .citem.done').length;
+
+  const pct = (done/items.length)*100;
+
+  document.getElementById('prog').style.width = pct+'%';
+  document.getElementById('ckcnt').innerText = `${done} / ${items.length}`;
+}
+
+function resetCk(){
+  document.querySelectorAll('#chklist .citem').forEach(i=>i.classList.remove('done'));
+  updateProgress();
+}
+
+
+/* =========================
+    MODO ESCURO (DECENTE DE VERDADE)
+========================= */
+
+// carrega preferência
+(function(){
+  const saved = localStorage.getItem('theme');
+
+  if(saved === 'dark'){
+    document.documentElement.setAttribute('data-theme','dark');
   }
 
-  updateIcon();
+  updateThemeIcon();
+})();
+
+function toggleTheme(){
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+  if(isDark){
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('theme','light');
+  }else{
+    document.documentElement.setAttribute('data-theme','dark');
+    localStorage.setItem('theme','dark');
+  }
+
+  updateThemeIcon();
 }
 
-function updateIcon(){
-  const btn = document.querySelector(".theme-toggle");
-  const isDark = document.documentElement.getAttribute("data-theme")==="dark";
-  btn.textContent = isDark ? "☀️" : "🌙";
-}
+// atualiza ícone
+function updateThemeIcon(){
+  let btn = document.getElementById('themeBtn');
 
-loadTheme();
+  if(!btn){
+    btn = document.createElement('button');
+    btn.id = 'themeBtn';
+    btn.style.marginLeft = 'auto';
+    btn.className = 'btn';
+    btn.onclick = toggleTheme;
+    document.querySelector('.topbar').appendChild(btn);
+  }
+
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  btn.textContent = isDark ? '☀️ Claro' : '🌙 Escuro';
+}
 
 </script>
-
-</body>
-</html>
