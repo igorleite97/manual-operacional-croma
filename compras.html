@@ -1,241 +1,270 @@
-<script>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Compras | Manual Operacional</title>
 
-/* =========================
-    BASE DE DADOS DOS CARDS
-   Aqui eu centralizo tudo, facilita manutenção depois
-========================= */
-const DATA = {
-  c1:{
-    title:'Pedido B2B recebido — verificação inicial',
-    phase:'Aprov. Coordenador',
-    color:'var(--purple)',
-    steps:[
-      ['Receber ticket','Validar se o card veio do Comercial com contexto mínimo'],
-      ['Conferir dados','Cliente, produto, endereço e anexos obrigatórios'],
-      ['Classificar pedido','Identificar se é padrão ou triangulado']
-    ],
-    alert:'Sem dados completos, o fluxo para aqui. Não empurre problema pra frente.'
-  },
-
-  c2:{
-    title:'Pedido triangulado',
-    phase:'Aprov. Coordenador',
-    color:'var(--amber)',
-    steps:[
-      ['Validar modelo','Fornecedor entrega direto ao cliente'],
-      ['Checar endereço','Evitar erro de logística'],
-      ['Alinhar prazo','Fornecedor precisa garantir SLA']
-    ]
-  },
-
-  f1:{
-    title:'Análise financeira',
-    phase:'Financeiro',
-    color:'var(--green)',
-    steps:[
-      ['Verificar caixa','Se existe viabilidade'],
-      ['Validar condição','Prazo vs impacto financeiro'],
-      ['Aprovar ou reprovar','Seguir fluxo']
-    ]
-  },
-
-  d1:{
-    title:'Aprovação de margem',
-    phase:'Diretoria',
-    color:'var(--accent)',
-    steps:[
-      ['Analisar markup','Se está dentro da estratégia'],
-      ['Ajustar se necessário','Negociação ou recusa'],
-      ['Autorizar execução','Liberação final']
-    ]
-  },
-
-  b1:{
-    title:'Cotar e executar compra',
-    phase:'Comprador',
-    color:'var(--teal)',
-    steps:[
-      ['Buscar fornecedores','Sempre que possível, mais de 1'],
-      ['Negociar','Preço, prazo e condição'],
-      ['Fechar compra','Escolher melhor custo-benefício']
-    ]
-  },
-
-  b2:{
-    title:'Validar NF do fornecedor',
-    phase:'Comprador',
-    color:'var(--teal)',
-    steps:[
-      ['Conferir dados fiscais','CNPJ, valores e itens'],
-      ['Verificar impostos','Evitar erro contábil'],
-      ['Liberar envio','Encaminhar ao financeiro']
-    ]
-  },
-
-  p1:{
-    title:'Pendência / bloqueio',
-    phase:'Pendentes',
-    color:'var(--red)',
-    steps:[
-      ['Identificar problema','Falta de info ou atraso'],
-      ['Escalar','Avisar supervisor'],
-      ['Resolver','Voltar fluxo']
-    ]
-  },
-
-  o1:{
-    title:'Fechamento do ciclo',
-    phase:'Finalizado',
-    color:'var(--gray)',
-    steps:[
-      ['Atualizar controle','Planilha ou sistema'],
-      ['Confirmar entrega','Com logística'],
-      ['Encerrar card','Fluxo concluído']
-    ]
-  }
-};
-
-
-/* =========================
-    DETALHE DO CARD
-   Aqui é onde a mágica acontece
-========================= */
-function det(id){
-
-  const d = DATA[id];
-  const el = document.getElementById('det-panel');
-
-  // remove seleção anterior
-  document.querySelectorAll('.kcard').forEach(c=>c.classList.remove('sel'));
-  document.querySelector(`[data-id="${id}"]`).classList.add('sel');
-
-  // monta steps
-  let stepsHTML = d.steps.map((s,i)=>`
-    <div class="step">
-      <div class="step-n" style="background:${d.color}20;color:${d.color}">${i+1}</div>
-      <div class="step-body">
-        <strong>${s[0]}</strong>
-        <p>${s[1]}</p>
-      </div>
-    </div>
-  `).join('');
-
-  el.innerHTML = `
-    <div class="detail-head">
-      <h3>${d.title}</h3>
-      <span class="dphase" style="background:${d.color}20;color:${d.color}">
-        ${d.phase}
-      </span>
-    </div>
-
-    <div class="steps">${stepsHTML}</div>
-
-    ${d.alert ? `
-      <div class="alert alert-warn">
-        <span class="alert-icon">⚠️</span>
-        <p>${d.alert}</p>
-      </div>
-    `:''}
-  `;
-}
-
-
-/* =========================
-    TABS
-========================= */
-function tab(name,el){
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-}
-
-
-/* =========================
-    FILTRO KANBAN
-========================= */
-function filt(col){
-
-  document.querySelectorAll('.kcol').forEach(c=>{
-    if(col==='all'){
-      c.style.display='block';
-    }else{
-      c.style.display = c.dataset.col===col ? 'block':'none';
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --text:#1e293b;
+      --accent:#2563eb;
     }
+
+    [data-theme="dark"]{
+      --bg:#0f172a;
+      --card:#1e293b;
+      --text:#e2e8f0;
+      --accent:#38bdf8;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      padding:12px 20px;
+      background:var(--card);
+      border-bottom:1px solid #ddd;
+    }
+
+    .title{
+      font-weight:bold;
+      font-size:18px;
+    }
+
+    .btn{
+      margin-left:auto;
+      padding:6px 12px;
+      cursor:pointer;
+      border:none;
+      border-radius:6px;
+      background:var(--accent);
+      color:#fff;
+    }
+
+    .container{
+      padding:20px;
+    }
+
+    .kanban{
+      display:flex;
+      gap:16px;
+      overflow-x:auto;
+    }
+
+    .col{
+      background:var(--card);
+      padding:10px;
+      border-radius:8px;
+      min-width:250px;
+    }
+
+    .col h3{
+      margin-top:0;
+    }
+
+    .card{
+      background:var(--bg);
+      padding:10px;
+      border-radius:6px;
+      margin-bottom:10px;
+      cursor:pointer;
+      border-left:4px solid var(--accent);
+    }
+
+    .card:hover{
+      opacity:0.85;
+    }
+
+    .detail{
+      margin-top:20px;
+      background:var(--card);
+      padding:15px;
+      border-radius:8px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="title">📦 Compras - Manual Operacional</div>
+    <button id="themeBtn" class="btn">🌙 Escuro</button>
+  </div>
+
+  <div class="container">
+
+    <!-- KANBAN -->
+    <div class="kanban">
+
+      <div class="col">
+        <h3>Coordenador</h3>
+        <div class="card" onclick="det('c1')">Pedido recebido</div>
+        <div class="card" onclick="det('c2')">Pedido triangulado</div>
+      </div>
+
+      <div class="col">
+        <h3>Financeiro</h3>
+        <div class="card" onclick="det('f1')">Análise financeira</div>
+      </div>
+
+      <div class="col">
+        <h3>Diretoria</h3>
+        <div class="card" onclick="det('d1')">Aprovação de margem</div>
+      </div>
+
+      <div class="col">
+        <h3>Comprador</h3>
+        <div class="card" onclick="det('b1')">Cotar e comprar</div>
+        <div class="card" onclick="det('b2')">Validar NF</div>
+      </div>
+
+      <div class="col">
+        <h3>Finalizado</h3>
+        <div class="card" onclick="det('o1')">Fechamento</div>
+      </div>
+
+    </div>
+
+    <!-- DETALHE -->
+    <div id="detalhe" class="detail">
+      <strong>Selecione um card para ver o fluxo.</strong>
+    </div>
+
+  </div>
+
+  <script>
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+    /* =========================
+       BASE DE DADOS
+    ========================= */
+    const DATA = {
+      c1:{
+        title:'Pedido recebido',
+        steps:[
+          'Validar informações do pedido',
+          'Conferir anexos obrigatórios',
+          'Encaminhar para aprovação'
+        ]
+      },
+
+      c2:{
+        title:'Pedido triangulado',
+        steps:[
+          'Fornecedor entrega direto ao cliente',
+          'Validar endereço',
+          'Alinhar prazo'
+        ]
+      },
+
+      f1:{
+        title:'Análise financeira',
+        steps:[
+          'Verificar caixa',
+          'Validar condição de pagamento',
+          'Aprovar ou reprovar'
+        ]
+      },
+
+      d1:{
+        title:'Aprovação de margem',
+        steps:[
+          'Analisar markup',
+          'Validar estratégia',
+          'Autorizar compra'
+        ]
+      },
+
+      b1:{
+        title:'Cotar e comprar',
+        steps:[
+          'Buscar fornecedores',
+          'Negociar preço e prazo',
+          'Fechar compra'
+        ]
+      },
+
+      b2:{
+        title:'Validar NF',
+        steps:[
+          'Conferir dados fiscais',
+          'Verificar valores',
+          'Liberar financeiro'
+        ]
+      },
+
+      o1:{
+        title:'Fechamento',
+        steps:[
+          'Atualizar controle',
+          'Confirmar entrega',
+          'Encerrar processo'
+        ]
+      }
+    };
+
+    /* =========================
+       DETALHE
+    ========================= */
+    window.det = function(id){
+      const d = DATA[id];
+
+      let html = `<h3>${d.title}</h3><ul>`;
+
+      d.steps.forEach(s=>{
+        html += `<li>${s}</li>`;
+      });
+
+      html += `</ul>`;
+
+      document.getElementById('detalhe').innerHTML = html;
+    };
+
+    /* =========================
+       TEMA
+    ========================= */
+    const btn = document.getElementById('themeBtn');
+
+    function loadTheme(){
+      const saved = localStorage.getItem('theme');
+
+      if(saved === 'dark'){
+        document.documentElement.setAttribute('data-theme','dark');
+        btn.textContent = '☀️ Claro';
+      }
+    }
+
+    function toggleTheme(){
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+      if(isDark){
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme','light');
+        btn.textContent = '🌙 Escuro';
+      }else{
+        document.documentElement.setAttribute('data-theme','dark');
+        localStorage.setItem('theme','dark');
+        btn.textContent = '☀️ Claro';
+      }
+    }
+
+    btn.addEventListener('click', toggleTheme);
+
+    loadTheme();
+
   });
 
-}
+  </script>
 
-
-/* =========================
-    CHECKLIST
-========================= */
-function ck(el){
-  el.classList.toggle('done');
-  updateProgress();
-}
-
-function updateProgress(){
-  const items = document.querySelectorAll('#chklist .citem');
-  const done = document.querySelectorAll('#chklist .citem.done').length;
-
-  const pct = (done/items.length)*100;
-
-  document.getElementById('prog').style.width = pct+'%';
-  document.getElementById('ckcnt').innerText = `${done} / ${items.length}`;
-}
-
-function resetCk(){
-  document.querySelectorAll('#chklist .citem').forEach(i=>i.classList.remove('done'));
-  updateProgress();
-}
-
-
-/* =========================
-    MODO ESCURO (DECENTE DE VERDADE)
-========================= */
-
-// carrega preferência
-(function(){
-  const saved = localStorage.getItem('theme');
-
-  if(saved === 'dark'){
-    document.documentElement.setAttribute('data-theme','dark');
-  }
-
-  updateThemeIcon();
-})();
-
-function toggleTheme(){
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-
-  if(isDark){
-    document.documentElement.removeAttribute('data-theme');
-    localStorage.setItem('theme','light');
-  }else{
-    document.documentElement.setAttribute('data-theme','dark');
-    localStorage.setItem('theme','dark');
-  }
-
-  updateThemeIcon();
-}
-
-// atualiza ícone
-function updateThemeIcon(){
-  let btn = document.getElementById('themeBtn');
-
-  if(!btn){
-    btn = document.createElement('button');
-    btn.id = 'themeBtn';
-    btn.style.marginLeft = 'auto';
-    btn.className = 'btn';
-    btn.onclick = toggleTheme;
-    document.querySelector('.topbar').appendChild(btn);
-  }
-
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  btn.textContent = isDark ? '☀️ Claro' : '🌙 Escuro';
-}
-
-</script>
+</body>
+</html>
