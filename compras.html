@@ -3,477 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Compras — Manual Operacional · Croma Tecnologia</title>
+<title>Compras - Sistema</title>
+
 <style>
 :root {
-  --bg:#ffffff; --bg2:#f7f8fc; --bg3:#eef1f7;
-  --text:#111827; --text2:#4b5563; --text3:#9ca3af;
-  --border:#e5e7eb; --border2:#d1d5db;
-  --accent:#1e40af; --accent2:#3b82f6; --accent-bg:#eff6ff;
-  --purple:#7c3aed; --purple-bg:#f5f3ff;
-  --green:#059669; --green-bg:#ecfdf5;
-  --teal:#0d9488; --teal-bg:#f0fdfa;
-  --amber:#b45309; --amber-bg:#fffbeb;
-  --red:#dc2626; --red-bg:#fef2f2;
-  --gray:#3065ce; --gray-bg:#f9fafb;
-  --radius:10px; --radius-lg:16px;
-  --shadow:0 1px 3px rgba(0,0,0,.08);
-  --shadow-md:0 4px 12px rgba(0,0,0,.08);
+  --bg:#f8fafc;
+  --bg2:#ffffff;
+  --text:#0f172a;
+  --border:#e2e8f0;
+  --accent:#2563eb;
 }
-@media(prefers-color-scheme:dark){:root{
-  --bg:#0f1117; --bg2:#161b27; --bg3:#1e2535;
-  --text:#f1f5f9; --text2:#94a3b8; --text3:#475569;
-  --border:#1e2535; --border2:#2d3748;
-  --accent:#3b82f6; --accent2:#60a5fa; --accent-bg:#1e3a5f;
-  --purple:#a78bfa; --purple-bg:#2e1065;
-  --green:#34d399; --green-bg:#064e3b;
-  --teal:#2dd4bf; --teal-bg:#134e4a;
-  --amber:#fcd34d; --amber-bg:#451a03;
-  --red:#f87171; --red-bg:#450a0a;
-  --gray:#9ca3af; --gray-bg:#1f2937;
-}}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
-.topbar{background:var(--bg);border-bottom:1px solid var(--border);height:56px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem;position:sticky;top:0;z-index:200;box-shadow:var(--shadow)}
-.topbar-logo img{height:30px;width:auto;object-fit:contain}
-.topbar-divider{width:1px;height:20px;background:var(--border2);flex-shrink:0}
-.topbar-title{font-size:13px;color:var(--text2)}
-.topbar-title b{color:var(--text);font-weight:500}
-.topbar-nav{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
-.topbar-nav a{font-size:11px;color:var(--text2);text-decoration:none;padding:5px 9px;border-radius:6px;transition:all .15s}
-.topbar-nav a:hover{background:var(--bg2);color:var(--text)}
-.topbar-nav a.active{background:var(--accent-bg);color:var(--accent);font-weight:500}
-@media(max-width:700px){.topbar-nav{display:none}}
-.hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:2rem 1.5rem 1.75rem}
-.hero-inner{max-width:960px;margin:0 auto}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-bg);color:var(--accent);font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;margin-bottom:.75rem;border:1px solid rgba(59,130,246,.2)}
-.hero h1{font-size:26px;font-weight:600;letter-spacing:-.02em;margin-bottom:.5rem}
-.hero p{font-size:13px;color:var(--text2);max-width:580px;line-height:1.7}
-.hero-meta{display:flex;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
-.hero-meta span{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:4px}
-.hero-meta span::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--border2);display:inline-block}
-.page{max-width:960px;margin:0 auto;padding:1.75rem 1.5rem 5rem}
-.tab-bar{display:flex;gap:2px;border-bottom:1px solid var(--border);margin-bottom:1.5rem;overflow-x:auto}
-.tab-bar::-webkit-scrollbar{height:0}
-.tab-btn{font-size:12px;font-weight:500;padding:8px 16px;border:none;background:none;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .15s;border-radius:6px 6px 0 0}
-.tab-btn:hover{color:var(--text);background:var(--bg2)}
-.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);background:var(--accent-bg)}
-.tab-panel{display:none}
-.tab-panel.active{display:block;animation:fadeIn .2s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-.section{margin-bottom:2rem}
-.section-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:.875rem;display:flex;align-items:center;gap:8px}
-.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
-.flow-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:.875rem 1rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1.25rem}
-.fpill{font-size:11px;font-weight:500;padding:5px 12px;border-radius:20px;cursor:pointer;border:1px solid transparent;transition:all .15s;user-select:none}
-.fpill:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
-.fsep{color:var(--text3);font-size:12px;flex-shrink:0}
-.flow-reset{font-size:10px;padding:4px 10px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text2);cursor:pointer;margin-left:auto;transition:all .15s}
-.flow-reset:hover{background:var(--bg2)}
-.kanban{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-bottom:1.25rem}
-@media(max-width:800px){.kanban{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:500px){.kanban{grid-template-columns:repeat(2,1fr)}}
-.kcol-head{font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:7px 10px;border-radius:8px;text-align:center;margin-bottom:8px}
-.kcard{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:10px 11px;margin-bottom:7px;cursor:pointer;transition:all .18s;position:relative;overflow:hidden}
-.kcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;opacity:0;transition:opacity .18s}
-.kcard:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:var(--shadow-md)}
-.kcard:hover::before,.kcard.sel::before{opacity:1}
-.kcard.sel{transform:translateY(-2px);box-shadow:var(--shadow-md)}
-.kcard-title{font-size:11px;font-weight:500;color:var(--text);line-height:1.4;margin-bottom:3px}
-.kcard-sub{font-size:10px;color:var(--text3);line-height:1.3}
-.ktag{display:inline-block;font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;margin-top:5px}
-.col-coord .kcard::before{background:var(--purple)}
-.col-fin   .kcard::before{background:var(--green)}
-.col-dir   .kcard::before{background:var(--accent2)}
-.col-buy   .kcard::before{background:var(--teal)}
-.col-pend  .kcard::before{background:var(--red)}
-.col-done  .kcard::before{background:var(--gray)}
-.col-coord .kcard.sel{border-left:2px solid var(--purple)}
-.col-fin   .kcard.sel{border-left:2px solid var(--green)}
-.col-dir   .kcard.sel{border-left:2px solid var(--accent2)}
-.col-buy   .kcard.sel{border-left:2px solid var(--teal)}
-.col-pend  .kcard.sel{border-left:2px solid var(--red)}
-.col-done  .kcard.sel{border-left:2px solid var(--gray)}
-.detail{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;min-height:220px}
-.detail-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:180px;gap:8px;text-align:center}
-.detail-empty svg{opacity:.15}
-.detail-empty p{font-size:13px;color:var(--text3)}
-.detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:1.125rem;padding-bottom:.875rem;border-bottom:1px solid var(--border)}
-.detail-head h3{font-size:15px;font-weight:600;color:var(--text);line-height:1.4}
-.dphase{font-size:10px;font-weight:600;padding:4px 11px;border-radius:20px;white-space:nowrap;flex-shrink:0}
-.steps{display:grid;gap:10px}
-.step{display:flex;gap:12px;align-items:flex-start}
-.step-n{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
-.step-body strong{font-weight:500;color:var(--text);display:block;margin-bottom:2px;font-size:12px}
-.step-body p{font-size:12px;color:var(--text2);line-height:1.6;margin:0}
-.alert{border-radius:8px;padding:10px 14px;margin-top:1rem;display:flex;gap:10px;align-items:flex-start}
-.alert-icon{font-size:14px;flex-shrink:0;margin-top:1px}
-.alert p{font-size:11px;line-height:1.6;margin:0}
-.alert-warn{background:var(--amber-bg);border:1px solid rgba(180,83,9,.2)}
-.alert-warn p{color:var(--amber)}
-.alert-ok{background:var(--green-bg);border:1px solid rgba(5,150,105,.2)}
-.alert-ok p{color:var(--green)}
-.alert-rule{background:var(--red-bg);border:1px solid rgba(220,38,38,.2)}
-.alert-rule p{color:var(--red)}
-.alert-info{background:var(--accent-bg);border:1px solid rgba(59,130,246,.2)}
-.alert-info p{color:var(--accent)}
-.sla-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
-.sla-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;transition:all .15s}
-.sla-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
-.sla-card label{font-size:10px;color:var(--text3);display:block;margin-bottom:4px;font-weight:500}
-.sla-card span{font-size:12px;font-weight:500;color:var(--text)}
-.sla-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:middle}
-.policy-table{display:grid;gap:6px}
-.policy-row{display:grid;grid-template-columns:130px 1fr 1.4fr;gap:12px;align-items:start;padding:12px 16px;border-radius:var(--radius);background:var(--bg);border:1px solid var(--border);transition:all .15s}
-.policy-row:hover{border-color:var(--border2);box-shadow:var(--shadow)}
-@media(max-width:600px){.policy-row{grid-template-columns:1fr}}
-.policy-badge{font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;text-align:center;display:inline-block}
-.policy-cond{font-size:12px;font-weight:500;color:var(--text);padding-top:2px}
-.policy-obs{font-size:11px;color:var(--text2);line-height:1.5;padding-top:2px}
-.checklist{display:grid;gap:5px}
-.citem{display:flex;gap:12px;align-items:flex-start;padding:10px 13px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all .15s;user-select:none}
-.citem:hover{border-color:var(--border2)}
-.citem.done{background:var(--green-bg);border-color:rgba(5,150,105,.25)}
-.cbox{width:18px;height:18px;border:1.5px solid var(--border2);border-radius:4px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s}
-.citem.done .cbox{background:var(--green);border-color:var(--green)}
-.cbox svg{display:none}
-.citem.done .cbox svg{display:block}
-.ctext{font-size:12px;color:var(--text2);line-height:1.5;transition:color .15s}
-.citem.done .ctext{color:var(--text3);text-decoration:line-through}
-.check-progress{margin-top:.875rem;display:flex;align-items:center;gap:10px}
-.progress-bar{flex:1;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
-.progress-fill{height:100%;background:var(--green);border-radius:2px;transition:width .3s ease}
-.check-count{font-size:11px;color:var(--text3);white-space:nowrap}
-.glossary{display:grid;gap:4px}
-.gitem{display:grid;grid-template-columns:160px 1fr;gap:14px;padding:10px 13px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);transition:all .15s}
-.gitem:hover{border-color:var(--border2);background:var(--bg2)}
-@media(max-width:500px){.gitem{grid-template-columns:1fr;gap:3px}}
-.gterm{font-size:11px;font-weight:600;color:var(--text)}
-.gdef{font-size:11px;color:var(--text2);line-height:1.6}
-.raci-wrap{overflow-x:auto}
-.raci-table{width:100%;border-collapse:collapse;font-size:11px}
-.raci-table th{background:var(--bg3);padding:8px 10px;text-align:left;font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--text2);border-bottom:1px solid var(--border);white-space:nowrap}
-.raci-table td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
-.raci-table tr:last-child td{border-bottom:none}
-.raci-table tr:hover td{background:var(--bg2)}
-.raci-pill{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;text-align:center;min-width:24px}
-.r-R{background:#dbeafe;color:#1e40af}
-.r-A{background:#dcfce7;color:#166534}
-.r-C{background:#fef9c3;color:#854d0e}
-.r-I{background:#f3f4f6;color:#6b7280}
-.video-grid{display:grid;gap:1rem}
-.vtitle{font-size:12px;font-weight:500;color:var(--text);margin-bottom:.5rem}
-.video-ph{background:var(--bg2);border:1.5px dashed var(--border2);border-radius:var(--radius-lg);padding:2.5rem 1rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
-.vicon{width:44px;height:44px;background:var(--bg3);border-radius:50%;display:flex;align-items:center;justify-content:center}
-.video-ph p{font-size:11px;color:var(--text3);max-width:320px;line-height:1.5}
-.video-ph code{font-size:10px;background:var(--bg3);padding:2px 6px;border-radius:4px;color:var(--text2)}
-footer{border-top:1px solid var(--border);padding:1.25rem 1.5rem;max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-footer p{font-size:11px;color:var(--text3)}
-.btn{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:6px 13px;border-radius:7px;border:1px solid var(--border2);background:var(--bg);color:var(--text2);cursor:pointer;text-decoration:none;transition:all .15s}
-.btn:hover{background:var(--bg2);color:var(--text)}
+
+/* DARK MODE */
+html.dark {
+  --bg:#0f1117;
+  --bg2:#161b27;
+  --text:#f1f5f9;
+  --border:#2d3748;
+  --accent:#3b82f6;
+}
+
+body {
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* HEADER */
+.header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px;
+  background:var(--bg2);
+  border-bottom:1px solid var(--border);
+}
+
+/* BOTÃO */
+.btn {
+  padding:8px 14px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  background:var(--accent);
+  color:#fff;
+  font-size:16px;
+}
+
+/* KANBAN MOCK */
+.container {
+  padding:20px;
+}
+
+.card {
+  background:var(--bg2);
+  border:1px solid var(--border);
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:10px;
+}
 </style>
 </head>
+
 <body>
 
-<header class="topbar">
- <a href="index.html" style="text-decoration:none;display:flex;align-items:center" class="topbar-logo">
-    <img src="logo-branco.png" alt="Croma Tecnologia">
-  </a>
-</picture>
-  <div class="topbar-divider"></div>
-  <span class="topbar-title">Manual Operacional <b>/ Compras</b></span>
-  <nav class="topbar-nav">
-    <a href="index.html">Inicio</a>
-    <a href="financeiro.html">Financeiro</a>
-    <a href="logistica.html">Logistica</a>
-    <a href="compras.html" class="active">Compras</a>
-    <a href="comercial.html">Comercial</a>
-    <a href="licitacao.html">Licitação</a>
-    <a href="ecommerce.html">E-commerce</a>
-    <a href="outsourcing.html">Outsourcing</a>
-  </nav>
-</header>
+<div class="header">
+  <h2>Projeto Compras</h2>
 
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-badge">
-      <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="currentColor"/></svg>
-      Setor de Compras
-    </div>
-    <h1>Ciclo de Compra &mdash; Comercial Privado</h1>
-    <p>Do ticket no OptiWork até a confirmacao de entrega. Clique em qualquer card do kanban para ver o passo a passo detalhado de cada etapa.</p>
-    <div class="hero-meta">
-      <span>Versao 1.2</span>
-      <span>Março 2026</span>
-      <span>Documento Interno</span>
-      <span>Sistemas: OptiWork &middot; OMIE</span>
-    </div>
-  </div>
-</section>
+  <!-- BOTÃO TEMA -->
+  <button id="themeBtn" class="btn">🌙</button>
+</div>
 
-<main class="page">
-
-  <div class="tab-bar">
-    <button class="tab-btn active" onclick="tab('kanban',this)">Fluxo Kanban</button>
-    <button class="tab-btn" onclick="tab('politica',this)">Politica de Pagamento</button>
-    <button class="tab-btn" onclick="tab('ticket',this)">Checklist do Ticket</button>
-    <button class="tab-btn" onclick="tab('raci',this)">Matriz RACI</button>
-    <button class="tab-btn" onclick="tab('glossario',this)">Glossario</button>
-    <button class="tab-btn" onclick="tab('videos',this)">Videos</button>
-  </div>
-
-  <div class="tab-panel active" id="tab-kanban">
-    <div class="section">
-      <div class="section-label">Fluxo de aprovacao</div>
-      <div class="flow-row">
-        <span class="fpill" style="background:var(--purple-bg);color:var(--purple);border-color:rgba(124,58,237,.25)" onclick="filt('coord')">Aprov. Coordenador</span>
-        <span class="fsep">&#8594;</span>
-        <span class="fpill" style="background:var(--green-bg);color:var(--green);border-color:rgba(5,150,105,.25)" onclick="filt('fin')">Aprov. Financeiro</span>
-        <span class="fsep">&#8594;</span>
-        <span class="fpill" style="background:var(--accent-bg);color:var(--accent);border-color:rgba(59,130,246,.25)" onclick="filt('dir')">Aprov. Diretoria</span>
-        <span class="fsep">&#8594;</span>
-        <span class="fpill" style="background:var(--teal-bg);color:var(--teal);border-color:rgba(13,148,136,.25)" onclick="filt('buy')">Comprar</span>
-        <span class="fsep">&#8594;</span>
-        <span class="fpill" style="background:var(--red-bg);color:var(--red);border-color:rgba(220,38,38,.25)" onclick="filt('pend')">Pendentes</span>
-        <span class="fsep">/</span>
-        <span class="fpill" style="background:var(--gray-bg);color:var(--gray);border-color:rgba(107,114,128,.25)" onclick="filt('done')">Comprados</span>
-        <button class="flow-reset" onclick="filt('all')">Ver tudo</button>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="kanban">
-        <div class="kcol col-coord" data-col="coord">
-          <div class="kcol-head" style="background:var(--purple-bg);color:var(--purple)">Aprov. coord.</div>
-          <div class="kcard" data-id="c1" onclick="det('c1')"><div class="kcard-title">Pedido B2B recebido</div><div class="kcard-sub">Ticket aberto pelo Comercial</div><span class="ktag" style="background:var(--accent-bg);color:var(--accent)">B2B</span></div>
-          <div class="kcard" data-id="c2" onclick="det('c2')"><div class="kcard-title">Pedido triangulado</div><div class="kcard-sub">Fornecedor entrega ao cliente</div><span class="ktag" style="background:var(--amber-bg);color:var(--amber)">Triangulacao</span></div>
-        </div>
-        <div class="kcol col-fin" data-col="fin">
-          <div class="kcol-head" style="background:var(--green-bg);color:var(--green)">Aprov. fin.</div>
-          <div class="kcard" data-id="f1" onclick="det('f1')"><div class="kcard-title">Analise de caixa</div><div class="kcard-sub">Financeiro valida</div><span class="ktag" style="background:var(--green-bg);color:var(--green)">Financeiro</span></div>
-        </div>
-        <div class="kcol col-dir" data-col="dir">
-          <div class="kcol-head" style="background:var(--accent-bg);color:var(--accent)">Aprov. dir.</div>
-          <div class="kcard" data-id="d1" onclick="det('d1')"><div class="kcard-title">Avaliacao de margem</div><div class="kcard-sub">Diretoria aprova</div><span class="ktag" style="background:var(--accent-bg);color:var(--accent)">Diretoria</span></div>
-        </div>
-        <div class="kcol col-buy" data-col="buy">
-          <div class="kcol-head" style="background:var(--teal-bg);color:var(--teal)">Comprar</div>
-          <div class="kcard" data-id="b1" onclick="det('b1')"><div class="kcard-title">Cotar e executar</div><div class="kcard-sub">Acao principal do comprador</div><span class="ktag" style="background:var(--teal-bg);color:var(--teal)">Comprador</span></div>
-          <div class="kcard" data-id="b2" onclick="det('b2')"><div class="kcard-title">Validar NF do fornecedor</div><div class="kcard-sub">Antes de enviar ao Financeiro</div><span class="ktag" style="background:var(--teal-bg);color:var(--teal)">Comprador</span></div>
-        </div>
-        <div class="kcol col-pend" data-col="pend">
-          <div class="kcol-head" style="background:var(--red-bg);color:var(--red)">Pendentes</div>
-          <div class="kcard" data-id="p1" onclick="det('p1')"><div class="kcard-title">Impedimento ativo</div><div class="kcard-sub">SLA extrapolado</div><span class="ktag" style="background:var(--red-bg);color:var(--red)">Escalar</span></div>
-        </div>
-        <div class="kcol col-done" data-col="done">
-          <div class="kcol-head" style="background:var(--gray-bg);color:var(--gray)">Comprados</div>
-          <div class="kcard" data-id="o1" onclick="det('o1')"><div class="kcard-title">Fechar ciclo</div><div class="kcard-sub">Atualizar planilha</div><span class="ktag" style="background:var(--gray-bg);color:var(--gray)">Encerrado</span></div>
-        </div>
-      </div>
-
-      <div class="detail" id="det-panel">
-        <div class="detail-empty">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
-          <p>Clique em qualquer card acima para ver o passo a passo desta etapa</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-label">SLA &mdash; Regra de atendimento</div>
-      <div class="sla-grid">
-        <div class="sla-card"><label>Ticket ate 12h</label><span><span class="sla-dot" style="background:var(--green)"></span>Analise no mesmo dia util</span></div>
-        <div class="sla-card"><label>Ticket apos 12h</label><span><span class="sla-dot" style="background:var(--accent2)"></span>Analise ate 12h do dia seguinte</span></div>
-        <div class="sla-card"><label>Prazo maximo de compra</label><span><span class="sla-dot" style="background:var(--amber)"></span>24h apos entrada em Comprar</span></div>
-        <div class="sla-card"><label>Prazo extrapolado</label><span><span class="sla-dot" style="background:var(--red)"></span>Pendentes + acionar Supervisor</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="tab-panel" id="tab-politica">
-    <div class="section">
-      <div class="section-label">Hierarquia de condicoes de pagamento</div>
-      <div class="policy-table">
-        <div class="policy-row">
-          <span class="policy-badge" style="background:var(--green-bg);color:var(--green)">1. Preferencia</span>
-          <span class="policy-cond">Faturado a prazo &mdash; boleto com vencimento futuro</span>
-          <span class="policy-obs">Regra padrao. Sempre buscar esta condicao primeiro em toda negociacao com fornecedor.</span>
-        </div>
-        <div class="policy-row">
-          <span class="policy-badge" style="background:var(--accent-bg);color:var(--accent)">2. Preferencia</span>
-          <span class="policy-cond">Boleto parcelado</span>
-          <span class="policy-obs">Quando o fornecedor nao oferecer prazo unico. Parcelar minimiza impacto no fluxo de caixa.</span>
-        </div>
-        <div class="policy-row" style="border-color:rgba(220,38,38,.3)">
-          <span class="policy-badge" style="background:var(--red-bg);color:var(--red)">Excecao</span>
-          <span class="policy-cond">Pagamento a vista &mdash; PIX ou transferencia</span>
-          <span class="policy-obs">Somente com <strong>autorizacao expressa da Diretoria</strong> registrada no card do OptiWork antes de fechar a compra.</span>
-        </div>
-      </div>
-      <div class="alert alert-rule" style="margin-top:1rem">
-        <span class="alert-icon">&#9940;</span>
-        <p><strong>Procedimento obrigatorio para compra a vista:</strong> comunicar ao Supervisor e Financeiro, aguardar autorizacao da Diretoria, registrar aprovacao no card e somente entao prosseguir.</p>
-      </div>
-    </div>
-    <div class="section">
-      <div class="section-label">Principios fundamentais do comprador</div>
-      <div style="display:grid;gap:8px">
-        <div class="alert alert-ok"><span class="alert-icon">&#10003;</span><p><strong>Compra segura:</strong> toda compra deve ser feita com fornecedores confiaveis e previamente validados. Verificar CNPJ, reputacao e historico antes de qualquer negociacao com fornecedor novo.</p></div>
-        <div class="alert alert-info"><span class="alert-icon">&#9675;</span><p><strong>Melhor custo e condicao:</strong> o comprador tem autonomia e responsabilidade de buscar o melhor preco, mesmo quando o vendedor ja indicou um fornecedor. Cotar com ao menos dois fornecedores e boa pratica sempre que o prazo permitir.</p></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="tab-panel" id="tab-ticket">
-    <div class="section">
-      <div class="section-label">Informacoes obrigatorias no ticket</div>
-      <p style="font-size:12px;color:var(--text2);margin-bottom:1rem;line-height:1.6">Verifique se todos os itens estao presentes antes de aprovar o avanco do card. Clique para marcar como verificado.</p>
-      <div class="checklist" id="chklist">
-        <div class="citem" onclick="ck(this)"><div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ctext">Nome e razao social do cliente (comprador final)</div></div>
-        <div class="citem" onclick="ck(this)"><div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ctext">CNPJ do cliente</div></div>
-        <div class="citem" onclick="ck(this)"><div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ctext">Itens completos: nome do produto, modelo, especificacao tecnica e quantidade</div></div>
-        <div class="citem" onclick="ck(this)"><div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ctext">Endereco completo de entrega: logradouro, numero, bairro, cidade, UF e CEP</div></div>
-        <div class="citem" onclick="ck(this)"><div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ctext">Indicacao: entrega TRIANGULADA (fornecedor ao cliente) ou padrao (estoque Croma ao cliente)</div></div>
-        <div class="citem" onclick="ck(this)"><div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ctext">Empresa Croma faturadora: TECINFO, ESFERA, CRO TI, ESPACO CROMA etc.</div></div>
-        <div class="citem" onclick="ck(this)"><div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ctext">Planilha de Markup (.xlsx) anexada ao card &mdash; preenchida pelo vendedor</div></div>
-        <div class="citem" onclick="ck(this)"><div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ctext">Ordem de Compra do cliente (.pdf) anexada ao card</div></div>
-        <div class="citem" onclick="ck(this)"><div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ctext">Fornecedor sugerido pelo vendedor (se ja cotado) &mdash; nome, contato ou link</div></div>
-        <div class="citem" onclick="ck(this)"><div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ctext">Observacoes relevantes: voltagem, prazo urgente, condicao especial negociada com o cliente</div></div>
-      </div>
-      <div class="check-progress">
-        <button class="btn" onclick="resetCk()" style="font-size:10px;padding:4px 10px">Limpar</button>
-        <div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
-        <span class="check-count" id="ckcnt">0 / 10</span>
-      </div>
-    </div>
-    <div class="section">
-      <div class="section-label">Padrao de titulo do card no OptiWork</div>
-      <div style="background:var(--accent-bg);border:1px solid rgba(59,130,246,.25);border-radius:var(--radius);padding:1rem 1.25rem;text-align:center">
-        <p style="font-size:13px;font-weight:600;color:var(--accent);margin-bottom:4px">PEDIDO DE COMPRA &ndash; [PRODUTO] &ndash; [CLIENTE] &ndash; [SOLICITANTE] [DATA]</p>
-        <p style="font-size:11px;color:var(--text3)">Exemplo: PEDIDO DE COMPRA &ndash; NOTEBOOK DELL &ndash; EMPRESA XYZ &ndash; CONSULTOR 02/03</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="tab-panel" id="tab-raci">
-    <div class="section">
-      <div class="section-label">Legenda</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.25rem">
-        <span style="font-size:11px;display:flex;align-items:center;gap:5px"><span class="raci-pill r-R">R</span>Responsavel &mdash; executa</span>
-        <span style="font-size:11px;display:flex;align-items:center;gap:5px"><span class="raci-pill r-A">A</span>Aprovador &mdash; responde</span>
-        <span style="font-size:11px;display:flex;align-items:center;gap:5px"><span class="raci-pill r-C">C</span>Consultado &mdash; fornece input</span>
-        <span style="font-size:11px;display:flex;align-items:center;gap:5px"><span class="raci-pill r-I">I</span>Informado &mdash; recebe update</span>
-      </div>
-      <div class="raci-wrap">
-        <table class="raci-table">
-          <thead><tr><th style="min-width:220px">Atividade</th><th>Comprador</th><th>Supervisor</th><th>Financeiro</th><th>Diretoria</th><th>Comercial</th><th>Logistica</th></tr></thead>
-          <tbody>
-            <tr><td>Criar ticket no OptiWork</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-R">R</span></td><td>&ndash;</td></tr>
-            <tr><td>Verificar SLA e monitorar tickets</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td></tr>
-            <tr><td>Conferir informacoes e anexos</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-C">C</span></td><td>&ndash;</td></tr>
-            <tr><td>Aprovar ticket (Coordenador)</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-C">C</span></td><td>&ndash;</td><td><span class="raci-pill r-C">C</span></td><td>&ndash;</td></tr>
-            <tr><td>Aprovar viabilidade financeira</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td></tr>
-            <tr><td>Aprovar margem (Diretoria)</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-R">R</span></td><td>&ndash;</td><td>&ndash;</td></tr>
-            <tr><td>Autorizar compra a vista</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-R">R</span></td><td>&ndash;</td><td>&ndash;</td></tr>
-            <tr><td>Cotar com fornecedores</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td>&ndash;</td></tr>
-            <tr><td>Executar compra com fornecedor</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td>&ndash;</td></tr>
-            <tr><td>Validar NFS do fornecedor</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td><span class="raci-pill r-A">A</span></td><td><span class="raci-pill r-C">C</span></td><td>&ndash;</td><td><span class="raci-pill r-C">C</span></td></tr>
-            <tr><td>Enviar NFS ao Financeiro</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td></tr>
-            <tr><td>Atualizar planilha de acompanhamento</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-C">C</span></td></tr>
-            <tr><td>Fechar card e encerrar ciclo</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td></tr>
-            <tr><td>Manter tabelas de precos (MKP 1,35)</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <div class="tab-panel" id="tab-glossario">
-    <div class="section">
-      <div class="section-label">Termos e siglas do setor</div>
-      <div class="glossary">
-        <div class="gitem"><span class="gterm">Ordem de Compra (OC)</span><span class="gdef">Documento formal do cliente B2B autorizando a compra. Em licitacoes equivale a Nota de Empenho.</span></div>
-        <div class="gitem"><span class="gterm">Nota de Empenho</span><span class="gdef">Documento oficial do governo formalizando pedido em licitacoes. Equivalente a OC no setor de Licitacoes.</span></div>
-        <div class="gitem"><span class="gterm">Planilha de Markup</span><span class="gdef">Excel com analise de viabilidade financeira da venda. Preenchida pelo vendedor &mdash; o comprador apenas confirma que esta anexada.</span></div>
-        <div class="gitem"><span class="gterm">MKP / Markup</span><span class="gdef">Indice multiplicador sobre o custo para definir o preco de venda. MKP 1,35 = custo x 1,35. Tabelas de fabricantes parceiros usam minimo 1,35.</span></div>
-        <div class="gitem"><span class="gterm">Triangulacao</span><span class="gdef">Entrega em que o fornecedor despacha direto ao cliente final, sem transitar pelo estoque da Croma.</span></div>
-        <div class="gitem"><span class="gterm">CIF</span><span class="gdef">Cost, Insurance and Freight &mdash; frete e seguro por conta do fornecedor ate o destino final.</span></div>
-        <div class="gitem"><span class="gterm">FOB</span><span class="gdef">Free on Board &mdash; frete por conta do comprador (cliente) a partir de determinado ponto de origem.</span></div>
-        <div class="gitem"><span class="gterm">Faturado / A prazo</span><span class="gdef">Condicao de pagamento preferencial: NFS emitida e pagamento em data futura. Primeira opcao em toda negociacao.</span></div>
-        <div class="gitem"><span class="gterm">DIFAL</span><span class="gdef">Diferencial de Aliquota do ICMS. Incide em vendas interestaduais para consumidor final nao contribuinte.</span></div>
-        <div class="gitem"><span class="gterm">NF-e / NFS-e</span><span class="gdef">NF-e: Nota Fiscal eletronica de produto. NFS-e: Nota Fiscal de Servico eletronica emitida pela Croma ao faturar.</span></div>
-        <div class="gitem"><span class="gterm">SLA</span><span class="gdef">Service Level Agreement &mdash; prazo maximo acordado para conclusao de uma tarefa ou resposta ao solicitante.</span></div>
-        <div class="gitem"><span class="gterm">OMIE</span><span class="gdef">ERP da empresa: CRM, faturamento, NFS-e, controle de estoque e pedidos de compra.</span></div>
-        <div class="gitem"><span class="gterm">OptiWork</span><span class="gdef">Sistema de gestao de projetos e fluxos internos. Onde tickets de pedido de compra sao criados e acompanhados.</span></div>
-        <div class="gitem"><span class="gterm">Drive OptiWork</span><span class="gdef">Repositorio de arquivos compartilhados no OptiWork. Local das planilhas de acompanhamento e tabelas de fabricantes.</span></div>
-        <div class="gitem"><span class="gterm">Card / Ticket</span><span class="gdef">Tarefa no OptiWork representando um pedido de compra. Cada compra tem um card proprio que percorre as colunas do kanban.</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="tab-panel" id="tab-videos">
-    <div class="section">
-      <div class="section-label">Tutoriais em video</div>
-      <div class="alert alert-info" style="margin-bottom:1.25rem">
-        <span class="alert-icon">&#9432;</span>
-        <p>Para adicionar um video: grave no <strong>Loom</strong> ou suba no <strong>YouTube (nao listado)</strong>. Clique em Share &rarr; Embed &rarr; copie o iframe e substitua o bloco correspondente abaixo.</p>
-      </div>
-      <div class="video-grid">
-        <div><p class="vtitle">Como analisar e aprovar um ticket no OptiWork</p><div class="video-ph"><div class="vicon"><svg width="16" height="16" viewBox="0 0 16 16" fill="var(--text3)"><path d="M6 4l6 4-6 4V4z"/></svg></div><p>Cole aqui o iframe do Loom ou YouTube</p><code>&lt;iframe src="https://www.loom.com/embed/SEU-ID" width="100%" height="360" frameborder="0"&gt;&lt;/iframe&gt;</code></div></div>
-        <div><p class="vtitle">Como executar uma compra &mdash; coluna Comprar</p><div class="video-ph"><div class="vicon"><svg width="16" height="16" viewBox="0 0 16 16" fill="var(--text3)"><path d="M6 4l6 4-6 4V4z"/></svg></div><p>Cole aqui o iframe do Loom ou YouTube</p><code>&lt;iframe src="https://www.loom.com/embed/SEU-ID" width="100%" height="360" frameborder="0"&gt;&lt;/iframe&gt;</code></div></div>
-        <div><p class="vtitle">Como validar uma NF de fornecedor</p><div class="video-ph"><div class="vicon"><svg width="16" height="16" viewBox="0 0 16 16" fill="var(--text3)"><path d="M6 4l6 4-6 4V4z"/></svg></div><p>Cole aqui o iframe do Loom ou YouTube</p><code>&lt;iframe src="https://www.loom.com/embed/SEU-ID" width="100%" height="360" frameborder="0"&gt;&lt;/iframe&gt;</code></div></div>
-      </div>
-    </div>
-  </div>
-
-</main>
-
-<footer>
-  <p>Manual Operacional &middot; Setor de Compras &middot; Croma Tecnologia &middot; v1.2 &middot; Marco 2026</p>
-  <a href="index.html" class="btn">&larr; Voltar ao hub</a>
-</footer>
+<div class="container">
+  <div class="card">Solicitação #2187</div>
+  <div class="card">Solicitação #2188</div>
+</div>
 
 <script>
-const D={
-  c1:{title:'Pedido B2B recebido &mdash; verificacao do Coordenador',phase:'Aprov. coordenador',ps:'background:var(--purple-bg);color:var(--purple)',steps:[{t:'Ler o ticket completo',b:'Itens, quantidades, especificacoes, cliente, endereco de entrega e empresa faturadora Croma &mdash; tudo deve estar preenchido pelo solicitante.'},{t:'Verificar o corpo do card',b:'Todas as informacoes obrigatorias devem estar presentes (ver Checklist do Ticket). Em caso de ausencia, devolver ao solicitante com comentario explicando a pendencia.'},{t:'Confirmar dois anexos obrigatorios',b:'Planilha de Markup (.xlsx) preenchida pelo vendedor + Ordem de Compra do cliente (.pdf). Ambos devem estar anexados ao card.'},{t:'Aprovar ou devolver',b:'Se tudo correto: aprovar e mover para Aprov. Financeiro. Se faltar algo: comentar no card o que esta ausente e devolver ao solicitante.'}],alert:{type:'warn',icon:'&#9888;',text:'O Coordenador NAO preenche o Markup &mdash; apenas confirma que esta anexado e que os dados estao completos. O preenchimento e responsabilidade exclusiva do vendedor.'}},
-  c2:{title:'Pedido triangulado &mdash; atencao ao endereco',phase:'Aprov. coordenador',ps:'background:var(--purple-bg);color:var(--purple)',steps:[{t:'Identificar a triangulacao',b:'O solicitante deve indicar explicitamente no corpo do card que a entrega vai do fornecedor direto ao cliente final, sem passar pelo estoque da Croma.'},{t:'Verificar endereco completo do cliente final',b:'Logradouro, numero, bairro, cidade, UF e CEP. Este endereco sera fornecido diretamente ao fornecedor na hora da compra.'},{t:'Confirmar empresa faturadora',b:'Qual CNPJ da Croma emitira a NFS-e ao cliente (TECINFO, ESFERA, CRO TI, ESPACO CROMA etc.).'},{t:'Verificar anexos e aprovar',b:'Markup (.xlsx) + Ordem de Compra (.pdf) presentes &rarr; aprovar e mover para Aprov. Financeiro.'}],alert:{type:'rule',icon:'&#9940;',text:'Na execucao da compra: o endereco de entrega informado ao fornecedor deve ser o do CLIENTE FINAL &mdash; nunca o endereco da Croma. Erro aqui causa entrega no lugar errado.'}},
-  f1:{title:'Aprovacao financeira &mdash; Financeiro atua',phase:'Aprov. financeiro',ps:'background:var(--green-bg);color:var(--green)',steps:[{t:'Financeiro analisa a Planilha de Markup',b:'Avalia a viabilidade em relacao ao fluxo de caixa atual da empresa.'},{t:'Financeiro valida prazos',b:'Prazo de pagamento ao fornecedor versus prazo de recebimento do cliente &mdash; o fluxo precisa ser positivo.'},{t:'Comprador monitora',b:'Verificar diariamente se o card avancou. Nao ha acao ativa do comprador nesta etapa.'},{t:'Resultado',b:'Se aprovado: Financeiro move para Aprov. Diretoria. Se reprovado: card retorna com comentario detalhando o motivo.'}],alert:{type:'ok',icon:'&#10003;',text:'Se o card estiver ha mais de 1 dia util em Aprov. Financeiro sem movimentacao, o comprador deve acionar o Supervisor &mdash; nao o Financeiro diretamente.'}},
-  d1:{title:'Aprovacao da Diretoria &mdash; ultima etapa antes da compra',phase:'Aprov. diretoria',ps:'background:var(--accent-bg);color:var(--accent)',steps:[{t:'Diretoria avalia a margem liquida',b:'Analisa o resultado final calculado na Planilha de Markup &mdash; margem minima aceitavel definida internamente.'},{t:'Diretoria avalia riscos',b:'Risco operacional, logistico e alinhamento com a estrategia comercial da empresa.'},{t:'Comprador aguarda',b:'Nenhuma compra pode ser iniciada sem este aval. Sem excecoes &mdash; mesmo em casos urgentes.'},{t:'Resultado',b:'Se aprovado: card avanca para Comprar e o comprador entra em acao dentro do prazo de 24h.'}],alert:{type:'rule',icon:'&#9940;',text:'Regra inviolavel: nenhuma compra e executada antes da aprovacao dupla (Financeiro + Diretoria). Em casos urgentes, a autorizacao deve ser registrada no card antes de qualquer acao.'}},
-  b1:{title:'Executar a compra &mdash; acao principal do comprador',phase:'Comprar',ps:'background:var(--teal-bg);color:var(--teal)',steps:[{t:'Ler o ticket completo',b:'Confirmar itens, especificacoes, endereco de entrega, empresa faturadora e fornecedor sugerido pelo vendedor.'},{t:'Cotar com fornecedores',b:'Usar o fornecedor indicado como referencia e buscar cotacoes adicionais sempre que o prazo permitir. O comprador tem autonomia para escolher o melhor.'},{t:'Negociar condicao de pagamento',b:'1. faturado a prazo &rarr; 2. boleto parcelado &rarr; a vista somente com autorizacao da Diretoria registrada no card antes de fechar.'},{t:'Fechar e registrar',b:'Apos fechar o pedido, comentar no card: fornecedor escolhido, valor final, prazo de entrega e condicao de pagamento. Arrastar para Comprados.'},{t:'Atualizar planilha',b:'Preencher a planilha de acompanhamento no Drive do OptiWork imediatamente &mdash; Logistica usa esta planilha para etiquetar o produto ao receber.'}],alert:{type:'ok',icon:'&#10003;',text:'Prazo: 24h apos o card entrar nesta coluna. Se nao for possivel concluir, mover para Pendentes e acionar o Supervisor imediatamente.'}},
-  b2:{title:'Validar NF do fornecedor &mdash; antes do Financeiro',phase:'Comprar',ps:'background:var(--teal-bg);color:var(--teal)',steps:[{t:'Conferir valor total',b:'O valor da NFS deve ser identico ao pedido fechado com o fornecedor.'},{t:'Conferir itens',b:'Verificar quantidade e descricao de cada produto &mdash; item a item, sem excecoes.'},{t:'Confirmar forma de pagamento',b:'Deve ser a mesma negociada: prazo, boleto, numero de parcelas.'},{t:'Validar CNPJ e chave',b:'CNPJ do emitente deve ser o mesmo fornecedor do pedido. Validar chave de acesso na SEFAZ antes de encaminhar.'}],alert:{type:'rule',icon:'&#9940;',text:'NFS sem pedido correspondente: NAO encaminhar ao Financeiro. Suspender e acionar o Supervisor. Aceitar NFS indevidas gera risco financeiro e juridico para a empresa.'}},
-  p1:{title:'Impedimento ativo &mdash; procedimento de escalada',phase:'Pendentes',ps:'background:var(--red-bg);color:var(--red)',steps:[{t:'Identificar o impedimento',b:'Fornecedor sem estoque, prazo incompativel, divergencia de valores ou outro obstaculo que impede a conclusao no prazo.'},{t:'Registrar no card',b:'Adicionar comentario detalhado explicando o problema, data, contatos realizados e proximos passos planejados.'},{t:'Acionar o Supervisor',b:'Notificar imediatamente. O Supervisor assume o acompanhamento junto ao comprador.'},{t:'Comunicacao centralizada',b:'Vendedores e consultores NAO devem contatar o comprador diretamente &mdash; toda comunicacao passa pelo Supervisor durante a resolucao.'}],alert:{type:'rule',icon:'&#9940;',text:'O Supervisor e o unico ponto de contato entre comprador e vendedores durante a resolucao de um Pendente. Isso protege o comprador de interrupcoes e garante rastreabilidade.'}},
-  o1:{title:'Compra concluida &mdash; fechar o ciclo',phase:'Comprados',ps:'background:var(--gray-bg);color:var(--gray)',steps:[{t:'Registrar no card',b:'Fornecedor contratado, NF do fornecedor (quando recebida), valor final e prazo de entrega confirmado.'},{t:'Atualizar planilha de acompanhamento',b:'Drive OptiWork: consultor, cliente, itens, valor de compra, valor de venda, prazo, triangulacao (sim/nao) e status atual.'},{t:'Monitorar entrega',b:'Ao receber confirmacao da Logistica/Estoque de que o produto chegou, fechar o card definitivamente.'}],alert:{type:'info',icon:'&#9432;',text:'A planilha de acompanhamento e usada pela Logistica para identificar o responsavel e gerar a etiqueta correta ao receber a mercadoria. Manter sempre atualizada e critico para a operacao.'}}
-};
-function det(id){
-  const d=D[id];
-  document.querySelectorAll('.kcard').forEach(c=>c.classList.remove('sel'));
-  document.querySelector('[data-id="'+id+'"]').classList.add('sel');
-  const s=d.steps.map((x,i)=>'<div class="step"><div class="step-n" style="'+d.ps+'">'+( i+1)+'</div><div class="step-body"><strong>'+x.t+'</strong><p>'+x.b+'</p></div></div>').join('');
-  const at={warn:'alert-warn',ok:'alert-ok',rule:'alert-rule',info:'alert-info'};
-  const a=d.alert?'<div class="alert '+at[d.alert.type]+'"><span class="alert-icon">'+d.alert.icon+'</span><p>'+d.alert.text+'</p></div>':'';
-  document.getElementById('det-panel').innerHTML='<div class="detail-head"><h3>'+d.title+'</h3><span class="dphase" style="'+d.ps+'">'+d.phase+'</span></div><div class="steps">'+s+'</div>'+a;
+// ==========================
+// CONTROLE DE TEMA
+// ==========================
+
+function applyTheme(theme){
+  const root = document.documentElement;
+
+  if(theme === 'dark'){
+    root.classList.add('dark');
+  } else {
+    root.classList.remove('dark');
+  }
+
+  localStorage.setItem('theme', theme);
+  updateThemeIcon();
 }
-function filt(col){
-  document.querySelectorAll('.kcol').forEach(c=>{c.style.opacity=(col==='all'||c.dataset.col===col)?'1':'0.2';c.style.transition='opacity .2s';});
+
+function toggleTheme(){
+  const isDark = document.documentElement.classList.contains('dark');
+  applyTheme(isDark ? 'light' : 'dark');
 }
-function tab(id,btn){
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+id).classList.add('active');
-  btn.classList.add('active');
+
+function updateThemeIcon(){
+  const btn = document.getElementById('themeBtn');
+  if(!btn) return;
+
+  const isDark = document.documentElement.classList.contains('dark');
+  btn.textContent = isDark ? '☀️' : '🌙';
 }
-function ck(item){
-  item.classList.toggle('done');
-  const tot=document.querySelectorAll('#chklist .citem').length;
-  const done=document.querySelectorAll('#chklist .citem.done').length;
-  document.getElementById('prog').style.width=(done/tot*100)+'%';
-  document.getElementById('ckcnt').textContent=done+' / '+tot;
+
+function loadTheme(){
+  const saved = localStorage.getItem('theme');
+
+  if(saved){
+    applyTheme(saved);
+  } else {
+    // fallback: segue sistema
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(prefersDark ? 'dark' : 'light');
+  }
 }
-function resetCk(){
-  document.querySelectorAll('#chklist .citem').forEach(i=>i.classList.remove('done'));
-  document.getElementById('prog').style.width='0%';
-  document.getElementById('ckcnt').textContent='0 / 10';
-}
+
+// ==========================
+// INIT SEGURO (SEM ERRO)
+// ==========================
+document.addEventListener('DOMContentLoaded', () => {
+  loadTheme();
+
+  const btn = document.getElementById('themeBtn');
+  if(btn){
+    btn.addEventListener('click', toggleTheme);
+  }
+});
 </script>
+
 </body>
 </html>
