@@ -1,270 +1,170 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <title>Compras | Manual Operacional</title>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
 
-  <style>
-    :root{
-      --bg:#f6f7fb;
-      --card:#ffffff;
-      --text:#1e293b;
-      --accent:#2563eb;
-    }
+/* =========================
+   BASE DE DADOS (DETALHES)
+========================= */
+const D = {
+  c1:{
+    title:'Pedido B2B recebido — verificação do Coordenador',
+    phase:'Aprov. coordenador',
+    steps:[
+      {t:'Ler o ticket completo',b:'Verificar itens, cliente, endereço e empresa faturadora.'},
+      {t:'Validar anexos',b:'Confirmar planilha de markup e ordem de compra.'},
+      {t:'Encaminhar aprovação',b:'Se correto, seguir fluxo.'}
+    ]
+  },
 
-    [data-theme="dark"]{
-      --bg:#0f172a;
-      --card:#1e293b;
-      --text:#e2e8f0;
-      --accent:#38bdf8;
-    }
+  c2:{
+    title:'Pedido triangulado',
+    phase:'Aprov. coordenador',
+    steps:[
+      {t:'Validar tipo de entrega',b:'Fornecedor envia direto ao cliente.'},
+      {t:'Confirmar endereço',b:'Evitar erro logístico.'}
+    ]
+  },
 
-    body{
-      margin:0;
-      font-family:Arial, sans-serif;
-      background:var(--bg);
-      color:var(--text);
-    }
+  f1:{
+    title:'Análise financeira',
+    phase:'Financeiro',
+    steps:[
+      {t:'Verificar caixa',b:'Empresa tem saldo para compra?'},
+      {t:'Validar condição',b:'Preferência faturado.'}
+    ]
+  },
 
-    .topbar{
-      display:flex;
-      align-items:center;
-      padding:12px 20px;
-      background:var(--card);
-      border-bottom:1px solid #ddd;
-    }
+  d1:{
+    title:'Aprovação de margem',
+    phase:'Diretoria',
+    steps:[
+      {t:'Analisar markup',b:'Garantir rentabilidade'},
+      {t:'Autorizar',b:'Liberar compra'}
+    ]
+  },
 
-    .title{
-      font-weight:bold;
-      font-size:18px;
-    }
+  b1:{
+    title:'Cotar e comprar',
+    phase:'Comprador',
+    steps:[
+      {t:'Buscar fornecedores',b:'Sempre comparar'},
+      {t:'Negociar',b:'Preço e prazo'},
+      {t:'Executar compra',b:'Formalizar pedido'}
+    ]
+  },
 
-    .btn{
-      margin-left:auto;
-      padding:6px 12px;
-      cursor:pointer;
-      border:none;
-      border-radius:6px;
-      background:var(--accent);
-      color:#fff;
-    }
+  b2:{
+    title:'Validar NF',
+    phase:'Comprador',
+    steps:[
+      {t:'Conferir dados fiscais',b:'CNPJ, valores, impostos'},
+      {t:'Enviar ao financeiro',b:'Para pagamento'}
+    ]
+  },
 
-    .container{
-      padding:20px;
-    }
+  o1:{
+    title:'Fechamento',
+    phase:'Finalizado',
+    steps:[
+      {t:'Atualizar controle',b:'Planilha / sistema'},
+      {t:'Encerrar card',b:'Fluxo concluído'}
+    ]
+  }
+};
 
-    .kanban{
-      display:flex;
-      gap:16px;
-      overflow-x:auto;
-    }
+/* =========================
+   DETALHE DO CARD
+========================= */
+window.det = function(id){
+  const el = document.getElementById('det-panel');
+  if(!el || !D[id]) return;
 
-    .col{
-      background:var(--card);
-      padding:10px;
-      border-radius:8px;
-      min-width:250px;
-    }
+  // remover seleção anterior
+  document.querySelectorAll('.kcard').forEach(c=>c.classList.remove('sel'));
 
-    .col h3{
-      margin-top:0;
-    }
+  // selecionar atual
+  const card = document.querySelector(`[data-id="${id}"]`);
+  if(card) card.classList.add('sel');
 
-    .card{
-      background:var(--bg);
-      padding:10px;
-      border-radius:6px;
-      margin-bottom:10px;
-      cursor:pointer;
-      border-left:4px solid var(--accent);
-    }
-
-    .card:hover{
-      opacity:0.85;
-    }
-
-    .detail{
-      margin-top:20px;
-      background:var(--card);
-      padding:15px;
-      border-radius:8px;
-    }
-
-  </style>
-</head>
-
-<body>
-
-  <div class="topbar">
-    <div class="title">📦 Compras - Manual Operacional</div>
-    <button id="themeBtn" class="btn">🌙 Escuro</button>
-  </div>
-
-  <div class="container">
-
-    <!-- KANBAN -->
-    <div class="kanban">
-
-      <div class="col">
-        <h3>Coordenador</h3>
-        <div class="card" onclick="det('c1')">Pedido recebido</div>
-        <div class="card" onclick="det('c2')">Pedido triangulado</div>
-      </div>
-
-      <div class="col">
-        <h3>Financeiro</h3>
-        <div class="card" onclick="det('f1')">Análise financeira</div>
-      </div>
-
-      <div class="col">
-        <h3>Diretoria</h3>
-        <div class="card" onclick="det('d1')">Aprovação de margem</div>
-      </div>
-
-      <div class="col">
-        <h3>Comprador</h3>
-        <div class="card" onclick="det('b1')">Cotar e comprar</div>
-        <div class="card" onclick="det('b2')">Validar NF</div>
-      </div>
-
-      <div class="col">
-        <h3>Finalizado</h3>
-        <div class="card" onclick="det('o1')">Fechamento</div>
-      </div>
-
+  let html = `
+    <div class="detail-head">
+      <h3>${D[id].title}</h3>
+      <span class="dphase">${D[id].phase}</span>
     </div>
+    <div class="steps">
+  `;
 
-    <!-- DETALHE -->
-    <div id="detalhe" class="detail">
-      <strong>Selecione um card para ver o fluxo.</strong>
-    </div>
-
-  </div>
-
-  <script>
-
-  document.addEventListener('DOMContentLoaded', () => {
-
-    /* =========================
-       BASE DE DADOS
-    ========================= */
-    const DATA = {
-      c1:{
-        title:'Pedido recebido',
-        steps:[
-          'Validar informações do pedido',
-          'Conferir anexos obrigatórios',
-          'Encaminhar para aprovação'
-        ]
-      },
-
-      c2:{
-        title:'Pedido triangulado',
-        steps:[
-          'Fornecedor entrega direto ao cliente',
-          'Validar endereço',
-          'Alinhar prazo'
-        ]
-      },
-
-      f1:{
-        title:'Análise financeira',
-        steps:[
-          'Verificar caixa',
-          'Validar condição de pagamento',
-          'Aprovar ou reprovar'
-        ]
-      },
-
-      d1:{
-        title:'Aprovação de margem',
-        steps:[
-          'Analisar markup',
-          'Validar estratégia',
-          'Autorizar compra'
-        ]
-      },
-
-      b1:{
-        title:'Cotar e comprar',
-        steps:[
-          'Buscar fornecedores',
-          'Negociar preço e prazo',
-          'Fechar compra'
-        ]
-      },
-
-      b2:{
-        title:'Validar NF',
-        steps:[
-          'Conferir dados fiscais',
-          'Verificar valores',
-          'Liberar financeiro'
-        ]
-      },
-
-      o1:{
-        title:'Fechamento',
-        steps:[
-          'Atualizar controle',
-          'Confirmar entrega',
-          'Encerrar processo'
-        ]
-      }
-    };
-
-    /* =========================
-       DETALHE
-    ========================= */
-    window.det = function(id){
-      const d = DATA[id];
-
-      let html = `<h3>${d.title}</h3><ul>`;
-
-      d.steps.forEach(s=>{
-        html += `<li>${s}</li>`;
-      });
-
-      html += `</ul>`;
-
-      document.getElementById('detalhe').innerHTML = html;
-    };
-
-    /* =========================
-       TEMA
-    ========================= */
-    const btn = document.getElementById('themeBtn');
-
-    function loadTheme(){
-      const saved = localStorage.getItem('theme');
-
-      if(saved === 'dark'){
-        document.documentElement.setAttribute('data-theme','dark');
-        btn.textContent = '☀️ Claro';
-      }
-    }
-
-    function toggleTheme(){
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-
-      if(isDark){
-        document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('theme','light');
-        btn.textContent = '🌙 Escuro';
-      }else{
-        document.documentElement.setAttribute('data-theme','dark');
-        localStorage.setItem('theme','dark');
-        btn.textContent = '☀️ Claro';
-      }
-    }
-
-    btn.addEventListener('click', toggleTheme);
-
-    loadTheme();
-
+  D[id].steps.forEach((s,i)=>{
+    html += `
+      <div class="step">
+        <div class="step-n">${i+1}</div>
+        <div class="step-body">
+          <strong>${s.t}</strong>
+          <p>${s.b}</p>
+        </div>
+      </div>
+    `;
   });
 
-  </script>
+  html += `</div>`;
 
-</body>
-</html>
+  el.innerHTML = html;
+};
+
+/* =========================
+   TABS
+========================= */
+window.tab = function(name,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+
+  const panel = document.getElementById('tab-'+name);
+  if(panel) panel.classList.add('active');
+  if(btn) btn.classList.add('active');
+};
+
+/* =========================
+   FILTRO KANBAN
+========================= */
+window.filt = function(tipo){
+  document.querySelectorAll('.kcol').forEach(col=>{
+    if(tipo === 'all'){
+      col.style.display='block';
+    }else{
+      col.style.display = col.dataset.col === tipo ? 'block':'none';
+    }
+  });
+};
+
+/* =========================
+   CHECKLIST
+========================= */
+window.ck = function(el){
+  el.classList.toggle('done');
+  updateProgress();
+};
+
+window.resetCk = function(){
+  document.querySelectorAll('.citem').forEach(c=>c.classList.remove('done'));
+  updateProgress();
+};
+
+function updateProgress(){
+  const total = document.querySelectorAll('.citem').length;
+  const done = document.querySelectorAll('.citem.done').length;
+
+  const pct = total ? (done/total)*100 : 0;
+
+  const bar = document.getElementById('prog');
+  const txt = document.getElementById('ckcnt');
+
+  if(bar) bar.style.width = pct+'%';
+  if(txt) txt.textContent = `${done} / ${total}`;
+}
+
+/* =========================
+   INIT
+========================= */
+updateProgress();
+
+});
+</script>
