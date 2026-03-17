@@ -4,887 +4,265 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Logística e Estoque — Manual Operacional · Croma Tecnologia</title>
-
-<!-- ====================================================
-     FONTES: DM Sans pro corpo, DM Mono pra código
-     Mesmo padrão do compras.html — consistência entre páginas
-==================================================== -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-
 <style>
-/* ====================================================
-   VARIÁVEIS DE TEMA
-   Mesma estrutura do compras.html — só muda a cor
-   de acento: aqui usamos teal/verde (Logística)
-   em vez do azul (Compras).
-==================================================== */
-:root {
-  --transition-theme: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
+/* ============================================================
+   TOKENS DE TEMA
+   Teal/verde é a cor do setor de Logística e Estoque
+============================================================ */
+:root { --transition-theme: background .3s ease, color .3s ease, border-color .3s ease; }
 
 [data-theme="dark"] {
-  --bg:         #0d1117;
-  --bg2:        #161b27;
-  --bg3:        #1e2535;
-  --bg4:        #252f42;
-  --text:       #e8edf5;
-  --text2:      #8b98b1;
-  --text3:      #4a5568;
-  --border:     #1e2535;
-  --border2:    #2a3654;
-
-  /* Acento principal desta página: teal/verde — Logística */
-  --accent:     #2dd4bf;
-  --accent2:    #5eead4;
-  --accent-bg:  #0a2e2b;
-  --accent-glow: rgba(45,212,191,0.15);
-
-  --green:      #34d399;
-  --green-bg:   #052e1c;
-  --green-glow: rgba(52,211,153,0.15);
-
-  --blue:       #4f8ef7;
-  --blue-bg:    #0f2347;
-  --blue-glow:  rgba(79,142,247,0.15);
-
-  --purple:     #a78bfa;
-  --purple-bg:  #1a1040;
-
-  --amber:      #fbbf24;
-  --amber-bg:   #2d1a00;
-
-  --red:        #f87171;
-  --red-bg:     #2d0a0a;
-
-  --shadow:     0 2px 8px rgba(0,0,0,0.4);
-  --shadow-md:  0 8px 24px rgba(0,0,0,0.5);
-  --shadow-lg:  0 16px 48px rgba(0,0,0,0.6);
+  --bg:#0d1117; --bg2:#161b27; --bg3:#1e2535; --bg4:#252f42;
+  --text:#e8edf5; --text2:#8b98b1; --text3:#4a5568;
+  --border:#1e2535; --border2:#2a3654;
+  --accent:#2dd4bf; --accent2:#5eead4; --accent-bg:#0a2e2b; --accent-glow:rgba(45,212,191,.15);
+  --green:#34d399;  --green-bg:#052e1c;  --green-glow:rgba(52,211,153,.15);
+  --blue:#4f8ef7;   --blue-bg:#0f2347;   --blue-glow:rgba(79,142,247,.15);
+  --purple:#a78bfa; --purple-bg:#1a1040;
+  --amber:#fbbf24;  --amber-bg:#2d1a00;
+  --red:#f87171;    --red-bg:#2d0a0a;
+  --shadow:0 2px 8px rgba(0,0,0,.4); --shadow-md:0 8px 24px rgba(0,0,0,.5);
 }
-
 [data-theme="light"] {
-  --bg:         #f8faff;
-  --bg2:        #ffffff;
-  --bg3:        #eef2fa;
-  --bg4:        #e4eaf8;
-  --text:       #111827;
-  --text2:      #4b5563;
-  --text3:      #9ca3af;
-  --border:     #e5e9f5;
-  --border2:    #cdd5ef;
-
-  --accent:     #0d9488;
-  --accent2:    #14b8a6;
-  --accent-bg:  #f0fdfa;
-  --accent-glow: rgba(13,148,136,0.08);
-
-  --green:      #059669;
-  --green-bg:   #ecfdf5;
-  --green-glow: rgba(5,150,105,0.08);
-
-  --blue:       #1e40af;
-  --blue-bg:    #eff6ff;
-  --blue-glow:  rgba(30,64,175,0.08);
-
-  --purple:     #6d28d9;
-  --purple-bg:  #f5f3ff;
-
-  --amber:      #b45309;
-  --amber-bg:   #fffbeb;
-
-  --red:        #dc2626;
-  --red-bg:     #fef2f2;
-
-  --shadow:     0 1px 4px rgba(0,0,0,0.06);
-  --shadow-md:  0 4px 16px rgba(0,0,0,0.08);
-  --shadow-lg:  0 12px 40px rgba(0,0,0,0.1);
+  --bg:#f8faff; --bg2:#ffffff; --bg3:#eef2fa; --bg4:#e4eaf8;
+  --text:#111827; --text2:#4b5563; --text3:#9ca3af;
+  --border:#e5e9f5; --border2:#cdd5ef;
+  --accent:#0d9488; --accent2:#14b8a6; --accent-bg:#f0fdfa; --accent-glow:rgba(13,148,136,.08);
+  --green:#059669;  --green-bg:#ecfdf5;  --green-glow:rgba(5,150,105,.08);
+  --blue:#1e40af;   --blue-bg:#eff6ff;   --blue-glow:rgba(30,64,175,.08);
+  --purple:#6d28d9; --purple-bg:#f5f3ff;
+  --amber:#b45309;  --amber-bg:#fffbeb;
+  --red:#dc2626;    --red-bg:#fef2f2;
+  --shadow:0 1px 4px rgba(0,0,0,.06); --shadow-md:0 4px 16px rgba(0,0,0,.08);
 }
 
-/* ====================================================
-   RESET E BASE
-==================================================== */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'DM Sans', -apple-system, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  font-size: 14px;
-  line-height: 1.65;
-  transition: var(--transition-theme);
-  min-height: 100vh;
-}
-
-/* ====================================================
-   TOPBAR — igual ao compras.html
-==================================================== */
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 300;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 0 1.5rem;
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(12px);
-  transition: var(--transition-theme);
-}
-
-.topbar-logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  flex-shrink: 0;
-}
-
-.logo-fallback {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: -0.03em;
-}
-
-.topbar-divider {
-  width: 1px;
-  height: 22px;
-  background: var(--border2);
-  flex-shrink: 0;
-}
-
-.topbar-title { font-size: 13px; color: var(--text2); white-space: nowrap; }
-.topbar-title strong { color: var(--text); font-weight: 600; }
-
-.topbar-nav { display: flex; gap: 2px; margin-left: auto; flex-wrap: wrap; }
-
-.topbar-nav a {
-  font-size: 12px;
-  color: var(--text2);
-  text-decoration: none;
-  padding: 5px 10px;
-  border-radius: 7px;
-  transition: all 0.15s;
-  font-weight: 500;
-}
-
-.topbar-nav a:hover { background: var(--bg3); color: var(--text); }
-.topbar-nav a.active { background: var(--accent-bg); color: var(--accent); }
-
-/* Botão de tema — mesma lógica do compras.html */
-.theme-toggle {
-  width: 36px; height: 36px;
-  border-radius: 10px;
-  border: 1px solid var(--border2);
-  background: var(--bg3);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-  flex-shrink: 0;
-  color: var(--text2);
-  margin-left: 6px;
-}
-
-.theme-toggle:hover {
-  background: var(--bg4);
-  color: var(--text);
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-glow);
-}
-
-.theme-toggle svg { transition: transform 0.4s ease; }
-.theme-toggle:hover svg { transform: rotate(20deg); }
-
-.icon-sun  { display: none; }
-.icon-moon { display: block; }
-[data-theme="light"] .icon-sun  { display: block; }
-[data-theme="light"] .icon-moon { display: none; }
-
-@media(max-width: 700px) { .topbar-nav { display: none; } }
-
-/* ====================================================
-   HERO
-==================================================== */
-.hero {
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-  padding: 2.5rem 1.5rem 2rem;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Detalhe decorativo verde/teal no hero */
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -60px; right: -60px;
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.hero-inner { max-width: 960px; margin: 0 auto; position: relative; }
-
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--accent-bg);
-  color: var(--accent);
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 20px;
-  margin-bottom: 1rem;
-  border: 1px solid var(--accent-glow);
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-}
-
-.hero h1 {
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  margin-bottom: 0.6rem;
-  line-height: 1.2;
-}
-
-.hero p { font-size: 14px; color: var(--text2); max-width: 580px; line-height: 1.7; }
-
-.hero-meta { display: flex; gap: 1.5rem; margin-top: 1.25rem; flex-wrap: wrap; }
-
-.hero-meta span {
-  font-size: 11px;
-  color: var(--text3);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-weight: 500;
-}
-
-.hero-meta span::before {
-  content: '';
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--border2);
-  display: inline-block;
-}
-
-/* ====================================================
-   SELETOR DE PERFIL (Logística / Estoque)
-   Esta página tem dois perfis distintos de usuário.
-   O switcher fica logo abaixo do hero.
-==================================================== */
-.profile-bar {
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-  padding: 0.875rem 1.5rem;
-  transition: var(--transition-theme);
-}
-
-.profile-inner {
-  max-width: 960px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.profile-label {
-  font-size: 11px;
-  color: var(--text3);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.profile-btn {
-  font-size: 12px;
-  font-weight: 600;
-  padding: 7px 18px;
-  border-radius: 20px;
-  border: 1px solid var(--border2);
-  background: var(--bg3);
-  color: var(--text2);
-  cursor: pointer;
-  transition: all 0.15s;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-family: inherit;
-}
-
-.profile-btn:hover { background: var(--bg4); color: var(--text); }
-
-/* Perfil ativo: Logística (teal) */
-.profile-btn.active-log {
-  background: var(--accent-bg);
-  color: var(--accent);
-  border-color: var(--accent-glow);
-}
-
-/* Perfil ativo: Estoque (verde) */
-.profile-btn.active-est {
-  background: var(--green-bg);
-  color: var(--green);
-  border-color: var(--green-glow);
-}
-
-/* ====================================================
-   LAYOUT PRINCIPAL
-==================================================== */
-.page { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
-
-.section { margin-bottom: 2rem; }
-
-.section-label {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text3);
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-/* ====================================================
-   PERFIS — PAINÉIS
-   Cada perfil tem seu próprio conjunto de abas.
-==================================================== */
-.profile-panel { display: none; }
-.profile-panel.active { display: block; animation: fadeIn 0.2s ease; }
-
-/* ====================================================
-   ABAS
-   Usamos cores diferentes por perfil:
-   teal para Logística, verde para Estoque
-==================================================== */
-.tab-bar {
-  display: flex;
-  gap: 2px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 2rem;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.tab-bar::-webkit-scrollbar { height: 0; }
-
-.tab-btn {
-  font-size: 12px;
-  font-weight: 600;
-  padding: 10px 18px;
-  border: none;
-  background: none;
-  color: var(--text3);
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  white-space: nowrap;
-  transition: all 0.15s;
-  border-radius: 8px 8px 0 0;
-  letter-spacing: 0.01em;
-  font-family: inherit;
-}
-
-.tab-btn:hover { color: var(--text); background: var(--bg3); }
-
-/* Aba ativa para o perfil Logística */
-.tab-btn.active-log {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
-  background: var(--accent-bg);
-}
-
-/* Aba ativa para o perfil Estoque */
-.tab-btn.active-est {
-  color: var(--green);
-  border-bottom-color: var(--green);
-  background: var(--green-bg);
-}
-
-.tab-panel { display: none; }
-.tab-panel.active {
-  display: block;
-  animation: fadeIn 0.2s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: none; }
-}
-
-/* ====================================================
-   PASSOS NUMERADOS
-==================================================== */
-.steps { display: grid; gap: 12px; }
-
-.step { display: flex; gap: 14px; align-items: flex-start; }
-
-.step-n {
-  width: 26px; height: 26px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 700;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.step-body strong {
-  font-weight: 600;
-  color: var(--text);
-  display: block;
-  margin-bottom: 3px;
-  font-size: 13px;
-}
-
-.step-body p { font-size: 12px; color: var(--text2); line-height: 1.65; margin: 0; }
-
-/* ====================================================
-   ALERTAS
-==================================================== */
-.alert {
-  border-radius: 10px;
-  padding: 12px 16px;
-  margin-top: 1.25rem;
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-}
-
-.alert-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
-.alert p    { font-size: 12px; line-height: 1.65; margin: 0; }
-
-.alert-warn  { background: var(--amber-bg); border: 1px solid rgba(251,191,36,.2); }
-.alert-warn p { color: var(--amber); }
-
-.alert-ok    { background: var(--green-bg); border: 1px solid var(--green-glow); }
-.alert-ok p  { color: var(--green); }
-
-.alert-rule  { background: var(--red-bg); border: 1px solid rgba(248,113,113,.2); }
-.alert-rule p { color: var(--red); }
-
-.alert-info  { background: var(--blue-bg); border: 1px solid var(--blue-glow); }
-.alert-info p { color: var(--blue); }
-
-.alert-teal  { background: var(--accent-bg); border: 1px solid var(--accent-glow); }
-.alert-teal p { color: var(--accent); }
-
-/* ====================================================
-   CHECKLIST INTERATIVO
-==================================================== */
-.checklist { display: grid; gap: 6px; }
-
-.citem {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding: 11px 14px;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.15s;
-  user-select: none;
-}
-
-.citem:hover { border-color: var(--border2); }
-
-.citem.done {
-  background: var(--green-bg);
-  border-color: var(--green-glow);
-}
-
-.cbox {
-  width: 20px; height: 20px;
-  border: 2px solid var(--border2);
-  border-radius: 6px;
-  flex-shrink: 0;
-  margin-top: 1px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.15s;
-}
-
-.citem.done .cbox { background: var(--green); border-color: var(--green); }
-.cbox svg { display: none; }
-.citem.done .cbox svg { display: block; }
-
-.ctext { font-size: 12px; color: var(--text2); line-height: 1.55; transition: color 0.15s; }
-.citem.done .ctext { color: var(--text3); text-decoration: line-through; }
-
-.check-progress { margin-top: 1rem; display: flex; align-items: center; gap: 10px; }
-
-.progress-bar {
-  flex: 1;
-  height: 5px;
-  background: var(--bg3);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background: var(--green);
-  border-radius: 3px;
-  transition: width 0.35s cubic-bezier(0.4,0,0.2,1);
-}
-
-.check-count { font-size: 12px; color: var(--text3); white-space: nowrap; font-weight: 600; }
-
-/* ====================================================
-   SLA GRID
-==================================================== */
-.sla-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 10px;
-}
-
-.sla-card {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px 16px;
-  transition: all 0.15s;
-}
-
-.sla-card:hover { border-color: var(--border2); box-shadow: var(--shadow); }
-
-.sla-card label {
-  font-size: 10px;
-  color: var(--text3);
-  display: block;
-  margin-bottom: 5px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.sla-card span { font-size: 13px; font-weight: 500; color: var(--text); }
-
-.sla-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 5px;
-  vertical-align: middle;
-}
-
-/* ====================================================
-   BLOCOS DE REGIÕES
-==================================================== */
-.region-box {
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-  border: 1px solid transparent;
-  margin-bottom: 0.75rem;
-}
-
-.region-title { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
-
-.region-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-
-.region-tag {
-  font-size: 11px;
-  padding: 3px 10px;
-  border-radius: 20px;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  color: var(--text2);
-  font-weight: 500;
-}
-
-/* ====================================================
-   TABELA GENÉRICA
-==================================================== */
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 12px;
-}
-
-.data-table th {
-  background: var(--bg3);
-  padding: 10px 12px;
-  text-align: left;
-  font-weight: 700;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: var(--text2);
-  border-bottom: 1px solid var(--border);
-  white-space: nowrap;
-}
-
-.data-table td {
-  padding: 10px 12px;
-  border-bottom: 1px solid var(--border);
-  color: var(--text2);
-  font-size: 12px;
-}
-
-.data-table tr:last-child td { border-bottom: none; }
-.data-table tr:hover td { background: var(--bg3); }
-.data-table td:first-child { font-weight: 500; color: var(--text); }
-
-/* ====================================================
-   PRÉVIA DA ETIQUETA DE PRODUTO
-   Simula a etiqueta física que vai no produto
-==================================================== */
-.etiqueta {
-  border: 2px solid var(--border2);
-  border-radius: 10px;
-  padding: 1.25rem 1.5rem;
-  max-width: 400px;
-  background: var(--bg2);
-  font-family: 'DM Mono', monospace;
-}
-
-.etiqueta-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 8px;
-  font-size: 12px;
-}
-
-.etiqueta-label {
-  font-size: 9px;
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  display: block;
-  margin-bottom: 2px;
-  font-weight: 600;
-}
-
-.etiqueta-val { font-size: 13px; font-weight: 600; color: var(--text); }
-
-.etiqueta-divider {
-  border: none;
-  border-top: 1px dashed var(--border2);
-  margin: 10px 0;
-}
-
-/* ====================================================
-   MATRIZ RACI
-==================================================== */
-.raci-wrap { overflow-x: auto; border-radius: 12px; }
-
-.raci-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-
-.raci-table th {
-  background: var(--bg3);
-  padding: 10px 12px;
-  text-align: left;
-  font-weight: 700;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: var(--text2);
-  border-bottom: 1px solid var(--border);
-  white-space: nowrap;
-}
-
-.raci-table td {
-  padding: 10px 12px;
-  border-bottom: 1px solid var(--border);
-  vertical-align: middle;
-  font-size: 12px;
-}
-
-.raci-table tr:last-child td { border-bottom: none; }
-.raci-table tr:hover td { background: var(--bg3); }
-.raci-table td:first-child { font-weight: 500; color: var(--text); }
-
-.raci-pill {
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 800;
-  padding: 3px 9px;
-  border-radius: 20px;
-  text-align: center;
-  min-width: 28px;
-  letter-spacing: 0.02em;
-}
-
-[data-theme="dark"] .r-R { background: rgba(45,212,191,.2);  color: #2dd4bf; }
-[data-theme="dark"] .r-A { background: rgba(52,211,153,.2);  color: #34d399; }
-[data-theme="dark"] .r-C { background: rgba(251,191,36,.2);  color: #fbbf24; }
-[data-theme="dark"] .r-I { background: rgba(148,163,184,.1); color: #64748b; }
-
-[data-theme="light"] .r-R { background: #ccfbf1; color: #0f766e; }
-[data-theme="light"] .r-A { background: #dcfce7; color: #166534; }
-[data-theme="light"] .r-C { background: #fef9c3; color: #854d0e; }
-[data-theme="light"] .r-I { background: #f3f4f6; color: #6b7280; }
-
-/* ====================================================
-   GLOSSÁRIO
-==================================================== */
-.glossary { display: grid; gap: 5px; }
-
-.gitem {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 16px;
-  padding: 11px 14px;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  transition: all 0.15s;
-}
-
-.gitem:hover { border-color: var(--border2); background: var(--bg3); }
-
-@media(max-width: 500px) { .gitem { grid-template-columns: 1fr; gap: 4px; } }
-
-.gterm { font-size: 12px; font-weight: 700; color: var(--text); }
-.gdef  { font-size: 12px; color: var(--text2); line-height: 1.6; }
-
-/* ====================================================
-   VÍDEOS
-==================================================== */
-.video-grid { display: grid; gap: 1.25rem; }
-
-.vtitle { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 0.6rem; }
-
-.video-ph {
-  background: var(--bg2);
-  border: 2px dashed var(--border2);
-  border-radius: 12px;
-  padding: 2.5rem 1.5rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  transition: border-color 0.15s;
-}
-
-.video-ph:hover { border-color: var(--accent); }
-
-.vicon {
-  width: 48px; height: 48px;
-  background: var(--bg3);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.video-ph p    { font-size: 12px; color: var(--text3); max-width: 320px; line-height: 1.6; }
-.video-ph code {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  background: var(--bg3);
-  padding: 3px 8px;
-  border-radius: 5px;
-  color: var(--text2);
-  word-break: break-all;
-}
-
-/* ====================================================
-   BOTÃO GENÉRICO
-==================================================== */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  padding: 7px 14px;
-  border-radius: 8px;
-  border: 1px solid var(--border2);
-  background: var(--bg2);
-  color: var(--text2);
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.15s;
-  font-weight: 500;
-  font-family: inherit;
-}
-
-.btn:hover { background: var(--bg3); color: var(--text); }
-
-/* ====================================================
-   RODAPÉ
-==================================================== */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 1.25rem 1.5rem;
-  max-width: 960px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-footer p { font-size: 11px; color: var(--text3); }
-
-/* Divisor entre seções compartilhadas (glossário/vídeos) */
-.shared-section { margin-top: 2.5rem; padding-top: 0.5rem; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.65;transition:var(--transition-theme)}
+
+/* ============================================================
+   TOPBAR — ORDEM FIXA IDÊNTICA AO COMPRAS.HTML
+============================================================ */
+.topbar{position:sticky;top:0;z-index:300;height:56px;display:flex;align-items:center;gap:12px;padding:0 1.5rem;background:var(--bg2);border-bottom:1px solid var(--border);box-shadow:var(--shadow);backdrop-filter:blur(12px);transition:var(--transition-theme)}
+.topbar-logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
+.logo-fallback{font-size:16px;font-weight:700;color:var(--accent);letter-spacing:-.03em}
+.topbar-divider{width:1px;height:22px;background:var(--border2);flex-shrink:0}
+.topbar-title{font-size:13px;color:var(--text2);white-space:nowrap}
+.topbar-title strong{color:var(--text);font-weight:600}
+.topbar-nav{display:flex;gap:2px;margin-left:auto}
+.topbar-nav a{font-size:12px;color:var(--text2);text-decoration:none;padding:5px 10px;border-radius:7px;transition:all .15s;font-weight:500;white-space:nowrap}
+.topbar-nav a:hover{background:var(--bg3);color:var(--text)}
+.topbar-nav a.active{background:var(--accent-bg);color:var(--accent)}
+.theme-toggle{width:36px;height:36px;border-radius:10px;border:1px solid var(--border2);background:var(--bg3);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;color:var(--text2);margin-left:6px}
+.theme-toggle:hover{background:var(--bg4);color:var(--text);border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.theme-toggle svg{transition:transform .4s ease}
+.theme-toggle:hover svg{transform:rotate(20deg)}
+.icon-sun{display:none}.icon-moon{display:block}
+[data-theme="light"] .icon-sun{display:block}[data-theme="light"] .icon-moon{display:none}
+@media(max-width:900px){.topbar-nav{display:none}}
+
+/* HERO */
+.hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:2.5rem 1.5rem 2rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:1000px;margin:0 auto;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-bg);color:var(--accent);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:1rem;border:1px solid var(--accent-glow);letter-spacing:.03em;text-transform:uppercase}
+.hero h1{font-size:28px;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem;line-height:1.2}
+.hero p{font-size:14px;color:var(--text2);max-width:580px;line-height:1.7}
+.hero-meta{display:flex;gap:1.5rem;margin-top:1.25rem;flex-wrap:wrap}
+.hero-meta span{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:5px;font-weight:500}
+.hero-meta span::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--border2);display:inline-block}
+
+/* ROLE BAR */
+.role-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:.875rem 1.5rem;transition:var(--transition-theme)}
+.role-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.role-label{font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.role-btn{font-size:12px;font-weight:600;padding:7px 18px;border-radius:20px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px;font-family:inherit;white-space:nowrap}
+.role-btn:hover{background:var(--bg4);color:var(--text)}
+.role-btn.active-log{background:var(--accent-bg);color:var(--accent);border-color:var(--accent-glow)}
+.role-btn.active-est{background:var(--green-bg);color:var(--green);border-color:var(--green-glow)}
+
+/* LAYOUT */
+.page{max-width:1000px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.section{margin-bottom:2rem}
+.section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.role-panel{display:none}
+.role-panel.active{display:block;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ABAS — cor varia por cargo */
+.tab-bar{display:flex;gap:2px;border-bottom:1px solid var(--border);margin-bottom:2rem;overflow-x:auto;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{height:0}
+.tab-btn{font-size:12px;font-weight:600;padding:10px 18px;border:none;background:none;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .15s;border-radius:8px 8px 0 0;font-family:inherit}
+.tab-btn:hover{color:var(--text);background:var(--bg3)}
+.tab-btn.active-log{color:var(--accent);border-bottom-color:var(--accent);background:var(--accent-bg)}
+.tab-btn.active-est{color:var(--green);border-bottom-color:var(--green);background:var(--green-bg)}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fadeIn .2s ease}
+
+/* INTRO DO CARGO */
+.role-intro{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:2rem;display:flex;gap:16px;align-items:flex-start}
+.role-intro-icon{font-size:28px;flex-shrink:0;margin-top:2px}
+.role-intro h2{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px}
+.role-intro p{font-size:13px;color:var(--text2);line-height:1.7}
+.role-intro-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.role-intro-tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;background:var(--bg3);color:var(--text2);border:1px solid var(--border2)}
+
+/* SCOPE GRID */
+.scope-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
+.scope-card{padding:16px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;transition:all .15s}
+.scope-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.scope-card-icon{font-size:20px;margin-bottom:8px}
+.scope-card h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.scope-card p{font-size:12px;color:var(--text2);line-height:1.6}
+
+/* INFO CARDS (substitui checklists) */
+.info-grid{display:grid;gap:8px}
+.info-card{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .15s}
+.info-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.info-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
+.info-body strong{font-size:12px;font-weight:600;color:var(--text);display:block;margin-bottom:3px}
+.info-body p{font-size:12px;color:var(--text2);line-height:1.6;margin:0}
+
+/* FLOW STEPS */
+.flow-steps{display:grid;gap:0}
+.flow-step{display:flex;gap:16px;align-items:flex-start;position:relative;padding-bottom:4px}
+.flow-step:not(:last-child)::before{content:'';position:absolute;left:15px;top:34px;bottom:-4px;width:2px;background:var(--border2);z-index:0}
+.flow-step-n{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;position:relative;z-index:1;margin-top:10px}
+.flow-step-body{flex:1;padding:10px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:all .15s}
+.flow-step-body:hover{border-color:var(--border2)}
+.flow-step-body h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.flow-step-body p{font-size:12px;color:var(--text2);line-height:1.6;margin:0}
+.flow-step-body .step-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.step-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px}
+
+/* SYSTEMS */
+.systems-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.system-card{padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;transition:all .15s}
+.system-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.system-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.system-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.system-use{font-size:11px;color:var(--text2);line-height:1.6}
+.system-actions{display:grid;gap:3px;margin-top:8px}
+.system-action{font-size:11px;color:var(--text3);padding:3px 0;border-top:1px solid var(--border);display:flex;gap:6px;align-items:center}
+.system-action::before{content:'›';color:var(--accent);font-weight:700;font-size:13px}
+
+/* RELACIONAMENTOS */
+.rel-grid{display:grid;gap:8px}
+.rel-card{display:grid;grid-template-columns:160px 1fr;gap:14px;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;align-items:start;transition:all .15s}
+.rel-card:hover{border-color:var(--border2)}
+@media(max-width:500px){.rel-card{grid-template-columns:1fr;gap:6px}}
+.rel-fase{font-size:11px;font-weight:700;color:var(--text)}
+.rel-fase small{display:block;font-size:10px;font-weight:400;color:var(--text3);margin-top:2px}
+.rel-quem{display:flex;flex-wrap:wrap;gap:5px}
+.rel-pill{font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px}
+
+/* TABELAS GERAIS */
+.data-table{width:100%;border-collapse:collapse;font-size:12px}
+.data-table th{background:var(--bg3);padding:10px 12px;text-align:left;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--text2);border-bottom:1px solid var(--border);white-space:nowrap}
+.data-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text2);font-size:12px}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:var(--bg3)}
+.data-table td:first-child{font-weight:500;color:var(--text)}
+
+/* ALERTAS */
+.alert{border-radius:10px;padding:12px 16px;margin-top:1rem;display:flex;gap:10px;align-items:flex-start}
+.alert-icon{font-size:15px;flex-shrink:0;margin-top:1px}
+.alert p{font-size:12px;line-height:1.65;margin:0}
+.alert-warn{background:var(--amber-bg);border:1px solid rgba(251,191,36,.2)}
+.alert-warn p{color:var(--amber)}
+.alert-ok{background:var(--green-bg);border:1px solid var(--green-glow)}
+.alert-ok p{color:var(--green)}
+.alert-rule{background:var(--red-bg);border:1px solid rgba(248,113,113,.2)}
+.alert-rule p{color:var(--red)}
+.alert-info{background:var(--accent-bg);border:1px solid var(--accent-glow)}
+.alert-info p{color:var(--accent2)}
+
+/* REGIÕES */
+.region-box{border-radius:10px;padding:1rem 1.25rem;border:1px solid transparent;margin-bottom:.75rem}
+.region-title{font-size:13px;font-weight:700;margin-bottom:8px}
+.region-tags{display:flex;flex-wrap:wrap;gap:6px}
+.region-tag{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--bg2);border:1px solid var(--border);color:var(--text2);font-weight:500}
+
+/* ETIQUETA */
+.etiqueta{border:2px solid var(--border2);border-radius:10px;padding:1.25rem 1.5rem;max-width:400px;background:var(--bg2);font-family:'DM Mono',monospace}
+.etiqueta-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;font-size:12px}
+.etiqueta-label{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:2px;font-weight:600}
+.etiqueta-val{font-size:13px;font-weight:600;color:var(--text)}
+.etiqueta-divider{border:none;border-top:1px dashed var(--border2);margin:10px 0}
+
+/* SLA */
+.sla-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.sla-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;transition:all .15s}
+.sla-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.sla-card label{font-size:10px;color:var(--text3);display:block;margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.sla-card span{font-size:13px;font-weight:500;color:var(--text)}
+.sla-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:middle}
+
+/* RACI */
+.raci-wrap{overflow-x:auto;border-radius:12px}
+.raci-table{width:100%;border-collapse:collapse;font-size:12px}
+.raci-table th{background:var(--bg3);padding:10px 12px;text-align:left;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--text2);border-bottom:1px solid var(--border);white-space:nowrap}
+.raci-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle;font-size:12px}
+.raci-table tr:last-child td{border-bottom:none}
+.raci-table tr:hover td{background:var(--bg3)}
+.raci-table td:first-child{font-weight:500;color:var(--text)}
+.raci-pill{display:inline-block;font-size:10px;font-weight:800;padding:3px 9px;border-radius:20px;text-align:center;min-width:28px}
+[data-theme="dark"] .r-R{background:rgba(45,212,191,.2);color:#2dd4bf}
+[data-theme="dark"] .r-A{background:rgba(52,211,153,.2);color:#34d399}
+[data-theme="dark"] .r-C{background:rgba(251,191,36,.2);color:#fbbf24}
+[data-theme="dark"] .r-I{background:rgba(148,163,184,.1);color:#64748b}
+[data-theme="light"] .r-R{background:#ccfbf1;color:#0f766e}
+[data-theme="light"] .r-A{background:#dcfce7;color:#166534}
+[data-theme="light"] .r-C{background:#fef9c3;color:#854d0e}
+[data-theme="light"] .r-I{background:#f3f4f6;color:#6b7280}
+
+/* GLOSSÁRIO */
+.glossary{display:grid;gap:5px}
+.gitem{display:grid;grid-template-columns:200px 1fr;gap:16px;padding:11px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .15s}
+.gitem:hover{border-color:var(--border2);background:var(--bg3)}
+@media(max-width:500px){.gitem{grid-template-columns:1fr;gap:4px}}
+.gterm{font-size:12px;font-weight:700;color:var(--text)}
+.gdef{font-size:12px;color:var(--text2);line-height:1.6}
+
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:7px 14px;border-radius:8px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);cursor:pointer;text-decoration:none;transition:all .15s;font-weight:500;font-family:inherit}
+.btn:hover{background:var(--bg3);color:var(--text)}
+footer{border-top:1px solid var(--border);padding:1.25rem 1.5rem;max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+footer p{font-size:11px;color:var(--text3)}
+.shared-section{margin-top:2.5rem;padding-top:.5rem}
 </style>
 </head>
 <body>
 
-<!-- ====================================================
-     TOPBAR
-==================================================== -->
+<!-- TOPBAR — ordem fixa idêntica ao compras.html -->
 <header class="topbar">
   <a href="index.html" class="topbar-logo">
     <img src="logo-branco.png" alt="Croma Tecnologia" height="28"
-         onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
     <span class="logo-fallback" style="display:none">CROMA</span>
   </a>
-
   <div class="topbar-divider"></div>
-
   <span class="topbar-title">Manual Operacional <strong>/ Logística e Estoque</strong></span>
-
   <nav class="topbar-nav">
     <a href="index.html">Inicio</a>
+    <a href="financeiro.html">Financeiro</a>
     <a href="compras.html">Compras</a>
     <a href="logistica.html" class="active">Logística</a>
-    <a href="financeiro.html">Financeiro</a>
     <a href="comercial.html">Comercial</a>
+    <a href="licitacao.html">Licitação</a>
     <a href="ecommerce.html">E-commerce</a>
     <a href="outsourcing.html">Outsourcing</a>
   </nav>
-
-  <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema claro/escuro" aria-label="Alternar tema">
-    <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-    </svg>
-    <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="5"/>
-      <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-      <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-    </svg>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
+    <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
   </button>
 </header>
 
-<!-- ====================================================
-     HERO
-==================================================== -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-badge">
@@ -892,367 +270,326 @@ footer p { font-size: 11px; color: var(--text3); }
       Logística e Estoque
     </div>
     <h1>Frete, Entrega e Controle de Estoque</h1>
-    <p>Este setor cobre dois perfis distintos: o profissional de Logística (frete, CTE, entregas, triangulações) e o profissional de Estoque (recebimento, entrada de NF, etiquetagem, despacho). Selecione seu perfil abaixo.</p>
+    <p>Selecione seu cargo para ver seu escopo de atuação, fluxo operacional do início ao fim, sistemas que você usa e com quem você se relaciona em cada etapa do processo.</p>
     <div class="hero-meta">
-      <span>Versão 1.0</span>
-      <span>Março 2026</span>
-      <span>Documento Interno</span>
-      <span>Sistemas: OMIE · OptiWork</span>
+      <span>Versão 1.0</span><span>Março 2026</span><span>Documento Interno</span><span>Sistemas: OMIE · OptiWork</span>
     </div>
   </div>
 </section>
 
-<!-- ====================================================
-     SELETOR DE PERFIL
-     Logística = teal | Estoque = verde
-==================================================== -->
-<div class="profile-bar">
-  <div class="profile-inner">
-    <span class="profile-label">Selecione seu perfil:</span>
-
-    <button class="profile-btn active-log" id="pbtn-log" onclick="setProfile('log')">
-      <!-- Ícone de caixa/pacote para Logística -->
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-        <circle cx="12" cy="10" r="3"/>
-      </svg>
-      Profissional de Logística
+<!-- SELETOR DE CARGO -->
+<div class="role-bar">
+  <div class="role-inner">
+    <span class="role-label">Seu cargo:</span>
+    <button class="role-btn active-log" id="rbtn-log" onclick="setRole('log')">
+      🚚 Analista de Logística
     </button>
-
-    <button class="profile-btn" id="pbtn-est" onclick="setProfile('est')">
-      <!-- Ícone de grade/estoque -->
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="2" width="9" height="9"/><rect x="13" y="2" width="9" height="9"/>
-        <rect x="2" y="13" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/>
-      </svg>
-      Profissional de Estoque
+    <button class="role-btn" id="rbtn-est" onclick="setRole('est')">
+      📦 Analista de Estoque
     </button>
   </div>
 </div>
 
 <main class="page">
 
-  <!-- ==================================================
-       PERFIL A — LOGÍSTICA
-       Frete, CTE, monitoramento, análise de custo
-  ================================================== -->
-  <div class="profile-panel active" id="profile-log">
+  <!-- ══════════════════════════════════════
+       CARGO: ANALISTA DE LOGÍSTICA
+  ══════════════════════════════════════ -->
+  <div class="role-panel active" id="role-log">
+
+    <div class="role-intro">
+      <div class="role-intro-icon">🚚</div>
+      <div>
+        <h2>Analista de Logística</h2>
+        <p>Você cuida de toda a cadeia de transporte e entrega. Sua atuação começa antes mesmo da venda ser fechada — na cotação do frete — e só termina quando o comprovante de entrega está registrado no OMIE e o Financeiro foi formalmente comunicado.</p>
+        <div class="role-intro-tags">
+          <span class="role-intro-tag">OMIE</span>
+          <span class="role-intro-tag">OptiWork</span>
+          <span class="role-intro-tag">TG Transportes</span>
+          <span class="role-intro-tag">Motorista interno</span>
+        </div>
+      </div>
+    </div>
 
     <div class="tab-bar" id="tabs-log">
-      <button class="tab-btn active-log" onclick="tabLog('frete', this)">Cotação de Frete</button>
-      <button class="tab-btn" onclick="tabLog('cte', this)">Lançamento de CTE</button>
-      <button class="tab-btn" onclick="tabLog('entrega', this)">Monitoramento de Entregas</button>
-      <button class="tab-btn" onclick="tabLog('sinalizacao', this)">Sinalização no OMIE</button>
-      <button class="tab-btn" onclick="tabLog('custo', this)">Análise de Custo</button>
-      <button class="tab-btn" onclick="tabLog('raci-log', this)">Matriz RACI</button>
+      <button class="tab-btn active-log" onclick="tabRole('log','escopo',this)">Escopo</button>
+      <button class="tab-btn" onclick="tabRole('log','fluxo',this)">Fluxo Operacional</button>
+      <button class="tab-btn" onclick="tabRole('log','sistemas',this)">Sistemas</button>
+      <button class="tab-btn" onclick="tabRole('log','relacionamentos',this)">Relacionamentos</button>
+      <button class="tab-btn" onclick="tabRole('log','regras',this)">Regras</button>
+      <button class="tab-btn" onclick="tabRole('log','raci',this)">Matriz RACI</button>
     </div>
 
-    <!-- ---- TAB: COTAÇÃO DE FRETE ---- -->
-    <div class="tab-panel active" id="tab-log-frete">
-
+    <!-- ESCOPO LOG -->
+    <div class="tab-panel active" id="tab-log-escopo">
       <div class="section">
-        <div class="section-label">Quando cotar o frete</div>
-        <div class="sla-grid">
-          <div class="sla-card">
-            <label>Venda B2B (Comercial)</label>
-            <span><span class="sla-dot" style="background:var(--blue)"></span>Antes do Markup ser finalizado</span>
+        <div class="section-label">O que é sua responsabilidade</div>
+        <div class="scope-grid">
+          <div class="scope-card">
+            <div class="scope-card-icon">💰</div>
+            <h4>Cotar fretes</h4>
+            <p>Subsidiar a análise de viabilidade comercial com valores reais de frete antes do fechamento da venda. Você cota, registra no OptiWork e responde no card do solicitante.</p>
           </div>
-          <div class="sla-card">
-            <label>Venda via Licitação</label>
-            <span><span class="sla-dot" style="background:var(--purple)"></span>Antes da fase de lance</span>
+          <div class="scope-card">
+            <div class="scope-card-icon">📄</div>
+            <h4>Lançar CTEs no OMIE</h4>
+            <p>Após conferir que o valor do CTE está correto, você lança em Contas a Pagar no OMIE. Este lançamento é o que aciona o pagamento à transportadora pelo Financeiro.</p>
           </div>
-          <div class="sla-card">
-            <label>Pedido já aprovado</label>
-            <span><span class="sla-dot" style="background:var(--accent)"></span>Ao chegar na coluna Comprar</span>
+          <div class="scope-card">
+            <div class="scope-card-icon">🔍</div>
+            <h4>Conferir valores cobrados</h4>
+            <p>Confrontar o valor da fatura de frete com o valor cotado. CTE com valor divergente: suspender o pagamento e negociar com a transportadora antes de qualquer lançamento.</p>
           </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-label">Informações obrigatórias no ticket de cotação</div>
-        <p style="font-size:13px;color:var(--text2);margin-bottom:1.25rem;line-height:1.7">
-          O solicitante abre o ticket de cotação no OptiWork. A Logística responde com os valores no comentário do mesmo card. O ticket deve conter todos os itens abaixo:
-        </p>
-        <div class="checklist" id="chk-frete">
-          <div class="citem" onclick="ck(this,'chk-frete','prog-frete','cnt-frete')">
-            <div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ctext">CEP ou endereço completo de destino</div>
+          <div class="scope-card">
+            <div class="scope-card-icon">📍</div>
+            <h4>Monitorar entregas e tratar ocorrências</h4>
+            <p>Acompanhar entregas ativas, identificar atrasos e acionar transportadoras ou fornecedores parceiros para resolução. Registrar tudo no OptiWork.</p>
           </div>
-          <div class="citem" onclick="ck(this,'chk-frete','prog-frete','cnt-frete')">
-            <div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ctext">Peso bruto estimado da carga (kg)</div>
+          <div class="scope-card">
+            <div class="scope-card-icon">✅</div>
+            <h4>Sinalizar entregas concluídas no OMIE</h4>
+            <p>Ao confirmar a entrega, atualizar o status da NF no OMIE, anexar o comprovante e informar o Financeiro por escrito — especialmente em triangulações.</p>
           </div>
-          <div class="citem" onclick="ck(this,'chk-frete','prog-frete','cnt-frete')">
-            <div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ctext">Dimensões ou volume cúbico estimado da embalagem</div>
+          <div class="scope-card">
+            <div class="scope-card-icon">⚖️</div>
+            <h4>Analisar motorista interno vs. parceiro</h4>
+            <p>Avaliar custo/benefício para cada entrega: motorista interno para Brasília e entorno, TG Transportes e parceiros para o restante do país ou cargas maiores.</p>
           </div>
-          <div class="citem" onclick="ck(this,'chk-frete','prog-frete','cnt-frete')">
-            <div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ctext">Tipo de produto (eletrônico, linha branca, suprimentos etc.)</div>
-          </div>
-          <div class="citem" onclick="ck(this,'chk-frete','prog-frete','cnt-frete')">
-            <div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ctext">Prazo de entrega exigido pelo cliente</div>
-          </div>
-          <div class="citem" onclick="ck(this,'chk-frete','prog-frete','cnt-frete')">
-            <div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ctext">Indicação se é entrega triangulada (fornecedor ao cliente) ou padrão</div>
-          </div>
-          <div class="citem" onclick="ck(this,'chk-frete','prog-frete','cnt-frete')">
-            <div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ctext">Valor declarado da mercadoria (para cálculo de seguro)</div>
-          </div>
-        </div>
-        <div class="check-progress">
-          <button class="btn" onclick="resetCk('chk-frete','prog-frete','cnt-frete')">↺ Limpar</button>
-          <div class="progress-bar"><div class="progress-fill" id="prog-frete" style="width:0%"></div></div>
-          <span class="check-count" id="cnt-frete">0 / 7</span>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-label">Passo a passo — cotar com transportadoras</div>
-        <div class="steps">
-          <div class="step">
-            <div class="step-n" style="background:var(--accent-bg);color:var(--accent)">1</div>
-            <div class="step-body">
-              <strong>Identificar a transportadora adequada</strong>
-              <p>Brasília e regiões próximas (Plano Piloto, Taguatinga, Águas Claras, Samambaia, Riacho Fundo, Guará, Lago Sul/Norte): avaliar entrega via motorista interno. Fora do perímetro ou carga pesada: acionar parceiros logísticos (TG Transportes e outros). Triangulada: verificar se o fornecedor cota o frete diretamente.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--accent-bg);color:var(--accent)">2</div>
-            <div class="step-body">
-              <strong>Solicitar cotação formal</strong>
-              <p>Contatar a transportadora informando: CEP de origem e destino, peso, volume, tipo de produto e prazo. Solicitar a cotação por escrito — e-mail ou mensagem. Nunca registrar apenas verbalmente.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--accent-bg);color:var(--accent)">3</div>
-            <div class="step-body">
-              <strong>Registrar no card do OptiWork</strong>
-              <p>Adicionar comentário com: transportadora, valor cotado, prazo de entrega e condição. Se mais de uma transportadora foi cotada, listar todas e indicar a recomendada com justificativa de custo/benefício.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--accent-bg);color:var(--accent)">4</div>
-            <div class="step-body">
-              <strong>Acompanhar valor após contratação</strong>
-              <p>Ao receber o CTE, confrontar o valor da fatura com o valor cotado. Se houver divergência: suspender o pagamento e tratar com a transportadora antes de lançar no OMIE.</p>
-            </div>
-          </div>
-        </div>
-        <div class="alert alert-warn">
-          <span class="alert-icon">⚠️</span>
-          <p><strong>Regra de conferência do CTE:</strong> o CTE nunca deve ser lançado no OMIE sem conferência prévia. Se o valor cobrado for superior ao cotado, suspender o pagamento e negociar o ajuste com a transportadora antes de qualquer lançamento.</p>
         </div>
       </div>
     </div>
 
-    <!-- ---- TAB: LANÇAMENTO DE CTE ---- -->
-    <div class="tab-panel" id="tab-log-cte">
+    <!-- FLUXO LOG -->
+    <div class="tab-panel" id="tab-log-fluxo">
       <div class="section">
-        <div class="section-label">Lançamento do CTE no OMIE — Contas a Pagar</div>
-        <p style="font-size:13px;color:var(--text2);margin-bottom:1.5rem;line-height:1.7">
-          Após confirmar que o valor do CTE está correto, o profissional de Logística realiza o lançamento no contas a pagar do OMIE. Este lançamento aciona o pagamento à transportadora pelo Financeiro.
-        </p>
-        <div class="steps">
-          <div class="step">
-            <div class="step-n" style="background:var(--amber-bg);color:var(--amber)">1</div>
-            <div class="step-body">
-              <strong>Acessar o OMIE e selecionar a empresa correta</strong>
-              <p>Login em app.omie.com.br. Selecionar a empresa Croma correspondente ao pedido: TECINFO, ESFERA, CRO TI, ESPAÇO CROMA etc.</p>
+        <div class="section-label">Do início ao fim — seu caminho no processo</div>
+        <div class="flow-steps">
+
+          <div class="flow-step">
+            <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">1</div>
+            <div class="flow-step-body">
+              <h4>Cotação de frete — antes da venda fechar</h4>
+              <p>O solicitante (vendedor, analista ou comprador) abre um card no OptiWork com os dados da carga. Você recebe, cota com as transportadoras adequadas e responde no mesmo card com: transportadora recomendada, valor, prazo e condição.</p>
+              <div class="step-tags">
+                <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">Você responde no OptiWork</span>
+                <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Sempre por escrito — nunca só verbalmente</span>
+              </div>
             </div>
           </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--amber-bg);color:var(--amber)">2</div>
-            <div class="step-body">
-              <strong>Navegar para Financeiro → Contas a Pagar</strong>
-              <p>No menu principal: "Financeiro" → "Contas a Pagar" → "+ Novo Lançamento".</p>
+
+          <div class="flow-step">
+            <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">2</div>
+            <div class="flow-step-body">
+              <h4>Análise: motorista interno ou parceiro logístico?</h4>
+              <p>Brasília e regiões próximas (Plano Piloto, Taguatinga, Águas Claras, Samambaia, Riacho Fundo, Guará, Lago Sul/Norte): avaliar motorista interno. Fora do DF, cargas pesadas ou alto valor com seguro: acionar TG Transportes ou parceiro. Trianguladas: verificar se o fornecedor já inclui frete.</p>
+              <div class="step-tags">
+                <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Brasília → motorista interno</span>
+                <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Fora do DF → parceiro logístico</span>
+              </div>
             </div>
           </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--amber-bg);color:var(--amber)">3</div>
-            <div class="step-body">
-              <strong>Preencher os dados do CTE</strong>
-              <p>Fornecedor: selecionar a transportadora emitente. Número do documento: número do CTE. Valor: deve ser idêntico ao valor cotado e acordado. Data de emissão e vencimento conforme o CTE. Conta contábil: frete. Observação: informar número do pedido ou NF relacionada.</p>
+
+          <div class="flow-step">
+            <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">3</div>
+            <div class="flow-step-body">
+              <h4>Conferir o CTE recebido</h4>
+              <p>Ao receber o CTE da transportadora, confrontar o valor cobrado com o valor cotado. Se baterem: prosseguir para o lançamento no OMIE. Se divergirem: suspender, contatar a transportadora, registrar no OptiWork (cotado vs. cobrado) e só lançar após confirmação do valor correto.</p>
+              <div class="step-tags">
+                <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Valores OK → lançar no OMIE</span>
+                <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Divergência → suspender e negociar</span>
+              </div>
             </div>
           </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--amber-bg);color:var(--amber)">4</div>
-            <div class="step-body">
-              <strong>Anexar o CTE e salvar</strong>
-              <p>Anexar o PDF do CTE ao lançamento antes de salvar. O lançamento ficará com status "A Pagar" aguardando confirmação do Financeiro. Registrar no card do OptiWork que o CTE foi lançado.</p>
+
+          <div class="flow-step">
+            <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">4</div>
+            <div class="flow-step-body">
+              <h4>Lançar CTE no OMIE — Contas a Pagar</h4>
+              <p>Acessar OMIE → empresa correta → Financeiro → Contas a Pagar → + Novo Lançamento. Preencher: fornecedor (transportadora), número do CTE, valor, datas e conta contábil frete. Anexar o PDF do CTE. Registrar no OptiWork que o lançamento foi feito.</p>
+              <div class="step-tags">
+                <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">OMIE — empresa correta!</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="alert alert-rule">
-          <span class="alert-icon">🚫</span>
-          <p><strong>CTE com valor divergente — procedimento obrigatório:</strong> NÃO lançar no OMIE. Contatar a transportadora imediatamente para justificativa e ajuste. Registrar a ocorrência no card com os valores (cotado vs. cobrado). Somente após confirmação do valor correto, prosseguir com o lançamento.</p>
+
+          <div class="flow-step">
+            <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">5</div>
+            <div class="flow-step-body">
+              <h4>Monitorar a entrega até a conclusão</h4>
+              <p>Para cada entrega ativa: verificar diariamente o rastreamento para prazos críticos. Se a data prevista passar sem confirmação: acionar a transportadora ou fornecedor (em trianguladas), registrar a ocorrência no OptiWork com nova previsão e comunicar Compras e Comercial.</p>
+              <div class="step-tags">
+                <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">Monitoramento diário</span>
+                <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Atraso → RMA logístico</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">6</div>
+            <div class="flow-step-body">
+              <h4>Confirmar entrega e sinalizar no OMIE</h4>
+              <p><strong>Entrega padrão:</strong> recolher comprovante assinado (motorista) ou POD (transportadora) → localizar NF no OMIE → atualizar status → anexar comprovante → arquivar original físico.<br><strong>Triangulada:</strong> obter comprovante do parceiro → anexar na NF no OMIE → comunicar Financeiro por escrito com número da NF, parceiro e data de entrega.</p>
+              <div class="step-tags">
+                <span class="step-tag" style="background:var(--purple-bg);color:var(--purple)">Triangulada → comunicar Financeiro!</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">✓</div>
+            <div class="flow-step-body">
+              <h4>Ciclo encerrado</h4>
+              <p>Comprovante anexado no OMIE + Financeiro informado = ciclo logístico encerrado. Para FUNBIO: comprovante vai na NF de remessa, não na NF comum.</p>
+              <div class="step-tags">
+                <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Ciclo encerrado</span>
+                <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">FUNBIO: NF de remessa!</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
 
-    <!-- ---- TAB: MONITORAMENTO DE ENTREGAS ---- -->
-    <div class="tab-panel" id="tab-log-entrega">
-
+    <!-- SISTEMAS LOG -->
+    <div class="tab-panel" id="tab-log-sistemas">
       <div class="section">
-        <div class="section-label">Acompanhamento diário de entregas ativas</div>
-        <p style="font-size:13px;color:var(--text2);margin-bottom:1.25rem;line-height:1.7">
-          Para cada entrega em andamento, verificar diariamente:
-        </p>
-        <div class="checklist" id="chk-mon">
-          <div class="citem" onclick="ck(this,'chk-mon','prog-mon','cnt-mon')">
-            <div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ctext">Data prevista de entrega informada pela transportadora na contratação</div>
-          </div>
-          <div class="citem" onclick="ck(this,'chk-mon','prog-mon','cnt-mon')">
-            <div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ctext">Status de rastreamento atualizado — diariamente para entregas com prazo crítico</div>
-          </div>
-          <div class="citem" onclick="ck(this,'chk-mon','prog-mon','cnt-mon')">
-            <div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ctext">Confirmação de entrega validada com o cliente quando possível</div>
-          </div>
-        </div>
-        <div class="check-progress">
-          <button class="btn" onclick="resetCk('chk-mon','prog-mon','cnt-mon')">↺ Limpar</button>
-          <div class="progress-bar"><div class="progress-fill" id="prog-mon" style="width:0%"></div></div>
-          <span class="check-count" id="cnt-mon">0 / 3</span>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-label">Entrega fora do prazo — RMA Logístico</div>
-        <div class="steps">
-          <div class="step">
-            <div class="step-n" style="background:var(--red-bg);color:var(--red)">1</div>
-            <div class="step-body">
-              <strong>Identificar a ocorrência</strong>
-              <p>Verificar o rastreamento e confirmar o atraso. Identificar se o problema é da transportadora, do fornecedor (triangulada) ou de restrição no destino.</p>
+        <div class="section-label">Sistemas que você usa e para quê</div>
+        <div class="systems-grid">
+          <div class="system-card">
+            <div class="system-name"><span class="system-dot" style="background:var(--accent)"></span>OMIE</div>
+            <div class="system-use">ERP principal. Você usa para lançar CTEs e sinalizar entregas.</div>
+            <div class="system-actions">
+              <span class="system-action">Financeiro → Contas a Pagar → lançar CTE</span>
+              <span class="system-action">Localizar NF e atualizar status de entrega</span>
+              <span class="system-action">Anexar comprovantes de entrega diretamente na NF</span>
+              <span class="system-action">Selecionar empresa Croma correta (TECINFO, ESFERA etc.)</span>
             </div>
           </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--red-bg);color:var(--red)">2</div>
-            <div class="step-body">
-              <strong>Contatar o parceiro responsável</strong>
-              <p>Transporte direto: acionar a transportadora. Triangulada: acionar o fornecedor (Agis, Mazer, Gazin etc.) para rastreamento e nova previsão. Solicitar motivo do atraso, nova data e protocolo de ocorrência.</p>
+          <div class="system-card">
+            <div class="system-name"><span class="system-dot" style="background:var(--green)"></span>OptiWork</div>
+            <div class="system-use">Central de comunicação e registro de ocorrências.</div>
+            <div class="system-actions">
+              <span class="system-action">Receber e responder tickets de cotação de frete</span>
+              <span class="system-action">Registrar ocorrências e novos prazos de entrega</span>
+              <span class="system-action">Comunicar Compras e Comercial sobre atrasos</span>
+              <span class="system-action">Confirmar que CTE foi lançado e entrega encerrada</span>
             </div>
           </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--red-bg);color:var(--red)">3</div>
-            <div class="step-body">
-              <strong>Registrar e comunicar internamente</strong>
-              <p>Registrar no card do OptiWork: data da ocorrência, motivo informado e nova previsão. Comunicar Compras e Comercial sobre o novo prazo — eles informam o cliente. Acompanhar diariamente até a resolução.</p>
+          <div class="system-card">
+            <div class="system-name"><span class="system-dot" style="background:var(--amber)"></span>TG Transportes</div>
+            <div class="system-use">Parceiro logístico externo para entregas fora do DF.</div>
+            <div class="system-actions">
+              <span class="system-action">Solicitar cotação formal por escrito</span>
+              <span class="system-action">Agendar coleta de mercadorias</span>
+              <span class="system-action">Obter rastreamento e POD após entrega</span>
+            </div>
+          </div>
+          <div class="system-card">
+            <div class="system-name"><span class="system-dot" style="background:var(--purple)"></span>Fornecedores parceiros</div>
+            <div class="system-use">Agis, Mazer, Gazin — para entregas trianguladas.</div>
+            <div class="system-actions">
+              <span class="system-action">Acompanhar status de entrega diretamente</span>
+              <span class="system-action">Solicitar comprovante de entrega (PDF)</span>
+              <span class="system-action">Tratar atrasos e abrir ocorrências</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ---- TAB: SINALIZAÇÃO NO OMIE ---- -->
-    <div class="tab-panel" id="tab-log-sinalizacao">
-
+    <!-- RELACIONAMENTOS LOG -->
+    <div class="tab-panel" id="tab-log-relacionamentos">
       <div class="section">
-        <div class="section-label">Entrega padrão — estoque Croma ao cliente</div>
-        <div class="steps">
-          <div class="step">
-            <div class="step-n" style="background:var(--green-bg);color:var(--green)">1</div>
-            <div class="step-body">
-              <strong>Obter o comprovante de entrega</strong>
-              <p>Motorista interno: recolher o cabeçalho da NF assinado pelo cliente no ato da entrega. Transportadora: solicitar o comprovante (POD — Proof of Delivery) assim que confirmado.</p>
+        <div class="section-label">Com quem você interage em cada fase</div>
+        <div class="rel-grid">
+          <div class="rel-card">
+            <div class="rel-fase">Cotação de frete<small>Antes da venda</small></div>
+            <div class="rel-quem">
+              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você responde</span>
+              <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Compras solicitou</span>
+              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Comercial solicitou</span>
             </div>
           </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--green-bg);color:var(--green)">2</div>
-            <div class="step-body">
-              <strong>Atualizar a NF no OMIE</strong>
-              <p>Localizar a NF correspondente no OMIE. Mover para o status de entrega confirmada. Anexar o comprovante (PDF ou imagem) diretamente na NF.</p>
+          <div class="rel-card">
+            <div class="rel-fase">Lançamento de CTE<small>Contas a Pagar</small></div>
+            <div class="rel-quem">
+              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você lança</span>
+              <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Financeiro paga</span>
             </div>
           </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--green-bg);color:var(--green)">3</div>
-            <div class="step-body">
-              <strong>Arquivar o comprovante físico</strong>
-              <p>O original (cabeçalho da NF assinado) vai para a pasta de comprovantes físicos da Logística, organizado por data e número de NF.</p>
+          <div class="rel-card">
+            <div class="rel-fase">Ocorrência de atraso<small>RMA Logístico</small></div>
+            <div class="rel-quem">
+              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você trata</span>
+              <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Informa Compras</span>
+              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Informa Comercial</span>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-label">Entrega triangulada — fornecedor direto ao cliente</div>
-        <div class="steps">
-          <div class="step">
-            <div class="step-n" style="background:var(--purple-bg);color:var(--purple)">1</div>
-            <div class="step-body">
-              <strong>Acompanhar com o fornecedor parceiro</strong>
-              <p>Manter contato ativo com Agis, Mazer, Gazin ou outro parceiro. Solicitar comprovante assim que confirmar a entrega.</p>
+          <div class="rel-card">
+            <div class="rel-fase">Entrega padrão confirmada</div>
+            <div class="rel-quem">
+              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você sinaliza no OMIE</span>
+              <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Financeiro recebe info</span>
             </div>
           </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--purple-bg);color:var(--purple)">2</div>
-            <div class="step-body">
-              <strong>Anexar comprovante na NF do OMIE</strong>
-              <p>Com o PDF do parceiro em mãos, localizar a NF no OMIE. Anexar e atualizar o status para entrega confirmada.</p>
+          <div class="rel-card">
+            <div class="rel-fase">Entrega triangulada confirmada</div>
+            <div class="rel-quem">
+              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você anexa comprovante</span>
+              <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Financeiro formalmente comunicado</span>
+              <span class="rel-pill" style="background:var(--purple-bg);color:var(--purple)">Parceiro (Agis/Mazer/Gazin)</span>
             </div>
           </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--purple-bg);color:var(--purple)">3</div>
-            <div class="step-body">
-              <strong>Informar o Financeiro formalmente</strong>
-              <p>Comunicar por escrito (comentário no OptiWork ou e-mail): número da NF, fornecedor parceiro, data de entrega confirmada e que o comprovante está anexado no OMIE. Esta comunicação é o gatilho para o Financeiro liberar o pagamento ao parceiro.</p>
+          <div class="rel-card">
+            <div class="rel-fase">Decisão motorista vs. parceiro</div>
+            <div class="rel-quem">
+              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você decide e registra</span>
+              <span class="rel-pill" style="background:var(--amber-bg);color:var(--amber)">Consulta Diretoria em casos relevantes</span>
             </div>
           </div>
-        </div>
-        <div class="alert alert-teal">
-          <span class="alert-icon">ℹ</span>
-          <p><strong>Caso especial — cliente FUNBIO:</strong> os comprovantes de entrega devem ser anexados nas NFs de REMESSA, não nas NFs comuns de venda. O FUNBIO paga com base na remessa entregue. Confirme qual NF é a de remessa antes de anexar.</p>
         </div>
       </div>
     </div>
 
-    <!-- ---- TAB: ANÁLISE DE CUSTO ---- -->
-    <div class="tab-panel" id="tab-log-custo">
+    <!-- REGRAS LOG -->
+    <div class="tab-panel" id="tab-log-regras">
+      <div class="section">
+        <div class="section-label">Informações que o ticket de cotação deve conter</div>
+        <div class="info-grid">
+          <div class="info-card"><div class="info-icon" style="background:var(--accent-bg)">📍</div><div class="info-body"><strong>CEP ou endereço completo de destino</strong><p>Logradouro, número, bairro, cidade, UF. Sem isso, a cotação não é precisa.</p></div></div>
+          <div class="info-card"><div class="info-icon" style="background:var(--accent-bg)">⚖️</div><div class="info-body"><strong>Peso bruto estimado da carga (kg)</strong><p>Fundamental para calcular o frete — especialmente para parceiros externos.</p></div></div>
+          <div class="info-card"><div class="info-icon" style="background:var(--accent-bg)">📦</div><div class="info-body"><strong>Dimensões ou volume cúbico estimado</strong><p>Transportadoras cobram por peso real ou cubado, o que for maior.</p></div></div>
+          <div class="info-card"><div class="info-icon" style="background:var(--accent-bg)">🖥️</div><div class="info-body"><strong>Tipo de produto</strong><p>Eletrônico, linha branca, suprimentos etc. Impacta manuseio, seguro e modal de transporte.</p></div></div>
+          <div class="info-card"><div class="info-icon" style="background:var(--accent-bg)">⏰</div><div class="info-body"><strong>Prazo de entrega exigido pelo cliente</strong><p>Define se é entrega normal ou urgente — impacta escolha de modal e custo.</p></div></div>
+          <div class="info-card"><div class="info-icon" style="background:var(--accent-bg)">🔀</div><div class="info-body"><strong>Tipo de entrega: triangulada ou padrão</strong><p>Triangulada = fornecedor ao cliente. Padrão = estoque Croma ao cliente. Define quem despacha.</p></div></div>
+          <div class="info-card"><div class="info-icon" style="background:var(--accent-bg)">💲</div><div class="info-body"><strong>Valor declarado da mercadoria</strong><p>Necessário para cálculo do seguro da carga. Sempre informar valor real.</p></div></div>
+        </div>
+      </div>
 
       <div class="section">
-        <div class="section-label">Regiões atendidas pelo motorista interno</div>
+        <div class="section-label">Regiões e decisão de entrega</div>
         <div class="region-box" style="background:var(--green-bg);border-color:var(--green-glow)">
-          <div class="region-title" style="color:var(--green)">✓ Motorista interno — sem análise adicional necessária</div>
+          <div class="region-title" style="color:var(--green)">✓ Motorista interno — sem análise adicional</div>
           <div class="region-tags">
-            <span class="region-tag">Plano Piloto</span>
-            <span class="region-tag">Taguatinga</span>
-            <span class="region-tag">Águas Claras</span>
-            <span class="region-tag">Samambaia</span>
-            <span class="region-tag">Riacho Fundo</span>
-            <span class="region-tag">Guará</span>
-            <span class="region-tag">Lago Sul</span>
-            <span class="region-tag">Lago Norte</span>
+            <span class="region-tag">Plano Piloto</span><span class="region-tag">Taguatinga</span>
+            <span class="region-tag">Águas Claras</span><span class="region-tag">Samambaia</span>
+            <span class="region-tag">Riacho Fundo</span><span class="region-tag">Guará</span>
+            <span class="region-tag">Lago Sul</span><span class="region-tag">Lago Norte</span>
             <span class="region-tag">Regiões próximas</span>
           </div>
         </div>
         <div class="region-box" style="background:var(--amber-bg);border-color:rgba(251,191,36,.2)">
           <div class="region-title" style="color:var(--amber)">⚠ Parceiro logístico externo — avaliar custo/benefício</div>
           <div class="region-tags">
-            <span class="region-tag">Fora do DF</span>
-            <span class="region-tag">Cargas pesadas ou volumosas</span>
-            <span class="region-tag">Alto valor com seguro</span>
-            <span class="region-tag">Prazo crítico</span>
+            <span class="region-tag">Fora do DF</span><span class="region-tag">Cargas pesadas ou volumosas</span>
+            <span class="region-tag">Alto valor com seguro</span><span class="region-tag">Prazo crítico</span>
           </div>
         </div>
-      </div>
 
-      <div class="section">
-        <div class="section-label">Critérios de decisão — motorista interno vs. parceiro</div>
-        <div style="overflow-x:auto;border-radius:12px">
+        <div style="overflow-x:auto;border-radius:12px;margin-top:1rem">
           <table class="data-table">
-            <thead>
-              <tr>
-                <th>Critério</th>
-                <th style="background:var(--green-bg);color:var(--green)">Motorista Interno</th>
-                <th style="background:var(--amber-bg);color:var(--amber)">Parceiro (TG Transportes)</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Critério</th><th style="background:var(--green-bg);color:var(--green)">Motorista Interno</th><th style="background:var(--amber-bg);color:var(--amber)">TG Transportes</th></tr></thead>
             <tbody>
               <tr><td>Cobertura</td>        <td>Brasília e entorno</td>          <td>Nacional</td></tr>
               <tr><td>Seguro da carga</td>  <td>Responsabilidade Croma</td>      <td>Segurado pelo parceiro</td></tr>
@@ -1262,44 +599,44 @@ footer p { font-size: 11px; color: var(--text3); }
             </tbody>
           </table>
         </div>
-        <div class="alert alert-info">
+      </div>
+
+      <div class="section">
+        <div class="section-label">Regra obrigatória — CTE divergente</div>
+        <div class="alert alert-rule">
+          <span class="alert-icon">🚫</span>
+          <p><strong>CTE com valor diferente da cotação: NÃO lançar no OMIE.</strong> Suspender o processo, contatar a transportadora, registrar no OptiWork (cotado vs. cobrado). Somente após ajuste confirmado, proceder com o lançamento.</p>
+        </div>
+        <div class="alert alert-info" style="margin-top:.75rem">
           <span class="alert-icon">ℹ</span>
-          <p><strong>Regra prática:</strong> quando o frete via parceiro for inferior ao custo estimado do motorista interno, ou quando a carga for de alto valor ou destinada a regiões distantes, priorize o parceiro logístico. Registrar a análise no card do OptiWork.</p>
+          <p><strong>FUNBIO — caso especial:</strong> comprovantes de entrega devem ser anexados nas NFs de REMESSA, não nas NFs comuns de venda. Confirme qual NF é a de remessa antes de anexar.</p>
         </div>
       </div>
     </div>
 
-    <!-- ---- TAB: RACI LOGÍSTICA ---- -->
-    <div class="tab-panel" id="tab-log-raci-log">
+    <!-- RACI LOG -->
+    <div class="tab-panel" id="tab-log-raci">
       <div class="section">
-        <div class="section-label">Legenda</div>
+        <div class="section-label">Matriz RACI — Logística</div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center">
           <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-R">R</span>Responsável — executa</span>
           <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-A">A</span>Aprovador — responde</span>
-          <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-C">C</span>Consultado — fornece input</span>
-          <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-I">I</span>Informado — recebe update</span>
+          <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-C">C</span>Consultado</span>
+          <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-I">I</span>Informado</span>
         </div>
         <div class="raci-wrap">
           <table class="raci-table">
-            <thead>
-              <tr>
-                <th style="min-width:240px">Atividade — Logística</th>
-                <th>Logística</th><th>Estoque</th><th>Compras</th>
-                <th>Financeiro</th><th>Comercial</th><th>Diretoria</th>
-              </tr>
-            </thead>
+            <thead><tr><th style="min-width:240px">Atividade</th><th>Logística</th><th>Estoque</th><th>Compras</th><th>Financeiro</th><th>Comercial</th><th>Diretoria</th></tr></thead>
             <tbody>
-              <tr><td>Cotar frete para negociação comercial</td>      <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-C">C</span></td><td>–</td>                                 <td><span class="raci-pill r-C">C</span></td><td>–</td></tr>
-              <tr><td>Lançar CTE no OMIE (contas a pagar)</td>        <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-A">A</span></td><td>–</td>                                 <td>–</td></tr>
-              <tr><td>Conferir valor CTE vs. cotação</td>             <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-C">C</span></td><td>–</td>                                 <td>–</td></tr>
-              <tr><td>Suspender pagamento CTE divergente</td>         <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-A">A</span></td><td>–</td>                                 <td>–</td></tr>
-              <tr><td>Monitorar entregas fora do prazo</td>           <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td>–</td></tr>
-              <tr><td>Tratar RMA logístico com transportadora</td>    <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td></tr>
-              <tr><td>Sinalizar entrega concluída no OMIE</td>        <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-C">C</span></td><td>–</td>                                 <td><span class="raci-pill r-A">A</span></td><td>–</td>                                 <td>–</td></tr>
-              <tr><td>Informar Financeiro sobre entrega (triang.)</td><td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-A">A</span></td><td>–</td>                                 <td>–</td></tr>
-              <tr><td>Anexar comprovante na NF do OMIE</td>           <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-C">C</span></td><td>–</td>                                 <td>–</td></tr>
-              <tr><td>Analisar custo: motorista vs. parceiro</td>     <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-C">C</span></td></tr>
-              <tr><td>Organizar comprovantes físicos de entrega</td>  <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td>–</td>                                 <td>–</td>                                 <td>–</td>                                 <td>–</td></tr>
+              <tr><td>Cotar frete para negociação comercial</td>        <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-C">C</span></td><td>–</td>                                 <td><span class="raci-pill r-C">C</span></td><td>–</td></tr>
+              <tr><td>Lançar CTE no OMIE (contas a pagar)</td>          <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-A">A</span></td><td>–</td>                                 <td>–</td></tr>
+              <tr><td>Conferir valor CTE vs. cotação</td>               <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-C">C</span></td><td>–</td>                                 <td>–</td></tr>
+              <tr><td>Suspender pagamento CTE divergente</td>           <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-A">A</span></td><td>–</td>                                 <td>–</td></tr>
+              <tr><td>Monitorar entregas fora do prazo</td>             <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td>–</td></tr>
+              <tr><td>Tratar RMA com transportadora</td>                <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td></tr>
+              <tr><td>Sinalizar entrega concluída no OMIE</td>          <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-C">C</span></td><td>–</td>                                 <td><span class="raci-pill r-A">A</span></td><td>–</td>                                 <td>–</td></tr>
+              <tr><td>Informar Financeiro — entrega triangulada</td>    <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-A">A</span></td><td>–</td>                                 <td>–</td></tr>
+              <tr><td>Analisar custo motorista vs. parceiro</td>        <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-C">C</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -1307,394 +644,308 @@ footer p { font-size: 11px; color: var(--text3); }
     </div>
   </div>
 
-  <!-- ==================================================
-       PERFIL B — ESTOQUE
-       Recebimento, entrada de NF, etiquetagem, despacho
-  ================================================== -->
-  <div class="profile-panel" id="profile-est">
+  <!-- ══════════════════════════════════════
+       CARGO: ANALISTA DE ESTOQUE
+  ══════════════════════════════════════ -->
+  <div class="role-panel" id="role-est">
 
-    <div class="tab-bar" id="tabs-est">
-      <button class="tab-btn active-est" onclick="tabEst('recebimento', this)">Recebimento</button>
-      <button class="tab-btn" onclick="tabEst('entrada-nf', this)">Entrada de NF</button>
-      <button class="tab-btn" onclick="tabEst('etiqueta', this)">Etiquetagem</button>
-      <button class="tab-btn" onclick="tabEst('despacho', this)">Despacho</button>
-      <button class="tab-btn" onclick="tabEst('rota', this)">Rota do Motorista</button>
-      <button class="tab-btn" onclick="tabEst('relatorios', this)">Relatórios OMIE</button>
-      <button class="tab-btn" onclick="tabEst('raci-est', this)">Matriz RACI</button>
+    <div class="role-intro" style="border-color:var(--green-glow)">
+      <div class="role-intro-icon">📦</div>
+      <div>
+        <h2>Analista de Estoque</h2>
+        <p>Você é responsável por tudo que acontece fisicamente dentro da empresa: receber, conferir, registrar no OMIE, etiquetar, organizar, separar e despachar. Cada etapa sua alimenta outro setor — Compras, Logística e Financeiro dependem do que você faz.</p>
+        <div class="role-intro-tags">
+          <span class="role-intro-tag">OMIE</span>
+          <span class="role-intro-tag">OptiWork</span>
+          <span class="role-intro-tag">Planilha de acompanhamento</span>
+          <span class="role-intro-tag">Etiquetagem física</span>
+        </div>
+      </div>
     </div>
 
-    <!-- ---- TAB: RECEBIMENTO ---- -->
-    <div class="tab-panel active" id="tab-est-recebimento">
+    <div class="tab-bar" id="tabs-est">
+      <button class="tab-btn active-est" onclick="tabRole('est','escopo',this)">Escopo</button>
+      <button class="tab-btn" onclick="tabRole('est','fluxo',this)">Fluxo Operacional</button>
+      <button class="tab-btn" onclick="tabRole('est','sistemas',this)">Sistemas</button>
+      <button class="tab-btn" onclick="tabRole('est','relacionamentos',this)">Relacionamentos</button>
+      <button class="tab-btn" onclick="tabRole('est','regras',this)">Regras</button>
+      <button class="tab-btn" onclick="tabRole('est','raci',this)">Matriz RACI</button>
+    </div>
 
+    <!-- ESCOPO EST -->
+    <div class="tab-panel active" id="tab-est-escopo">
       <div class="section">
-        <div class="section-label">Checklist de conferência no recebimento</div>
-        <p style="font-size:13px;color:var(--text2);margin-bottom:1.25rem;line-height:1.7">
-          Toda mercadoria que chega à Croma deve ser conferida no ato da entrega, independente do fornecedor. Clique para marcar cada item.
-        </p>
-        <div class="checklist" id="chk-rec">
-          <div class="citem" onclick="ck(this,'chk-rec','prog-rec','cnt-rec')">
-            <div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ctext">Quantidade de volumes recebidos confere com a NF</div>
+        <div class="section-label">O que é sua responsabilidade</div>
+        <div class="scope-grid">
+          <div class="scope-card">
+            <div class="scope-card-icon">🔍</div>
+            <h4>Receber e conferir mercadorias</h4>
+            <p>Toda mercadoria que chega à Croma deve ser conferida no ato da entrega, sem exceções (exceto Mercado Livre). Quantidade, modelo, embalagem e vinculação ao pedido de compra.</p>
           </div>
-          <div class="citem" onclick="ck(this,'chk-rec','prog-rec','cnt-rec')">
-            <div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ctext">Descrição e modelo dos produtos conferem com a NF (série quando aplicável)</div>
+          <div class="scope-card">
+            <div class="scope-card-icon">💻</div>
+            <h4>Registrar entrada de NF no OMIE</h4>
+            <p>Após conferência física, registrar a entrada da NF no OMIE usando a chave de acesso de 44 dígitos. Isso atualiza o estoque e gera automaticamente o Contas a Pagar para o Financeiro.</p>
           </div>
-          <div class="citem" onclick="ck(this,'chk-rec','prog-rec','cnt-rec')">
-            <div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ctext">Embalagens íntegras — sem amassados, rasgos ou sinais de queda</div>
+          <div class="scope-card">
+            <div class="scope-card-icon">🏷️</div>
+            <h4>Etiquetar e organizar</h4>
+            <p>Cada produto recebe etiqueta com produto, NF, consultor/canal, cliente final, data e número do pedido. Organizar no local correto do estoque conforme mapa interno.</p>
           </div>
-          <div class="citem" onclick="ck(this,'chk-rec','prog-rec','cnt-rec')">
-            <div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ctext">Produtos internos sem avaria visível (abrir embalagem se necessário)</div>
+          <div class="scope-card">
+            <div class="scope-card-icon">📤</div>
+            <h4>Separar e despachar</h4>
+            <p>Separar produtos por pedido, embalar adequadamente e despachar via motorista interno ou transportadora. Nunca liberar produto sem NF emitida.</p>
           </div>
-          <div class="citem" onclick="ck(this,'chk-rec','prog-rec','cnt-rec')">
-            <div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ctext">A NF pertence a um pedido de compra registrado — nunca receber sem pedido correspondente</div>
+          <div class="scope-card">
+            <div class="scope-card-icon">🗺️</div>
+            <h4>Organizar rota do motorista</h4>
+            <p>Programar a rota diária priorizando: urgências, NFs da manhã e agrupamento por região. Coordenar com Logística para entregas fora do perímetro.</p>
           </div>
-          <div class="citem" onclick="ck(this,'chk-rec','prog-rec','cnt-rec')">
-            <div class="cbox"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="ctext">CNPJ destinatário da NF é o correto (empresa Croma correspondente ao pedido)</div>
+          <div class="scope-card">
+            <div class="scope-card-icon">📊</div>
+            <h4>Consultar relatórios no OMIE</h4>
+            <p>Posição de estoque, movimentação, produtos abaixo do mínimo e NFs de entrada. Consultar regularmente para controle e planejamento de reposição.</p>
           </div>
         </div>
-        <div class="check-progress">
-          <button class="btn" onclick="resetCk('chk-rec','prog-rec','cnt-rec')">↺ Limpar</button>
-          <div class="progress-bar"><div class="progress-fill" id="prog-rec" style="width:0%"></div></div>
-          <span class="check-count" id="cnt-rec">0 / 6</span>
+      </div>
+    </div>
+
+    <!-- FLUXO EST -->
+    <div class="tab-panel" id="tab-est-fluxo">
+      <div class="section">
+        <div class="section-label">Do recebimento ao despacho — seu caminho</div>
+        <div class="flow-steps">
+
+          <div class="flow-step">
+            <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">1</div>
+            <div class="flow-step-body">
+              <h4>Receber e conferir a mercadoria no ato</h4>
+              <p>Ao chegar a entrega: verificar quantidade de volumes vs. NF, descrição e modelo vs. NF, integridade das embalagens, ausência de avarias visíveis, se a NF pertence a um pedido registrado, e se o CNPJ destinatário é o correto. Não assinar o canhoto antes de confirmar tudo.</p>
+              <div class="step-tags">
+                <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Avaria → fotografar antes de mover</span>
+                <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Mercado Livre: exceção — pode inspecionar depois</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">2</div>
+            <div class="flow-step-body">
+              <h4>Registrar entrada de NF no OMIE</h4>
+              <p>OMIE → empresa correta → Compras, Estoque e Produção → Estoque → Entrada de NF → + Nova Entrada. Inserir chave de acesso de 44 dígitos (DANFE). Vincular ao pedido de compra. Conferir fornecedor, itens, quantidades e valores antes de confirmar. Confirmar → OMIE atualiza estoque automaticamente.</p>
+              <div class="step-tags">
+                <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">OMIE — empresa correta!</span>
+                <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Divergência → acionar Compras antes de confirmar</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">3</div>
+            <div class="flow-step-body">
+              <h4>Planilhar e carimbar a NF física</h4>
+              <p>Registrar a NF na planilha de controle de entradas. Carimbar a NF física com "Entrada Realizada" e assinar. Arquivar para conferência posterior do setor de Compras.</p>
+              <div class="step-tags">
+                <span class="step-tag" style="background:var(--blue-bg);color:var(--blue)">→ Compras confere depois</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">4</div>
+            <div class="flow-step-body">
+              <h4>Etiquetar e organizar no estoque</h4>
+              <p>Etiquetar imediatamente após a entrada. A etiqueta deve conter: produto/modelo, número da NF, data de entrada, consultor/canal (vem da planilha de Compras), cliente final e número do pedido. Alocar no local correto conforme mapa interno.</p>
+              <div class="step-tags">
+                <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Toners de Outsourcing: sem etiqueta individual</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">5</div>
+            <div class="flow-step-body">
+              <h4>Separar, embalar e despachar</h4>
+              <p>Ao receber a NF de venda emitida: localizar pelo produto/etiqueta, embalar adequadamente (frágil → reforço + identificação FRÁGIL), identificar a embalagem externamente com cliente, endereço e NF. Despachar via motorista (incluir na rota) ou transportadora (agendar coleta com Logística).</p>
+              <div class="step-tags">
+                <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Sem NF emitida → NÃO despachar</span>
+                <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">NF manhã → despachar até o final da tarde</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">6</div>
+            <div class="flow-step-body">
+              <h4>Registrar despacho no OptiWork</h4>
+              <p>Registrar que o produto foi despachado: data, transportadora ou motorista e número da NF. A Logística usa essa informação para acompanhar a entrega.</p>
+              <div class="step-tags">
+                <span class="step-tag" style="background:var(--green-bg);color:var(--green)">→ Logística monitora a partir daqui</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- SISTEMAS EST -->
+    <div class="tab-panel" id="tab-est-sistemas">
+      <div class="section">
+        <div class="section-label">Sistemas que você usa e para quê</div>
+        <div class="systems-grid">
+          <div class="system-card">
+            <div class="system-name"><span class="system-dot" style="background:var(--green)"></span>OMIE</div>
+            <div class="system-use">ERP principal. Você usa para entrada de NF, relatórios e controle de estoque.</div>
+            <div class="system-actions">
+              <span class="system-action">Compras e Estoque → Entrada de NF</span>
+              <span class="system-action">Verificar se contas a pagar foi gerado corretamente</span>
+              <span class="system-action">Relatórios → Posição de estoque, Movimentação, Abaixo do mínimo</span>
+              <span class="system-action">Selecionar empresa Croma correta sempre</span>
+            </div>
+          </div>
+          <div class="system-card">
+            <div class="system-name"><span class="system-dot" style="background:var(--accent)"></span>OptiWork</div>
+            <div class="system-use">Comunicação inter-setorial e registro de ocorrências.</div>
+            <div class="system-actions">
+              <span class="system-action">Registrar recebimentos e avarias</span>
+              <span class="system-action">Confirmar despachos com data e transportadora</span>
+              <span class="system-action">Acionar Compras e Logística em ocorrências</span>
+            </div>
+          </div>
+          <div class="system-card">
+            <div class="system-name"><span class="system-dot" style="background:var(--blue)"></span>Planilha de Compras</div>
+            <div class="system-use">Planilha de acompanhamento do Drive OptiWork.</div>
+            <div class="system-actions">
+              <span class="system-action">Identificar consultor/canal para etiquetar</span>
+              <span class="system-action">Verificar cliente final do produto</span>
+              <span class="system-action">Confirmar se é triangulada ou padrão</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RELACIONAMENTOS EST -->
+    <div class="tab-panel" id="tab-est-relacionamentos">
+      <div class="section">
+        <div class="section-label">Com quem você interage em cada fase</div>
+        <div class="rel-grid">
+          <div class="rel-card">
+            <div class="rel-fase">Recebimento com avaria</div>
+            <div class="rel-quem">
+              <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Você registra e documenta</span>
+              <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Compras trata com fornecedor</span>
+              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Logística abre ocorrência na transportadora</span>
+            </div>
+          </div>
+          <div class="rel-card">
+            <div class="rel-fase">Entrada de NF no OMIE</div>
+            <div class="rel-quem">
+              <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Você lança</span>
+              <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Compras aprova e confere NF física depois</span>
+              <span class="rel-pill" style="background:var(--amber-bg);color:var(--amber)">Financeiro recebe o contas a pagar gerado</span>
+            </div>
+          </div>
+          <div class="rel-card">
+            <div class="rel-fase">Etiquetagem</div>
+            <div class="rel-quem">
+              <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Você etiqueta</span>
+              <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Planilha de Compras informa consultor/cliente</span>
+            </div>
+          </div>
+          <div class="rel-card">
+            <div class="rel-fase">Despacho e rota</div>
+            <div class="rel-quem">
+              <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Você organiza a rota</span>
+              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Logística coordena fora do perímetro</span>
+            </div>
+          </div>
+          <div class="rel-card">
+            <div class="rel-fase">Exceção: produto sem NF</div>
+            <div class="rel-quem">
+              <span class="rel-pill" style="background:var(--red-bg);color:var(--red)">Não despachar</span>
+              <span class="rel-pill" style="background:var(--amber-bg);color:var(--amber)">Diretoria autoriza (com registro no card)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REGRAS EST -->
+    <div class="tab-panel" id="tab-est-regras">
+      <div class="section">
+        <div class="section-label">O que verificar ao receber uma mercadoria</div>
+        <div class="info-grid">
+          <div class="info-card"><div class="info-icon" style="background:var(--green-bg)">🔢</div><div class="info-body"><strong>Quantidade confere com a NF</strong><p>Contar volumes e unidades. Se divergir, não assinar o canhoto antes de registrar a ressalva.</p></div></div>
+          <div class="info-card"><div class="info-icon" style="background:var(--green-bg)">🏷️</div><div class="info-body"><strong>Produto e modelo conferem com a NF</strong><p>Verificar número de série quando aplicável. Modelo errado = devolução imediata.</p></div></div>
+          <div class="info-card"><div class="info-icon" style="background:var(--green-bg)">📦</div><div class="info-body"><strong>Embalagem íntegra</strong><p>Sem amassados, rasgos ou sinais de queda. Dano externo pode indicar dano interno.</p></div></div>
+          <div class="info-card"><div class="info-icon" style="background:var(--green-bg)">🔍</div><div class="info-body"><strong>Produto interno sem avaria</strong><p>Abrir embalagem para conferência quando houver suspeita de dano. Fotografar antes de mover qualquer item.</p></div></div>
+          <div class="info-card"><div class="info-icon" style="background:var(--green-bg)">📋</div><div class="info-body"><strong>NF pertence a um pedido registrado</strong><p>Nunca receber mercadoria sem pedido de compra correspondente no sistema.</p></div></div>
+          <div class="info-card"><div class="info-icon" style="background:var(--green-bg)">🏢</div><div class="info-body"><strong>CNPJ destinatário está correto</strong><p>A empresa Croma na NF deve ser a mesma do pedido de compra. CNPJ errado = não receber.</p></div></div>
         </div>
         <div class="alert alert-warn">
           <span class="alert-icon">⚠️</span>
-          <p><strong>Exceção — Mercado Livre:</strong> mercadorias recebidas via Mercado Livre podem ser inspecionadas após a entrega. A plataforma aceita reclamações em até 30 dias dependendo do produto. Para todos os demais fornecedores, a conferência é obrigatória no ato.</p>
+          <p><strong>Exceção Mercado Livre:</strong> mercadorias via Mercado Livre podem ser inspecionadas após a entrega — a plataforma aceita reclamações em até 30 dias. Para todos os demais fornecedores, conferência obrigatória no ato.</p>
         </div>
       </div>
-
-      <div class="section">
-        <div class="section-label">Avaria ou divergência — procedimento</div>
-        <div class="steps">
-          <div class="step">
-            <div class="step-n" style="background:var(--red-bg);color:var(--red)">1</div>
-            <div class="step-body">
-              <strong>Não assinar o canhoto imediatamente</strong>
-              <p>Anotar na própria NF ou canhoto a ressalva: "recebido com avaria" ou "quantidade divergente". Não mover o produto antes de documentar.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--red-bg);color:var(--red)">2</div>
-            <div class="step-body">
-              <strong>Documentar com fotos</strong>
-              <p>Fotografar o produto avariado ou volume com divergência. Registrar no card do OptiWork: descrição da avaria, quantidade divergente e fotos anexadas.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--red-bg);color:var(--red)">3</div>
-            <div class="step-body">
-              <strong>Acionar Compras e Logística</strong>
-              <p>Comunicar Compras imediatamente — eles tratam com o fornecedor. Se foi por transportadora, acionar Logística para abertura de ocorrência. Aguardar orientação antes de aceitar, devolver ou encaminhar.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ---- TAB: ENTRADA DE NF ---- -->
-    <div class="tab-panel" id="tab-est-entrada-nf">
-      <div class="section">
-        <div class="section-label">Entrada de NF de compra no OMIE</div>
-        <p style="font-size:13px;color:var(--text2);margin-bottom:1.5rem;line-height:1.7">
-          Após a conferência física, o profissional de Estoque realiza a entrada da NF no OMIE. Este processo atualiza o saldo de estoque e gera o lançamento no contas a pagar para o Financeiro.
-        </p>
-        <div class="steps">
-          <div class="step">
-            <div class="step-n" style="background:var(--green-bg);color:var(--green)">1</div>
-            <div class="step-body">
-              <strong>Acessar o OMIE — empresa correta</strong>
-              <p>Login em app.omie.com.br. Selecionar a empresa Croma correspondente à NF recebida.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--green-bg);color:var(--green)">2</div>
-            <div class="step-body">
-              <strong>Navegar para Compras e Estoque → Entrada de NF</strong>
-              <p>"Compras, Estoque e Produção" → "Estoque" → "Entrada de NF" → "+ Nova Entrada".</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--green-bg);color:var(--green)">3</div>
-            <div class="step-body">
-              <strong>Inserir a chave de acesso da NF</strong>
-              <p>Digitar os 44 dígitos da chave de acesso (disponível no DANFE — impresso que acompanha a mercadoria). O OMIE preencherá os dados automaticamente. Vincular a NF ao pedido de compra correspondente.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--green-bg);color:var(--green)">4</div>
-            <div class="step-body">
-              <strong>Conferir antes de confirmar</strong>
-              <p>Verificar fornecedor, descrição dos itens, quantidades e valores totais. Se houver divergência: NÃO confirmar — acionar o setor de Compras.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--green-bg);color:var(--green)">5</div>
-            <div class="step-body">
-              <strong>Confirmar entrada e verificar contas a pagar</strong>
-              <p>Confirmar a entrada — o OMIE atualizará o saldo de estoque automaticamente. Verificar se o lançamento de contas a pagar foi gerado com fornecedor, valor e vencimento corretos.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--green-bg);color:var(--green)">6</div>
-            <div class="step-body">
-              <strong>Planilhar e carimbar a NF física</strong>
-              <p>Registrar a NF na planilha de controle de entradas. Carimbar a NF física com "Entrada Realizada" e assinar. Arquivar para conferência posterior do setor de Compras.</p>
-            </div>
-          </div>
-        </div>
-        <div class="alert alert-info">
-          <span class="alert-icon">ℹ</span>
-          <p><strong>Integração com Compras:</strong> após a entrada da NF, Compras realiza a conferência final da NF física (carimbada e planilhada). Este é o ponto de handoff entre Estoque e Compras no ciclo de recebimento.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ---- TAB: ETIQUETAGEM ---- -->
-    <div class="tab-panel" id="tab-est-etiqueta">
 
       <div class="section">
         <div class="section-label">Padrão obrigatório da etiqueta</div>
-        <p style="font-size:13px;color:var(--text2);margin-bottom:1.25rem;line-height:1.7">
-          Cada produto deve ser etiquetado imediatamente após a entrada da NF. A etiqueta permite rastrear o produto internamente e identificar o responsável na hora do despacho.
-        </p>
-        <!-- Simulação visual da etiqueta física -->
         <div class="etiqueta">
-          <div class="etiqueta-row">
-            <div>
-              <span class="etiqueta-label">Produto / Modelo</span>
-              <span class="etiqueta-val">_______________________________</span>
-            </div>
-          </div>
+          <div class="etiqueta-row"><div><span class="etiqueta-label">Produto / Modelo</span><span class="etiqueta-val">_______________________________</span></div></div>
           <div class="etiqueta-divider"></div>
           <div class="etiqueta-row">
-            <div>
-              <span class="etiqueta-label">Nº NF de Entrada</span>
-              <span class="etiqueta-val">_______________</span>
-            </div>
-            <div>
-              <span class="etiqueta-label">Data de Entrada</span>
-              <span class="etiqueta-val">___/___/______</span>
-            </div>
+            <div><span class="etiqueta-label">Nº NF de Entrada</span><span class="etiqueta-val">_______________</span></div>
+            <div><span class="etiqueta-label">Data de Entrada</span><span class="etiqueta-val">___/___/______</span></div>
           </div>
           <div class="etiqueta-divider"></div>
-          <div class="etiqueta-row">
-            <div>
-              <span class="etiqueta-label">Consultor / Canal</span>
-              <span class="etiqueta-val">_______________________________</span>
-            </div>
-          </div>
-          <div class="etiqueta-row">
-            <div>
-              <span class="etiqueta-label">Cliente Final</span>
-              <span class="etiqueta-val">_______________________________</span>
-            </div>
-          </div>
+          <div class="etiqueta-row"><div><span class="etiqueta-label">Consultor / Canal</span><span class="etiqueta-val">_______________________________</span></div></div>
+          <div class="etiqueta-row"><div><span class="etiqueta-label">Cliente Final</span><span class="etiqueta-val">_______________________________</span></div></div>
           <div class="etiqueta-divider"></div>
-          <div class="etiqueta-row">
-            <div>
-              <span class="etiqueta-label">Nº Pedido Interno</span>
-              <span class="etiqueta-val">_______________</span>
-            </div>
-          </div>
+          <div class="etiqueta-row"><div><span class="etiqueta-label">Nº Pedido Interno</span><span class="etiqueta-val">_______________</span></div></div>
         </div>
-        <div class="alert alert-info">
+        <div class="alert alert-info" style="margin-top:1rem">
           <span class="alert-icon">ℹ</span>
-          <p><strong>Exceção — produtos sem etiqueta:</strong> toners e produtos de impressão relacionados ao Outsourcing (locação de impressoras) não precisam de etiquetagem individual. Estes itens possuem controle próprio na operação de Outsourcing.</p>
+          <p><strong>Exceção — toners e produtos de Outsourcing:</strong> não precisam de etiqueta individual. Esses itens têm controle próprio dentro da operação de locação de impressoras.</p>
         </div>
       </div>
 
       <div class="section">
-        <div class="section-label">Organização física do estoque</div>
-        <div class="steps">
-          <div class="step">
-            <div class="step-n" style="background:var(--green-bg);color:var(--green)">1</div>
-            <div class="step-body">
-              <strong>Cada categoria tem área definida</strong>
-              <p>Seguir o mapa de localização interno. Produtos recém-chegados não devem ser misturados com os já etiquetados e organizados antes de passar pela etiquetagem.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--green-bg);color:var(--green)">2</div>
-            <div class="step-body">
-              <strong>Itens frágeis e de alto valor</strong>
-              <p>Armazenar em área protegida, identificada e de acesso controlado. Manter corredores livres para circulação e acesso às prateleiras.</p>
-            </div>
-          </div>
+        <div class="section-label">Regra de ponto de corte para despacho</div>
+        <div class="sla-grid">
+          <div class="sla-card"><label>NF emitida pela manhã</label><span><span class="sla-dot" style="background:var(--green)"></span>Despachar até o final da tarde</span></div>
+          <div class="sla-card"><label>NF emitida à tarde</label><span><span class="sla-dot" style="background:var(--accent)"></span>Despachar no próximo dia útil</span></div>
+          <div class="sla-card"><label>Urgência do cliente</label><span><span class="sla-dot" style="background:var(--amber)"></span>Prioridade máxima na rota</span></div>
+          <div class="sla-card"><label>Produto sem NF</label><span><span class="sla-dot" style="background:var(--red)"></span>NÃO despachar — ver Diretoria</span></div>
         </div>
       </div>
     </div>
 
-    <!-- ---- TAB: DESPACHO ---- -->
-    <div class="tab-panel" id="tab-est-despacho">
-
+    <!-- RACI EST -->
+    <div class="tab-panel" id="tab-est-raci">
       <div class="section">
-        <div class="section-label">Ponto de corte — regra obrigatória</div>
-        <div class="alert alert-warn">
-          <span class="alert-icon">⏳</span>
-          <p><strong>NFs emitidas no período da manhã:</strong> solicitar coleta ou incluir na rota do motorista até o final da tarde do mesmo dia. Isso não significa entrega no mesmo dia — significa que o DESPACHO deve ser providenciado até o final da tarde. NFs do período da tarde: programar para o próximo dia útil.</p>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-label">Passo a passo de separação e embalagem</div>
-        <div class="steps">
-          <div class="step">
-            <div class="step-n" style="background:var(--accent-bg);color:var(--accent)">1</div>
-            <div class="step-body">
-              <strong>Identificar o pedido pela etiqueta</strong>
-              <p>A partir da NF emitida ou pedido de venda, localizar o produto no estoque pela etiqueta. Confirmar produto, modelo, quantidade e cliente de destino.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--accent-bg);color:var(--accent)">2</div>
-            <div class="step-body">
-              <strong>Separar e embalar adequadamente</strong>
-              <p>Usar caixas, plástico-bolha e fita conforme o tipo de transporte. Frágeis ou alto valor: reforçar a embalagem e identificar com "FRÁGIL". Identificar externamente: nome do cliente, endereço de entrega e número da NF.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--accent-bg);color:var(--accent)">3</div>
-            <div class="step-body">
-              <strong>Verificar autorização para liberação</strong>
-              <p>Nunca liberar produto sem NF emitida. A única exceção é com autorização expressa da Diretoria registrada no card do OptiWork antes da liberação. Liberação sem registro é responsabilidade do profissional de estoque.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n" style="background:var(--accent-bg);color:var(--accent)">4</div>
-            <div class="step-body">
-              <strong>Entregar ao motorista ou transportadora</strong>
-              <p>Motorista interno: incluir na rota do dia. Transportadora: agendar coleta com Logística e guardar o protocolo. Registrar no OptiWork: data, transportadora ou motorista e número da NF.</p>
-            </div>
-          </div>
-        </div>
-        <div class="alert alert-rule">
-          <span class="alert-icon">🚫</span>
-          <p><strong>Liberação sem NF:</strong> produto não pode sair do estoque sem NF emitida. Mesmo em urgências ou pedido de vendedor, a autorização da Diretoria deve ser registrada no card antes. Sem registro, a responsabilidade é do profissional de estoque.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ---- TAB: ROTA DO MOTORISTA ---- -->
-    <div class="tab-panel" id="tab-est-rota">
-      <div class="section">
-        <div class="section-label">Critérios de prioridade da rota diária</div>
-        <div style="overflow-x:auto;border-radius:12px">
-          <table class="data-table">
-            <thead>
-              <tr><th>Critério</th><th>Regra</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>NF do período da manhã</td>         <td>Despacho obrigatório até o final da tarde do mesmo dia</td></tr>
-              <tr><td>Urgência solicitada pelo cliente</td><td>Prioridade máxima — comunicar o motorista imediatamente</td></tr>
-              <tr><td>Agrupamento por região</td>         <td>Organizar por proximidade geográfica para otimizar tempo e combustível</td></tr>
-              <tr><td>Limite de carga do veículo</td>     <td>Não sobrecarregar — dividir em mais de uma viagem se necessário</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="alert alert-info">
-          <span class="alert-icon">ℹ</span>
-          <p>Para regiões fora do perímetro do motorista interno, coordenar com a Logística a contratação de parceiro externo (TG Transportes ou similar) antes de incluir na rota.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ---- TAB: RELATÓRIOS OMIE ---- -->
-    <div class="tab-panel" id="tab-est-relatorios">
-      <div class="section">
-        <div class="section-label">Principais relatórios de estoque no OMIE</div>
-        <div style="overflow-x:auto;border-radius:12px">
-          <table class="data-table">
-            <thead>
-              <tr><th>Relatório</th><th>Quando usar</th><th>O que mostra</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Posição de Estoque</td>
-                <td>Consulta diária ou sob demanda</td>
-                <td>Quantidade atual de cada produto em estoque</td>
-              </tr>
-              <tr>
-                <td>Movimentação de Estoque</td>
-                <td>Para auditoria ou inventário</td>
-                <td>Entradas e saídas de cada produto em determinado período</td>
-              </tr>
-              <tr>
-                <td>Produtos Abaixo do Mínimo</td>
-                <td>Para planejar reposição</td>
-                <td>Itens cujo saldo está abaixo do estoque mínimo cadastrado</td>
-              </tr>
-              <tr>
-                <td>NFs de Entrada</td>
-                <td>Para conferência de recebimentos</td>
-                <td>Histórico de NFs de compra lançadas no sistema</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="section" style="margin-top:1.5rem">
-          <div class="section-label">Como acessar os relatórios</div>
-          <div class="steps">
-            <div class="step">
-              <div class="step-n" style="background:var(--green-bg);color:var(--green)">1</div>
-              <div class="step-body">
-                <strong>Acessar o OMIE — empresa correta</strong>
-                <p>Login em app.omie.com.br. Selecionar a empresa correspondente.</p>
-              </div>
-            </div>
-            <div class="step">
-              <div class="step-n" style="background:var(--green-bg);color:var(--green)">2</div>
-              <div class="step-body">
-                <strong>Navegar para Compras e Estoque → Relatórios</strong>
-                <p>"Compras, Estoque e Produção" → "Relatórios" → selecionar o relatório desejado na lista.</p>
-              </div>
-            </div>
-            <div class="step">
-              <div class="step-n" style="background:var(--green-bg);color:var(--green)">3</div>
-              <div class="step-body">
-                <strong>Filtrar o período e exportar</strong>
-                <p>Definir data de início e fim. Clicar em "Gerar". Para compartilhar: exportar em PDF ou planilha e enviar pelo canal correto.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ---- TAB: RACI ESTOQUE ---- -->
-    <div class="tab-panel" id="tab-est-raci-est">
-      <div class="section">
-        <div class="section-label">Legenda</div>
+        <div class="section-label">Matriz RACI — Estoque</div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center">
-          <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-R">R</span>Responsável — executa</span>
-          <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-A">A</span>Aprovador — responde</span>
-          <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-C">C</span>Consultado — fornece input</span>
-          <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-I">I</span>Informado — recebe update</span>
+          <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-R">R</span>Responsável</span>
+          <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-A">A</span>Aprovador</span>
+          <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-C">C</span>Consultado</span>
+          <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-I">I</span>Informado</span>
         </div>
         <div class="raci-wrap">
           <table class="raci-table">
-            <thead>
-              <tr>
-                <th style="min-width:240px">Atividade — Estoque</th>
-                <th>Estoque</th><th>Logística</th><th>Compras</th>
-                <th>Financeiro</th><th>Comercial</th><th>Diretoria</th>
-              </tr>
-            </thead>
+            <thead><tr><th style="min-width:240px">Atividade</th><th>Estoque</th><th>Logística</th><th>Compras</th><th>Financeiro</th><th>Comercial</th><th>Diretoria</th></tr></thead>
             <tbody>
-              <tr><td>Receber e conferir mercadorias fisicamente</td>  <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td>                                 <td>–</td></tr>
-              <tr><td>Registrar entrada de NF no OMIE</td>             <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td><span class="raci-pill r-A">A</span></td><td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td></tr>
-              <tr><td>Lançar contas a pagar após entrada de NF</td>    <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td><span class="raci-pill r-A">A</span></td><td><span class="raci-pill r-C">C</span></td><td>–</td>                                 <td>–</td></tr>
-              <tr><td>Planilhar e carimbar NF física</td>              <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td><span class="raci-pill r-C">C</span></td><td>–</td>                                 <td>–</td>                                 <td>–</td></tr>
-              <tr><td>Etiquetar e organizar mercadorias</td>           <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td>                                 <td>–</td></tr>
-              <tr><td>Separar e embalar produtos para despacho</td>    <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td>                                 <td>–</td></tr>
-              <tr><td>Autorizar liberação de produto sem NF</td>       <td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td>                                 <td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-R">R</span></td></tr>
-              <tr><td>Organizar rota do motorista interno</td>         <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>–</td>                                 <td>–</td>                                 <td>–</td>                                 <td>–</td></tr>
-              <tr><td>Consultar relatórios de estoque no OMIE</td>     <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-C">C</span></td><td>–</td>                                 <td>–</td></tr>
+              <tr><td>Receber e conferir mercadorias</td>         <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td>                                 <td>–</td></tr>
+              <tr><td>Registrar entrada de NF no OMIE</td>        <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td><span class="raci-pill r-A">A</span></td><td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td></tr>
+              <tr><td>Lançar contas a pagar após NF</td>          <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td><span class="raci-pill r-A">A</span></td><td><span class="raci-pill r-C">C</span></td><td>–</td>                                 <td>–</td></tr>
+              <tr><td>Planilhar e carimbar NF física</td>         <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td><span class="raci-pill r-C">C</span></td><td>–</td>                                 <td>–</td>                                 <td>–</td></tr>
+              <tr><td>Etiquetar e organizar mercadorias</td>      <td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td>                                 <td>–</td></tr>
+              <tr><td>Separar e embalar para despacho</td>        <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td>                                 <td>–</td></tr>
+              <tr><td>Autorizar liberação sem NF</td>             <td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td>                                 <td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-R">R</span></td></tr>
+              <tr><td>Organizar rota do motorista interno</td>    <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>–</td>                                 <td>–</td>                                 <td>–</td>                                 <td>–</td></tr>
+              <tr><td>Consultar relatórios de estoque OMIE</td>   <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-C">C</span></td><td>–</td>                                 <td>–</td></tr>
             </tbody>
           </table>
         </div>
@@ -1702,79 +953,27 @@ footer p { font-size: 11px; color: var(--text3); }
     </div>
   </div>
 
-  <!-- ==================================================
-       SEÇÕES COMPARTILHADAS
-       Glossário e Vídeos servem os dois perfis.
-       Ficam sempre visíveis independente do perfil ativo.
-  ================================================== -->
+  <!-- GLOSSÁRIO COMPARTILHADO (ambos os cargos) -->
   <div class="shared-section">
     <div class="tab-bar" id="tabs-shared">
-      <button class="tab-btn active-log" onclick="tabShared('glossario', this)">Glossário</button>
-      <button class="tab-btn" onclick="tabShared('videos', this)">Vídeos</button>
+      <button class="tab-btn active-log" onclick="tabShared('glossario',this)">Glossário</button>
     </div>
-
-    <!-- Glossário compartilhado -->
     <div class="tab-panel active" id="tab-shared-glossario">
       <div class="section">
         <div class="section-label">Termos e siglas do setor</div>
         <div class="glossary">
           <div class="gitem"><span class="gterm">CTE (Conhecimento de Transporte)</span><span class="gdef">Documento fiscal que acompanha o transporte de mercadorias. Emitido pela transportadora. Equivale à NF do serviço de frete.</span></div>
-          <div class="gitem"><span class="gterm">DANFE</span><span class="gdef">Documento Auxiliar da Nota Fiscal Eletrônica. Impresso que acompanha fisicamente a mercadoria e contém a chave de acesso da NF (44 dígitos).</span></div>
+          <div class="gitem"><span class="gterm">DANFE</span><span class="gdef">Documento Auxiliar da Nota Fiscal Eletrônica. Impresso físico que acompanha a mercadoria — contém a chave de acesso de 44 dígitos necessária para entrada no OMIE.</span></div>
           <div class="gitem"><span class="gterm">POD (Proof of Delivery)</span><span class="gdef">Comprovante de entrega emitido pela transportadora, com assinatura do destinatário. Equivale ao canhoto digital.</span></div>
-          <div class="gitem"><span class="gterm">Triangulação</span><span class="gdef">Entrega em que o fornecedor despacha diretamente ao cliente final, sem a mercadoria transitar pelo estoque da Croma.</span></div>
-          <div class="gitem"><span class="gterm">RMA Logístico</span><span class="gdef">Return Merchandise Authorization aplicado à logística: processo de tratativa de ocorrência de entrega (atraso, extravio, avaria).</span></div>
-          <div class="gitem"><span class="gterm">Contas a Pagar</span><span class="gdef">Lançamento no OMIE que registra uma obrigação de pagamento futuro. Gerado automaticamente na entrada de NF ou manualmente para CTEs.</span></div>
-          <div class="gitem"><span class="gterm">Ponto de Corte</span><span class="gdef">Horário limite para que uma NF entre na programação de despacho do dia. Na Croma: NFs do período da manhã devem ser despachadas até o final da tarde.</span></div>
-          <div class="gitem"><span class="gterm">TG Transportes</span><span class="gdef">Parceiro logístico externo para entregas fora do perímetro do motorista interno ou cargas de maior porte com seguro.</span></div>
-          <div class="gitem"><span class="gterm">NF de Remessa</span><span class="gdef">NF emitida para acompanhar produtos em regime de remessa (como no caso FUNBIO). O pagamento ocorre após confirmação de entrega.</span></div>
-          <div class="gitem"><span class="gterm">FUNBIO</span><span class="gdef">Cliente com regime especial: pagamento baseado em NF de remessa entregue. Comprovantes devem ser anexados na NF de remessa, não na NF comum.</span></div>
-          <div class="gitem"><span class="gterm">OMIE</span><span class="gdef">ERP da empresa: controle de estoque, emissão de NFS-e, contas a pagar/receber e relatórios gerenciais.</span></div>
-          <div class="gitem"><span class="gterm">OptiWork</span><span class="gdef">Sistema de gestão de projetos e fluxos internos. Utilizado para registro de ocorrências e comunicação entre setores.</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Vídeos compartilhados -->
-    <div class="tab-panel" id="tab-shared-videos">
-      <div class="section">
-        <div class="section-label">Tutoriais em vídeo</div>
-        <div class="alert alert-info" style="margin-bottom:1.5rem">
-          <span class="alert-icon">ℹ</span>
-          <p>Grave no <strong>Loom</strong> ou suba no <strong>YouTube (não listado)</strong>. Substitua os blocos abaixo pelo iframe correspondente: Share → Embed → copiar iframe.</p>
-        </div>
-        <div class="video-grid">
-          <div>
-            <p class="vtitle">Como lançar um CTE no OMIE (contas a pagar)</p>
-            <div class="video-ph">
-              <div class="vicon"><svg width="18" height="18" viewBox="0 0 16 16" fill="var(--text3)"><path d="M6 4l6 4-6 4V4z"/></svg></div>
-              <p>Cole aqui o iframe do Loom ou YouTube</p>
-              <code>&lt;iframe src="https://www.loom.com/embed/SEU-ID" ...&gt;</code>
-            </div>
-          </div>
-          <div>
-            <p class="vtitle">Como realizar a entrada de NF no OMIE (Estoque)</p>
-            <div class="video-ph">
-              <div class="vicon"><svg width="18" height="18" viewBox="0 0 16 16" fill="var(--text3)"><path d="M6 4l6 4-6 4V4z"/></svg></div>
-              <p>Cole aqui o iframe do Loom ou YouTube</p>
-              <code>&lt;iframe src="https://www.loom.com/embed/SEU-ID" ...&gt;</code>
-            </div>
-          </div>
-          <div>
-            <p class="vtitle">Como preencher a etiqueta e organizar o estoque</p>
-            <div class="video-ph">
-              <div class="vicon"><svg width="18" height="18" viewBox="0 0 16 16" fill="var(--text3)"><path d="M6 4l6 4-6 4V4z"/></svg></div>
-              <p>Cole aqui o iframe do Loom ou YouTube</p>
-              <code>&lt;iframe src="https://www.loom.com/embed/SEU-ID" ...&gt;</code>
-            </div>
-          </div>
-          <div>
-            <p class="vtitle">Como sinalizar entrega concluída e informar o Financeiro</p>
-            <div class="video-ph">
-              <div class="vicon"><svg width="18" height="18" viewBox="0 0 16 16" fill="var(--text3)"><path d="M6 4l6 4-6 4V4z"/></svg></div>
-              <p>Cole aqui o iframe do Loom ou YouTube</p>
-              <code>&lt;iframe src="https://www.loom.com/embed/SEU-ID" ...&gt;</code>
-            </div>
-          </div>
+          <div class="gitem"><span class="gterm">Triangulação</span><span class="gdef">Entrega em que o fornecedor despacha diretamente ao cliente final, sem a mercadoria transitar pelo estoque da Croma. Logística monitora remotamente pelo parceiro.</span></div>
+          <div class="gitem"><span class="gterm">RMA Logístico</span><span class="gdef">Return Merchandise Authorization aplicado à logística: processo de tratativa de ocorrência de entrega (atraso, extravio, avaria em trânsito).</span></div>
+          <div class="gitem"><span class="gterm">Ponto de Corte</span><span class="gdef">Horário limite para que uma NF entre na programação de despacho do dia. Na Croma: NFs do período da manhã → despacho no mesmo dia. NFs da tarde → próximo dia útil.</span></div>
+          <div class="gitem"><span class="gterm">TG Transportes</span><span class="gdef">Parceiro logístico externo para entregas fora do perímetro do motorista interno ou cargas de maior porte com seguro incluso.</span></div>
+          <div class="gitem"><span class="gterm">NF de Remessa</span><span class="gdef">NF emitida para acompanhar produtos em regime de remessa (caso FUNBIO). O pagamento ocorre após confirmação da entrega. Comprovante deve ser anexado nesta NF, não na NF comum.</span></div>
+          <div class="gitem"><span class="gterm">FUNBIO</span><span class="gdef">Cliente com regime especial de pagamento baseado em NF de remessa entregue. Atenção: comprovantes de entrega vão na NF de remessa, não na NF de venda comum.</span></div>
+          <div class="gitem"><span class="gterm">OMIE</span><span class="gdef">ERP da empresa: controle de estoque, emissão de NFS-e, contas a pagar/receber e relatórios gerenciais. Sempre selecionar a empresa Croma correta ao acessar.</span></div>
+          <div class="gitem"><span class="gterm">OptiWork</span><span class="gdef">Sistema de gestão de projetos e fluxos internos. Usado para registro de ocorrências, comunicação entre setores e rastreamento de pedidos de compra.</span></div>
+          <div class="gitem"><span class="gterm">Contas a Pagar</span><span class="gdef">Lançamento no OMIE que registra uma obrigação de pagamento futuro. Gerado automaticamente na entrada de NF (Estoque) ou manualmente para CTEs (Logística).</span></div>
         </div>
       </div>
     </div>
@@ -1788,92 +987,51 @@ footer p { font-size: 11px; color: var(--text3); }
 </footer>
 
 <script>
-// ====================================================
-// SELETOR DE PERFIL
-// Alterna entre os dois conjuntos de abas e conteúdo.
-// O botão ativo muda de cor por perfil.
-// ====================================================
-function setProfile(p) {
-  const isLog = p === 'log';
-
-  document.getElementById('profile-log').classList.toggle('active', isLog);
-  document.getElementById('profile-est').classList.toggle('active', !isLog);
-
-  document.getElementById('pbtn-log').className = 'profile-btn' + (isLog ? ' active-log' : '');
-  document.getElementById('pbtn-est').className = 'profile-btn' + (!isLog ? ' active-est' : '');
+// ============================================================
+// SELETOR DE CARGO
+// Teal para Logística, Verde para Estoque
+// ============================================================
+function setRole(r) {
+  document.querySelectorAll('.role-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active-log', 'active-est'));
+  document.getElementById('role-' + r).classList.add('active');
+  const btn = document.getElementById('rbtn-' + r);
+  btn.classList.add(r === 'log' ? 'active-log' : 'active-est');
 }
 
-// ====================================================
-// TROCA DE ABAS — LOGÍSTICA
-// Só mexe nas abas do perfil de Logística.
-// ====================================================
-function tabLog(id, btn) {
-  document.querySelectorAll('#tabs-log .tab-btn').forEach(b => b.classList.remove('active-log'));
-  document.querySelectorAll('[id^="tab-log-"]').forEach(p => p.classList.remove('active'));
-  document.getElementById('tab-log-' + id).classList.add('active');
-  btn.classList.add('active-log');
+// ============================================================
+// TROCA DE ABAS POR CARGO
+// Namespace isolado por cargo para evitar conflitos
+// ============================================================
+function tabRole(role, id, btn) {
+  const activeClass = role === 'log' ? 'active-log' : 'active-est';
+  document.querySelectorAll('#tabs-' + role + ' .tab-btn').forEach(b => b.classList.remove('active-log', 'active-est'));
+  document.querySelectorAll('[id^="tab-' + role + '-"]').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + role + '-' + id).classList.add('active');
+  btn.classList.add(activeClass);
 }
 
-// ====================================================
-// TROCA DE ABAS — ESTOQUE
-// Só mexe nas abas do perfil de Estoque.
-// ====================================================
-function tabEst(id, btn) {
-  document.querySelectorAll('#tabs-est .tab-btn').forEach(b => b.classList.remove('active-est'));
-  document.querySelectorAll('[id^="tab-est-"]').forEach(p => p.classList.remove('active'));
-  document.getElementById('tab-est-' + id).classList.add('active');
-  btn.classList.add('active-est');
-}
-
-// ====================================================
-// TROCA DE ABAS — SEÇÕES COMPARTILHADAS
-// Glossário e Vídeos valem pra qualquer perfil.
-// ====================================================
 function tabShared(id, btn) {
-  document.querySelectorAll('#tab-shared-glossario, #tab-shared-videos').forEach(p => p.classList.remove('active'));
-  document.getElementById('tab-shared-' + id).classList.add('active');
-  document.querySelectorAll('#tabs-shared .tab-btn').forEach(b => b.classList.remove('active-log', 'active-est'));
+  document.querySelectorAll('#tabs-shared .tab-btn').forEach(b => b.classList.remove('active-log','active-est'));
   btn.classList.add('active-log');
 }
 
-// ====================================================
-// CHECKLIST INTERATIVO
-// Recebe o item clicado e os IDs dos elementos de progresso.
-// Funciona para múltiplas checklists na mesma página.
-// ====================================================
-function ck(item, listId, progId, cntId) {
-  item.classList.toggle('done');
-  const items = document.querySelectorAll('#' + listId + ' .citem');
-  const done  = document.querySelectorAll('#' + listId + ' .citem.done').length;
-  document.getElementById(progId).style.width = (done / items.length * 100) + '%';
-  document.getElementById(cntId).textContent  = done + ' / ' + items.length;
-}
-
-function resetCk(listId, progId, cntId) {
-  document.querySelectorAll('#' + listId + ' .citem').forEach(i => i.classList.remove('done'));
-  document.getElementById(progId).style.width = '0%';
-  const total = document.querySelectorAll('#' + listId + ' .citem').length;
-  document.getElementById(cntId).textContent  = '0 / ' + total;
-}
-
-// ====================================================
-// TOGGLE DE TEMA CLARO / ESCURO
-// Mesma lógica do compras.html — salva no localStorage.
-// ====================================================
+// ============================================================
+// TOGGLE DE TEMA — persiste no localStorage
+// ============================================================
 function toggleTheme() {
   const html = document.documentElement;
-  const novoTema = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', novoTema);
-  try { localStorage.setItem('croma-tema', novoTema); } catch(e) {}
+  const novo = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', novo);
+  try { localStorage.setItem('croma-tema', novo); } catch(e) {}
 }
 
-// Ao carregar a página: respeita a preferência salva ou a do sistema
 (function() {
   try {
     const salvo = localStorage.getItem('croma-tema');
     if (salvo) {
       document.documentElement.setAttribute('data-theme', salvo);
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
       document.documentElement.setAttribute('data-theme', 'light');
     }
   } catch(e) {}
