@@ -3,51 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Compras — Manual Operacional · Croma Tecnologia</title>
+<title>Compras &mdash; Manual Operacional &middot; Croma Tecnologia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* ============================================================
-   TOKENS DE TEMA
-   Azul é a cor do setor de Compras — coerente com os outros
-   arquivos mas com acento diferente por setor.
-============================================================ */
-:root { --transition-theme: background .3s ease, color .3s ease, border-color .3s ease; }
-
-[data-theme="dark"] {
-  --bg:#0d1117; --bg2:#161b27; --bg3:#1e2535; --bg4:#252f42;
-  --text:#e8edf5; --text2:#8b98b1; --text3:#4a5568;
-  --border:#1e2535; --border2:#2a3654;
-  --accent:#4f8ef7; --accent2:#7ab3ff; --accent-bg:#0f2347; --accent-glow:rgba(79,142,247,.15);
-  --purple:#a78bfa; --purple-bg:#1a1040;
-  --green:#34d399;  --green-bg:#052e1c;  --green-glow:rgba(52,211,153,.15);
-  --teal:#2dd4bf;   --teal-bg:#0a2e2b;
-  --amber:#fbbf24;  --amber-bg:#2d1a00;
-  --red:#f87171;    --red-bg:#2d0a0a;
-  --shadow:0 2px 8px rgba(0,0,0,.4); --shadow-md:0 8px 24px rgba(0,0,0,.5);
+:root{--transition-theme:background .3s ease,color .3s ease,border-color .3s ease}
+[data-theme="dark"]{
+  --bg:#0d1117;--bg2:#161b27;--bg3:#1e2535;--bg4:#252f42;
+  --text:#e8edf5;--text2:#8b98b1;--text3:#4a5568;
+  --border:#1e2535;--border2:#2a3654;
+  --accent:#4f8ef7;--accent2:#7ab3ff;--accent-bg:#0f2347;--accent-glow:rgba(79,142,247,.15);
+  --purple:#a78bfa;--purple-bg:#1a1040;--purple-glow:rgba(167,139,250,.12);
+  --green:#34d399;--green-bg:#052e1c;--green-glow:rgba(52,211,153,.15);
+  --teal:#2dd4bf;--teal-bg:#0a2e2b;
+  --amber:#fbbf24;--amber-bg:#2d1a00;
+  --red:#f87171;--red-bg:#2d0a0a;
+  --shadow:0 2px 8px rgba(0,0,0,.4);--shadow-md:0 8px 24px rgba(0,0,0,.5);
 }
-[data-theme="light"] {
-  --bg:#f8faff; --bg2:#ffffff; --bg3:#eef2fa; --bg4:#e4eaf8;
-  --text:#111827; --text2:#4b5563; --text3:#9ca3af;
-  --border:#e5e9f5; --border2:#cdd5ef;
-  --accent:#1e40af; --accent2:#3b82f6; --accent-bg:#eff6ff; --accent-glow:rgba(59,130,246,.08);
-  --purple:#6d28d9; --purple-bg:#f5f3ff;
-  --green:#059669;  --green-bg:#ecfdf5;  --green-glow:rgba(5,150,105,.08);
-  --teal:#0d9488;   --teal-bg:#f0fdfa;
-  --amber:#b45309;  --amber-bg:#fffbeb;
-  --red:#dc2626;    --red-bg:#fef2f2;
-  --shadow:0 1px 4px rgba(0,0,0,.06); --shadow-md:0 4px 16px rgba(0,0,0,.08);
+[data-theme="light"]{
+  --bg:#f8faff;--bg2:#ffffff;--bg3:#eef2fa;--bg4:#e4eaf8;
+  --text:#111827;--text2:#4b5563;--text3:#9ca3af;
+  --border:#e5e9f5;--border2:#cdd5ef;
+  --accent:#1e40af;--accent2:#3b82f6;--accent-bg:#eff6ff;--accent-glow:rgba(59,130,246,.08);
+  --purple:#6d28d9;--purple-bg:#f5f3ff;--purple-glow:rgba(109,40,217,.08);
+  --green:#059669;--green-bg:#ecfdf5;--green-glow:rgba(5,150,105,.08);
+  --teal:#0d9488;--teal-bg:#f0fdfa;
+  --amber:#b45309;--amber-bg:#fffbeb;
+  --red:#dc2626;--red-bg:#fef2f2;
+  --shadow:0 1px 4px rgba(0,0,0,.06);--shadow-md:0 4px 16px rgba(0,0,0,.08);
 }
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.65;transition:var(--transition-theme)}
 
-/* ============================================================
-   TOPBAR — ORDEM FIXA PARA TODAS AS PÁGINAS
-   Inicio · Financeiro · Compras · Logística · Comercial ·
-   Licitação · E-commerce · Outsourcing
-============================================================ */
+/* TOPBAR */
 .topbar{position:sticky;top:0;z-index:300;height:56px;display:flex;align-items:center;gap:12px;padding:0 1.5rem;background:var(--bg2);border-bottom:1px solid var(--border);box-shadow:var(--shadow);backdrop-filter:blur(12px);transition:var(--transition-theme)}
 .topbar-logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
 .logo-fallback{font-size:16px;font-weight:700;color:var(--accent);letter-spacing:-.03em}
@@ -63,51 +52,28 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 .theme-toggle svg{transition:transform .4s ease}
 .theme-toggle:hover svg{transform:rotate(20deg)}
 .icon-sun{display:none}.icon-moon{display:block}
-[data-theme="light"] .icon-sun{display:block}[data-theme="light"] .icon-moon{display:none}
+[data-theme="light"] .icon-sun{display:block}
+[data-theme="light"] .icon-moon{display:none}
 @media(max-width:900px){.topbar-nav{display:none}}
 
-/* ============================================================
-   HERO
-============================================================ */
+/* HERO */
 .hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:2.5rem 1.5rem 2rem;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none}
 .hero-inner{max-width:1000px;margin:0 auto;position:relative}
 .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-bg);color:var(--accent);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:1rem;border:1px solid var(--accent-glow);letter-spacing:.03em;text-transform:uppercase}
 .hero h1{font-size:28px;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem;line-height:1.2}
-.hero p{font-size:14px;color:var(--text2);max-width:560px;line-height:1.7}
+.hero p{font-size:14px;color:var(--text2);max-width:580px;line-height:1.7}
 .hero-meta{display:flex;gap:1.5rem;margin-top:1.25rem;flex-wrap:wrap}
 .hero-meta span{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:5px;font-weight:500}
 .hero-meta span::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--border2);display:inline-block}
 
-/* ============================================================
-   SELETOR DE CARGO
-   O coração do novo sistema — escolhe o cargo e o conteúdo
-   das abas muda completamente para mostrar só o que importa
-   para aquele profissional.
-============================================================ */
-.role-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:.875rem 1.5rem;transition:var(--transition-theme)}
-.role-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
-.role-label{font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
-.role-btn{font-size:12px;font-weight:600;padding:7px 18px;border-radius:20px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px;font-family:inherit;white-space:nowrap}
-.role-btn:hover{background:var(--bg4);color:var(--text)}
-.role-btn.active{background:var(--accent-bg);color:var(--accent);border-color:var(--accent-glow)}
-
-/* ============================================================
-   LAYOUT PRINCIPAL
-============================================================ */
+/* LAYOUT */
 .page{max-width:1000px;margin:0 auto;padding:2rem 1.5rem 5rem}
 .section{margin-bottom:2rem}
 .section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
 .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
 
-/* Painéis de cargo */
-.role-panel{display:none}
-.role-panel.active{display:block;animation:fadeIn .2s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-
-/* ============================================================
-   ABAS
-============================================================ */
+/* ABAS */
 .tab-bar{display:flex;gap:2px;border-bottom:1px solid var(--border);margin-bottom:2rem;overflow-x:auto;scrollbar-width:none}
 .tab-bar::-webkit-scrollbar{height:0}
 .tab-btn{font-size:12px;font-weight:600;padding:10px 18px;border:none;background:none;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .15s;border-radius:8px 8px 0 0;font-family:inherit}
@@ -115,47 +81,37 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);background:var(--accent-bg)}
 .tab-panel{display:none}
 .tab-panel.active{display:block;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* ============================================================
-   CARDS DE ESCOPO (substituem checklists)
-   Cada item informativo vira um card limpo com ícone e texto.
-   Sem interação — é para ler e aprender.
-============================================================ */
+/* SCOPE GRID */
+.scope-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
+.scope-card{padding:16px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;transition:all .15s;display:flex;gap:14px;align-items:flex-start}
+.scope-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.scope-icon{width:36px;height:36px;border-radius:9px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent)}
+.scope-body h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.scope-body p{font-size:12px;color:var(--text2);line-height:1.6}
+
+/* INFO GRID */
 .info-grid{display:grid;gap:8px}
 .info-card{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .15s}
 .info-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
-.info-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
-.info-body{flex:1}
+.info-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .info-body strong{font-size:12px;font-weight:600;color:var(--text);display:block;margin-bottom:3px}
 .info-body p{font-size:12px;color:var(--text2);line-height:1.6;margin:0}
 
-/* Grid de 2 colunas para escopos */
-.scope-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
-.scope-card{padding:16px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;transition:all .15s}
-.scope-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
-.scope-card-icon{font-size:20px;margin-bottom:8px}
-.scope-card h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
-.scope-card p{font-size:12px;color:var(--text2);line-height:1.6}
-
-/* ============================================================
-   FLUXO OPERACIONAL
-   Passos numerados que mostram o caminho completo do cargo
-============================================================ */
+/* FLOW STEPS */
 .flow-steps{display:grid;gap:0}
 .flow-step{display:flex;gap:16px;align-items:flex-start;position:relative;padding-bottom:4px}
 .flow-step:not(:last-child)::before{content:'';position:absolute;left:15px;top:34px;bottom:-4px;width:2px;background:var(--border2);z-index:0}
 .flow-step-n{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;position:relative;z-index:1;margin-top:10px}
-.flow-step-body{flex:1;padding:10px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:all .15s}
+.flow-step-body{flex:1;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:all .15s}
 .flow-step-body:hover{border-color:var(--border2)}
 .flow-step-body h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
 .flow-step-body p{font-size:12px;color:var(--text2);line-height:1.6;margin:0}
-.flow-step-body .step-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.step-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
 .step-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px}
 
-/* ============================================================
-   GRID DE SISTEMAS
-   Mostra ferramentas/sistemas com cor e uso específico
-============================================================ */
+/* SYSTEMS */
 .systems-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
 .system-card{padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;transition:all .15s}
 .system-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
@@ -166,39 +122,28 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 .system-action{font-size:11px;color:var(--text3);padding:3px 0;border-top:1px solid var(--border);display:flex;gap:6px;align-items:center}
 .system-action::before{content:'›';color:var(--accent);font-weight:700;font-size:13px}
 
-/* ============================================================
-   MATRIZ DE RELACIONAMENTOS
-   Mostra com quem o profissional interage em cada fase
-============================================================ */
+/* RELACIONAMENTOS */
 .rel-grid{display:grid;gap:8px}
-.rel-card{display:grid;grid-template-columns:160px 1fr;gap:14px;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;align-items:start;transition:all .15s}
+.rel-card{display:grid;grid-template-columns:170px 1fr;gap:14px;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;align-items:start;transition:all .15s}
 .rel-card:hover{border-color:var(--border2)}
 @media(max-width:500px){.rel-card{grid-template-columns:1fr;gap:6px}}
 .rel-fase{font-size:11px;font-weight:700;color:var(--text)}
 .rel-fase small{display:block;font-size:10px;font-weight:400;color:var(--text3);margin-top:2px}
 .rel-quem{display:flex;flex-wrap:wrap;gap:5px}
 .rel-pill{font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px}
-.rel-r{background:var(--accent-bg);color:var(--accent)}
-.rel-a{background:var(--green-bg);color:var(--green)}
-.rel-c{background:var(--amber-bg);color:var(--amber)}
-.rel-i{background:var(--bg3);color:var(--text2);border:1px solid var(--border2)}
 
-/* ============================================================
-   POLÍTICA DE PAGAMENTO — tabela visual
-============================================================ */
+/* POLÍTICA */
 .policy-grid{display:grid;gap:8px}
-.policy-card{display:grid;grid-template-columns:110px 1fr 1.5fr;gap:14px;align-items:start;padding:14px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .15s}
+.policy-card{display:grid;grid-template-columns:120px 1fr 1.4fr;gap:14px;align-items:start;padding:14px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .15s}
 .policy-card:hover{border-color:var(--border2)}
 @media(max-width:600px){.policy-card{grid-template-columns:1fr;gap:6px}}
 .policy-badge{font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;text-align:center;display:inline-block;text-transform:uppercase;letter-spacing:.04em}
-.policy-cond{font-size:13px;font-weight:600;color:var(--text)}
-.policy-obs{font-size:12px;color:var(--text2);line-height:1.6}
+.policy-cond{font-size:13px;font-weight:600;color:var(--text);padding-top:2px}
+.policy-obs{font-size:12px;color:var(--text2);line-height:1.6;padding-top:2px}
 
-/* ============================================================
-   ALERTAS
-============================================================ */
+/* ALERTAS */
 .alert{border-radius:10px;padding:12px 16px;margin-top:1rem;display:flex;gap:10px;align-items:flex-start}
-.alert-icon{font-size:15px;flex-shrink:0;margin-top:1px}
+.alert-icon{width:20px;height:20px;flex-shrink:0;margin-top:1px}
 .alert p{font-size:12px;line-height:1.65;margin:0}
 .alert-warn{background:var(--amber-bg);border:1px solid rgba(251,191,36,.2)}
 .alert-warn p{color:var(--amber)}
@@ -208,23 +153,39 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 .alert-rule p{color:var(--red)}
 .alert-info{background:var(--accent-bg);border:1px solid var(--accent-glow)}
 .alert-info p{color:var(--accent2)}
+.alert-purple{background:var(--purple-bg);border:1px solid var(--purple-glow)}
+.alert-purple p{color:var(--purple)}
 
-/* ============================================================
-   KANBAN (mantido para o contexto de referência visual)
-============================================================ */
-.kanban{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-bottom:1.5rem}
+/* KANBAN */
+.kanban{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:1.5rem}
 @media(max-width:800px){.kanban{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:500px){.kanban{grid-template-columns:repeat(2,1fr)}}
 .kcol-head{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:7px 10px;border-radius:8px;text-align:center;margin-bottom:8px}
-.kcard{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:11px 13px;margin-bottom:8px;position:relative;overflow:hidden;transition:all .18s}
+.kcard{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:11px 13px;margin-bottom:8px;transition:all .18s}
 .kcard:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:var(--shadow-md)}
 .kcard-title{font-size:12px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:3px}
 .kcard-sub{font-size:11px;color:var(--text3);line-height:1.3}
 .ktag{display:inline-block;font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;margin-top:6px}
 
-/* ============================================================
-   GLOSSÁRIO
-============================================================ */
+/* MARKUP TABLE */
+.markup-table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border)}
+.markup-table{width:100%;border-collapse:collapse;font-size:12px}
+.markup-table th{background:var(--bg3);padding:10px 13px;text-align:left;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--text2);border-bottom:1px solid var(--border);white-space:nowrap}
+.markup-table td{padding:10px 13px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+.markup-table tr:last-child td{border-bottom:none}
+.markup-table tr:hover td{background:var(--bg3)}
+.markup-table td:first-child{font-weight:600;color:var(--text);white-space:nowrap}
+.badge-resp{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap}
+
+/* SLA */
+.sla-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.sla-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;transition:all .15s}
+.sla-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.sla-card label{font-size:10px;color:var(--text3);display:block;margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.sla-card span{font-size:13px;font-weight:500;color:var(--text)}
+.sla-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:middle}
+
+/* GLOSSÁRIO */
 .glossary{display:grid;gap:5px}
 .gitem{display:grid;grid-template-columns:180px 1fr;gap:16px;padding:11px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .15s}
 .gitem:hover{border-color:var(--border2);background:var(--bg3)}
@@ -250,32 +211,18 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 [data-theme="light"] .r-C{background:#fef9c3;color:#854d0e}
 [data-theme="light"] .r-I{background:#f3f4f6;color:#6b7280}
 
-/* SLA cards */
-.sla-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
-.sla-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;transition:all .15s}
-.sla-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
-.sla-card label{font-size:10px;color:var(--text3);display:block;margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
-.sla-card span{font-size:13px;font-weight:500;color:var(--text)}
-.sla-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:middle}
-
 .btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:7px 14px;border-radius:8px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);cursor:pointer;text-decoration:none;transition:all .15s;font-weight:500;font-family:inherit}
 .btn:hover{background:var(--bg3);color:var(--text)}
-
 footer{border-top:1px solid var(--border);padding:1.25rem 1.5rem;max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
 footer p{font-size:11px;color:var(--text3)}
 
-/* Intro banner do cargo */
-.role-intro{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:2rem;display:flex;gap:16px;align-items:flex-start}
-.role-intro-icon{font-size:28px;flex-shrink:0;margin-top:2px}
-.role-intro h2{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px}
-.role-intro p{font-size:13px;color:var(--text2);line-height:1.7}
-.role-intro-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-.role-intro-tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;background:var(--bg3);color:var(--text2);border:1px solid var(--border2)}
+/* SVG helpers */
+.ico{display:flex;align-items:center;justify-content:center}
 </style>
 </head>
 <body>
 
-<!-- TOPBAR — ordem fixa em todas as páginas -->
+<!-- TOPBAR -->
 <header class="topbar">
   <a href="index.html" class="topbar-logo">
     <img src="logo-branco.png" alt="Croma Tecnologia" height="28"
@@ -288,9 +235,9 @@ footer p{font-size:11px;color:var(--text3)}
     <a href="index.html">Inicio</a>
     <a href="financeiro.html">Financeiro</a>
     <a href="compras.html" class="active">Compras</a>
-    <a href="logistica.html">Logística</a>
+    <a href="logistica.html">Logistica</a>
     <a href="comercial.html">Comercial</a>
-    <a href="licitacao.html">Licitação</a>
+    <a href="licitacao.html">Licitacao</a>
     <a href="ecommerce.html">E-commerce</a>
     <a href="outsourcing.html">Outsourcing</a>
   </nav>
@@ -307,783 +254,781 @@ footer p{font-size:11px;color:var(--text3)}
       <svg width="6" height="6" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="currentColor"/></svg>
       Setor de Compras
     </div>
-    <h1>Ciclo de Compra — Comercial Privado</h1>
-    <p>Selecione seu cargo para ver seu escopo de atuação, fluxo operacional, sistemas que você usa e com quem você se relaciona em cada etapa.</p>
+    <h1>Ciclo de Compra &mdash; Comercial Privado</h1>
+    <p>Manual do Analista de Compras: do recebimento do ticket no OptiWork ate o fechamento do ciclo apos confirmacao de entrega. Toda compra exige aprovacao da Diretoria &mdash; sem excecao.</p>
     <div class="hero-meta">
-      <span>Versão 1.2</span><span>Março 2026</span><span>Documento Interno</span><span>Sistemas: OptiWork · OMIE</span>
+      <span>Versao 1.3</span>
+      <span>Marco 2026</span>
+      <span>Documento Interno</span>
+      <span>Sistemas: OptiWork &middot; OMIE</span>
     </div>
   </div>
 </section>
 
-<!-- SELETOR DE CARGO -->
-<div class="role-bar">
-  <div class="role-inner">
-    <span class="role-label">Seu cargo:</span>
-    <button class="role-btn active" id="rbtn-comprador" onclick="setRole('comprador')">
-      🛒 Analista de Compras
-    </button>
-    <button class="role-btn" id="rbtn-supervisor" onclick="setRole('supervisor')">
-      👁 Supervisor de Compras
-    </button>
-  </div>
-</div>
-
 <main class="page">
 
-  <!-- ══════════════════════════════════════════════
-       CARGO: ANALISTA DE COMPRAS
-  ══════════════════════════════════════════════ -->
-  <div class="role-panel active" id="role-comprador">
+  <div class="tab-bar" id="main-tabs">
+    <button class="tab-btn active" onclick="tab('escopo',this)">Escopo</button>
+    <button class="tab-btn" onclick="tab('fluxo',this)">Fluxo Operacional</button>
+    <button class="tab-btn" onclick="tab('sistemas',this)">Sistemas</button>
+    <button class="tab-btn" onclick="tab('relacionamentos',this)">Relacionamentos</button>
+    <button class="tab-btn" onclick="tab('regras',this)">Regras e Politicas</button>
+    <button class="tab-btn" onclick="tab('markup',this)">Planilha de Markup</button>
+    <button class="tab-btn" onclick="tab('raci',this)">Matriz RACI</button>
+    <button class="tab-btn" onclick="tab('glossario',this)">Glossario</button>
+  </div>
 
-    <!-- Intro do cargo -->
-    <div class="role-intro">
-      <div class="role-intro-icon">🛒</div>
-      <div>
-        <h2>Analista de Compras</h2>
-        <p>Você é o elo entre o time comercial e os fornecedores. Toda solicitação de produto passa por você antes de qualquer aquisição. Seu trabalho começa quando um card chega ao kanban e termina quando a entrega é confirmada e o ciclo está fechado.</p>
-        <div class="role-intro-tags">
-          <span class="role-intro-tag">OptiWork</span>
-          <span class="role-intro-tag">OMIE</span>
-          <span class="role-intro-tag">Planilha de Markup</span>
-          <span class="role-intro-tag">Drive OptiWork</span>
-        </div>
-      </div>
-    </div>
+  <!-- ══════════════ ESCOPO ══════════════ -->
+  <div class="tab-panel active" id="tab-escopo">
 
-    <!-- Abas do Analista -->
-    <div class="tab-bar" id="tabs-comprador">
-      <button class="tab-btn active" onclick="tabRole('comprador','escopo',this)">Escopo</button>
-      <button class="tab-btn" onclick="tabRole('comprador','fluxo',this)">Fluxo Operacional</button>
-      <button class="tab-btn" onclick="tabRole('comprador','sistemas',this)">Sistemas</button>
-      <button class="tab-btn" onclick="tabRole('comprador','relacionamentos',this)">Relacionamentos</button>
-      <button class="tab-btn" onclick="tabRole('comprador','regras',this)">Regras e Políticas</button>
-      <button class="tab-btn" onclick="tabRole('comprador','kanban',this)">Kanban de Referência</button>
-      <button class="tab-btn" onclick="tabRole('comprador','glossario',this)">Glossário</button>
-    </div>
+    <div class="section">
+      <div class="section-label">Responsabilidades do Analista de Compras</div>
+      <div class="scope-grid">
 
-    <!-- ESCOPO -->
-    <div class="tab-panel active" id="tab-comprador-escopo">
-      <div class="section">
-        <div class="section-label">O que é sua responsabilidade</div>
-        <div class="scope-grid">
-          <div class="scope-card">
-            <div class="scope-card-icon">📋</div>
+        <div class="scope-card">
+          <div class="scope-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+          </div>
+          <div class="scope-body">
             <h4>Monitorar os tickets</h4>
-            <p>Acompanhar continuamente os cards no projeto COMPRAS do OptiWork durante todo o horário de trabalho. Nenhum card pode ficar parado além do SLA.</p>
+            <p>Acompanhar continuamente os cards no projeto COMPRAS do OptiWork durante todo o horario de trabalho. Nenhum card pode ultrapassar o SLA sem comunicacao ao Coordenador.</p>
           </div>
-          <div class="scope-card">
-            <div class="scope-card-icon">🔍</div>
+        </div>
+
+        <div class="scope-card">
+          <div class="scope-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div class="scope-body">
             <h4>Verificar dados e anexos</h4>
-            <p>Antes de agir, confirmar que todas as informações obrigatórias e os dois anexos (Markup + OC) estão no card. Se faltar algo, devolver ao solicitante.</p>
+            <p>Confirmar que todas as informacoes obrigatorias e os dois anexos (Markup + OC) estao no card. Ticket incompleto retorna ao solicitante com comentario claro.</p>
           </div>
-          <div class="scope-card">
-            <div class="scope-card-icon">💰</div>
+        </div>
+
+        <div class="scope-card">
+          <div class="scope-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="scope-body">
             <h4>Cotar com fornecedores</h4>
-            <p>Buscar o melhor preço e condição, usando o fornecedor indicado como referência mas sem ficar limitado a ele. Autonomia total para escolher o melhor.</p>
+            <p>Buscar o melhor preco e condicao de pagamento. Autonomia para escolher o fornecedor mais vantajoso. Minimo de 2 cotacoes sempre que o prazo permitir.</p>
           </div>
-          <div class="scope-card">
-            <div class="scope-card-icon">✅</div>
+        </div>
+
+        <div class="scope-card">
+          <div class="scope-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div class="scope-body">
             <h4>Executar a compra</h4>
-            <p>Fechar o pedido somente após aprovação completa de todos os níveis (Coordenador → Financeiro → Diretoria). Zero exceções.</p>
+            <p>Fechar o pedido somente apos aprovacao da Diretoria. Esta aprovacao e obrigatoria para TODA compra &mdash; nao e excecao, e a regra padrao do processo.</p>
           </div>
-          <div class="scope-card">
-            <div class="scope-card-icon">🧾</div>
+        </div>
+
+        <div class="scope-card">
+          <div class="scope-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="scope-body">
             <h4>Validar e encaminhar NFs</h4>
-            <p>Conferir a Nota Fiscal do fornecedor item por item antes de encaminhar ao Financeiro. NF sem pedido correspondente nunca é aceita.</p>
+            <p>Conferir a NF do fornecedor item a item antes de encaminhar ao Financeiro. NF sem pedido correspondente nunca e aceita &mdash; suspender e acionar imediatamente.</p>
           </div>
-          <div class="scope-card">
-            <div class="scope-card-icon">📊</div>
+        </div>
+
+        <div class="scope-card">
+          <div class="scope-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div class="scope-body">
             <h4>Manter planilhas atualizadas</h4>
             <p>Registrar toda compra na planilha de acompanhamento no Drive do OptiWork e manter tabelas de fabricantes parceiros com MKP 1,35 aplicado.</p>
           </div>
         </div>
-      </div>
 
-      <div class="section">
-        <div class="section-label">O que NÃO é sua responsabilidade</div>
-        <div class="info-grid">
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--red-bg)">🚫</div>
-            <div class="info-body">
-              <strong>Preencher a Planilha de Markup</strong>
-              <p>O Markup é preenchido exclusivamente pelo vendedor/analista. Você apenas confirma que está anexado ao card e que os dados parecem coerentes.</p>
-            </div>
-          </div>
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--red-bg)">🚫</div>
-            <div class="info-body">
-              <strong>Criar o ticket de pedido de compra</strong>
-              <p>O ticket é criado pelo Comercial, pelo E-commerce ou pelo setor de Licitações. Você recebe o card já criado e trabalha a partir dele.</p>
-            </div>
-          </div>
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--red-bg)">🚫</div>
-            <div class="info-body">
-              <strong>Receber cobranças diretas de vendedores</strong>
-              <p>Quando um card está em Pendentes, o Supervisor assume o acompanhamento. Vendedores e consultores NÃO devem contatar o comprador diretamente — todo contato passa pelo Supervisor.</p>
-            </div>
-          </div>
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--red-bg)">🚫</div>
-            <div class="info-body">
-              <strong>Autorizar compras à vista por conta própria</strong>
-              <p>Pagamentos à vista (PIX, transferência) só acontecem com autorização expressa da Diretoria registrada no card. Você não pode aprovar isso sozinho.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
 
-    <!-- FLUXO OPERACIONAL -->
-    <div class="tab-panel" id="tab-comprador-fluxo">
-      <div class="section">
-        <div class="section-label">Onde você começa e onde termina</div>
-        <div class="flow-steps">
+    <div class="section">
+      <div class="section-label">O que NAO e responsabilidade do comprador</div>
+      <div class="info-grid">
 
-          <div class="flow-step">
-            <div class="flow-step-n" style="background:var(--bg3);color:var(--text3)">0</div>
-            <div class="flow-step-body">
-              <h4>Card entra no kanban — você monitora</h4>
-              <p>O vendedor cria o ticket. O Coordenador/Supervisor faz a primeira análise. Você monitora mas não atua ainda. Se passar 1 dia útil sem movimentação em qualquer etapa, acionar o Supervisor.</p>
-              <div class="step-tags">
-                <span class="step-tag" style="background:var(--bg3);color:var(--text2)">OptiWork</span>
-                <span class="step-tag" style="background:var(--purple-bg);color:var(--purple)">Quem atua: Coordenador</span>
-              </div>
-            </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--red-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
           </div>
-
-          <div class="flow-step">
-            <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">1</div>
-            <div class="flow-step-body">
-              <h4>Card chega em COMPRAR — você entra em ação</h4>
-              <p>Aprovação completa confirmada. Leia o ticket integralmente: itens, quantidades, especificações, endereço de entrega, se é triangulada e por qual CNPJ da Croma será faturado.</p>
-              <div class="step-tags">
-                <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">Você é o responsável</span>
-                <span class="step-tag" style="background:var(--bg3);color:var(--text2)">SLA: 24h</span>
-              </div>
-            </div>
+          <div class="info-body">
+            <strong>Preencher ou alterar a Planilha de Markup</strong>
+            <p>O Markup e preenchido exclusivamente pelo consultor/vendedor. O comprador apenas confirma que esta anexado. Qualquer necessidade de alteracao exige reinicio do fluxo de aprovacao.</p>
           </div>
-
-          <div class="flow-step">
-            <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">2</div>
-            <div class="flow-step-body">
-              <h4>Cotar com fornecedores</h4>
-              <p>Use o fornecedor indicado como ponto de partida. Busque cotações adicionais sempre que o prazo permitir. Compare: preço, prazo de entrega, condição de pagamento e confiabilidade. Para fornecedor novo: verificar CNPJ na Receita, reputação e histórico antes de fechar.</p>
-              <div class="step-tags">
-                <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">Você é o responsável</span>
-                <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Min. 2 fornecedores quando possível</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="flow-step">
-            <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">3</div>
-            <div class="flow-step-body">
-              <h4>Negociar condição de pagamento</h4>
-              <p>Hierarquia obrigatória: 1º faturado a prazo → 2º boleto parcelado → à vista somente com autorização da Diretoria registrada no card. Se o fornecedor exigir antecipado, escale para o Supervisor antes de aceitar.</p>
-              <div class="step-tags">
-                <span class="step-tag" style="background:var(--green-bg);color:var(--green)">1º: Faturado a prazo</span>
-                <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">2º: Boleto parcelado</span>
-                <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Exceção: À vista c/ Diretoria</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="flow-step">
-            <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">4</div>
-            <div class="flow-step-body">
-              <h4>Fechar o pedido com o fornecedor</h4>
-              <p>Confirmar por escrito: itens, quantidades, valores, prazo de entrega e forma de pagamento. Para trianguladas: informar ao fornecedor o endereço do cliente final, não o da Croma. Solicitar rastreamento assim que disponível.</p>
-              <div class="step-tags">
-                <span class="step-tag" style="background:var(--purple-bg);color:var(--purple)">⚠ Triangulada: endereço do cliente!</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="flow-step">
-            <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">5</div>
-            <div class="flow-step-body">
-              <h4>Registrar no card e mover para COMPRADOS</h4>
-              <p>Adicionar comentário no card: fornecedor escolhido, valor total, prazo de entrega e condição de pagamento. Se o fornecedor foi diferente do indicado pelo vendedor, justificar. Arrastar o card para COMPRADOS.</p>
-              <div class="step-tags">
-                <span class="step-tag" style="background:var(--bg3);color:var(--text2)">OptiWork</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="flow-step">
-            <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">6</div>
-            <div class="flow-step-body">
-              <h4>Atualizar planilha de acompanhamento</h4>
-              <p>Preencher na planilha do Drive OptiWork: data, quantidade, descrição, status, consultor/canal, NF de compra, empresa faturadora, fornecedor e observações. A Logística usa essa planilha para etiquetar ao receber.</p>
-              <div class="step-tags">
-                <span class="step-tag" style="background:var(--bg3);color:var(--text2)">Drive OptiWork</span>
-                <span class="step-tag" style="background:var(--teal-bg);color:var(--teal)">Logística depende disso</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="flow-step">
-            <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">7</div>
-            <div class="flow-step-body">
-              <h4>Validar NF do fornecedor e encaminhar ao Financeiro</h4>
-              <p>Ao receber a NF: conferir valor, itens, forma de pagamento, CNPJ do emitente e validar chave na SEFAZ. Só encaminhar ao Financeiro após conferência completa. NF sem pedido correspondente: suspender e acionar Supervisor.</p>
-              <div class="step-tags">
-                <span class="step-tag" style="background:var(--green-bg);color:var(--green)">→ Financeiro</span>
-                <span class="step-tag" style="background:var(--red-bg);color:var(--red)">NF sem pedido: NÃO encaminhar</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="flow-step">
-            <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">✓</div>
-            <div class="flow-step-body">
-              <h4>Fechar o card após confirmação de entrega</h4>
-              <p>Ao receber confirmação do Estoque/Logística de que o produto chegou ao destino, fechar o card definitivamente no OptiWork. Ciclo encerrado.</p>
-              <div class="step-tags">
-                <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Ciclo encerrado</span>
-              </div>
-            </div>
-          </div>
-
         </div>
+
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--red-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          </div>
+          <div class="info-body">
+            <strong>Criar o ticket de pedido de compra</strong>
+            <p>O ticket e criado pelo Comercial, pelo E-commerce ou pelo setor de Licitacoes. O comprador recebe o card ja criado e trabalha a partir dele.</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--red-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          </div>
+          <div class="info-body">
+            <strong>Executar compra sem aprovacao da Diretoria</strong>
+            <p>Toda e qualquer compra exige aprovacao formal da Diretoria registrada no card do OptiWork. Nao ha excecao para urgencias &mdash; a aprovacao deve ser obtida antes de qualquer acao.</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--red-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          </div>
+          <div class="info-body">
+            <strong>Receber cobrancas diretas de consultores/vendedores</strong>
+            <p>Quando um card esta em Pendentes, o Coordenador do Comercial assume o acompanhamento. Vendedores e consultores NAO devem contatar o comprador diretamente.</p>
+          </div>
+        </div>
+
       </div>
+    </div>
+  </div>
 
-      <div class="section">
-        <div class="section-label">Quando vai para PENDENTES</div>
-        <div class="info-grid">
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--red-bg)">⏱</div>
-            <div class="info-body">
-              <strong>24h sem conseguir concluir a compra</strong>
-              <p>Se não for possível fechar o pedido dentro do SLA, mover para Pendentes imediatamente e acionar o Supervisor. Não aguardar o prazo estourar sem comunicar.</p>
-            </div>
-          </div>
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--red-bg)">📦</div>
-            <div class="info-body">
-              <strong>Fornecedor sem estoque ou prazo incompatível</strong>
-              <p>Registrar no card o motivo, os contatos realizados e os próximos passos planejados. O Supervisor assume o acompanhamento a partir daí.</p>
-            </div>
-          </div>
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--red-bg)">💲</div>
-            <div class="info-body">
-              <strong>Divergência de valores ou cotação insatisfatória</strong>
-              <p>Nenhum fornecedor com preço ou condição aceitável encontrado. Registrar no card e acionar Supervisor — pode envolver renegociação com o cliente.</p>
+  <!-- ══════════════ FLUXO ══════════════ -->
+  <div class="tab-panel" id="tab-fluxo">
+    <div class="section">
+      <div class="section-label">Onde voce comeca e onde termina</div>
+      <div class="flow-steps">
+
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--bg3);color:var(--text3)">0</div>
+          <div class="flow-step-body">
+            <h4>Ticket criado pelo solicitante &mdash; voce monitora</h4>
+            <p>O consultor/vendedor cria o ticket. O Coordenador do Comercial faz a primeira analise. Voce monitora mas nao atua. Se passar 1 dia util sem movimentacao em qualquer etapa, reportar ao Coordenador do Comercial.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--bg3);color:var(--text2)">OptiWork</span>
+              <span class="step-tag" style="background:var(--purple-bg);color:var(--purple)">Quem atua: Coord. Comercial</span>
             </div>
           </div>
         </div>
+
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">1</div>
+          <div class="flow-step-body">
+            <h4>Aprovacao do Financeiro</h4>
+            <p>Financeiro valida a viabilidade de caixa e o prazo de pagamento. O comprador nao atua &mdash; apenas monitora se o card avancou. Se ficar parado mais de 1 dia util, reportar ao Coordenador do Comercial.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Financeiro age</span>
+              <span class="step-tag" style="background:var(--bg3);color:var(--text2)">Voce monitora</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">2</div>
+          <div class="flow-step-body">
+            <h4>Aprovacao da Diretoria &mdash; OBRIGATORIA para toda compra</h4>
+            <p>A Diretoria aprova a margem, o risco e o alinhamento estrategico. Esta etapa e obrigatoria para TODA compra, sem excecao. Sem esta aprovacao, nenhuma aquisicao pode ser iniciada.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">Diretoria age</span>
+              <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Sem aprovacao = sem compra</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--teal-bg);color:var(--teal)">3</div>
+          <div class="flow-step-body">
+            <h4>Card chega em COMPRAR &mdash; voce entra em acao</h4>
+            <p>Aprovacao completa confirmada. Leia o ticket integralmente: itens, quantidades, especificacoes, endereco de entrega, se e triangulada e por qual CNPJ da Croma sera faturado.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--teal-bg);color:var(--teal)">Voce e o responsavel</span>
+              <span class="step-tag" style="background:var(--bg3);color:var(--text2)">SLA: 24h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--teal-bg);color:var(--teal)">4</div>
+          <div class="flow-step-body">
+            <h4>Cotar com fornecedores</h4>
+            <p>Use o fornecedor indicado como ponto de partida. Busque cotacoes adicionais sempre que o prazo permitir. Compare: preco, prazo de entrega, condicao de pagamento e confiabilidade. Para fornecedor novo: verificar CNPJ na Receita, reputacao e historico antes de fechar.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Min. 2 cotacoes quando possivel</span>
+              <span class="step-tag" style="background:var(--teal-bg);color:var(--teal)">Autonomia para escolher o melhor</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--teal-bg);color:var(--teal)">5</div>
+          <div class="flow-step-body">
+            <h4>Negociar condicao de pagamento</h4>
+            <p>Hierarquia obrigatoria: 1. faturado a prazo &rarr; 2. boleto parcelado &rarr; a vista somente com autorizacao adicional da Diretoria registrada no card. Se o fornecedor exigir antecipado, escalar para o Coordenador do Comercial antes de aceitar.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--green-bg);color:var(--green)">1. Faturado a prazo</span>
+              <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">2. Boleto parcelado</span>
+              <span class="step-tag" style="background:var(--red-bg);color:var(--red)">A vista: autorizacao extra Diretoria</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--teal-bg);color:var(--teal)">6</div>
+          <div class="flow-step-body">
+            <h4>Fechar o pedido com o fornecedor</h4>
+            <p>Confirmar por escrito: itens, quantidades, valores, prazo de entrega e forma de pagamento. Para trianguladas: informar ao fornecedor o endereco do cliente final, nunca o da Croma. Solicitar confirmacao e rastreamento.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--purple-bg);color:var(--purple)">Triangulada: endereco do cliente!</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--teal-bg);color:var(--teal)">7</div>
+          <div class="flow-step-body">
+            <h4>Registrar no card e mover para COMPRADOS</h4>
+            <p>Adicionar comentario no card: fornecedor escolhido, valor total, prazo de entrega e condicao de pagamento. Se o fornecedor foi diferente do indicado, justificar. Arrastar o card para COMPRADOS.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--bg3);color:var(--text2)">OptiWork</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--teal-bg);color:var(--teal)">8</div>
+          <div class="flow-step-body">
+            <h4>Atualizar planilha de acompanhamento</h4>
+            <p>Preencher na planilha do Drive OptiWork: data, quantidade, descricao, status, consultor/canal, NF de compra, empresa faturadora, fornecedor e observacoes. A Logistica usa essa planilha para etiquetar ao receber.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--bg3);color:var(--text2)">Drive OptiWork</span>
+              <span class="step-tag" style="background:var(--teal-bg);color:var(--teal)">Logistica depende disso</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--teal-bg);color:var(--teal)">9</div>
+          <div class="flow-step-body">
+            <h4>Validar NF do fornecedor e encaminhar ao Financeiro</h4>
+            <p>Ao receber a NF: conferir valor, itens, forma de pagamento, CNPJ do emitente e validar chave na SEFAZ. Somente encaminhar ao Financeiro apos conferencia completa. NF sem pedido correspondente: suspender e acionar imediatamente.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--green-bg);color:var(--green)">&rarr; Financeiro</span>
+              <span class="step-tag" style="background:var(--red-bg);color:var(--red)">NF sem pedido: NAO encaminhar</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="flow-step-body">
+            <h4>Fechar o card apos confirmacao de entrega</h4>
+            <p>Ao receber confirmacao do Estoque/Logistica de que o produto chegou ao destino, fechar o card definitivamente no OptiWork. Ciclo encerrado.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Ciclo encerrado</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- SISTEMAS -->
-    <div class="tab-panel" id="tab-comprador-sistemas">
-      <div class="section">
-        <div class="section-label">Sistemas que você usa e para quê</div>
-        <div class="systems-grid">
-          <div class="system-card">
-            <div class="system-name">
-              <span class="system-dot" style="background:var(--accent)"></span>
-              OptiWork
-            </div>
-            <div class="system-use">Central de operação do comprador. Tudo começa e termina aqui.</div>
-            <div class="system-actions">
-              <span class="system-action">Monitorar cards no projeto COMPRAS</span>
-              <span class="system-action">Verificar dados e anexos do ticket</span>
-              <span class="system-action">Registrar comentários em cada etapa</span>
-              <span class="system-action">Mover cards entre colunas do kanban</span>
-              <span class="system-action">Registrar impedimentos em Pendentes</span>
-            </div>
-          </div>
-          <div class="system-card">
-            <div class="system-name">
-              <span class="system-dot" style="background:var(--green)"></span>
-              Drive OptiWork
-            </div>
-            <div class="system-use">Repositório de arquivos compartilhados da equipe.</div>
-            <div class="system-actions">
-              <span class="system-action">Planilha de acompanhamento de compras</span>
-              <span class="system-action">Tabelas de preços de fabricantes</span>
-              <span class="system-action">Histórico de fornecedores aprovados</span>
-            </div>
-          </div>
-          <div class="system-card">
-            <div class="system-name">
-              <span class="system-dot" style="background:var(--amber)"></span>
-              OMIE (uso indireto)
-            </div>
-            <div class="system-use">ERP da empresa — você usa para verificar e conferir, não para lançar.</div>
-            <div class="system-actions">
-              <span class="system-action">Conferir NFs de fornecedores recebidas</span>
-              <span class="system-action">Verificar pedidos de compra registrados</span>
-              <span class="system-action">Consultar status de pagamentos</span>
-            </div>
-          </div>
-          <div class="system-card">
-            <div class="system-name">
-              <span class="system-dot" style="background:var(--red)"></span>
-              SEFAZ (portal externo)
-            </div>
-            <div class="system-use">Validação de autenticidade de NFs de fornecedores.</div>
-            <div class="system-actions">
-              <span class="system-action">Validar chave de acesso de 44 dígitos</span>
-              <span class="system-action">Confirmar CNPJ do emitente</span>
-              <span class="system-action">Verificar status da NF antes de encaminhar</span>
-            </div>
-          </div>
-          <div class="system-card">
-            <div class="system-name">
-              <span class="system-dot" style="background:var(--purple)"></span>
-              Excel / Google Sheets
-            </div>
-            <div class="system-use">Planilhas de trabalho e análise.</div>
-            <div class="system-actions">
-              <span class="system-action">Planilha de acompanhamento (Drive OptiWork)</span>
-              <span class="system-action">Tabelas de fabricantes (MKP 1,35)</span>
-              <span class="system-action">Planilha de Markup (verificar, não preencher)</span>
-            </div>
-          </div>
-          <div class="system-card">
-            <div class="system-name">
-              <span class="system-dot" style="background:var(--teal)"></span>
-              Receita Federal (portal externo)
-            </div>
-            <div class="system-use">Validação de novos fornecedores antes do primeiro pedido.</div>
-            <div class="system-actions">
-              <span class="system-action">Verificar CNPJ ativo</span>
-              <span class="system-action">Confirmar razão social e situação cadastral</span>
-            </div>
-          </div>
-        </div>
+    <div class="section">
+      <div class="section-label">SLA &mdash; prazos obrigatorios</div>
+      <div class="sla-grid">
+        <div class="sla-card"><label>Ticket ate 12h</label><span><span class="sla-dot" style="background:var(--green)"></span>Analise no mesmo dia util</span></div>
+        <div class="sla-card"><label>Ticket apos 12h</label><span><span class="sla-dot" style="background:var(--accent2)"></span>Analise ate 12h do dia seguinte</span></div>
+        <div class="sla-card"><label>Prazo max. de compra</label><span><span class="sla-dot" style="background:var(--amber)"></span>24h apos entrar em Comprar</span></div>
+        <div class="sla-card"><label>Prazo extrapolado</label><span><span class="sla-dot" style="background:var(--red)"></span>Pendentes + Coord. Comercial</span></div>
       </div>
     </div>
 
-    <!-- RELACIONAMENTOS -->
-    <div class="tab-panel" id="tab-comprador-relacionamentos">
-      <div class="section">
-        <div class="section-label">Com quem você interage em cada fase</div>
-        <div class="rel-grid">
-          <div class="rel-card">
-            <div class="rel-fase">Ticket criado<small>Coluna: Aprov. Coordenador</small></div>
-            <div class="rel-quem">
-              <span class="rel-pill rel-i">Você é informado</span>
-              <span class="rel-pill rel-a" style="background:var(--purple-bg);color:var(--purple)">Coordenador / Supervisor age</span>
-              <span class="rel-pill rel-i" style="background:var(--accent-bg);color:var(--accent)">Comercial criou</span>
-            </div>
-          </div>
-          <div class="rel-card">
-            <div class="rel-fase">Análise financeira<small>Coluna: Aprov. Financeiro</small></div>
-            <div class="rel-quem">
-              <span class="rel-pill rel-i">Você monitora</span>
-              <span class="rel-pill rel-a" style="background:var(--green-bg);color:var(--green)">Financeiro age</span>
-            </div>
-          </div>
-          <div class="rel-card">
-            <div class="rel-fase">Aprovação da margem<small>Coluna: Aprov. Diretoria</small></div>
-            <div class="rel-quem">
-              <span class="rel-pill rel-i">Você monitora</span>
-              <span class="rel-pill rel-a" style="background:var(--accent-bg);color:var(--accent)">Diretoria age</span>
-            </div>
-          </div>
-          <div class="rel-card">
-            <div class="rel-fase">Cotação e compra<small>Coluna: Comprar</small></div>
-            <div class="rel-quem">
-              <span class="rel-pill rel-r" style="background:var(--accent-bg);color:var(--accent)">Você é o responsável</span>
-              <span class="rel-pill rel-c">Supervisor aprova</span>
-              <span class="rel-pill rel-c" style="background:var(--amber-bg);color:var(--amber)">Consulta Comercial se necessário</span>
-            </div>
-          </div>
-          <div class="rel-card">
-            <div class="rel-fase">Impedimento ativo<small>Coluna: Pendentes</small></div>
-            <div class="rel-quem">
-              <span class="rel-pill rel-r" style="background:var(--red-bg);color:var(--red)">Você registra</span>
-              <span class="rel-pill rel-a" style="background:var(--purple-bg);color:var(--purple)">Supervisor assume</span>
-            </div>
-          </div>
-          <div class="rel-card">
-            <div class="rel-fase">Validação da NF<small>Após receber NF do fornecedor</small></div>
-            <div class="rel-quem">
-              <span class="rel-pill rel-r" style="background:var(--accent-bg);color:var(--accent)">Você confere</span>
-              <span class="rel-pill rel-a" style="background:var(--green-bg);color:var(--green)">→ Financeiro recebe</span>
-              <span class="rel-pill rel-c" style="background:var(--teal-bg);color:var(--teal)">Logística informada</span>
-            </div>
-          </div>
-          <div class="rel-card">
-            <div class="rel-fase">Planilha de acompanhamento<small>Após compra fechada</small></div>
-            <div class="rel-quem">
-              <span class="rel-pill rel-r" style="background:var(--accent-bg);color:var(--accent)">Você preenche</span>
-              <span class="rel-pill rel-i" style="background:var(--teal-bg);color:var(--teal)">Logística usa para etiqueta</span>
-              <span class="rel-pill rel-i" style="background:var(--accent-bg);color:var(--accent)">Comercial acompanha entrega</span>
-            </div>
-          </div>
-          <div class="rel-card">
-            <div class="rel-fase">Fechamento do ciclo<small>Confirmação de entrega</small></div>
-            <div class="rel-quem">
-              <span class="rel-pill rel-r" style="background:var(--accent-bg);color:var(--accent)">Você fecha o card</span>
-              <span class="rel-pill rel-c" style="background:var(--teal-bg);color:var(--teal)">Logística/Estoque confirmou entrega</span>
-              <span class="rel-pill rel-i" style="background:var(--accent-bg);color:var(--accent)">Comercial informado</span>
-            </div>
-          </div>
+    <div class="section">
+      <div class="section-label">Kanban de referencia &mdash; 5 colunas do ciclo</div>
+      <div class="kanban">
+        <div>
+          <div class="kcol-head" style="background:var(--purple-bg);color:var(--purple)">Aprov. coord.</div>
+          <div class="kcard"><div class="kcard-title">Pedido B2B recebido</div><div class="kcard-sub">Ticket criado pelo consultor</div><span class="ktag" style="background:var(--purple-bg);color:var(--purple)">Coord. Comercial age</span></div>
+          <div class="kcard"><div class="kcard-title">Pedido triangulado</div><div class="kcard-sub">Fornecedor ao cliente</div><span class="ktag" style="background:var(--amber-bg);color:var(--amber)">Atencao ao endereco</span></div>
         </div>
+        <div>
+          <div class="kcol-head" style="background:var(--green-bg);color:var(--green)">Aprov. fin.</div>
+          <div class="kcard"><div class="kcard-title">Analise de caixa</div><div class="kcard-sub">Financeiro valida fluxo</div><span class="ktag" style="background:var(--green-bg);color:var(--green)">Financeiro age</span></div>
+        </div>
+        <div>
+          <div class="kcol-head" style="background:var(--accent-bg);color:var(--accent)">Aprov. dir. &#9733;</div>
+          <div class="kcard" style="border-color:var(--accent)"><div class="kcard-title">Aprovacao obrigatoria</div><div class="kcard-sub">Toda compra passa aqui</div><span class="ktag" style="background:var(--accent-bg);color:var(--accent)">Diretoria age</span></div>
+        </div>
+        <div>
+          <div class="kcol-head" style="background:var(--teal-bg);color:var(--teal)">Comprar &#9733;</div>
+          <div class="kcard" style="border-color:var(--teal)"><div class="kcard-title">Cotar e executar</div><div class="kcard-sub">Acao principal &mdash; 24h</div><span class="ktag" style="background:var(--teal-bg);color:var(--teal)">Voce age</span></div>
+          <div class="kcard"><div class="kcard-title">Validar NF do fornecedor</div><div class="kcard-sub">Antes de enviar ao Financeiro</div><span class="ktag" style="background:var(--teal-bg);color:var(--teal)">Voce age</span></div>
+        </div>
+        <div>
+          <div class="kcol-head" style="background:var(--bg3);color:var(--text2)">Comprados</div>
+          <div class="kcard"><div class="kcard-title">Fechar ciclo</div><div class="kcard-sub">Monitorar + atualizar planilha</div><span class="ktag" style="background:var(--bg3);color:var(--text3)">Encerrado</span></div>
+        </div>
+      </div>
+      <div class="alert alert-info">
+        <div class="alert-icon ico">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <p>&#9733; <strong>Aprov. Diretoria</strong> e obrigatoria para TODA compra. &#9733; <strong>Comprar</strong> e onde sua atuacao e central &mdash; SLA de 24h conta a partir da entrada nesta coluna. Pendentes: mover imediatamente e comunicar Coordenador do Comercial.</p>
       </div>
     </div>
+  </div>
 
-    <!-- REGRAS E POLÍTICAS -->
-    <div class="tab-panel" id="tab-comprador-regras">
-      <div class="section">
-        <div class="section-label">Política de pagamento a fornecedores</div>
-        <div class="policy-grid">
-          <div class="policy-card">
-            <span class="policy-badge" style="background:var(--green-bg);color:var(--green)">1ª Preferência</span>
-            <span class="policy-cond">Faturado a prazo<br><small style="font-weight:400;color:var(--text2)">Boleto com vencimento futuro</small></span>
-            <span class="policy-obs">Regra padrão — sempre buscar esta condição primeiro em toda negociação com fornecedor. É o ponto de partida de qualquer cotação.</span>
-          </div>
-          <div class="policy-card">
-            <span class="policy-badge" style="background:var(--accent-bg);color:var(--accent)">2ª Preferência</span>
-            <span class="policy-cond">Boleto parcelado</span>
-            <span class="policy-obs">Quando o fornecedor não oferecer prazo único. Parcelar minimiza impacto no fluxo de caixa da empresa.</span>
-          </div>
-          <div class="policy-card" style="border-color:rgba(248,113,113,.3)">
-            <span class="policy-badge" style="background:var(--red-bg);color:var(--red)">Exceção</span>
-            <span class="policy-cond">À vista<br><small style="font-weight:400;color:var(--text2)">PIX, transferência, depósito</small></span>
-            <span class="policy-obs">Somente com autorização expressa da Diretoria registrada no card do OptiWork <strong>antes</strong> de fechar. Nunca à vista sem esse registro.</span>
+  <!-- ══════════════ SISTEMAS ══════════════ -->
+  <div class="tab-panel" id="tab-sistemas">
+    <div class="section">
+      <div class="section-label">Sistemas que voce usa e para que</div>
+      <div class="systems-grid">
+        <div class="system-card">
+          <div class="system-name"><span class="system-dot" style="background:var(--accent)"></span>OptiWork</div>
+          <div class="system-use">Central de operacao do comprador. Tudo comeca e termina aqui.</div>
+          <div class="system-actions">
+            <span class="system-action">Monitorar cards no projeto COMPRAS</span>
+            <span class="system-action">Verificar dados e anexos do ticket</span>
+            <span class="system-action">Registrar comentarios em cada etapa</span>
+            <span class="system-action">Mover cards entre colunas do kanban</span>
+            <span class="system-action">Registrar impedimentos em Pendentes</span>
           </div>
         </div>
-      </div>
-
-      <div class="section">
-        <div class="section-label">SLA — prazos obrigatórios</div>
-        <div class="sla-grid">
-          <div class="sla-card"><label>Ticket até 12h</label><span><span class="sla-dot" style="background:var(--green)"></span>Análise no mesmo dia útil</span></div>
-          <div class="sla-card"><label>Ticket após 12h</label><span><span class="sla-dot" style="background:var(--accent2)"></span>Análise até 12h do dia seguinte</span></div>
-          <div class="sla-card"><label>Prazo máx. de compra</label><span><span class="sla-dot" style="background:var(--amber)"></span>24h após entrar em Comprar</span></div>
-          <div class="sla-card"><label>Prazo extrapolado</label><span><span class="sla-dot" style="background:var(--red)"></span>Pendentes + Supervisor imediato</span></div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-label">Regras de validação de NF do fornecedor</div>
-        <div class="info-grid">
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--accent-bg)">💵</div>
-            <div class="info-body"><strong>Valor total confere com o pedido fechado</strong><p>O valor da NF deve ser idêntico ao que foi combinado na negociação. Qualquer divergência: suspender e acionar Supervisor.</p></div>
-          </div>
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--accent-bg)">📦</div>
-            <div class="info-body"><strong>Itens e quantidades corretos — item a item</strong><p>Verificar código, descrição e quantidade de cada produto. Não conferir no total — verificar linha a linha.</p></div>
-          </div>
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--accent-bg)">📅</div>
-            <div class="info-body"><strong>Forma de pagamento é a mesma negociada</strong><p>Prazo, número de parcelas ou condição deve ser exatamente a acordada. NF com condição diferente: não encaminhar.</p></div>
-          </div>
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--accent-bg)">🏢</div>
-            <div class="info-body"><strong>CNPJ do emitente é o fornecedor do pedido</strong><p>Nunca aceitar NF de terceiros sem aprovação do Supervisor. Verificar se razão social e CNPJ correspondem ao fornecedor contratado.</p></div>
-          </div>
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--accent-bg)">🔑</div>
-            <div class="info-body"><strong>Chave de acesso validada na SEFAZ</strong><p>Antes de encaminhar ao Financeiro, validar os 44 dígitos da chave no portal da SEFAZ. NF inválida: suspender imediatamente.</p></div>
-          </div>
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--red-bg)">🚨</div>
-            <div class="info-body"><strong>NF sem pedido correspondente = alerta máximo</strong><p>Se chegar uma NF que não se vincula a nenhum pedido registrado, NÃO encaminhar ao Financeiro. Suspender e acionar Supervisor imediatamente.</p></div>
+        <div class="system-card">
+          <div class="system-name"><span class="system-dot" style="background:var(--green)"></span>Drive OptiWork</div>
+          <div class="system-use">Repositorio de arquivos compartilhados da equipe.</div>
+          <div class="system-actions">
+            <span class="system-action">Planilha de acompanhamento de compras</span>
+            <span class="system-action">Tabelas de precos de fabricantes (MKP 1,35)</span>
+            <span class="system-action">Historico de fornecedores aprovados</span>
           </div>
         </div>
-      </div>
-
-      <div class="section">
-        <div class="section-label">Regras de fornecedor novo</div>
-        <div class="info-grid">
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--amber-bg)">🔍</div>
-            <div class="info-body"><strong>Verificar CNPJ na Receita Federal</strong><p>Empresa deve estar ativa. Verificar razão social, situação cadastral e data de abertura antes de qualquer negociação.</p></div>
-          </div>
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--amber-bg)">⭐</div>
-            <div class="info-body"><strong>Pesquisar reputação</strong><p>Reclame Aqui, avaliações online, referências do mercado. Para pedidos de alto valor, solicitar referências comerciais.</p></div>
-          </div>
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--amber-bg)">🚚</div>
-            <div class="info-body"><strong>Confirmar capacidade de entrega</strong><p>O fornecedor consegue entregar no prazo exigido pelo cliente? Confirmar antes de fechar — não depois.</p></div>
-          </div>
-          <div class="info-card">
-            <div class="info-icon" style="background:var(--amber-bg)">📝</div>
-            <div class="info-body"><strong>Registrar o fornecedor aprovado</strong><p>Após validar, registrar na lista interna de fornecedores aprovados e comunicar o Supervisor.</p></div>
+        <div class="system-card">
+          <div class="system-name"><span class="system-dot" style="background:var(--amber)"></span>OMIE (uso indireto)</div>
+          <div class="system-use">ERP da empresa &mdash; voce usa para verificar e conferir, nao para lancar.</div>
+          <div class="system-actions">
+            <span class="system-action">Conferir NFs de fornecedores recebidas</span>
+            <span class="system-action">Verificar pedidos de compra registrados</span>
+            <span class="system-action">Consultar status de pagamentos</span>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- KANBAN DE REFERÊNCIA -->
-    <div class="tab-panel" id="tab-comprador-kanban">
-      <div class="section">
-        <div class="section-label">Visão geral do fluxo — todas as colunas</div>
-        <div class="kanban">
-          <div>
-            <div class="kcol-head" style="background:var(--purple-bg);color:var(--purple)">Aprov. coord.</div>
-            <div class="kcard">
-              <div class="kcard-title">Pedido B2B recebido</div>
-              <div class="kcard-sub">Ticket aberto pelo Comercial</div>
-              <span class="ktag" style="background:var(--purple-bg);color:var(--purple)">Coordenador age</span>
-            </div>
-            <div class="kcard">
-              <div class="kcard-title">Pedido triangulado</div>
-              <div class="kcard-sub">Fornecedor entrega ao cliente</div>
-              <span class="ktag" style="background:var(--amber-bg);color:var(--amber)">Atenção ao endereço</span>
-            </div>
-          </div>
-          <div>
-            <div class="kcol-head" style="background:var(--green-bg);color:var(--green)">Aprov. fin.</div>
-            <div class="kcard">
-              <div class="kcard-title">Análise de caixa</div>
-              <div class="kcard-sub">Financeiro valida fluxo</div>
-              <span class="ktag" style="background:var(--green-bg);color:var(--green)">Financeiro age</span>
-            </div>
-          </div>
-          <div>
-            <div class="kcol-head" style="background:var(--accent-bg);color:var(--accent)">Aprov. dir.</div>
-            <div class="kcard">
-              <div class="kcard-title">Avaliação de margem</div>
-              <div class="kcard-sub">Diretoria aprova</div>
-              <span class="ktag" style="background:var(--accent-bg);color:var(--accent)">Diretoria age</span>
-            </div>
-          </div>
-          <div>
-            <div class="kcol-head" style="background:var(--teal-bg);color:var(--teal)">Comprar ★</div>
-            <div class="kcard" style="border-color:var(--teal)">
-              <div class="kcard-title">Cotar e executar</div>
-              <div class="kcard-sub">Ação principal — 24h</div>
-              <span class="ktag" style="background:var(--teal-bg);color:var(--teal)">Você age</span>
-            </div>
-            <div class="kcard">
-              <div class="kcard-title">Validar NF do fornecedor</div>
-              <div class="kcard-sub">Antes de enviar ao Financeiro</div>
-              <span class="ktag" style="background:var(--teal-bg);color:var(--teal)">Você age</span>
-            </div>
-          </div>
-          <div>
-            <div class="kcol-head" style="background:var(--red-bg);color:var(--red)">Pendentes</div>
-            <div class="kcard">
-              <div class="kcard-title">Impedimento ativo</div>
-              <div class="kcard-sub">Registrar + Supervisor</div>
-              <span class="ktag" style="background:var(--red-bg);color:var(--red)">Escalar</span>
-            </div>
-          </div>
-          <div>
-            <div class="kcol-head" style="background:var(--bg3);color:var(--text2)">Comprados</div>
-            <div class="kcard">
-              <div class="kcard-title">Fechar ciclo</div>
-              <div class="kcard-sub">Monitorar + atualizar planilha</div>
-              <span class="ktag" style="background:var(--bg3);color:var(--text3)">Encerrado</span>
-            </div>
+        <div class="system-card">
+          <div class="system-name"><span class="system-dot" style="background:var(--red)"></span>SEFAZ (portal externo)</div>
+          <div class="system-use">Validacao de autenticidade de NFs de fornecedores.</div>
+          <div class="system-actions">
+            <span class="system-action">Validar chave de acesso de 44 digitos</span>
+            <span class="system-action">Confirmar CNPJ do emitente</span>
+            <span class="system-action">Verificar status da NF antes de encaminhar</span>
           </div>
         </div>
-        <div class="alert alert-info">
-          <span class="alert-icon">ℹ</span>
-          <p>A coluna <strong>Comprar</strong> marcada com ★ é onde sua atuação é central. As demais colunas você monitora. Seu SLA conta a partir do momento que o card entra em Comprar.</p>
+        <div class="system-card">
+          <div class="system-name"><span class="system-dot" style="background:var(--purple)"></span>Excel / Google Sheets</div>
+          <div class="system-use">Planilhas de trabalho e analise.</div>
+          <div class="system-actions">
+            <span class="system-action">Planilha de acompanhamento (Drive OptiWork)</span>
+            <span class="system-action">Tabelas de fabricantes (MKP 1,35)</span>
+            <span class="system-action">Planilha de Markup (verificar, nao alterar)</span>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <!-- GLOSSÁRIO -->
-    <div class="tab-panel" id="tab-comprador-glossario">
-      <div class="section">
-        <div class="section-label">Termos que você precisa conhecer</div>
-        <div class="glossary">
-          <div class="gitem"><span class="gterm">Ordem de Compra (OC)</span><span class="gdef">Documento formal do cliente B2B autorizando a compra. Em licitações equivale à Nota de Empenho. Deve estar anexada ao card.</span></div>
-          <div class="gitem"><span class="gterm">Planilha de Markup</span><span class="gdef">Excel com análise de viabilidade financeira da venda. Preenchida pelo vendedor — você apenas confirma que está anexada e coerente. MKP = custo × índice.</span></div>
-          <div class="gitem"><span class="gterm">MKP 1,35</span><span class="gdef">Índice multiplicador padrão para tabelas de fabricantes parceiros. Custo × 1,35 = preço de venda mínimo. Você aplica isso ao atualizar tabelas de fabricantes.</span></div>
-          <div class="gitem"><span class="gterm">Triangulação</span><span class="gdef">Entrega em que o fornecedor despacha direto ao cliente final, sem transitar pelo estoque da Croma. Atenção ao endereço: sempre informar o do cliente ao fornecedor.</span></div>
-          <div class="gitem"><span class="gterm">CIF / FOB</span><span class="gdef">CIF: frete por conta do fornecedor até o destino. FOB: frete por conta do comprador a partir da origem. Impacta o custo real da compra.</span></div>
-          <div class="gitem"><span class="gterm">DIFAL</span><span class="gdef">Diferencial de Alíquota do ICMS em vendas interestaduais para consumidor final não contribuinte. Pode impactar margem em vendas fora do DF.</span></div>
-          <div class="gitem"><span class="gterm">NF-e / NFS-e</span><span class="gdef">NF-e: Nota Fiscal eletrônica de produto (fornecedor emite para Croma na compra). NFS-e: Nota Fiscal de Serviço eletrônica (Croma emite ao faturar para o cliente).</span></div>
-          <div class="gitem"><span class="gterm">SLA</span><span class="gdef">Service Level Agreement — prazo máximo acordado para conclusão de uma tarefa. No setor de Compras: 24h para executar a compra após card entrar em Comprar.</span></div>
-          <div class="gitem"><span class="gterm">OMIE</span><span class="gdef">ERP da empresa: CRM, faturamento, NFS-e, controle de estoque e pedidos de compra. Você usa para verificar NFs e pedidos.</span></div>
-          <div class="gitem"><span class="gterm">OptiWork</span><span class="gdef">Sistema de gestão de projetos e fluxos internos. Central de operação do comprador — onde os tickets de pedido de compra vivem.</span></div>
-          <div class="gitem"><span class="gterm">Drive OptiWork</span><span class="gdef">Repositório de arquivos compartilhados no OptiWork. Local das planilhas de acompanhamento e tabelas de fabricantes.</span></div>
-          <div class="gitem"><span class="gterm">Nota de Empenho</span><span class="gdef">Documento oficial do governo formalizando pedido em licitações. Equivale à OC no setor de Licitações.</span></div>
+        <div class="system-card">
+          <div class="system-name"><span class="system-dot" style="background:var(--teal)"></span>Receita Federal (externo)</div>
+          <div class="system-use">Validacao de novos fornecedores antes do primeiro pedido.</div>
+          <div class="system-actions">
+            <span class="system-action">Verificar CNPJ ativo</span>
+            <span class="system-action">Confirmar razao social e situacao cadastral</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════
-       CARGO: SUPERVISOR DE COMPRAS
-  ══════════════════════════════════════════════ -->
-  <div class="role-panel" id="role-supervisor">
-
-    <div class="role-intro">
-      <div class="role-intro-icon">👁</div>
-      <div>
-        <h2>Supervisor de Compras</h2>
-        <p>Você garante que o fluxo funcione: aprova tickets na entrada, monitora SLAs, assume a gestão de Pendentes e é o único ponto de contato entre o time comercial e o comprador durante resolução de impedimentos.</p>
-        <div class="role-intro-tags">
-          <span class="role-intro-tag">OptiWork</span>
-          <span class="role-intro-tag">Planilha de Markup</span>
-          <span class="role-intro-tag">Gestão de Pendentes</span>
-          <span class="role-intro-tag">Comunicação inter-setorial</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="tab-bar" id="tabs-supervisor">
-      <button class="tab-btn active" onclick="tabRole('supervisor','escopo',this)">Escopo</button>
-      <button class="tab-btn" onclick="tabRole('supervisor','fluxo',this)">Fluxo Operacional</button>
-      <button class="tab-btn" onclick="tabRole('supervisor','relacionamentos',this)">Relacionamentos</button>
-      <button class="tab-btn" onclick="tabRole('supervisor','raci',this)">Matriz RACI</button>
-    </div>
-
-    <!-- ESCOPO SUPERVISOR -->
-    <div class="tab-panel active" id="tab-supervisor-escopo">
-      <div class="section">
-        <div class="section-label">Responsabilidades do Supervisor</div>
-        <div class="scope-grid">
-          <div class="scope-card">
-            <div class="scope-card-icon">✅</div>
-            <h4>Aprovar tickets na entrada</h4>
-            <p>Verificar se os dados obrigatórios e os dois anexos (Markup + OC) estão presentes no card. Aprovar e mover para Aprov. Financeiro ou devolver ao solicitante com comentário claro.</p>
-          </div>
-          <div class="scope-card">
-            <div class="scope-card-icon">⏱</div>
-            <h4>Monitorar SLAs</h4>
-            <p>Garantir que nenhum card ultrapasse os prazos em nenhuma coluna. Acionar as áreas responsáveis quando necessário.</p>
-          </div>
-          <div class="scope-card">
-            <div class="scope-card-icon">🚨</div>
-            <h4>Gerenciar Pendentes</h4>
-            <p>Quando um card vai para Pendentes, você assume o acompanhamento. É o ponto de contato entre o comprador e o time comercial — vendedores não contactam o comprador diretamente.</p>
-          </div>
-          <div class="scope-card">
-            <div class="scope-card-icon">📊</div>
-            <h4>Aprovar cotações e compras</h4>
-            <p>Supervisionar as cotações do comprador e aprovar a execução da compra. Responsável final pelas decisões de aquisição.</p>
-          </div>
-          <div class="scope-card">
-            <div class="scope-card-icon">📋</div>
-            <h4>Manter tabelas de fabricantes</h4>
-            <p>Supervisionar a manutenção das tabelas de preços de fabricantes parceiros no Drive OptiWork.</p>
-          </div>
-          <div class="scope-card">
-            <div class="scope-card-icon">🔒</div>
-            <h4>Comunicar escaladas à Diretoria</h4>
-            <p>Quando necessário autorizar compras à vista ou situações excepcionais, comunicar e obter aprovação da Diretoria antes de qualquer ação.</p>
+  <!-- ══════════════ RELACIONAMENTOS ══════════════ -->
+  <div class="tab-panel" id="tab-relacionamentos">
+    <div class="section">
+      <div class="section-label">Com quem voce interage em cada fase</div>
+      <div class="rel-grid">
+        <div class="rel-card">
+          <div class="rel-fase">Ticket criado<small>Coluna: Aprov. Coordenador</small></div>
+          <div class="rel-quem">
+            <span class="rel-pill" style="background:var(--bg3);color:var(--text2)">Voce monitora</span>
+            <span class="rel-pill" style="background:var(--purple-bg);color:var(--purple)">Coord. Comercial age</span>
+            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Consultor criou</span>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- FLUXO SUPERVISOR -->
-    <div class="tab-panel" id="tab-supervisor-fluxo">
-      <div class="section">
-        <div class="section-label">Suas ações no fluxo</div>
-        <div class="flow-steps">
-          <div class="flow-step">
-            <div class="flow-step-n" style="background:var(--purple-bg);color:var(--purple)">1</div>
-            <div class="flow-step-body">
-              <h4>Analisar ticket na coluna Aprov. Coordenador</h4>
-              <p>Verificar se todas as informações obrigatórias estão presentes: dados do cliente, itens, endereço, empresa faturadora, fornecedor sugerido e as duas informações de tipo de entrega. Confirmar se Markup + OC estão anexados.</p>
-              <div class="step-tags">
-                <span class="step-tag" style="background:var(--purple-bg);color:var(--purple)">Aprovado → Aprov. Financeiro</span>
-                <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Pendência → devolver com comentário</span>
-              </div>
-            </div>
+        <div class="rel-card">
+          <div class="rel-fase">Analise financeira<small>Coluna: Aprov. Financeiro</small></div>
+          <div class="rel-quem">
+            <span class="rel-pill" style="background:var(--bg3);color:var(--text2)">Voce monitora</span>
+            <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Financeiro age</span>
           </div>
-          <div class="flow-step">
-            <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">2</div>
-            <div class="flow-step-body">
-              <h4>Supervisionar cotações do comprador</h4>
-              <p>Acompanhar as cotações realizadas pelo Analista. Aprovar ou orientar a escolha final do fornecedor quando houver dúvida sobre custo-benefício.</p>
-            </div>
+        </div>
+        <div class="rel-card">
+          <div class="rel-fase">Aprovacao de toda compra<small>Coluna: Aprov. Diretoria</small></div>
+          <div class="rel-quem">
+            <span class="rel-pill" style="background:var(--bg3);color:var(--text2)">Voce monitora</span>
+            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Diretoria age &mdash; obrigatoria</span>
           </div>
-          <div class="flow-step">
-            <div class="flow-step-n" style="background:var(--red-bg);color:var(--red)">3</div>
-            <div class="flow-step-body">
-              <h4>Assumir gestão de Pendentes</h4>
-              <p>Quando o comprador mover um card para Pendentes, você assume imediatamente. Comunicar o time Comercial sobre o prazo atualizado — eles informam o cliente. Nenhum vendedor deve contatar o comprador diretamente durante a resolução.</p>
-              <div class="step-tags">
-                <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Você é o ponto de contato único</span>
-              </div>
-            </div>
+        </div>
+        <div class="rel-card">
+          <div class="rel-fase">Cotacao e compra<small>Coluna: Comprar</small></div>
+          <div class="rel-quem">
+            <span class="rel-pill" style="background:var(--teal-bg);color:var(--teal)">Voce e o responsavel</span>
+            <span class="rel-pill" style="background:var(--amber-bg);color:var(--amber)">Consulta Comercial se necessario</span>
           </div>
-          <div class="flow-step">
-            <div class="flow-step-n" style="background:var(--amber-bg);color:var(--amber)">4</div>
-            <div class="flow-step-body">
-              <h4>Escaladas excepcionais à Diretoria</h4>
-              <p>Compras à vista, fornecedores novos de alto valor, situações fora da política padrão — você comunica a Diretoria e obtém aprovação formal registrada no card antes de autorizar o comprador a prosseguir.</p>
-            </div>
+        </div>
+        <div class="rel-card">
+          <div class="rel-fase">Impedimento ativo<small>Coluna: Pendentes</small></div>
+          <div class="rel-quem">
+            <span class="rel-pill" style="background:var(--red-bg);color:var(--red)">Voce registra no card</span>
+            <span class="rel-pill" style="background:var(--purple-bg);color:var(--purple)">Coord. Comercial assume</span>
+          </div>
+        </div>
+        <div class="rel-card">
+          <div class="rel-fase">Validacao da NF<small>Apos receber NF do fornecedor</small></div>
+          <div class="rel-quem">
+            <span class="rel-pill" style="background:var(--teal-bg);color:var(--teal)">Voce confere</span>
+            <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">&rarr; Financeiro recebe</span>
+            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Logistica informada</span>
+          </div>
+        </div>
+        <div class="rel-card">
+          <div class="rel-fase">Planilha de acompanhamento<small>Apos compra fechada</small></div>
+          <div class="rel-quem">
+            <span class="rel-pill" style="background:var(--teal-bg);color:var(--teal)">Voce preenche</span>
+            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Logistica usa para etiqueta</span>
+            <span class="rel-pill" style="background:var(--purple-bg);color:var(--purple)">Comercial acompanha entrega</span>
+          </div>
+        </div>
+        <div class="rel-card">
+          <div class="rel-fase">Fechamento do ciclo<small>Confirmacao de entrega</small></div>
+          <div class="rel-quem">
+            <span class="rel-pill" style="background:var(--teal-bg);color:var(--teal)">Voce fecha o card</span>
+            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Logistica/Estoque confirmou</span>
+            <span class="rel-pill" style="background:var(--purple-bg);color:var(--purple)">Comercial informado</span>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- RELACIONAMENTOS SUPERVISOR -->
-    <div class="tab-panel" id="tab-supervisor-relacionamentos">
-      <div class="section">
-        <div class="section-label">Com quem você interage</div>
-        <div class="rel-grid">
-          <div class="rel-card">
-            <div class="rel-fase">Análise de tickets<small>Diariamente</small></div>
-            <div class="rel-quem">
-              <span class="rel-pill rel-r" style="background:var(--purple-bg);color:var(--purple)">Você aprova ou devolve</span>
-              <span class="rel-pill rel-i" style="background:var(--accent-bg);color:var(--accent)">Comercial criou o ticket</span>
+  <!-- ══════════════ REGRAS ══════════════ -->
+  <div class="tab-panel" id="tab-regras">
+
+    <div class="section">
+      <div class="section-label">Politica de pagamento a fornecedores</div>
+      <div class="policy-grid">
+        <div class="policy-card">
+          <span class="policy-badge" style="background:var(--green-bg);color:var(--green)">1. Preferencia</span>
+          <span class="policy-cond">Faturado a prazo<br><small style="font-weight:400;color:var(--text2)">Boleto com vencimento futuro</small></span>
+          <span class="policy-obs">Regra padrao &mdash; sempre buscar esta condicao primeiro em toda negociacao com fornecedor.</span>
+        </div>
+        <div class="policy-card">
+          <span class="policy-badge" style="background:var(--accent-bg);color:var(--accent)">2. Preferencia</span>
+          <span class="policy-cond">Boleto parcelado</span>
+          <span class="policy-obs">Quando o fornecedor nao oferecer prazo unico. Parcelar minimiza impacto no fluxo de caixa.</span>
+        </div>
+        <div class="policy-card" style="border-color:rgba(248,113,113,.3)">
+          <span class="policy-badge" style="background:var(--red-bg);color:var(--red)">Excecao</span>
+          <span class="policy-cond">A vista &mdash; PIX, transferencia</span>
+          <span class="policy-obs">Requer autorizacao <strong>adicional</strong> da Diretoria registrada no card. A aprovacao padrao do fluxo nao cobre pagamento a vista &mdash; e necessaria uma autorizacao especifica.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Regras de validacao de NF do fornecedor</div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--accent-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="info-body"><strong>Valor total confere com o pedido fechado</strong><p>O valor da NF deve ser identico ao combinado na negociacao. Qualquer divergencia: suspender e comunicar imediatamente.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--accent-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <div class="info-body"><strong>Itens e quantidades corretos &mdash; item a item</strong><p>Verificar codigo, descricao e quantidade de cada produto. Nao conferir no total &mdash; verificar linha a linha.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--accent-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="info-body"><strong>Forma de pagamento e a mesma negociada</strong><p>Prazo, numero de parcelas ou condicao deve ser exatamente o acordado. NF com condicao diferente: nao encaminhar.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--accent-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="info-body"><strong>CNPJ do emitente e o fornecedor do pedido</strong><p>Nunca aceitar NF de terceiros. Verificar se razao social e CNPJ correspondem ao fornecedor contratado.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--accent-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+          </div>
+          <div class="info-body"><strong>Chave de acesso validada na SEFAZ</strong><p>Validar os 44 digitos da chave no portal da SEFAZ antes de encaminhar. NF invalida: suspender imediatamente.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--red-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="info-body"><strong>NF sem pedido correspondente = alerta maximo</strong><p>NAO encaminhar ao Financeiro. Suspender e acionar imediatamente. Aceitar NFS indevidas gera risco financeiro e juridico.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Regras de fornecedor novo</div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--amber-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <div class="info-body"><strong>Verificar CNPJ na Receita Federal</strong><p>Empresa deve estar ativa, com razao social e situacao cadastral regulares.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--amber-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="info-body"><strong>Pesquisar reputacao</strong><p>Reclame Aqui, avaliacoes online, referencias do mercado. Pedidos de alto valor: solicitar referencias comerciais.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--amber-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="m16 8 4 0 3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <div class="info-body"><strong>Confirmar capacidade de entrega</strong><p>O fornecedor entrega no prazo exigido pelo cliente? Confirmar antes de fechar &mdash; nao depois.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--amber-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <div class="info-body"><strong>Registrar e comunicar</strong><p>Apos validar, registrar na lista interna de fornecedores aprovados e comunicar ao Coordenador do Comercial.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ PLANILHA DE MARKUP ══════════════ -->
+  <div class="tab-panel" id="tab-markup">
+
+    <div class="section">
+      <div class="section-label">O que e a Planilha de Markup</div>
+      <div class="alert alert-info" style="margin-top:0;margin-bottom:1.5rem">
+        <div class="alert-icon ico">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <p>A Planilha de Markup e o documento de analise de viabilidade financeira da venda. Ela contem custo, preco, MKP, tributos e margem. E preenchida pelo consultor/vendedor antes da abertura do ticket e e compartilhada com todos os setores &mdash; principalmente o Comercial &mdash; como referencia da operacao.</p>
+      </div>
+
+      <div class="markup-table-wrap">
+        <table class="markup-table">
+          <thead>
+            <tr>
+              <th>Campo</th>
+              <th>O que e</th>
+              <th>Quem preenche</th>
+              <th>O comprador faz</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Custo do produto</td>
+              <td>Valor de custo cotado pelo vendedor com o fornecedor sugerido</td>
+              <td><span class="badge-resp" style="background:var(--purple-bg);color:var(--purple)">Consultor / Vendedor</span></td>
+              <td>Apenas verifica se esta preenchido</td>
+            </tr>
+            <tr>
+              <td>MKP (Markup)</td>
+              <td>Indice multiplicador sobre o custo. Ex: MKP 1,35 = custo x 1,35</td>
+              <td><span class="badge-resp" style="background:var(--purple-bg);color:var(--purple)">Consultor / Vendedor</span></td>
+              <td>Nao altera &mdash; referencia para tabelas de fabricantes</td>
+            </tr>
+            <tr>
+              <td>Preco de venda</td>
+              <td>Preco final ao cliente, ja com MKP e tributos aplicados</td>
+              <td><span class="badge-resp" style="background:var(--purple-bg);color:var(--purple)">Consultor / Vendedor</span></td>
+              <td>Nao altera</td>
+            </tr>
+            <tr>
+              <td>Tributos e DIFAL</td>
+              <td>Impostos da operacao, incluindo DIFAL para vendas interestaduais</td>
+              <td><span class="badge-resp" style="background:var(--purple-bg);color:var(--purple)">Consultor / Vendedor</span></td>
+              <td>Nao altera</td>
+            </tr>
+            <tr>
+              <td>Margem liquida</td>
+              <td>Resultado final da operacao. Base para aprovacao do Financeiro e Diretoria</td>
+              <td><span class="badge-resp" style="background:var(--purple-bg);color:var(--purple)">Consultor / Vendedor</span></td>
+              <td>Nao altera</td>
+            </tr>
+            <tr>
+              <td>Frete estimado</td>
+              <td>Custo de frete cotado pela Logistica antes do fechamento da venda</td>
+              <td><span class="badge-resp" style="background:var(--accent-bg);color:var(--accent)">Logistica</span></td>
+              <td>Nao altera</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Regra de imutabilidade do Markup</div>
+      <div class="alert alert-rule" style="margin-top:0">
+        <div class="alert-icon ico">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        </div>
+        <p><strong>A Planilha de Markup nao pode ser alterada apos a abertura do ticket.</strong> Os dados inseridos pelo consultor sao a base contratual da operacao. Qualquer necessidade de alteracao &mdash; seja de custo, preco, margem ou condicao &mdash; invalida o processo e exige reinicio completo do fluxo de aprovacao.</p>
+      </div>
+      <div class="alert alert-warn" style="margin-top:.75rem">
+        <div class="alert-icon ico">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <p><strong>Papel do comprador em relacao ao Markup:</strong> verificar apenas se o arquivo esta anexado ao card e se foi aprovado no fluxo. O comprador nao le, nao analisa, nao preenche e nao altera o documento. O conteudo e de responsabilidade exclusiva do consultor e do Comercial.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Fluxo de reinicio apos alteracao do Markup</div>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--red-bg);color:var(--red)">1</div>
+          <div class="flow-step-body">
+            <h4>Alteracao identificada</h4>
+            <p>Qualquer modificacao nos dados da planilha (custo, preco, MKP, margem) e identificada pelo consultor ou pelo comprador ao conferir o ticket.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--red-bg);color:var(--red)">2</div>
+          <div class="flow-step-body">
+            <h4>Ticket retorna ao inicio do fluxo</h4>
+            <p>O card e movido de volta para a coluna APROV. COORDENADOR. Nao pode avanciar diretamente para Financeiro ou Diretoria.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Reinicio obrigatorio</span>
             </div>
           </div>
-          <div class="rel-card">
-            <div class="rel-fase">Supervisão de cotações<small>Durante execução</small></div>
-            <div class="rel-quem">
-              <span class="rel-pill rel-a" style="background:var(--green-bg);color:var(--green)">Você aprova</span>
-              <span class="rel-pill rel-r" style="background:var(--accent-bg);color:var(--accent)">Analista executa</span>
-            </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--purple-bg);color:var(--purple)">3</div>
+          <div class="flow-step-body">
+            <h4>Nova aprovacao: Coordenador do Comercial</h4>
+            <p>O Coordenador do Comercial re-analisa os dados atualizados do Markup e confirma a viabilidade da venda com os novos numeros.</p>
           </div>
-          <div class="rel-card">
-            <div class="rel-fase">Gestão de Pendentes<small>Impedimentos ativos</small></div>
-            <div class="rel-quem">
-              <span class="rel-pill rel-r" style="background:var(--red-bg);color:var(--red)">Você coordena a resolução</span>
-              <span class="rel-pill rel-c" style="background:var(--accent-bg);color:var(--accent)">Analista reporta</span>
-              <span class="rel-pill rel-i" style="background:var(--teal-bg);color:var(--teal)">Comercial informado por você</span>
-            </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">4</div>
+          <div class="flow-step-body">
+            <h4>Nova aprovacao: Financeiro</h4>
+            <p>O Financeiro re-valida a viabilidade de caixa com os dados atualizados.</p>
           </div>
-          <div class="rel-card">
-            <div class="rel-fase">Exceções e escaladas</div>
-            <div class="rel-quem">
-              <span class="rel-pill rel-c" style="background:var(--amber-bg);color:var(--amber)">Você consulta Financeiro</span>
-              <span class="rel-pill rel-a" style="background:var(--purple-bg);color:var(--purple)">Diretoria aprova</span>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">5</div>
+          <div class="flow-step-body">
+            <h4>Nova aprovacao: Diretoria</h4>
+            <p>A Diretoria re-aprova a margem final com os novos valores. Somente apos esta aprovacao o card pode avanar para COMPRAR.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">Aprovacao completa = ciclo retomado</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- RACI SUPERVISOR -->
-    <div class="tab-panel" id="tab-supervisor-raci">
-      <div class="section">
-        <div class="section-label">Matriz RACI — visão completa do setor</div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center">
-          <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-R">R</span>Responsável — executa</span>
-          <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-A">A</span>Aprovador — responde</span>
-          <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-C">C</span>Consultado</span>
-          <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-I">I</span>Informado</span>
+    <div class="section">
+      <div class="section-label">Tabelas de precos de fabricantes parceiros</div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--accent-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          </div>
+          <div class="info-body"><strong>Ao receber nova tabela de fabricante</strong><p>Aplicar o MKP padrao de 1,35 sobre os precos de custo. Salvar no Drive OptiWork (pasta COMPRAS) com nome no padrao: FABRICANTE_Tabela_MesAno.xlsx. Ex: Midea_Tabela_Marco2026.xlsx.</p></div>
         </div>
-        <div class="raci-wrap">
-          <table class="raci-table">
-            <thead><tr><th style="min-width:230px">Atividade</th><th>Analista</th><th>Supervisor</th><th>Financeiro</th><th>Diretoria</th><th>Comercial</th><th>Logística</th></tr></thead>
-            <tbody>
-              <tr><td>Criar ticket no OptiWork</td>              <td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-R">R</span></td><td>–</td></tr>
-              <tr><td>Verificar SLA e monitorar tickets</td>     <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-I">I</span></td><td>–</td></tr>
-              <tr><td>Aprovar ticket (Coordenador)</td>          <td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-C">C</span></td><td>–</td>                                 <td><span class="raci-pill r-C">C</span></td><td>–</td></tr>
-              <tr><td>Aprovar viabilidade financeira</td>        <td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>–</td>                                 <td>–</td></tr>
-              <tr><td>Aprovar margem (Diretoria)</td>            <td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td>–</td></tr>
-              <tr><td>Autorizar compra à vista</td>              <td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td>–</td></tr>
-              <tr><td>Cotar com fornecedores</td>                <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>–</td>                                 <td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td></tr>
-              <tr><td>Executar compra com fornecedor</td>        <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>–</td>                                 <td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td>–</td></tr>
-              <tr><td>Validar NF do fornecedor</td>              <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td><span class="raci-pill r-A">A</span></td><td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-C">C</span></td></tr>
-              <tr><td>Atualizar planilha de acompanhamento</td>  <td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td><span class="raci-pill r-I">I</span></td><td>–</td>                                 <td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-C">C</span></td></tr>
-              <tr><td>Gerenciar Pendentes</td>                   <td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-R">R</span></td><td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-I">I</span></td><td>–</td></tr>
-              <tr><td>Manter tabelas de fabricantes (MKP 1,35)</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>–</td>                                 <td>–</td>                                 <td><span class="raci-pill r-I">I</span></td><td>–</td></tr>
-            </tbody>
-          </table>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--accent-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="info-body"><strong>Versionamento obrigatorio</strong><p>Nao substituir o arquivo anterior &mdash; adicionar a nova versao ao lado, preservando o historico. O time comercial precisa consultar versoes anteriores para pedidos em andamento.</p></div>
         </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--green-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="info-body"><strong>Comunicar o time Comercial</strong><p>Apos salvar a nova tabela, comunicar no canal adequado do OptiWork que a tabela atualizada esta disponivel. Indicar o nome do arquivo e o periodo de vigencia.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ RACI ══════════════ -->
+  <div class="tab-panel" id="tab-raci">
+    <div class="section">
+      <div class="section-label">Matriz RACI &mdash; responsabilidades por atividade</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center">
+        <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-R">R</span>Responsavel &mdash; executa</span>
+        <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-A">A</span>Aprovador &mdash; responde</span>
+        <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-C">C</span>Consultado</span>
+        <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-I">I</span>Informado</span>
+      </div>
+      <div class="raci-wrap">
+        <table class="raci-table">
+          <thead>
+            <tr>
+              <th style="min-width:240px">Atividade</th>
+              <th>Comprador</th>
+              <th>Coord. Comercial</th>
+              <th>Financeiro</th>
+              <th>Diretoria</th>
+              <th>Comercial / Consul.</th>
+              <th>Logistica</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Criar ticket no OptiWork</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-R">R</span></td><td>&ndash;</td></tr>
+            <tr><td>Preencher Planilha de Markup</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-R">R</span></td><td>&ndash;</td></tr>
+            <tr><td>Verificar SLA e monitorar tickets</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td></tr>
+            <tr><td>Conferir dados e anexos do ticket</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-C">C</span></td><td>&ndash;</td></tr>
+            <tr><td>Aprovar ticket (Coord. Comercial)</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-C">C</span></td><td>&ndash;</td><td><span class="raci-pill r-C">C</span></td><td>&ndash;</td></tr>
+            <tr><td>Aprovar viabilidade financeira</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr><td>Aprovar TODA compra (Diretoria)</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-R">R</span></td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr><td>Autorizar pagamento a vista (excecao)</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-R">R</span></td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr><td>Cotar com fornecedores</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr><td>Executar compra com o fornecedor</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr><td>Validar NF do fornecedor</td><td><span class="raci-pill r-R">R</span></td><td>&ndash;</td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-C">C</span></td></tr>
+            <tr><td>Enviar NF validada ao Financeiro</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr><td>Atualizar planilha de acompanhamento</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-C">C</span></td></tr>
+            <tr><td>Gerenciar Pendentes / escalada</td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-R">R</span></td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td></tr>
+            <tr><td>Reiniciar fluxo apos alteracao de Markup</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td><span class="raci-pill r-A">A</span></td><td><span class="raci-pill r-C">C</span></td><td>&ndash;</td></tr>
+            <tr><td>Manter tabelas de fabricantes (MKP 1,35)</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td></tr>
+            <tr><td>Fechar card e encerrar ciclo</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ GLOSSÁRIO ══════════════ -->
+  <div class="tab-panel" id="tab-glossario">
+    <div class="section">
+      <div class="section-label">Termos que voce precisa conhecer</div>
+      <div class="glossary">
+        <div class="gitem"><span class="gterm">Ordem de Compra (OC)</span><span class="gdef">Documento formal do cliente B2B autorizando a compra. Em licitacoes equivale a Nota de Empenho. Deve estar anexada ao card.</span></div>
+        <div class="gitem"><span class="gterm">Planilha de Markup</span><span class="gdef">Excel com analise de viabilidade financeira da venda. Preenchida pelo consultor/vendedor. Imutavel apos abertura do ticket &mdash; qualquer alteracao reinicia o fluxo completo de aprovacao.</span></div>
+        <div class="gitem"><span class="gterm">MKP 1,35</span><span class="gdef">Indice multiplicador padrao para tabelas de fabricantes parceiros. Custo x 1,35 = preco de venda minimo. O comprador aplica ao atualizar tabelas de fabricantes.</span></div>
+        <div class="gitem"><span class="gterm">Triangulacao</span><span class="gdef">Entrega em que o fornecedor despacha direto ao cliente final, sem transitar pelo estoque da Croma. Ao executar: informar ao fornecedor o endereco do cliente, nunca o da Croma.</span></div>
+        <div class="gitem"><span class="gterm">CIF / FOB</span><span class="gdef">CIF: frete por conta do fornecedor ate o destino. FOB: frete por conta do comprador (cliente) a partir da origem. Impacta o custo real da compra.</span></div>
+        <div class="gitem"><span class="gterm">DIFAL</span><span class="gdef">Diferencial de Aliquota do ICMS em vendas interestaduais para consumidor final nao contribuinte. Impacta margem em vendas fora do DF.</span></div>
+        <div class="gitem"><span class="gterm">NF-e / NFS-e</span><span class="gdef">NF-e: Nota Fiscal eletronica de produto (fornecedor emite para Croma na compra). NFS-e: Nota Fiscal de Servico eletronica (Croma emite ao faturar para o cliente).</span></div>
+        <div class="gitem"><span class="gterm">SLA</span><span class="gdef">Service Level Agreement &mdash; prazo maximo para conclusao de uma tarefa. No setor de Compras: 24h para executar a compra apos card entrar em Comprar.</span></div>
+        <div class="gitem"><span class="gterm">OMIE</span><span class="gdef">ERP da empresa: CRM, faturamento, NFS-e, controle de estoque e pedidos de compra. O comprador usa para verificar NFs e pedidos.</span></div>
+        <div class="gitem"><span class="gterm">OptiWork</span><span class="gdef">Sistema de gestao de projetos e fluxos internos. Central de operacao do comprador &mdash; onde os tickets de pedido de compra vivem e percorrem as colunas do kanban.</span></div>
+        <div class="gitem"><span class="gterm">Drive OptiWork</span><span class="gdef">Repositorio de arquivos compartilhados no OptiWork. Local das planilhas de acompanhamento, tabelas de fabricantes e historico de fornecedores.</span></div>
+        <div class="gitem"><span class="gterm">Nota de Empenho</span><span class="gdef">Documento oficial do governo formalizando pedido de compra em licitacoes. Equivale a OC no setor de Licitacoes.</span></div>
+        <div class="gitem"><span class="gterm">Coord. Comercial</span><span class="gdef">Coordenador do setor Comercial. Responsavel pela primeira aprovacao do ticket e pela gestao de Pendentes quando o comprador identifica impedimento.</span></div>
       </div>
     </div>
   </div>
@@ -1091,42 +1036,18 @@ footer p{font-size:11px;color:var(--text3)}
 </main>
 
 <footer>
-  <p>Manual Operacional · Setor de Compras · Croma Tecnologia · v1.2 · Março 2026</p>
-  <a href="index.html" class="btn">← Voltar ao hub</a>
+  <p>Manual Operacional &middot; Setor de Compras &middot; Croma Tecnologia &middot; v1.3 &middot; Marco 2026</p>
+  <a href="index.html" class="btn">&larr; Voltar ao hub</a>
 </footer>
 
 <script>
-// ============================================================
-// SELETOR DE CARGO
-// Troca o painel inteiro de conteúdo conforme o cargo escolhido.
-// Cada cargo tem suas próprias abas e conteúdo dedicado.
-// ============================================================
-function setRole(r) {
-  document.querySelectorAll('.role-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('role-' + r).classList.add('active');
-  document.getElementById('rbtn-' + r).classList.add('active');
-}
-
-// ============================================================
-// TROCA DE ABAS POR CARGO
-// Cada cargo tem seu próprio namespace de abas para evitar
-// conflito entre os painéis de diferentes cargos.
-// ============================================================
-function tabRole(role, id, btn) {
-  // Remove ativo de todas as abas do cargo
-  document.querySelectorAll('#tabs-' + role + ' .tab-btn').forEach(b => b.classList.remove('active'));
-  // Remove ativo de todos os painéis do cargo
-  document.querySelectorAll('[id^="tab-' + role + '-"]').forEach(p => p.classList.remove('active'));
-  // Ativa o painel e botão corretos
-  document.getElementById('tab-' + role + '-' + id).classList.add('active');
+function tab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('#main-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
   btn.classList.add('active');
 }
 
-// ============================================================
-// TOGGLE DE TEMA
-// Persiste no localStorage para ser consistente entre páginas.
-// ============================================================
 function toggleTheme() {
   const html = document.documentElement;
   const novo = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
@@ -1134,15 +1055,11 @@ function toggleTheme() {
   try { localStorage.setItem('croma-tema', novo); } catch(e) {}
 }
 
-// Restaurar tema salvo ou seguir preferência do sistema
 (function() {
   try {
     const salvo = localStorage.getItem('croma-tema');
-    if (salvo) {
-      document.documentElement.setAttribute('data-theme', salvo);
-    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-      document.documentElement.setAttribute('data-theme', 'light');
-    }
+    if (salvo) { document.documentElement.setAttribute('data-theme', salvo); }
+    else if (window.matchMedia('(prefers-color-scheme: light)').matches) { document.documentElement.setAttribute('data-theme', 'light'); }
   } catch(e) {}
 })();
 </script>
