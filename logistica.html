@@ -6,9 +6,7 @@
 <title>Logística e Estoque — Manual Operacional · Croma Tecnologia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<!-- Leaflet.js para o mapa interativo do DF — sem necessidade de API key -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- Leaflet.js carregado sob demanda ao abrir aba Regras de Logística -->
 <style>
 /* ============================================================
    TOKENS DE TEMA
@@ -249,6 +247,35 @@ footer p { font-size: 11px; color: var(--text3); }
 .leaflet-tile-pane { filter: none; }
 [data-theme="dark"] .map-wrap .leaflet-container { filter: brightness(.85) invert(1) contrast(.9) hue-rotate(200deg) saturate(.8); }
 [data-theme="dark"] .map-wrap .leaflet-marker-icon { filter: invert(1) hue-rotate(180deg); }
+
+/* UTILITÁRIOS DE COR — substituem inline styles repetidos */
+.c-accent { background: var(--accent-bg); color: var(--accent); }
+.c-green  { background: var(--green-bg);  color: var(--green);  }
+.c-amber  { background: var(--amber-bg);  color: var(--amber);  }
+.c-red    { background: var(--red-bg);    color: var(--red);    }
+.c-purple { background: var(--purple-bg); color: var(--purple); }
+.c-blue   { background: var(--blue-bg);   color: var(--blue);   }
+
+/* HAMBURGER — menu mobile */
+.hamburger { display: none; width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--border2); background: var(--bg3); cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 5px; flex-shrink: 0; margin-left: 6px; transition: all .2s; }
+.hamburger:hover { background: var(--bg4); border-color: var(--accent); }
+.hamburger span { display: block; width: 16px; height: 2px; background: var(--text2); border-radius: 2px; transition: all .3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media(max-width:900px) {
+  .hamburger { display: flex; }
+  .topbar-nav { display: none; position: absolute; top: 56px; left: 0; right: 0; background: var(--bg2); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-md); padding: .75rem 1rem; flex-direction: column; gap: 2px; z-index: 299; }
+  .topbar-nav.open { display: flex; }
+  .topbar-nav a { padding: 9px 14px; border-radius: 9px; font-size: 13px; }
+}
+
+/* GRID REGIÕES — responsivo */
+.region-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-top: 1rem; }
+@media(max-width:600px) { .region-grid { grid-template-columns: 1fr; } }
+
+/* FOCO VISÍVEL — acessibilidade de teclado */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 </style>
 </head>
 <body>
@@ -262,7 +289,7 @@ footer p { font-size: 11px; color: var(--text3); }
   </a>
   <div class="topbar-divider"></div>
   <span class="topbar-title">Manual Operacional <strong>/ Logística e Estoque</strong></span>
-  <nav class="topbar-nav">
+  <nav class="topbar-nav" id="topbar-nav" role="navigation" aria-label="Menu principal">
     <a href="index.html">Inicio</a>
     <a href="financeiro.html">Financeiro</a>
     <a href="compras.html">Compras</a>
@@ -272,6 +299,9 @@ footer p { font-size: 11px; color: var(--text3); }
     <a href="ecommerce.html">E-commerce</a>
     <a href="outsourcing.html">Outsourcing</a>
   </nav>
+  <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="topbar-nav" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
   <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
     <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -300,12 +330,12 @@ footer p { font-size: 11px; color: var(--text3); }
 <div class="role-bar">
   <div class="role-inner">
     <span class="role-label">Seu cargo:</span>
-    <button class="role-btn active-log" id="rbtn-log" onclick="setRole('log')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="m16 8 4 0 3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+    <button class="role-btn active-log" id="rbtn-log" aria-pressed="true" onclick="setRole('log')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="m16 8 4 0 3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
       Analista de Logística
     </button>
-    <button class="role-btn" id="rbtn-est" onclick="setRole('est')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+    <button class="role-btn" id="rbtn-est" aria-pressed="false" onclick="setRole('est')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
       Analista de Estoque
     </button>
   </div>
@@ -334,17 +364,17 @@ footer p { font-size: 11px; color: var(--text3); }
       </div>
     </div>
 
-    <div class="tab-bar" id="tabs-log">
-      <button class="tab-btn active-log" onclick="tabRole('log','escopo',this)">Escopo</button>
-      <button class="tab-btn" onclick="tabRole('log','fluxo',this)">Fluxo Operacional</button>
-      <button class="tab-btn" onclick="tabRole('log','sistemas',this)">Sistemas</button>
-      <button class="tab-btn" onclick="tabRole('log','relacionamentos',this)">Relacionamentos</button>
-      <button class="tab-btn" onclick="tabRole('log','regras',this)">Regras</button>
-      <button class="tab-btn" onclick="tabRole('log','raci',this)">Matriz RACI</button>
+    <div class="tab-bar" id="tabs-log" role="tablist" aria-label="Abas Logística">
+      <button class="tab-btn active-log" role="tab" aria-selected="true"  aria-controls="tab-log-escopo"         id="tbtn-log-escopo"         onclick="tabRole('log','escopo',this)">Escopo</button>
+      <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-log-fluxo"          id="tbtn-log-fluxo"          onclick="tabRole('log','fluxo',this)">Fluxo Operacional</button>
+      <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-log-sistemas"       id="tbtn-log-sistemas"       onclick="tabRole('log','sistemas',this)">Sistemas</button>
+      <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-log-relacionamentos" id="tbtn-log-relacionamentos" onclick="tabRole('log','relacionamentos',this)">Relacionamentos</button>
+      <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-log-regras"         id="tbtn-log-regras"         onclick="tabRole('log','regras',this)">Regras</button>
+      <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-log-raci"           id="tbtn-log-raci"           onclick="tabRole('log','raci',this)">Matriz RACI</button>
     </div>
 
     <!-- ESCOPO LOG -->
-    <div class="tab-panel active" id="tab-log-escopo">
+    <div class="tab-panel active" id="tab-log-escopo" role="tabpanel" aria-labelledby="tbtn-log-escopo">
       <div class="section">
         <div class="section-label">O que é sua responsabilidade</div>
         <div class="scope-grid">
@@ -414,7 +444,7 @@ footer p { font-size: 11px; color: var(--text3); }
     </div>
 
     <!-- FLUXO LOG -->
-    <div class="tab-panel" id="tab-log-fluxo">
+    <div class="tab-panel" id="tab-log-fluxo" role="tabpanel" aria-labelledby="tbtn-log-fluxo">
       <div class="section">
         <div class="section-label">Do início ao fim — seu caminho no processo</div>
         <div class="flow-steps">
@@ -425,8 +455,8 @@ footer p { font-size: 11px; color: var(--text3); }
               <h4>Cotação de frete — antes da venda fechar</h4>
               <p>O solicitante (vendedor ou comprador) abre um card no OptiWork com os dados da carga. Você cota, responde com: transportadora recomendada, valor, prazo e condição. Sempre por escrito — nunca apenas verbalmente.</p>
               <div class="step-tags">
-                <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">Você responde no card</span>
-                <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Supervisao comercial aprova cotação</span>
+                <span class="step-tag c-accent">Você responde no card</span>
+                <span class="step-tag c-amber">Supervisao comercial aprova cotação</span>
               </div>
             </div>
           </div>
@@ -437,8 +467,8 @@ footer p { font-size: 11px; color: var(--text3); }
               <h4>Análise: motorista interno ou parceiro logístico?</h4>
               <p>Brasília e regiões próximas (ver mapa na aba Regras): motorista interno. Fora do DF, cargas pesadas ou alto valor: TG Transportes ou parceiro. Trianguladas: verificar se o fornecedor já inclui frete.</p>
               <div class="step-tags">
-                <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Brasília → motorista interno</span>
-                <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Fora do DF → parceiro logístico</span>
+                <span class="step-tag c-green">Brasília → motorista interno</span>
+                <span class="step-tag c-amber">Fora do DF → parceiro logístico</span>
               </div>
             </div>
           </div>
@@ -449,8 +479,8 @@ footer p { font-size: 11px; color: var(--text3); }
               <h4>Conferir o CTE recebido</h4>
               <p>Confrontar o valor cobrado com o cotado. Se baterem: encaminhar ao Financeiro para lançamento no OMIE. Se divergirem: suspender, contatar a transportadora, registrar no OptiWork (cotado vs. cobrado) — só encaminhar após confirmação do valor correto.</p>
               <div class="step-tags">
-                <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Valores OK → Financeiro lança no OMIE</span>
-                <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Divergência → suspender e negociar</span>
+                <span class="step-tag c-green">Valores OK → Financeiro lança no OMIE</span>
+                <span class="step-tag c-red">Divergência → suspender e negociar</span>
               </div>
             </div>
           </div>
@@ -461,8 +491,8 @@ footer p { font-size: 11px; color: var(--text3); }
               <h4>Monitorar a entrega até a conclusão</h4>
               <p>Para cada entrega ativa: verificar rastreamento no site da transportadora. Se a data prevista passar sem confirmação: acionar a transportadora ou fornecedor parceiro (trianguladas), registrar no OptiWork com nova previsão e comunicar Compras e Comercial.</p>
               <div class="step-tags">
-                <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">Monitoramento conjunto com Estoque</span>
-                <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Atraso → RMA logístico</span>
+                <span class="step-tag c-accent">Monitoramento conjunto com Estoque</span>
+                <span class="step-tag c-red">Atraso → RMA logístico</span>
               </div>
             </div>
           </div>
@@ -473,8 +503,8 @@ footer p { font-size: 11px; color: var(--text3); }
               <h4>Confirmar entrega e sinalizar no OMIE</h4>
               <p><strong>Entrega padrão:</strong> recolher comprovante (motorista: canhoto assinado; transportadora: POD via e-mail ou WhatsApp) → localizar NF no OMIE → atualizar status → anexar comprovante → arquivar.<br><strong>Triangulada:</strong> obter comprovante do parceiro → anexar na NF no OMIE → comunicar Financeiro por escrito com número da NF, parceiro e data de entrega.</p>
               <div class="step-tags">
-                <span class="step-tag" style="background:var(--purple-bg);color:var(--purple)">Triangulada → comunicar Financeiro!</span>
-                <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">FUNBIO: comprovante na NF de remessa</span>
+                <span class="step-tag c-purple">Triangulada → comunicar Financeiro!</span>
+                <span class="step-tag c-amber">FUNBIO: comprovante na NF de remessa</span>
               </div>
             </div>
           </div>
@@ -487,7 +517,7 @@ footer p { font-size: 11px; color: var(--text3); }
               <h4>Ciclo logístico encerrado</h4>
               <p>Comprovante anexado no OMIE e Financeiro comunicado = ciclo encerrado. Registrar no OptiWork a conclusão.</p>
               <div class="step-tags">
-                <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Ciclo encerrado</span>
+                <span class="step-tag c-green">Ciclo encerrado</span>
               </div>
             </div>
           </div>
@@ -497,7 +527,7 @@ footer p { font-size: 11px; color: var(--text3); }
     </div>
 
     <!-- SISTEMAS LOG -->
-    <div class="tab-panel" id="tab-log-sistemas">
+    <div class="tab-panel" id="tab-log-sistemas" role="tabpanel" aria-labelledby="tbtn-log-sistemas">
       <div class="section">
         <div class="section-label">Sistemas que você usa e para quê</div>
         <div class="systems-grid">
@@ -542,45 +572,45 @@ footer p { font-size: 11px; color: var(--text3); }
     </div>
 
     <!-- RELACIONAMENTOS LOG -->
-    <div class="tab-panel" id="tab-log-relacionamentos">
+    <div class="tab-panel" id="tab-log-relacionamentos" role="tabpanel" aria-labelledby="tbtn-log-relacionamentos">
       <div class="section">
         <div class="section-label">Com quem você interage em cada fase</div>
         <div class="rel-grid">
           <div class="rel-card">
             <div class="rel-fase">Cotação de frete<small>Antes da venda</small></div>
             <div class="rel-quem">
-              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você cota</span>
-              <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Compras solicitou</span>
-              <span class="rel-pill" style="background:var(--purple-bg);color:var(--purple)">Supervisão Comercial aprova</span>
+              <span class="rel-pill c-accent">Você cota</span>
+              <span class="rel-pill c-blue">Compras solicitou</span>
+              <span class="rel-pill c-purple">Supervisão Comercial aprova</span>
             </div>
           </div>
           <div class="rel-card">
             <div class="rel-fase">Conferência e lançamento CTE<small>Contas a Pagar</small></div>
             <div class="rel-quem">
-              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você confere e encaminha</span>
-              <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Financeiro lança no OMIE</span>
+              <span class="rel-pill c-accent">Você confere e encaminha</span>
+              <span class="rel-pill c-green">Financeiro lança no OMIE</span>
             </div>
           </div>
           <div class="rel-card">
             <div class="rel-fase">Acompanhamento de entregas</div>
             <div class="rel-quem">
-              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você e Estoque monitoram</span>
-              <span class="rel-pill" style="background:var(--amber-bg);color:var(--amber)">Site da transportadora</span>
+              <span class="rel-pill c-accent">Você e Estoque monitoram</span>
+              <span class="rel-pill c-amber">Site da transportadora</span>
             </div>
           </div>
           <div class="rel-card">
             <div class="rel-fase">Ocorrência de atraso<small>RMA Logístico</small></div>
             <div class="rel-quem">
-              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você trata</span>
-              <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Informa Compras</span>
-              <span class="rel-pill" style="background:var(--purple-bg);color:var(--purple)">Informa Comercial</span>
+              <span class="rel-pill c-accent">Você trata</span>
+              <span class="rel-pill c-blue">Informa Compras</span>
+              <span class="rel-pill c-purple">Informa Comercial</span>
             </div>
           </div>
           <div class="rel-card">
             <div class="rel-fase">Entrega triangulada confirmada</div>
             <div class="rel-quem">
-              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você anexa comprovante no OMIE</span>
-              <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Financeiro formalmente comunicado</span>
+              <span class="rel-pill c-accent">Você anexa comprovante no OMIE</span>
+              <span class="rel-pill c-green">Financeiro formalmente comunicado</span>
             </div>
           </div>
         </div>
@@ -588,7 +618,7 @@ footer p { font-size: 11px; color: var(--text3); }
     </div>
 
     <!-- REGRAS LOG -->
-    <div class="tab-panel" id="tab-log-regras">
+    <div class="tab-panel" id="tab-log-regras" role="tabpanel" aria-labelledby="tbtn-log-regras">
 
       <div class="section">
         <div class="section-label">Informações obrigatórias no ticket de cotação de frete</div>
@@ -649,7 +679,7 @@ footer p { font-size: 11px; color: var(--text3); }
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1rem">
+        <div class="region-grid">
           <div class="region-box" style="background:var(--green-bg);border-color:var(--green-glow)">
             <div class="region-title" style="color:var(--green)">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -719,7 +749,7 @@ footer p { font-size: 11px; color: var(--text3); }
     </div>
 
     <!-- RACI LOG -->
-    <div class="tab-panel" id="tab-log-raci">
+    <div class="tab-panel" id="tab-log-raci" role="tabpanel" aria-labelledby="tbtn-log-raci">
       <div class="section">
         <div class="section-label">Matriz RACI — Logística</div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center">
@@ -780,18 +810,18 @@ footer p { font-size: 11px; color: var(--text3); }
       </div>
     </div>
 
-    <div class="tab-bar" id="tabs-est">
-      <button class="tab-btn active-est" onclick="tabRole('est','escopo',this)">Escopo</button>
-      <button class="tab-btn" onclick="tabRole('est','fluxo',this)">Fluxo Operacional</button>
-      <button class="tab-btn" onclick="tabRole('est','sistemas',this)">Sistemas</button>
-      <button class="tab-btn" onclick="tabRole('est','relacionamentos',this)">Relacionamentos</button>
-      <button class="tab-btn" onclick="tabRole('est','regras',this)">Regras</button>
-      <button class="tab-btn" onclick="tabRole('est','devolucao',this)">Devoluções</button>
-      <button class="tab-btn" onclick="tabRole('est','raci',this)">Matriz RACI</button>
+    <div class="tab-bar" id="tabs-est" role="tablist" aria-label="Abas Estoque">
+      <button class="tab-btn active-est" role="tab" aria-selected="true"  aria-controls="tab-est-escopo"         id="tbtn-est-escopo"         onclick="tabRole('est','escopo',this)">Escopo</button>
+      <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-est-fluxo"          id="tbtn-est-fluxo"          onclick="tabRole('est','fluxo',this)">Fluxo Operacional</button>
+      <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-est-sistemas"       id="tbtn-est-sistemas"       onclick="tabRole('est','sistemas',this)">Sistemas</button>
+      <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-est-relacionamentos" id="tbtn-est-relacionamentos" onclick="tabRole('est','relacionamentos',this)">Relacionamentos</button>
+      <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-est-regras"         id="tbtn-est-regras"         onclick="tabRole('est','regras',this)">Regras</button>
+      <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-est-devolucao"      id="tbtn-est-devolucao"      onclick="tabRole('est','devolucao',this)">Devoluções</button>
+      <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-est-raci"           id="tbtn-est-raci"           onclick="tabRole('est','raci',this)">Matriz RACI</button>
     </div>
 
     <!-- ESCOPO EST -->
-    <div class="tab-panel active" id="tab-est-escopo">
+    <div class="tab-panel active" id="tab-est-escopo" role="tabpanel" aria-labelledby="tbtn-est-escopo">
       <div class="section">
         <div class="section-label">O que é sua responsabilidade</div>
         <div class="scope-grid">
@@ -861,7 +891,7 @@ footer p { font-size: 11px; color: var(--text3); }
     </div>
 
     <!-- FLUXO EST -->
-    <div class="tab-panel" id="tab-est-fluxo">
+    <div class="tab-panel" id="tab-est-fluxo" role="tabpanel" aria-labelledby="tbtn-est-fluxo">
       <div class="section">
         <div class="section-label">Do recebimento ao despacho — seu caminho</div>
         <div class="flow-steps">
@@ -872,8 +902,8 @@ footer p { font-size: 11px; color: var(--text3); }
               <h4>Receber e conferir a mercadoria no ato</h4>
               <p>Verificar: quantidade de volumes vs. NF, descrição e modelo vs. NF, integridade das embalagens, ausência de avarias, se a NF pertence a um pedido registrado e se o CNPJ destinatário está correto. Não assinar o canhoto antes de confirmar tudo.</p>
               <div class="step-tags">
-                <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Avaria → fotografar antes de mover</span>
-                <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Mercado Livre: exceção — inspecionar depois</span>
+                <span class="step-tag c-amber">Avaria → fotografar antes de mover</span>
+                <span class="step-tag c-green">Mercado Livre: exceção — inspecionar depois</span>
               </div>
             </div>
           </div>
@@ -884,8 +914,8 @@ footer p { font-size: 11px; color: var(--text3); }
               <h4>Registrar entrada de NF no OMIE</h4>
               <p>OMIE → empresa correta → Compras e Estoque → Estoque → Entrada de NF → + Nova Entrada. Inserir a chave de acesso de 44 dígitos do DANFE. Vincular ao pedido de compra. Conferir fornecedor, itens, quantidades e valores antes de confirmar.</p>
               <div class="step-tags">
-                <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">OMIE — empresa correta sempre!</span>
-                <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Divergência → acionar Compras antes de confirmar</span>
+                <span class="step-tag c-amber">OMIE — empresa correta sempre!</span>
+                <span class="step-tag c-red">Divergência → acionar Compras antes de confirmar</span>
               </div>
             </div>
           </div>
@@ -896,7 +926,7 @@ footer p { font-size: 11px; color: var(--text3); }
               <h4>Planilhar e carimbar a NF física</h4>
               <p>Registrar na planilha de controle de entradas. Carimbar a NF física com "Entrada Realizada" e assinar. Arquivar para conferência posterior pelo setor de Compras.</p>
               <div class="step-tags">
-                <span class="step-tag" style="background:var(--blue-bg);color:var(--blue)">→ Compras confere depois</span>
+                <span class="step-tag c-blue">→ Compras confere depois</span>
               </div>
             </div>
           </div>
@@ -907,8 +937,8 @@ footer p { font-size: 11px; color: var(--text3); }
               <h4>Etiquetar e organizar no estoque</h4>
               <p>Etiquetar imediatamente após a entrada: produto/modelo, número da NF, data de entrada, consultor/canal (da planilha de Compras), cliente final e número do pedido. Alocar no local correto. Atenção: o CNPJ de compra e o CNPJ de venda devem ser o mesmo — não há venda interna.</p>
               <div class="step-tags">
-                <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Toners de Outsourcing: sem etiqueta individual</span>
-                <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Comprou por X → venderá por X</span>
+                <span class="step-tag c-amber">Toners de Outsourcing: sem etiqueta individual</span>
+                <span class="step-tag c-red">Comprou por X → venderá por X</span>
               </div>
             </div>
           </div>
@@ -919,7 +949,7 @@ footer p { font-size: 11px; color: var(--text3); }
               <h4>Separar, embalar e despachar</h4>
               <p>Ao receber a NF de venda emitida: localizar pelo produto/etiqueta, embalar (frágil → reforço + identificação "FRÁGIL"), identificar externamente com cliente, endereço e NF. Despachar via motorista (incluir na rota) ou transportadora (agendar coleta com Logística).</p>
               <div class="step-tags">
-                <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Sem NF emitida → NÃO despachar</span>
+                <span class="step-tag c-red">Sem NF emitida → NÃO despachar</span>
               </div>
             </div>
           </div>
@@ -930,7 +960,7 @@ footer p { font-size: 11px; color: var(--text3); }
               <h4>Registrar despacho e solicitar comprovante</h4>
               <p>Registrar no OptiWork: data, transportadora ou motorista e número da NF. Após a entrega, solicitar o comprovante assinado via e-mail ou WhatsApp. A Logística usa essa informação para acompanhamento.</p>
               <div class="step-tags">
-                <span class="step-tag" style="background:var(--green-bg);color:var(--green)">→ Logística monitora a partir daqui</span>
+                <span class="step-tag c-green">→ Logística monitora a partir daqui</span>
               </div>
             </div>
           </div>
@@ -962,7 +992,7 @@ footer p { font-size: 11px; color: var(--text3); }
     </div>
 
     <!-- SISTEMAS EST -->
-    <div class="tab-panel" id="tab-est-sistemas">
+    <div class="tab-panel" id="tab-est-sistemas" role="tabpanel" aria-labelledby="tbtn-est-sistemas">
       <div class="section">
         <div class="section-label">Sistemas que você usa e para quê</div>
         <div class="systems-grid">
@@ -999,52 +1029,52 @@ footer p { font-size: 11px; color: var(--text3); }
     </div>
 
     <!-- RELACIONAMENTOS EST -->
-    <div class="tab-panel" id="tab-est-relacionamentos">
+    <div class="tab-panel" id="tab-est-relacionamentos" role="tabpanel" aria-labelledby="tbtn-est-relacionamentos">
       <div class="section">
         <div class="section-label">Com quem você interage em cada fase</div>
         <div class="rel-grid">
           <div class="rel-card">
             <div class="rel-fase">Recebimento com avaria</div>
             <div class="rel-quem">
-              <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Você documenta</span>
-              <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Compras trata com fornecedor</span>
-              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Logística abre ocorrência</span>
+              <span class="rel-pill c-green">Você documenta</span>
+              <span class="rel-pill c-blue">Compras trata com fornecedor</span>
+              <span class="rel-pill c-accent">Logística abre ocorrência</span>
             </div>
           </div>
           <div class="rel-card">
             <div class="rel-fase">Entrada de NF no OMIE</div>
             <div class="rel-quem">
-              <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Você lança</span>
-              <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Compras confere NF física depois</span>
-              <span class="rel-pill" style="background:var(--amber-bg);color:var(--amber)">Financeiro recebe contas a pagar</span>
+              <span class="rel-pill c-green">Você lança</span>
+              <span class="rel-pill c-blue">Compras confere NF física depois</span>
+              <span class="rel-pill c-amber">Financeiro recebe contas a pagar</span>
             </div>
           </div>
           <div class="rel-card">
             <div class="rel-fase">Etiquetagem</div>
             <div class="rel-quem">
-              <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Você etiqueta</span>
-              <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Planilha de Compras informa consultor/cliente</span>
+              <span class="rel-pill c-green">Você etiqueta</span>
+              <span class="rel-pill c-blue">Planilha de Compras informa consultor/cliente</span>
             </div>
           </div>
           <div class="rel-card">
             <div class="rel-fase">Despacho e rota</div>
             <div class="rel-quem">
-              <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Você organiza a rota</span>
-              <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Logística coordena fora do perímetro</span>
+              <span class="rel-pill c-green">Você organiza a rota</span>
+              <span class="rel-pill c-accent">Logística coordena fora do perímetro</span>
             </div>
           </div>
           <div class="rel-card">
             <div class="rel-fase">Contagem de estoque</div>
             <div class="rel-quem">
-              <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Você executa</span>
-              <span class="rel-pill" style="background:var(--amber-bg);color:var(--amber)">Gestão autoriza antes de iniciar</span>
+              <span class="rel-pill c-green">Você executa</span>
+              <span class="rel-pill c-amber">Gestão autoriza antes de iniciar</span>
             </div>
           </div>
           <div class="rel-card">
             <div class="rel-fase">Produto sem NF — exceção</div>
             <div class="rel-quem">
-              <span class="rel-pill" style="background:var(--red-bg);color:var(--red)">Não despachar</span>
-              <span class="rel-pill" style="background:var(--amber-bg);color:var(--amber)">Diretoria autoriza com registro no card</span>
+              <span class="rel-pill c-red">Não despachar</span>
+              <span class="rel-pill c-amber">Diretoria autoriza com registro no card</span>
             </div>
           </div>
         </div>
@@ -1052,7 +1082,7 @@ footer p { font-size: 11px; color: var(--text3); }
     </div>
 
     <!-- REGRAS EST -->
-    <div class="tab-panel" id="tab-est-regras">
+    <div class="tab-panel" id="tab-est-regras" role="tabpanel" aria-labelledby="tbtn-est-regras">
 
       <div class="section">
         <div class="section-label">O que verificar ao receber uma mercadoria</div>
@@ -1143,7 +1173,7 @@ footer p { font-size: 11px; color: var(--text3); }
     </div>
 
     <!-- DEVOLUÇÕES EST -->
-    <div class="tab-panel" id="tab-est-devolucao">
+    <div class="tab-panel" id="tab-est-devolucao" role="tabpanel" aria-labelledby="tbtn-est-devolucao">
       <div class="section">
         <div class="section-label">Devolução originada pelo Comercial</div>
         <div class="flow-steps">
@@ -1167,7 +1197,7 @@ footer p { font-size: 11px; color: var(--text3); }
               <h4>Aprovação da Diretoria</h4>
               <p>A devolução segue para validação final da Diretoria antes de qualquer movimentação financeira ou retorno ao estoque.</p>
               <div class="step-tags">
-                <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">Diretoria valida</span>
+                <span class="step-tag c-accent">Diretoria valida</span>
               </div>
             </div>
           </div>
@@ -1190,8 +1220,8 @@ footer p { font-size: 11px; color: var(--text3); }
               <h4>Retorno ao estoque (se aprovado)</h4>
               <p>Se o produto estiver em bom estado: devolvido ao estoque pelo Analista de Estoque, com registro no OMIE e etiqueta atualizada. Se houver avaria: manter separado e aguardar definição da Diretoria sobre descarte ou conserto.</p>
               <div class="step-tags">
-                <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Sem avaria → volta ao estoque</span>
-                <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Com avaria → aguardar Diretoria</span>
+                <span class="step-tag c-green">Sem avaria → volta ao estoque</span>
+                <span class="step-tag c-red">Com avaria → aguardar Diretoria</span>
               </div>
             </div>
           </div>
@@ -1200,7 +1230,7 @@ footer p { font-size: 11px; color: var(--text3); }
     </div>
 
     <!-- RACI EST -->
-    <div class="tab-panel" id="tab-est-raci">
+    <div class="tab-panel" id="tab-est-raci" role="tabpanel" aria-labelledby="tbtn-est-raci">
       <div class="section">
         <div class="section-label">Matriz RACI — Estoque</div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center">
@@ -1244,10 +1274,10 @@ footer p { font-size: 11px; color: var(--text3); }
 
   <!-- GLOSSÁRIO E TERMOS COMPARTILHADOS -->
   <div class="shared-section">
-    <div class="tab-bar" id="tabs-shared">
-      <button class="tab-btn active-log" onclick="tabShared('glossario',this)">Glossário</button>
+    <div class="tab-bar" id="tabs-shared" role="tablist" aria-label="Seção compartilhada">
+      <button class="tab-btn active-log" role="tab" aria-selected="true" aria-controls="tab-shared-glossario" id="tbtn-shared-glossario" onclick="tabShared('glossario',this)">Glossário</button>
     </div>
-    <div class="tab-panel active" id="tab-shared-glossario">
+    <div class="tab-panel active" id="tab-shared-glossario" role="tabpanel" aria-labelledby="tbtn-shared-glossario">
       <div class="section">
         <div class="section-label">Termos e siglas do setor</div>
         <div class="glossary">
@@ -1277,60 +1307,9 @@ footer p { font-size: 11px; color: var(--text3); }
 
 <script>
 // ============================================================
-// SELETOR DE CARGO
-// Teal para Logística, Verde para Estoque.
-// Simples: esconde os dois painéis e mostra só o escolhido.
+// RESTAURAR TEMA — executado antes do DOMContentLoaded
+// para evitar flash de tema errado.
 // ============================================================
-function setRole(r) {
-  // Limpa estado ativo de todos os painéis e botões
-  document.querySelectorAll('.role-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active-log', 'active-est'));
-
-  // Ativa o painel e o botão corretos
-  document.getElementById('role-' + r).classList.add('active');
-  const btn = document.getElementById('rbtn-' + r);
-  btn.classList.add(r === 'log' ? 'active-log' : 'active-est');
-}
-
-// ============================================================
-// TROCA DE ABAS POR CARGO
-// Cada cargo tem namespace próprio de abas (tabs-log, tabs-est)
-// para não haver conflito entre os dois perfis.
-// ============================================================
-function tabRole(role, id, btn) {
-  // A classe ativa varia por cargo (teal para log, verde para est)
-  const activeClass = role === 'log' ? 'active-log' : 'active-est';
-
-  // Remove ativo de todas as abas e painéis desse cargo
-  document.querySelectorAll('#tabs-' + role + ' .tab-btn').forEach(b => b.classList.remove('active-log', 'active-est'));
-  document.querySelectorAll('[id^="tab-' + role + '-"]').forEach(p => p.classList.remove('active'));
-
-  // Ativa o painel e botão corretos
-  document.getElementById('tab-' + role + '-' + id).classList.add('active');
-  btn.classList.add(activeClass);
-}
-
-// ============================================================
-// GLOSSÁRIO COMPARTILHADO
-// Fica no final da página e é acessível de qualquer perfil.
-// ============================================================
-function tabShared(id, btn) {
-  document.querySelectorAll('#tabs-shared .tab-btn').forEach(b => b.classList.remove('active-log', 'active-est'));
-  btn.classList.add('active-log');
-}
-
-// ============================================================
-// TOGGLE DE TEMA CLARO/ESCURO
-// Salva no localStorage para que o tema persista entre páginas.
-// ============================================================
-function toggleTheme() {
-  const html = document.documentElement;
-  const novo = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', novo);
-  try { localStorage.setItem('croma-tema', novo); } catch(e) {}
-}
-
-// Restaurar tema salvo ou seguir preferência do sistema
 (function() {
   try {
     const salvo = localStorage.getItem('croma-tema');
@@ -1343,43 +1322,147 @@ function toggleTheme() {
 })();
 
 // ============================================================
-// MAPA INTERATIVO DO DISTRITO FEDERAL — Leaflet.js
-// Usando OpenStreetMap como base (sem API key necessária).
-// Verde = motorista interno, Laranja = avaliar parceiro.
-// O mapa só é inicializado quando o Leaflet estiver carregado.
+// SELETOR DE CARGO — persiste no localStorage
 // ============================================================
+function setRole(r) {
+  document.querySelectorAll('.role-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.role-btn').forEach(b => {
+    b.classList.remove('active-log', 'active-est');
+    b.setAttribute('aria-pressed', 'false');
+  });
+  document.getElementById('role-' + r).classList.add('active');
+  const btn = document.getElementById('rbtn-' + r);
+  btn.classList.add(r === 'log' ? 'active-log' : 'active-est');
+  btn.setAttribute('aria-pressed', 'true');
+  try { localStorage.setItem('croma-cargo', r); } catch(e) {}
+}
+
+// ============================================================
+// TROCA DE ABAS POR CARGO — atualiza ARIA corretamente
+// ============================================================
+function tabRole(role, id, btn) {
+  const activeClass = role === 'log' ? 'active-log' : 'active-est';
+
+  document.querySelectorAll('#tabs-' + role + ' .tab-btn').forEach(b => {
+    b.classList.remove('active-log', 'active-est');
+    b.setAttribute('aria-selected', 'false');
+  });
+  document.querySelectorAll('[id^="tab-' + role + '-"]').forEach(p => p.classList.remove('active'));
+
+  document.getElementById('tab-' + role + '-' + id).classList.add('active');
+  btn.classList.add(activeClass);
+  btn.setAttribute('aria-selected', 'true');
+
+  // Lazy load do Leaflet ao abrir a aba de Regras de Logística
+  if (role === 'log' && id === 'regras' && !window._mapaIniciado) {
+    carregarLeaflet();
+  }
+}
+
+// ============================================================
+// GLOSSÁRIO COMPARTILHADO — corrigido para ativar painel
+// ============================================================
+function tabShared(id, btn) {
+  document.querySelectorAll('#tabs-shared .tab-btn').forEach(b => {
+    b.classList.remove('active-log', 'active-est');
+    b.setAttribute('aria-selected', 'false');
+  });
+  document.querySelectorAll('[id^="tab-shared-"]').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active-log');
+  btn.setAttribute('aria-selected', 'true');
+  document.getElementById('tab-shared-' + id).classList.add('active');
+}
+
+// ============================================================
+// NAVEGAÇÃO POR TECLADO NAS ABAS (←/→)
+// ============================================================
+document.addEventListener('keydown', function(e) {
+  const tab = e.target.closest('[role="tab"]');
+  if (!tab) return;
+  const list = tab.closest('[role="tablist"]');
+  if (!list) return;
+  const tabs = Array.from(list.querySelectorAll('[role="tab"]'));
+  const idx  = tabs.indexOf(tab);
+  let next = -1;
+  if (e.key === 'ArrowRight') next = (idx + 1) % tabs.length;
+  if (e.key === 'ArrowLeft')  next = (idx - 1 + tabs.length) % tabs.length;
+  if (next >= 0) { e.preventDefault(); tabs[next].focus(); tabs[next].click(); }
+});
+
+// ============================================================
+// TOGGLE DE TEMA
+// ============================================================
+function toggleTheme() {
+  const html = document.documentElement;
+  const novo = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', novo);
+  try { localStorage.setItem('croma-tema', novo); } catch(e) {}
+}
+
+// ============================================================
+// HAMBURGER — menu mobile
+// ============================================================
+function toggleNav() {
+  const nav  = document.getElementById('topbar-nav');
+  const btn  = document.getElementById('hamburger');
+  const open = nav.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open);
+}
+
+// Fechar menu ao clicar fora
+document.addEventListener('click', function(e) {
+  const nav = document.getElementById('topbar-nav');
+  if (nav && nav.classList.contains('open') &&
+      !nav.contains(e.target) && !document.getElementById('hamburger').contains(e.target)) {
+    nav.classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+  }
+});
+
+// ============================================================
+// LEAFLET — carregado sob demanda apenas quando necessário
+// ============================================================
+function carregarLeaflet() {
+  if (window._mapaIniciado) return;
+
+  const link = document.createElement('link');
+  link.rel  = 'stylesheet';
+  link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+  document.head.appendChild(link);
+
+  const script = document.createElement('script');
+  script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  script.onload = iniciarMapa;
+  document.head.appendChild(script);
+  window._mapaIniciado = true;
+}
+
 function iniciarMapa() {
-  // Centro do mapa: Brasília, DF
   const mapa = L.map('mapa-df', {
     center: [-15.8, -47.97],
     zoom: 11,
     zoomControl: true,
-    scrollWheelZoom: false // Evita zoom acidental ao rolar a página
+    scrollWheelZoom: false
   });
 
-  // Camada base do OpenStreetMap
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     maxZoom: 18
   }).addTo(mapa);
 
-  // Ícone verde para regiões atendidas pelo motorista interno
   const iconeVerde = L.divIcon({
     className: '',
     html: '<div style="width:14px;height:14px;border-radius:50%;background:#22c55e;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4)"></div>',
-    iconSize: [14, 14],
-    iconAnchor: [7, 7]
+    iconSize: [14, 14], iconAnchor: [7, 7]
   });
-
-  // Ícone laranja para regiões que merecem avaliação de parceiro
   const iconeAmbar = L.divIcon({
     className: '',
     html: '<div style="width:14px;height:14px;border-radius:50%;background:#f59e0b;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4)"></div>',
-    iconSize: [14, 14],
-    iconAnchor: [7, 7]
+    iconSize: [14, 14], iconAnchor: [7, 7]
   });
 
-  // Regiões atendidas pelo motorista interno (verde)
   const regioesInternas = [
     { nome: 'Plano Piloto',  lat: -15.7801, lng: -47.9292 },
     { nome: 'Taguatinga',    lat: -15.8380, lng: -48.0558 },
@@ -1390,34 +1473,33 @@ function iniciarMapa() {
     { nome: 'Lago Sul',      lat: -15.8286, lng: -47.9057 },
     { nome: 'Lago Norte',    lat: -15.7396, lng: -47.8810 },
   ];
-
-  // Regiões onde convém avaliar parceiro logístico (laranja)
   const regioesExternas = [
-    { nome: 'Sobradinho',   lat: -15.6527, lng: -47.7905 },
-    { nome: 'Planaltina',   lat: -15.6190, lng: -47.6483 },
-    { nome: 'Gama',         lat: -16.0217, lng: -48.0659 },
-    { nome: 'Ceilândia',    lat: -15.8231, lng: -48.1104 },
-    { nome: 'Santa Maria',  lat: -16.0066, lng: -47.9909 },
+    { nome: 'Sobradinho',  lat: -15.6527, lng: -47.7905 },
+    { nome: 'Planaltina',  lat: -15.6190, lng: -47.6483 },
+    { nome: 'Gama',        lat: -16.0217, lng: -48.0659 },
+    { nome: 'Ceilândia',   lat: -15.8231, lng: -48.1104 },
+    { nome: 'Santa Maria', lat: -16.0066, lng: -47.9909 },
   ];
 
-  // Adicionar marcadores verdes
   regioesInternas.forEach(r => {
-    L.marker([r.lat, r.lng], { icon: iconeVerde })
-      .addTo(mapa)
+    L.marker([r.lat, r.lng], { icon: iconeVerde }).addTo(mapa)
       .bindPopup('<strong>' + r.nome + '</strong><br><span style="color:#22c55e;font-size:11px">Motorista interno</span>');
   });
-
-  // Adicionar marcadores laranjas
   regioesExternas.forEach(r => {
-    L.marker([r.lat, r.lng], { icon: iconeAmbar })
-      .addTo(mapa)
+    L.marker([r.lat, r.lng], { icon: iconeAmbar }).addTo(mapa)
       .bindPopup('<strong>' + r.nome + '</strong><br><span style="color:#f59e0b;font-size:11px">Avaliar parceiro logístico</span>');
   });
 }
 
-// Inicializar o mapa após o DOM estar pronto
-// Leaflet precisa que o elemento já exista no DOM
-document.addEventListener('DOMContentLoaded', iniciarMapa);
+// ============================================================
+// INICIALIZAÇÃO — restaurar cargo salvo
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  try {
+    const cargo = localStorage.getItem('croma-cargo');
+    if (cargo && (cargo === 'log' || cargo === 'est')) setRole(cargo);
+  } catch(e) {}
+});
 </script>
 </body>
 </html>
