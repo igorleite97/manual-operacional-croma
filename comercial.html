@@ -21,7 +21,7 @@
   --accent:#a78bfa; --accent2:#c4b5fd; --accent-bg:#1a1040; --accent-glow:rgba(167,139,250,.15);
   --blue:#4f8ef7;   --blue-bg:#0f2347;  --blue-glow:rgba(79,142,247,.15);
   --green:#34d399;  --green-bg:#052e1c; --green-glow:rgba(52,211,153,.15);
-  --teal:#2dd4bf;   --teal-bg:#0a2e2b;
+  --teal:#2dd4bf;   --teal-bg:#0a2e2b;  --teal-glow:rgba(45,212,191,.15);
   --amber:#fbbf24;  --amber-bg:#2d1a00;
   --red:#f87171;    --red-bg:#2d0a0a;
   --shadow:0 2px 8px rgba(0,0,0,.4); --shadow-md:0 8px 24px rgba(0,0,0,.5);
@@ -33,7 +33,7 @@
   --accent:#6d28d9; --accent2:#7c3aed; --accent-bg:#f5f3ff; --accent-glow:rgba(109,40,217,.08);
   --blue:#1e40af;   --blue-bg:#eff6ff;  --blue-glow:rgba(30,64,175,.08);
   --green:#059669;  --green-bg:#ecfdf5; --green-glow:rgba(5,150,105,.08);
-  --teal:#0d9488;   --teal-bg:#f0fdfa;
+  --teal:#0d9488;   --teal-bg:#f0fdfa;  --teal-glow:rgba(13,148,136,.08);
   --amber:#b45309;  --amber-bg:#fffbeb;
   --red:#dc2626;    --red-bg:#fef2f2;
   --shadow:0 1px 4px rgba(0,0,0,.06); --shadow-md:0 4px 16px rgba(0,0,0,.08);
@@ -230,6 +230,34 @@ body { font-family:'DM Sans',-apple-system,sans-serif; background:var(--bg); col
 .btn:hover { background:var(--bg3); color:var(--text); }
 footer { border-top:1px solid var(--border); padding:1.25rem 1.5rem; max-width:1000px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
 footer p { font-size:11px; color:var(--text3); }
+
+/* UTILITÁRIOS DE COR — substituem inline styles repetidos de step-tag, rel-pill e obrig-badge */
+.c-accent { background:var(--accent-bg); color:var(--accent); }
+.c-blue   { background:var(--blue-bg);   color:var(--blue);   }
+.c-green  { background:var(--green-bg);  color:var(--green);  }
+.c-amber  { background:var(--amber-bg);  color:var(--amber);  }
+.c-red    { background:var(--red-bg);    color:var(--red);    }
+.c-teal   { background:var(--teal-bg);   color:var(--teal);   }
+/* Variações do obrig-badge — cores definidas por modificador, sem inline style */
+.obrig-red   { background:var(--red-bg);   color:var(--red);   }
+.obrig-amber { background:var(--amber-bg); color:var(--amber); }
+
+/* HAMBURGER — botão que substitui o menu de nav no mobile */
+.hamburger { display:none; width:36px; height:36px; border-radius:10px; border:1px solid var(--border2); background:var(--bg3); cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:5px; flex-shrink:0; margin-left:6px; transition:all .2s; }
+.hamburger:hover { background:var(--bg4); border-color:var(--accent); }
+.hamburger span { display:block; width:16px; height:2px; background:var(--text2); border-radius:2px; transition:all .3s; }
+.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+@media(max-width:900px) {
+  .hamburger { display:flex; }
+  .topbar-nav { display:none; position:absolute; top:56px; left:0; right:0; background:var(--bg2); border-bottom:1px solid var(--border); box-shadow:var(--shadow-md); padding:.75rem 1rem; flex-direction:column; gap:2px; z-index:299; }
+  .topbar-nav.open { display:flex; }
+  .topbar-nav a { padding:9px 14px; border-radius:9px; font-size:13px; }
+}
+
+/* FOCO VISÍVEL — garante indicador de foco em navegação por teclado */
+:focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:4px; }
 </style>
 </head>
 <body>
@@ -243,7 +271,7 @@ footer p { font-size:11px; color:var(--text3); }
   </a>
   <div class="topbar-divider"></div>
   <span class="topbar-title">Manual Operacional <strong>/ Comercial</strong></span>
-  <nav class="topbar-nav">
+  <nav class="topbar-nav" id="topbar-nav" role="navigation" aria-label="Menu principal">
     <a href="index.html">Inicio</a>
     <a href="financeiro.html">Financeiro</a>
     <a href="compras.html">Compras</a>
@@ -253,6 +281,9 @@ footer p { font-size:11px; color:var(--text3); }
     <a href="ecommerce.html">E-commerce</a>
     <a href="outsourcing.html">Outsourcing</a>
   </nav>
+  <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="topbar-nav" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
   <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
     <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <svg class="icon-sun"  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -281,12 +312,12 @@ footer p { font-size:11px; color:var(--text3); }
 <div class="role-bar">
   <div class="role-inner">
     <span class="role-label">Seu cargo:</span>
-    <button class="role-btn active-cons" id="rbtn-cons" onclick="setRole('cons')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <button class="role-btn active-cons" id="rbtn-cons" aria-pressed="true" onclick="setRole('cons')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       Consultor de Vendas
     </button>
-    <button class="role-btn" id="rbtn-gest" onclick="setRole('gest')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <button class="role-btn" id="rbtn-gest" aria-pressed="false" onclick="setRole('gest')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       Gestor Comercial
     </button>
   </div>
@@ -337,18 +368,18 @@ footer p { font-size:11px; color:var(--text3); }
     </div>
   </div>
 
-  <div class="tab-bar" id="tabs-cons">
-    <button class="tab-btn active-cons" onclick="tabRole('cons','escopo',this)">Escopo</button>
-    <button class="tab-btn" onclick="tabRole('cons','fluxo',this)">Fluxo Operacional</button>
-    <button class="tab-btn" onclick="tabRole('cons','markup',this)">Planilha de Markup</button>
-    <button class="tab-btn" onclick="tabRole('cons','sistemas',this)">Sistemas</button>
-    <button class="tab-btn" onclick="tabRole('cons','relacionamentos',this)">Relacionamentos</button>
-    <button class="tab-btn" onclick="tabRole('cons','regras',this)">Regras</button>
-    <button class="tab-btn" onclick="tabRole('cons','glossario',this)">Glossário</button>
+  <div class="tab-bar" id="tabs-cons" role="tablist" aria-label="Abas Consultor de Vendas">
+    <button class="tab-btn active-cons" role="tab" aria-selected="true"  aria-controls="tab-cons-escopo"         id="tbtn-cons-escopo"         onclick="tabRole('cons','escopo',this)">Escopo</button>
+    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-cons-fluxo"           id="tbtn-cons-fluxo"          onclick="tabRole('cons','fluxo',this)">Fluxo Operacional</button>
+    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-cons-markup"          id="tbtn-cons-markup"         onclick="tabRole('cons','markup',this)">Planilha de Markup</button>
+    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-cons-sistemas"        id="tbtn-cons-sistemas"       onclick="tabRole('cons','sistemas',this)">Sistemas</button>
+    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-cons-relacionamentos" id="tbtn-cons-relacionamentos" onclick="tabRole('cons','relacionamentos',this)">Relacionamentos</button>
+    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-cons-regras"          id="tbtn-cons-regras"         onclick="tabRole('cons','regras',this)">Regras</button>
+    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-cons-glossario"       id="tbtn-cons-glossario"      onclick="tabRole('cons','glossario',this)">Glossário</button>
   </div>
 
   <!-- ABA: ESCOPO CONSULTOR -->
-  <div class="tab-panel active" id="tab-cons-escopo">
+  <div class="tab-panel active" id="tab-cons-escopo" role="tabpanel" aria-labelledby="tbtn-cons-escopo">
     <div class="section">
       <div class="section-label">O que é sua responsabilidade</div>
       <div class="scope-grid">
@@ -460,7 +491,7 @@ footer p { font-size:11px; color:var(--text3); }
   </div>
 
   <!-- ABA: FLUXO OPERACIONAL CONSULTOR -->
-  <div class="tab-panel" id="tab-cons-fluxo">
+  <div class="tab-panel" id="tab-cons-fluxo" role="tabpanel" aria-labelledby="tbtn-cons-fluxo">
     <div class="section">
       <div class="section-label">As 6 etapas do ciclo comercial</div>
       <div class="flow-steps">
@@ -517,7 +548,7 @@ footer p { font-size:11px; color:var(--text3); }
             <div class="step-tags">
               <span class="step-tag" style="background:var(--red-bg);color:var(--red)">OC obrigatória antes do ticket</span>
               <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Markup integral e correto</span>
-              <span class="step-tag" style="background:var(--teal-bg);color:var(--teal)">Frete cotado pela Logística</span>
+              <span class="step-tag c-teal">Frete cotado pela Logística</span>
             </div>
           </div>
         </div>
@@ -576,7 +607,7 @@ footer p { font-size:11px; color:var(--text3); }
   </div>
 
   <!-- ABA: PLANILHA DE MARKUP -->
-  <div class="tab-panel" id="tab-cons-markup">
+  <div class="tab-panel" id="tab-cons-markup" role="tabpanel" aria-labelledby="tbtn-cons-markup">
     <div class="section">
       <div class="section-label">O que é o Markup e por que ele é crítico</div>
       <div class="alert alert-info" style="margin-top:0;margin-bottom:1.5rem">
@@ -601,49 +632,49 @@ footer p { font-size:11px; color:var(--text3); }
               <td>Custo do produto</td>
               <td>Valor de custo real cotado com o fornecedor — não estimado</td>
               <td>Base de cálculo de toda a margem. Custo errado = margem errada</td>
-              <td><span class="obrig-badge" style="background:var(--red-bg);color:var(--red)">Obrigatório</span></td>
+              <td><span class="obrig-badge obrig-red">Obrigatório</span></td>
             </tr>
             <tr>
               <td>MKP (Markup)</td>
               <td>Índice multiplicador. Mínimo 1,35 para tabelas de fabricantes parceiros</td>
               <td>Define o preço mínimo de venda. Abaixo do mínimo: Gestor reprova automaticamente</td>
-              <td><span class="obrig-badge" style="background:var(--red-bg);color:var(--red)">Obrigatório</span></td>
+              <td><span class="obrig-badge obrig-red">Obrigatório</span></td>
             </tr>
             <tr>
               <td>Preço de venda</td>
               <td>Valor final acordado com o cliente</td>
               <td>Deve convergir com o que está na OC do cliente. Divergência = reprovado</td>
-              <td><span class="obrig-badge" style="background:var(--red-bg);color:var(--red)">Obrigatório</span></td>
+              <td><span class="obrig-badge obrig-red">Obrigatório</span></td>
             </tr>
             <tr>
               <td>Tributos (ICMS, PIS, COFINS)</td>
               <td>Tributos da operação conforme natureza da venda</td>
               <td>Impacta a margem real. Erro aqui distorce o resultado e pode levar a venda com prejuízo</td>
-              <td><span class="obrig-badge" style="background:var(--red-bg);color:var(--red)">Obrigatório</span></td>
+              <td><span class="obrig-badge obrig-red">Obrigatório</span></td>
             </tr>
             <tr>
               <td>DIFAL</td>
               <td>Diferencial de ICMS — incide em vendas interestaduais</td>
               <td>Obrigatório quando a venda é para fora do DF. Omitir reduz a margem real</td>
-              <td><span class="obrig-badge" style="background:var(--amber-bg);color:var(--amber)">Quando aplicável</span></td>
+              <td><span class="obrig-badge obrig-amber">Quando aplicável</span></td>
             </tr>
             <tr>
               <td>Frete</td>
               <td>Valor cotado pela Logística via OptiWork antes do fechamento</td>
               <td>Frete não considerado reduz a margem real da operação. Cotar antes de preencher</td>
-              <td><span class="obrig-badge" style="background:var(--red-bg);color:var(--red)">Obrigatório</span></td>
+              <td><span class="obrig-badge obrig-red">Obrigatório</span></td>
             </tr>
             <tr>
               <td>Margem líquida</td>
               <td>Resultado final após todos os custos e tributos</td>
               <td>Número que a Diretoria e o Financeiro analisam para aprovar. Margem negativa = reprovado</td>
-              <td><span class="obrig-badge" style="background:var(--red-bg);color:var(--red)">Obrigatório</span></td>
+              <td><span class="obrig-badge obrig-red">Obrigatório</span></td>
             </tr>
             <tr>
               <td>Empresa faturadora</td>
               <td>Qual CNPJ do grupo emitirá a NF ao cliente</td>
               <td>É o mesmo CNPJ pelo qual a compra será feita. Venda interna é proibida — definir antes de abrir o ticket</td>
-              <td><span class="obrig-badge" style="background:var(--red-bg);color:var(--red)">Obrigatório</span></td>
+              <td><span class="obrig-badge obrig-red">Obrigatório</span></td>
             </tr>
           </tbody>
         </table>
@@ -668,7 +699,7 @@ footer p { font-size:11px; color:var(--text3); }
   </div>
 
   <!-- ABA: SISTEMAS CONSULTOR -->
-  <div class="tab-panel" id="tab-cons-sistemas">
+  <div class="tab-panel" id="tab-cons-sistemas" role="tabpanel" aria-labelledby="tbtn-cons-sistemas">
     <div class="section">
       <div class="section-label">Sistemas que você usa e para quê</div>
       <div class="systems-grid">
@@ -717,7 +748,7 @@ footer p { font-size:11px; color:var(--text3); }
   </div>
 
   <!-- ABA: RELACIONAMENTOS CONSULTOR -->
-  <div class="tab-panel" id="tab-cons-relacionamentos">
+  <div class="tab-panel" id="tab-cons-relacionamentos" role="tabpanel" aria-labelledby="tbtn-cons-relacionamentos">
     <div class="section">
       <div class="section-label">Com quem você interage em cada fase</div>
       <div class="rel-grid">
@@ -732,7 +763,7 @@ footer p { font-size:11px; color:var(--text3); }
           <div class="rel-fase">Cotação de frete<small>Antes do Markup</small></div>
           <div class="rel-quem">
             <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você solicita via OptiWork</span>
-            <span class="rel-pill" style="background:var(--teal-bg);color:var(--teal)">Logística responde com valor</span>
+            <span class="rel-pill c-teal">Logística responde com valor</span>
           </div>
         </div>
         <div class="rel-card">
@@ -761,7 +792,7 @@ footer p { font-size:11px; color:var(--text3); }
           <div class="rel-fase">Acompanhamento de entrega</div>
           <div class="rel-quem">
             <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você monitora via OptiWork</span>
-            <span class="rel-pill" style="background:var(--teal-bg);color:var(--teal)">Logística confirma a entrega</span>
+            <span class="rel-pill c-teal">Logística confirma a entrega</span>
           </div>
         </div>
         <div class="rel-card">
@@ -783,7 +814,7 @@ footer p { font-size:11px; color:var(--text3); }
   </div>
 
   <!-- ABA: REGRAS CONSULTOR -->
-  <div class="tab-panel" id="tab-cons-regras">
+  <div class="tab-panel" id="tab-cons-regras" role="tabpanel" aria-labelledby="tbtn-cons-regras">
 
     <div class="section">
       <div class="section-label">Checklist obrigatório antes de abrir o ticket de compra</div>
@@ -881,7 +912,7 @@ footer p { font-size:11px; color:var(--text3); }
   </div>
 
   <!-- ABA: GLOSSÁRIO CONSULTOR -->
-  <div class="tab-panel" id="tab-cons-glossario">
+  <div class="tab-panel" id="tab-cons-glossario" role="tabpanel" aria-labelledby="tbtn-cons-glossario">
     <div class="section">
       <div class="section-label">Termos que você precisa conhecer</div>
       <div class="glossary">
@@ -923,16 +954,16 @@ footer p { font-size:11px; color:var(--text3); }
     </div>
   </div>
 
-  <div class="tab-bar" id="tabs-gest">
-    <button class="tab-btn active-gest" onclick="tabRole('gest','escopo',this)">Escopo</button>
-    <button class="tab-btn" onclick="tabRole('gest','aprovacao',this)">Aprovação de Vendas</button>
-    <button class="tab-btn" onclick="tabRole('gest','monitoramento',this)">Monitoramento</button>
-    <button class="tab-btn" onclick="tabRole('gest','relacionamentos',this)">Relacionamentos</button>
-    <button class="tab-btn" onclick="tabRole('gest','raci',this)">Matriz RACI</button>
+  <div class="tab-bar" id="tabs-gest" role="tablist" aria-label="Abas Gestor Comercial">
+    <button class="tab-btn active-gest" role="tab" aria-selected="true"  aria-controls="tab-gest-escopo"          id="tbtn-gest-escopo"          onclick="tabRole('gest','escopo',this)">Escopo</button>
+    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-gest-aprovacao"         id="tbtn-gest-aprovacao"       onclick="tabRole('gest','aprovacao',this)">Aprovação de Vendas</button>
+    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-gest-monitoramento"     id="tbtn-gest-monitoramento"   onclick="tabRole('gest','monitoramento',this)">Monitoramento</button>
+    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-gest-relacionamentos"   id="tbtn-gest-relacionamentos"  onclick="tabRole('gest','relacionamentos',this)">Relacionamentos</button>
+    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-gest-raci"              id="tbtn-gest-raci"            onclick="tabRole('gest','raci',this)">Matriz RACI</button>
   </div>
 
   <!-- ABA: ESCOPO GESTOR -->
-  <div class="tab-panel active" id="tab-gest-escopo">
+  <div class="tab-panel active" id="tab-gest-escopo" role="tabpanel" aria-labelledby="tbtn-gest-escopo">
     <div class="section">
       <div class="section-label">Responsabilidades do Gestor Comercial</div>
       <div class="scope-grid">
@@ -1002,7 +1033,7 @@ footer p { font-size:11px; color:var(--text3); }
   </div>
 
   <!-- ABA: APROVAÇÃO GESTOR -->
-  <div class="tab-panel" id="tab-gest-aprovacao">
+  <div class="tab-panel" id="tab-gest-aprovacao" role="tabpanel" aria-labelledby="tbtn-gest-aprovacao">
     <div class="section">
       <div class="section-label">O que o Gestor verifica em cada ticket</div>
       <div class="flow-steps">
@@ -1068,7 +1099,7 @@ footer p { font-size:11px; color:var(--text3); }
   </div>
 
   <!-- ABA: MONITORAMENTO GESTOR -->
-  <div class="tab-panel" id="tab-gest-monitoramento">
+  <div class="tab-panel" id="tab-gest-monitoramento" role="tabpanel" aria-labelledby="tbtn-gest-monitoramento">
     <div class="section">
       <div class="section-label">Rotina de monitoramento da equipe e da operação</div>
       <div class="info-grid">
@@ -1138,7 +1169,7 @@ footer p { font-size:11px; color:var(--text3); }
   </div>
 
   <!-- ABA: RELACIONAMENTOS GESTOR -->
-  <div class="tab-panel" id="tab-gest-relacionamentos">
+  <div class="tab-panel" id="tab-gest-relacionamentos" role="tabpanel" aria-labelledby="tbtn-gest-relacionamentos">
     <div class="section">
       <div class="section-label">Com quem o Gestor interage em cada situação</div>
       <div class="rel-grid">
@@ -1192,7 +1223,7 @@ footer p { font-size:11px; color:var(--text3); }
   </div>
 
   <!-- ABA: RACI GESTOR -->
-  <div class="tab-panel" id="tab-gest-raci">
+  <div class="tab-panel" id="tab-gest-raci" role="tabpanel" aria-labelledby="tbtn-gest-raci">
     <div class="section">
       <div class="section-label">Matriz RACI — Setor Comercial</div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center">
@@ -1245,36 +1276,57 @@ footer p { font-size:11px; color:var(--text3); }
 
 <script>
 // ============================================================
-// SELETOR DE CARGO
-// Purple para Consultor, Azul para Gestor.
-// Ao trocar, reseta as abas do perfil anterior para não
-// deixar painéis vazios ao voltar.
+// RESTAURAÇÃO DE TEMA — roda imediatamente, antes do
+// DOMContentLoaded, para evitar flash de tema incorreto.
+// ============================================================
+(function() {
+  try {
+    const salvo = localStorage.getItem('croma-tema');
+    if (salvo) {
+      document.documentElement.setAttribute('data-theme', salvo);
+    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {}
+})();
+
+// ============================================================
+// SELETOR DE CARGO — Purple para Consultor, Azul para Gestor.
+// Persiste no localStorage para manter a seleção ao recarregar.
 // ============================================================
 function setRole(r) {
   document.querySelectorAll('.role-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active-cons','active-gest'));
+  document.querySelectorAll('.role-btn').forEach(b => {
+    b.classList.remove('active-cons', 'active-gest');
+    b.setAttribute('aria-pressed', 'false');
+  });
 
   document.getElementById('role-' + r).classList.add('active');
   const btn = document.getElementById('rbtn-' + r);
   btn.classList.add(r === 'cons' ? 'active-cons' : 'active-gest');
+  btn.setAttribute('aria-pressed', 'true');
+  try { localStorage.setItem('croma-cargo', r); } catch(e) {}
 }
 
 // ============================================================
-// TROCA DE ABAS — namespace por cargo
+// TROCA DE ABAS — namespace por cargo (cons / gest).
 // Cada cargo tem seu conjunto isolado de abas e painéis,
-// identificados por prefixo (tabs-cons / tabs-gest e
-// tab-cons-* / tab-gest-*) para não colidir.
+// identificados por prefixo para não colidir entre si.
 // ============================================================
 function tabRole(role, id, btn) {
   const activeClass = role === 'cons' ? 'active-cons' : 'active-gest';
 
-  // Desativa todas as abas e painéis do cargo em questão
-  document.querySelectorAll('#tabs-' + role + ' .tab-btn').forEach(b => b.classList.remove('active-cons','active-gest'));
+  // Desativa todos os botões e painéis do cargo em questão
+  document.querySelectorAll('#tabs-' + role + ' .tab-btn').forEach(b => {
+    b.classList.remove('active-cons', 'active-gest');
+    b.setAttribute('aria-selected', 'false');
+  });
   document.querySelectorAll('[id^="tab-' + role + '-"]').forEach(p => p.classList.remove('active'));
 
   // Ativa o par botão + painel corretos
   document.getElementById('tab-' + role + '-' + id).classList.add('active');
   btn.classList.add(activeClass);
+  btn.setAttribute('aria-selected', 'true');
 }
 
 // ============================================================
@@ -1288,17 +1340,65 @@ function toggleTheme() {
   try { localStorage.setItem('croma-tema', novo); } catch(e) {}
 }
 
-// Restaurar tema salvo ou preferência do sistema na carga
-(function() {
+// ============================================================
+// HAMBURGER — abre/fecha o menu de navegação no mobile.
+// Também fecha ao clicar fora da topbar.
+// ============================================================
+function toggleNav() {
+  const nav = document.getElementById('topbar-nav');
+  const btn = document.getElementById('hamburger');
+  const open = nav.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open);
+}
+
+document.addEventListener('click', function(e) {
+  const nav = document.getElementById('topbar-nav');
+  const btn = document.getElementById('hamburger');
+  if (nav && nav.classList.contains('open') && !nav.contains(e.target) && !btn.contains(e.target)) {
+    nav.classList.remove('open');
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+});
+
+// ============================================================
+// NAVEGAÇÃO POR TECLADO nas abas — ← / → movem entre abas,
+// Home vai para a primeira, End para a última.
+// ============================================================
+document.addEventListener('keydown', function(e) {
+  const focused = document.activeElement;
+  if (!focused || focused.getAttribute('role') !== 'tab') return;
+
+  const tablist = focused.closest('[role="tablist"]');
+  if (!tablist) return;
+
+  const tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
+  const idx  = tabs.indexOf(focused);
+  let next = -1;
+
+  if (e.key === 'ArrowRight') next = (idx + 1) % tabs.length;
+  if (e.key === 'ArrowLeft')  next = (idx - 1 + tabs.length) % tabs.length;
+  if (e.key === 'Home')       next = 0;
+  if (e.key === 'End')        next = tabs.length - 1;
+
+  if (next >= 0) {
+    e.preventDefault();
+    tabs[next].focus();
+    tabs[next].click();
+  }
+});
+
+// ============================================================
+// RESTAURAÇÃO DE CARGO — ao recarregar, retorna ao cargo
+// que o usuário usou na última visita a esta página.
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
   try {
-    const salvo = localStorage.getItem('croma-tema');
-    if (salvo) {
-      document.documentElement.setAttribute('data-theme', salvo);
-    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-      document.documentElement.setAttribute('data-theme', 'light');
-    }
+    const cargo = localStorage.getItem('croma-cargo');
+    if (cargo && (cargo === 'cons' || cargo === 'gest')) setRole(cargo);
   } catch(e) {}
-})();
+});
 </script>
 </body>
 </html>
