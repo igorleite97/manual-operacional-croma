@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Licitação &mdash; Manual Operacional &middot; Croma Tecnologia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS — mesma estrutura de todos os outros manuais.
+   Licitação usa Purple-Vinho como cor de setor.
+============================================================ */
+:root{--transition-theme:background .3s ease,color .3s ease,border-color .3s ease}
+[data-theme="dark"]{
+  --bg:#0d1117;--bg2:#161b27;--bg3:#1e2535;--bg4:#252f42;
+  --text:#e8edf5;--text2:#8b98b1;--text3:#4a5568;
+  --border:#1e2535;--border2:#2a3654;
+  --accent:#b07ef8;--accent2:#cba8ff;--accent-bg:#1e1040;--accent-glow:rgba(176,126,248,.15);
+  --blue:#4f8ef7;--blue-bg:#0f2347;
+  --green:#34d399;--green-bg:#052e1c;--green-glow:rgba(52,211,153,.15);
+  --teal:#2dd4bf;--teal-bg:#0a2e2b;
+  --amber:#fbbf24;--amber-bg:#2d1a00;
+  --red:#f87171;--red-bg:#2d0a0a;
+  --shadow:0 2px 8px rgba(0,0,0,.4);--shadow-md:0 8px 24px rgba(0,0,0,.5);
+  /* Fases */
+  --f1:#8b4fcc;--f1-bg:#1e1040;--f1-glow:rgba(139,79,204,.15);
+  --f2:#2e86ab;--f2-bg:#0a2030;--f2-glow:rgba(46,134,171,.15);
+  --f3:#27ae60;--f3-bg:#052e1c;--f3-glow:rgba(39,174,96,.15);
+  --f4:#e67e22;--f4-bg:#2d1800;--f4-glow:rgba(230,126,34,.15);
+  --f5:#2471a3;--f5-bg:#0a1e30;--f5-glow:rgba(36,113,163,.15);
+  --f6:#7d3c98;--f6-bg:#1a0d28;--f6-glow:rgba(125,60,152,.15);
+}
+[data-theme="light"]{
+  --bg:#f8faff;--bg2:#ffffff;--bg3:#eef2fa;--bg4:#e4eaf8;
+  --text:#111827;--text2:#4b5563;--text3:#9ca3af;
+  --border:#e5e9f5;--border2:#cdd5ef;
+  --accent:#6d28d9;--accent2:#7c3aed;--accent-bg:#f5f3ff;--accent-glow:rgba(109,40,217,.08);
+  --blue:#1e40af;--blue-bg:#eff6ff;
+  --green:#059669;--green-bg:#ecfdf5;--green-glow:rgba(5,150,105,.08);
+  --teal:#0d9488;--teal-bg:#f0fdfa;
+  --amber:#b45309;--amber-bg:#fffbeb;
+  --red:#dc2626;--red-bg:#fef2f2;
+  --shadow:0 1px 4px rgba(0,0,0,.06);--shadow-md:0 4px 16px rgba(0,0,0,.08);
+  --f1:#6d28d9;--f1-bg:#f5f3ff;--f1-glow:rgba(109,40,217,.08);
+  --f2:#0e6e8c;--f2-bg:#e8f4f8;--f2-glow:rgba(14,110,140,.08);
+  --f3:#059669;--f3-bg:#ecfdf5;--f3-glow:rgba(5,150,105,.08);
+  --f4:#b45309;--f4-bg:#fffbeb;--f4-glow:rgba(180,83,9,.08);
+  --f5:#1a5276;--f5-bg:#eaf3fb;--f5-glow:rgba(26,82,118,.08);
+  --f6:#6c3483;--f6-bg:#f3e5ff;--f6-glow:rgba(108,52,131,.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.65;transition:var(--transition-theme)}
+
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:300;height:56px;display:flex;align-items:center;gap:12px;padding:0 1.5rem;background:var(--bg2);border-bottom:1px solid var(--border);box-shadow:var(--shadow);backdrop-filter:blur(12px);transition:var(--transition-theme)}
+.topbar-logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
+.logo-fallback{font-size:16px;font-weight:700;color:var(--accent);letter-spacing:-.03em}
+.topbar-divider{width:1px;height:22px;background:var(--border2);flex-shrink:0}
+.topbar-title{font-size:13px;color:var(--text2);white-space:nowrap}
+.topbar-title strong{color:var(--text);font-weight:600}
+.topbar-nav{display:flex;gap:2px;margin-left:auto}
+.topbar-nav a{font-size:12px;color:var(--text2);text-decoration:none;padding:5px 10px;border-radius:7px;transition:all .15s;font-weight:500;white-space:nowrap}
+.topbar-nav a:hover{background:var(--bg3);color:var(--text)}
+.topbar-nav a.active{background:var(--accent-bg);color:var(--accent)}
+.theme-toggle{width:36px;height:36px;border-radius:10px;border:1px solid var(--border2);background:var(--bg3);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;color:var(--text2);margin-left:6px}
+.theme-toggle:hover{background:var(--bg4);color:var(--text);border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.theme-toggle svg{transition:transform .4s ease}
+.theme-toggle:hover svg{transform:rotate(20deg)}
+.icon-sun{display:none}.icon-moon{display:block}
+[data-theme="light"] .icon-sun{display:block}[data-theme="light"] .icon-moon{display:none}
+@media(max-width:900px){.topbar-nav{display:none}}
+
+/* HERO */
+.hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:2.5rem 1.5rem 2rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:1060px;margin:0 auto;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-bg);color:var(--accent);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:1rem;border:1px solid var(--accent-glow);letter-spacing:.03em;text-transform:uppercase}
+.hero h1{font-size:28px;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem;line-height:1.2}
+.hero p{font-size:14px;color:var(--text2);max-width:600px;line-height:1.7}
+.hero-meta{display:flex;gap:1.5rem;margin-top:1.25rem;flex-wrap:wrap}
+.hero-meta span{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:5px;font-weight:500}
+.hero-meta span::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--border2);display:inline-block}
+
+/* FLUXO MACRO — navegação de fases */
+.fase-nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:.875rem 1.5rem;transition:var(--transition-theme)}
+.fase-nav-inner{max-width:1060px;margin:0 auto}
+.fase-track{display:flex;gap:0;align-items:stretch;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.fase-track::-webkit-scrollbar{height:0}
+.fase-btn{flex:1;min-width:120px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 12px;border:none;background:none;cursor:pointer;font-family:inherit;position:relative;transition:all .15s;border-radius:10px}
+.fase-btn:hover{background:var(--bg3)}
+.fase-btn::after{content:'';position:absolute;right:0;top:20%;height:60%;width:1px;background:var(--border2)}
+.fase-btn:last-child::after{display:none}
+.fase-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:var(--bg3);color:var(--text3);transition:all .2s}
+.fase-label{font-size:10px;font-weight:600;color:var(--text3);text-align:center;white-space:nowrap;transition:all .2s}
+.fase-btn.active .fase-num{color:#fff}
+.fase-btn.active .fase-label{font-weight:700}
+.fase-btn[data-fase="1"].active .fase-num{background:var(--f1)}
+.fase-btn[data-fase="1"].active .fase-label{color:var(--f1)}
+.fase-btn[data-fase="2"].active .fase-num{background:var(--f2)}
+.fase-btn[data-fase="2"].active .fase-label{color:var(--f2)}
+.fase-btn[data-fase="3"].active .fase-num{background:var(--f3)}
+.fase-btn[data-fase="3"].active .fase-label{color:var(--f3)}
+.fase-btn[data-fase="4"].active .fase-num{background:var(--f4)}
+.fase-btn[data-fase="4"].active .fase-label{color:var(--f4)}
+.fase-btn[data-fase="5"].active .fase-num{background:var(--f5)}
+.fase-btn[data-fase="5"].active .fase-label{color:var(--f5)}
+.fase-btn[data-fase="6"].active .fase-num{background:var(--f6)}
+.fase-btn[data-fase="6"].active .fase-label{color:var(--f6)}
+
+/* LAYOUT */
+.page{max-width:1060px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.fase-panel{display:none}
+.fase-panel.active{display:block;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.section{margin-bottom:2rem}
+.section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* FASE HEADER */
+.fase-header{border-radius:14px;padding:1.5rem;margin-bottom:2rem;display:flex;gap:16px;align-items:flex-start}
+.fase-header-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fase-header h2{font-size:18px;font-weight:700;color:var(--text);margin-bottom:3px}
+.fase-header p{font-size:13px;color:var(--text2);line-height:1.7}
+.fase-header-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.fase-header-tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;background:var(--bg3);color:var(--text2);border:1px solid var(--border2)}
+
+/* ABAS */
+.tab-bar{display:flex;gap:2px;border-bottom:1px solid var(--border);margin-bottom:2rem;overflow-x:auto;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{height:0}
+.tab-btn{font-size:12px;font-weight:600;padding:10px 18px;border:none;background:none;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .15s;border-radius:8px 8px 0 0;font-family:inherit}
+.tab-btn:hover{color:var(--text);background:var(--bg3)}
+.tab-btn.active{color:var(--fase-cor,var(--accent));border-bottom-color:var(--fase-cor,var(--accent));background:var(--fase-cor-bg,var(--accent-bg))}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fadeIn .2s ease}
+
+/* SCOPE GRID */
+.scope-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
+.scope-card{padding:16px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;transition:all .15s;display:flex;gap:14px;align-items:flex-start}
+.scope-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.scope-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.scope-body h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.scope-body p{font-size:12px;color:var(--text2);line-height:1.6}
+
+/* FLOW STEPS */
+.flow-steps{display:grid;gap:0}
+.flow-step{display:flex;gap:16px;align-items:flex-start;position:relative;padding-bottom:4px}
+.flow-step:not(:last-child)::before{content:'';position:absolute;left:15px;top:34px;bottom:-4px;width:2px;background:var(--border2);z-index:0}
+.flow-step-n{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;position:relative;z-index:1;margin-top:10px}
+.flow-step-body{flex:1;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:all .15s}
+.flow-step-body:hover{border-color:var(--border2)}
+.flow-step-body h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.flow-step-body p{font-size:12px;color:var(--text2);line-height:1.6;margin:0}
+.step-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.step-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px}
+
+/* INFO GRID */
+.info-grid{display:grid;gap:8px}
+.info-card{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .15s}
+.info-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.info-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.info-body strong{font-size:12px;font-weight:600;color:var(--text);display:block;margin-bottom:3px}
+.info-body p{font-size:12px;color:var(--text2);line-height:1.6;margin:0}
+
+/* DATA TABLE */
+.data-table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border)}
+.data-table{width:100%;border-collapse:collapse;font-size:12px}
+.data-table th{background:var(--bg3);padding:10px 13px;text-align:left;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--text2);border-bottom:1px solid var(--border);white-space:nowrap}
+.data-table td{padding:10px 13px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;font-size:12px}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:var(--bg3)}
+.data-table td:first-child{font-weight:600;color:var(--text)}
+
+/* ALERTAS */
+.alert{border-radius:10px;padding:12px 16px;margin-top:1rem;display:flex;gap:10px;align-items:flex-start}
+.alert-icon{width:20px;height:20px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center}
+.alert p{font-size:12px;line-height:1.65;margin:0}
+.alert-warn{background:var(--amber-bg);border:1px solid rgba(251,191,36,.2)}
+.alert-warn p{color:var(--amber)}
+.alert-rule{background:var(--red-bg);border:1px solid rgba(248,113,113,.2)}
+.alert-rule p{color:var(--red)}
+.alert-info{background:var(--accent-bg);border:1px solid var(--accent-glow)}
+.alert-info p{color:var(--accent2)}
+.alert-ok{background:var(--green-bg);border:1px solid var(--green-glow)}
+.alert-ok p{color:var(--green)}
+
+/* DECISÃO BOX (aprovado/reprovado) */
+.decisao-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:500px){.decisao-grid{grid-template-columns:1fr}}
+.decisao-card{padding:16px 18px;border-radius:12px;border:1px solid transparent}
+.decisao-card.ok{background:var(--green-bg);border-color:var(--green-glow)}
+.decisao-card.nok{background:var(--red-bg);border-color:rgba(248,113,113,.2)}
+.decisao-card h4{font-size:13px;font-weight:700;margin-bottom:8px}
+.decisao-card.ok h4{color:var(--green)}
+.decisao-card.nok h4{color:var(--red)}
+.decisao-card p{font-size:12px;line-height:1.6;margin:0}
+.decisao-card.ok p{color:var(--green)}
+.decisao-card.nok p{color:var(--red)}
+
+/* FORMULA BOX */
+.formula-box{background:var(--accent-bg);border:1px solid var(--accent-glow);border-radius:10px;padding:1rem 1.5rem;text-align:center;margin-bottom:1rem}
+.formula-box .formula{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--accent2);margin-bottom:4px}
+.formula-box .formula-label{font-size:11px;color:var(--text3)}
+
+/* STATUS BADGES */
+.status-ganho{background:var(--green-bg);color:var(--green);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid var(--green-glow)}
+.status-monitor{background:var(--amber-bg);color:var(--amber);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid rgba(251,191,36,.2)}
+.status-perdido{background:var(--red-bg);color:var(--red);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid rgba(248,113,113,.2)}
+
+/* MARKUP REGRA */
+.markup-rule{border-radius:12px;padding:1.25rem 1.5rem;border:2px solid;margin-bottom:1rem}
+.markup-rule .mkp-valor{font-family:'DM Mono',monospace;font-size:28px;font-weight:700}
+.markup-rule .mkp-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+
+/* GLOSSÁRIO */
+.glossary{display:grid;gap:5px}
+.gitem{display:grid;grid-template-columns:200px 1fr;gap:16px;padding:11px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .15s}
+.gitem:hover{border-color:var(--border2);background:var(--bg3)}
+@media(max-width:500px){.gitem{grid-template-columns:1fr;gap:4px}}
+.gterm{font-size:12px;font-weight:700;color:var(--text)}
+.gdef{font-size:12px;color:var(--text2);line-height:1.6}
+
+/* FASE INDICADORES (no topo de cada fase) */
+.fase-indicator-strip{display:flex;gap:4px;margin-bottom:1.5rem;flex-wrap:wrap}
+.fase-pip{height:4px;flex:1;min-width:30px;border-radius:4px;background:var(--border2);transition:background .3s}
+.fase-pip.done{background:var(--green)}
+.fase-pip.active{background:var(--fase-cor,var(--accent))}
+
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:7px 14px;border-radius:8px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);cursor:pointer;text-decoration:none;transition:all .15s;font-weight:500;font-family:inherit}
+.btn:hover{background:var(--bg3);color:var(--text)}
+footer{border-top:1px solid var(--border);padding:1.25rem 1.5rem;max-width:1060px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+footer p{font-size:11px;color:var(--text3)}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="topbar-logo">
+    <img src="logo-branco.png" alt="Croma Tecnologia" height="28"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="logo-fallback" style="display:none">CROMA</span>
+  </a>
+  <div class="topbar-divider"></div>
+  <span class="topbar-title">Manual Operacional <strong>/ Licitação</strong></span>
+  <nav class="topbar-nav">
+    <a href="index.html">Inicio</a>
+    <a href="financeiro.html">Financeiro</a>
+    <a href="compras.html">Compras</a>
+    <a href="logistica.html">Logistica</a>
+    <a href="comercial.html">Comercial</a>
+    <a href="licitacao.html" class="active">Licitacao</a>
+    <a href="ecommerce.html">E-commerce</a>
+    <a href="outsourcing.html">Outsourcing</a>
+  </nav>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
+    <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun"  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  </button>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <svg width="6" height="6" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="currentColor"/></svg>
+      Setor de Licitações
+    </div>
+    <h1>Processo Licitatório — Ciclo Completo</h1>
+    <p>6 fases compiladas num único manual: da captação do edital na plataforma Effecti até a execução da compra pós-empenho. Selecione a fase no fluxo abaixo para navegar.</p>
+    <div class="hero-meta">
+      <span>Versão 1.0</span><span>Março 2026</span><span>Documento Interno</span><span>Ferramenta: Effecti · OptiWork · OMIE</span>
+    </div>
+  </div>
+</section>
+
+<!-- NAVEGAÇÃO DE FASES -->
+<div class="fase-nav">
+  <div class="fase-nav-inner">
+    <div class="fase-track">
+      <button class="fase-btn active" data-fase="1" onclick="setFase(1)">
+        <div class="fase-num">1</div>
+        <div class="fase-label">Captação</div>
+      </button>
+      <button class="fase-btn" data-fase="2" onclick="setFase(2)">
+        <div class="fase-num">2</div>
+        <div class="fase-label">Análise</div>
+      </button>
+      <button class="fase-btn" data-fase="3" onclick="setFase(3)">
+        <div class="fase-num">3</div>
+        <div class="fase-label">Cotação</div>
+      </button>
+      <button class="fase-btn" data-fase="4" onclick="setFase(4)">
+        <div class="fase-num">4</div>
+        <div class="fase-label">Lance</div>
+      </button>
+      <button class="fase-btn" data-fase="5" onclick="setFase(5)">
+        <div class="fase-num">5</div>
+        <div class="fase-label">Monitoramento</div>
+      </button>
+      <button class="fase-btn" data-fase="6" onclick="setFase(6)">
+        <div class="fase-num">6</div>
+        <div class="fase-label">Compras</div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<main class="page">
+
+<!-- ════════════════ FASE 1 — CAPTAÇÃO ════════════════ -->
+<div class="fase-panel active" id="fase-1" style="--fase-cor:var(--f1);--fase-cor-bg:var(--f1-bg)">
+
+  <div class="fase-header" style="background:var(--f1-bg);border:1px solid var(--f1-glow)">
+    <div class="fase-header-icon" style="background:var(--f1)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    <div>
+      <h2>Fase 1 — Captação de Edital</h2>
+      <p>Identificar, filtrar e registrar oportunidades de licitação compatíveis com o perfil da empresa usando a plataforma Effecti.</p>
+      <div class="fase-header-tags">
+        <span class="fase-header-tag">Effecti</span><span class="fase-header-tag">OptiWork</span><span class="fase-header-tag">Banco de Editais</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-bar" id="tabs-f1">
+    <button class="tab-btn active" onclick="tabFase(1,'etapas',this)">Etapas</button>
+    <button class="tab-btn" onclick="tabFase(1,'modulos',this)">Módulos Effecti</button>
+    <button class="tab-btn" onclick="tabFase(1,'filtros',this)">Filtros e Avaliação</button>
+    <button class="tab-btn" onclick="tabFase(1,'arquivo',this)">Arquivo e Nomenclatura</button>
+  </div>
+
+  <div class="tab-panel active" id="f1-etapas">
+    <div class="section">
+      <div class="section-label">Passo a passo da captação</div>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f1);color:#fff">1</div>
+          <div class="flow-step-body">
+            <h4>Acesso ao Painel Effecti</h4>
+            <p>Acesse <strong>https://app.effecti.com.br</strong> com o e-mail corporativo e senha cadastrada. Você será direcionado ao Painel Inicial com as quatro opções de módulo.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--f1-bg);color:var(--f1)">Login corporativo</span>
+            </div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f1);color:#fff">2</div>
+          <div class="flow-step-body">
+            <h4>Pesquisa de Oportunidades</h4>
+            <p>No menu lateral, clique em <strong>"Avisos" ou "Encontrar"</strong> e acesse a aba <strong>"Todos os avisos"</strong>. Configure os filtros obrigatórios: portal, modalidade, datas, estado/município e palavras-chave.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Salvar filtros frequentes como padrão</span>
+            </div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f1);color:#fff">3</div>
+          <div class="flow-step-body">
+            <h4>Avaliação da Oportunidade</h4>
+            <p>Clique no título para abrir os detalhes. Verificar: órgão, modalidade, data final, ID Effecti, local e objeto da licitação. Confirmar se o objeto se enquadra no portfólio da empresa.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">"Próxima ao vencimento" → urgência</span>
+            </div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="flow-step-body">
+            <h4>Download e Arquivamento</h4>
+            <p>Baixar Edital, Termo de Referência e todos os Anexos. Salvar no Banco de Editais do OptiWork com a <strong>nomenclatura padrão obrigatória</strong>.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--f1-bg);color:var(--f1)">→ Fase 2: Análise de Edital</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="f1-modulos">
+    <div class="section">
+      <div class="section-label">Módulos do painel Effecti</div>
+      <div class="scope-grid">
+        <div class="scope-card">
+          <div class="scope-icon" style="background:var(--f1-bg)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--f1)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <div class="scope-body"><h4>Encontrar</h4><p>Pesquisar e filtrar licitações disponíveis. Ponto de entrada do processo de captação.</p></div>
+        </div>
+        <div class="scope-card">
+          <div class="scope-icon" style="background:var(--f1-bg)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--f1)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="scope-body"><h4>Cadastrar</h4><p>Enviar propostas e documentos de habilitação para participação nos certames.</p></div>
+        </div>
+        <div class="scope-card">
+          <div class="scope-icon" style="background:var(--f1-bg)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--f1)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="scope-body"><h4>Disputar</h4><p>Participar das sessões de lances em tempo real — módulo central da Fase 4.</p></div>
+        </div>
+        <div class="scope-card">
+          <div class="scope-icon" style="background:var(--f1-bg)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--f1)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="scope-body"><h4>Monitorar</h4><p>Acompanhar mensagens e comunicados do órgão no chat — essencial para a Fase 5.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="f1-filtros">
+    <div class="section">
+      <div class="section-label">Filtros de pesquisa obrigatórios</div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Filtro</th><th>Valores usuais</th></tr></thead>
+          <tbody>
+            <tr><td>Portal de captura</td><td>Compras Públicas · ComprasNet · BLL · PNCP</td></tr>
+            <tr><td>Modalidade</td><td>Pregão Eletrônico · Dispensa Eletrônica</td></tr>
+            <tr><td>Datas</td><td>Intervalo de publicação ou prazo final</td></tr>
+            <tr><td>Estado / Município</td><td>Restringir à unidade federativa de atuação</td></tr>
+            <tr><td>Palavras-chave</td><td>Eletrodomésticos · Locação · Mobiliário · Informática etc.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert alert-ok" style="margin-top:1rem">
+        <div class="alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <p><strong>Dica:</strong> Salve filtros usados com frequência em <strong>Perfil de busca → Salvar como padrão</strong> para agilizar a rotina diária de captação.</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-label">O que verificar em cada oportunidade</div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--f1-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--f1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+          <div class="info-body"><strong>Órgão</strong><p>Quem está contratando — ex: Prefeitura de Palmas, Marinha do Brasil.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--f1-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--f1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div class="info-body"><strong>Data final e modalidade</strong><p>Prazo limite para envio. Modalidade: Dispensa, Pregão Eletrônico ou Ata.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--f1-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--f1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="info-body"><strong>Local e objeto</strong><p>Onde será executado e o que será contratado. Confirmar compatibilidade com o portfólio.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--amber-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div class="info-body"><strong>Avisos de status</strong><p>"Próxima ao vencimento" = prazo crítico. "Licitação deserta" = possibilidade de republicação.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="f1-arquivo">
+    <div class="section">
+      <div class="section-label">Padrão de nomenclatura obrigatório</div>
+      <div style="background:var(--f1-bg);border:1px solid var(--f1-glow);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1rem;text-align:center">
+        <div style="font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--f1);margin-bottom:6px">Edital_[NÚMERO]-[ANO]_[MUNICÍPIO].pdf</div>
+        <div style="font-size:12px;color:var(--text3)">Exemplo: <span style="color:var(--text2);font-weight:600">Edital_120-2025_Palmas.pdf</span></div>
+      </div>
+      <div class="alert alert-warn">
+        <div class="alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <p>Manter o padrão de nomenclatura é obrigatório. Garante rastreabilidade e evita duplicações no banco de editais do OptiWork.</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-label">Documentos a baixar de cada licitação</div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--f1-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--f1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="info-body"><strong>Edital completo</strong><p>Documento principal com todas as regras do certame.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--f1-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--f1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          <div class="info-body"><strong>Termo de Referência (TR)</strong><p>Especificações técnicas dos itens — base para a análise e cotação.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--f1-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--f1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <div class="info-body"><strong>Planilhas e Minutas</strong><p>Planilhas de itens, minutas de contrato e demais anexos obrigatórios.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- fim fase 1 -->
+
+
+<!-- ════════════════ FASE 2 — ANÁLISE ════════════════ -->
+<div class="fase-panel" id="fase-2" style="--fase-cor:var(--f2);--fase-cor-bg:var(--f2-bg)">
+
+  <div class="fase-header" style="background:var(--f2-bg);border:1px solid var(--f2-glow)">
+    <div class="fase-header-icon" style="background:var(--f2)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    </div>
+    <div>
+      <h2>Fase 2 — Análise de Edital</h2>
+      <p>Verificar, de forma técnica, jurídica e estratégica, a viabilidade de participação no certame. Resultado: Aprovado para Cotação ou Reprovado/Arquivado.</p>
+      <div class="fase-header-tags">
+        <span class="fase-header-tag">Ficha de Análise</span><span class="fase-header-tag">OptiWork</span><span class="fase-header-tag">IA de apoio</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-bar" id="tabs-f2">
+    <button class="tab-btn active" onclick="tabFase(2,'etapas',this)">Etapas</button>
+    <button class="tab-btn" onclick="tabFase(2,'leitura',this)">Leitura Técnica</button>
+    <button class="tab-btn" onclick="tabFase(2,'eliminatorios',this)">Critérios Eliminatórios</button>
+    <button class="tab-btn" onclick="tabFase(2,'decisao',this)">Decisão Final</button>
+  </div>
+
+  <div class="tab-panel active" id="f2-etapas">
+    <div class="section">
+      <div class="section-label">Passo a passo da análise</div>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f2);color:#fff">1</div>
+          <div class="flow-step-body"><h4>Recebimento da Oportunidade</h4><p>Acessar o Banco de Editais no OptiWork, localizar o cartão criado na Fase 1 e fazer download do edital e de todos os anexos.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f2);color:#fff">2</div>
+          <div class="flow-step-body"><h4>Leitura Técnica do Edital</h4><p>Leitura panorâmica para identificar: objeto, prazos, critério de julgamento, exigências técnicas, habilitação, pagamento e condições contratuais.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f2);color:#fff">3</div>
+          <div class="flow-step-body">
+            <h4>Preenchimento da Ficha de Análise</h4>
+            <p>Abrir o modelo "Ficha de Análise de Edital" no Drive OptiWork, preencher todos os campos obrigatórios e executar análise complementar com apoio de IA.</p>
+            <div class="alert alert-warn" style="margin-top:.75rem">
+              <div class="alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+              <p>IA (ChatGPT, Gemini, DeepSeek) é ferramenta de apoio — não substitui a validação técnica e a responsabilidade do analista.</p>
+            </div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f2);color:#fff">4</div>
+          <div class="flow-step-body"><h4>Análise de Riscos e Critérios Eliminatórios</h4><p>Verificar os três eixos: especificações técnicas, prazo de entrega e critérios eliminatórios definidos pela política interna.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="flow-step-body"><h4>Encaminhamento da Decisão</h4><p>Aprovado → anexar ficha no cartão e atualizar planilha para status "Cotação". Reprovado → registrar motivo e arquivar.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="f2-leitura">
+    <div class="section">
+      <div class="section-label">Seções obrigatórias a destacar no edital</div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Seção</th><th>O que identificar</th></tr></thead>
+          <tbody>
+            <tr><td> Objeto</td><td>O que será contratado — descrição precisa do produto ou serviço</td></tr>
+            <tr><td> Prazos</td><td>Abertura da sessão, prazo de entrega, validade da proposta</td></tr>
+            <tr><td> Critério de julgamento</td><td>Menor preço, técnica e preço, melhor técnica</td></tr>
+            <tr><td> Exigências técnicas</td><td>Especificações, amostras, certificações: INMETRO, ISO, ABNT</td></tr>
+            <tr><td> Habilitação</td><td>Documentos jurídicos, fiscais, trabalhistas e técnicos exigidos</td></tr>
+            <tr><td> Pagamento</td><td>Prazo, reajuste, retenções e condições contratuais</td></tr>
+            <tr><td> Contrato</td><td>Vigência, garantias, caução, penalidades e prorrogação</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="f2-eliminatorios">
+    <div class="section">
+      <div class="section-label">Critérios eliminatórios — reprovação automática</div>
+      <div class="alert alert-rule">
+        <div class="alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
+        <p>A presença de qualquer critério abaixo na licitação resulta em reprovação automática — não seguir para a fase de cotação.</p>
+      </div>
+      <div style="height:.75rem"></div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Critério</th><th>Condição eliminatória</th></tr></thead>
+          <tbody>
+            <tr><td>Garantia de proposta (caução)</td><td>Qualquer formato exigido: depósito, fiança bancária ou seguro-garantia</td></tr>
+            <tr><td>Prazo de entrega exíguo</td><td>Inferior a 7 dias corridos para regiões Norte ou Nordeste</td></tr>
+            <tr><td>Prazo de amostra de cadeira</td><td>Inferior a 15 dias corridos</td></tr>
+            <tr><td>Multa sem teto máximo</td><td>Multa contratual sem limite definido no edital</td></tr>
+            <tr><td>Penalidades desproporcionais</td><td>Incompatíveis com o objeto, valor e complexidade do contrato</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="f2-decisao">
+    <div class="section">
+      <div class="section-label">Encaminhamento da decisão</div>
+      <div class="decisao-grid">
+        <div class="decisao-card ok">
+          <h4>✔ Aprovado — segue para Cotação</h4>
+          <p>Anexar a Ficha de Análise preenchida no cartão do OptiWork. Atualizar a Planilha de Gestão: status "Cotação".</p>
+        </div>
+        <div class="decisao-card nok">
+          <h4>✖ Reprovado — arquivar</h4>
+          <p>Registrar o motivo exato no campo de comentários do cartão. Arquivar no banco de editais. Não seguir para cotação.</p>
+        </div>
+      </div>
+      <div style="background:var(--red-bg);border:1px solid rgba(248,113,113,.2);border-radius:10px;padding:1rem 1.25rem;margin-top:1rem">
+        <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Exemplo de registro de reprovação</div>
+        <div style="font-size:12px;color:var(--text2);font-style:italic">"Reprovado – Item 4.1: Edital exige amostra em 10 dias, política interna exige mínimo 15 dias."</div>
+      </div>
+    </div>
+  </div>
+</div><!-- fim fase 2 -->
+
+
+<!-- ════════════════ FASE 3 — COTAÇÃO ════════════════ -->
+<div class="fase-panel" id="fase-3" style="--fase-cor:var(--f3);--fase-cor-bg:var(--f3-bg)">
+
+  <div class="fase-header" style="background:var(--f3-bg);border:1px solid var(--f3-glow)">
+    <div class="fase-header-icon" style="background:var(--f3)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    </div>
+    <div>
+      <h2>Fase 3 — Cotação e Especificação</h2>
+      <p>Avaliar a viabilidade técnica e econômica por item. Somente itens com custo × 1,30 ≤ valor estimado do edital seguem para o lance.</p>
+      <div class="fase-header-tags">
+        <span class="fase-header-tag">Planilha de Gestão</span><span class="fase-header-tag">Por item</span><span class="fase-header-tag">Markup mín. 1,30</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-bar" id="tabs-f3">
+    <button class="tab-btn active" onclick="tabFase(3,'etapas',this)">Etapas</button>
+    <button class="tab-btn" onclick="tabFase(3,'viabilidade',this)">Viabilidade Técnica</button>
+    <button class="tab-btn" onclick="tabFase(3,'formula',this)">Fórmula de Decisão</button>
+    <button class="tab-btn" onclick="tabFase(3,'registro',this)">Registro na Planilha</button>
+  </div>
+
+  <div class="tab-panel active" id="f3-etapas">
+    <div class="section">
+      <div class="section-label">Princípio central — cotação por item</div>
+      <div class="info-grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--f3-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--f3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          <div class="info-body"><strong>A cotação é por item</strong><p>Nunca de forma global. Cada item tem sua análise independente.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--f3-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--f3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="2"/></svg></div>
+          <div class="info-body"><strong>Análise econômica e técnica</strong><p>A análise jurídica já foi feita na Fase 2 — aqui foco em custo e viabilidade.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--f3-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--f3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <div class="info-body"><strong>Planilha é o instrumento oficial</strong><p>Todas as decisões devem ser registradas na Planilha de Gestão.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-label">Passo a passo da cotação</div>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f3);color:#fff">1</div>
+          <div class="flow-step-body"><h4>Analisar o Termo de Referência por Item</h4><p>Verificar especificações técnicas, requisitos mínimos e compatibilidade com os fabricantes disponíveis. Itens fora do escopo aprovado na Fase 2 não entram na cotação.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f3);color:#fff">2</div>
+          <div class="flow-step-body"><h4>Análise Crítica de Viabilidade Técnica</h4><p>Para cada item: fabricante, garantia (prazo e tipo), prazo de entrega, impacto de frete e atendimento integral ao TR. Qualquer requisito inviável = item reprovado.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f3);color:#fff">3</div>
+          <div class="flow-step-body"><h4>Formação do Custo Total do Item</h4><p>Custo de aquisição + frete (CIF/FOB/triangulado) + demais custos diretos. Todos os valores registrados na planilha.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f3);color:#fff">4</div>
+          <div class="flow-step-body"><h4>Aplicar a Fórmula de Decisão</h4><p>Preço Mínimo = Custo Total × 1,30. Se ≤ valor estimado do edital: aprovado. Se >, item reprovado como "Desistência por Preço".</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="flow-step-body"><h4>Registro na Planilha e Encaminhamento</h4><p>Registrar fabricante, custo, markup, preço final e status. Itens aprovados seguem para a Fase 4 — Lance.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="f3-viabilidade">
+    <div class="section">
+      <div class="section-label">Pontos obrigatórios de validação técnica por item</div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Ponto de Validação</th><th>O que verificar</th></tr></thead>
+          <tbody>
+            <tr><td>Fabricante e produto</td><td>Confiabilidade, disponibilidade no mercado, histórico de fornecimento</td></tr>
+            <tr><td>Garantia</td><td>Balcão ou on-site · Prazo exigido no edital · Viabilidade frente às políticas do fabricante</td></tr>
+            <tr><td>Prazo de entrega</td><td>Compatibilidade com o edital considerando produção, aquisição e logística</td></tr>
+            <tr><td>Impacto do frete</td><td>CIF (fornecedor paga até destino) · FOB (empresa paga da origem) · Triangulado</td></tr>
+            <tr><td>Risco logístico</td><td>Viabilidade de entrega na região especificada — Norte e Nordeste têm critérios específicos</td></tr>
+            <tr><td>Atendimento ao TR</td><td>Nenhum requisito técnico pode ser parcialmente atendido — é tudo ou nada</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="f3-formula">
+    <div class="section">
+      <div class="section-label">Fórmula de decisão — markup mínimo 1,30</div>
+      <div class="formula-box">
+        <div class="formula">Preço de Venda Mínimo = Custo Total × 1,30</div>
+        <div class="formula-label">Markup mínimo obrigatório — nenhum item pode ser cotado abaixo disso</div>
+      </div>
+      <div class="decisao-grid">
+        <div class="decisao-card ok">
+          <h4>✔ Item Aprovado</h4>
+          <p>Custo × 1,30 ≤ Valor estimado do edital.<br>O item é viável financeiramente e segue para a Fase de Lance.</p>
+        </div>
+        <div class="decisao-card nok">
+          <h4>✖ Desistência por Preço</h4>
+          <p>Custo × 1,30 > Valor estimado do edital.<br>O item é automaticamente reprovado. Registrar como "Desistência por Preço".</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="f3-registro">
+    <div class="section">
+      <div class="section-label">O que registrar na Planilha de Gestão para cada item</div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--f3-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--f3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <div class="info-body"><strong>Fabricante e produto cotado</strong><p>Nome do fabricante e modelo/referência exata que será ofertada.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--f3-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--f3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <div class="info-body"><strong>Custo total, markup e preço final</strong><p>Custo (produto + frete + diretos), markup aplicado e preço de venda resultante.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--f3-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--f3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <div class="info-body"><strong>Status e motivo objetivo</strong><p>"Aprovado para Lance" ou "Desistência por Preço" — com justificativa registrada.</p></div>
+        </div>
+      </div>
+      <div style="background:var(--red-bg);border:1px solid rgba(248,113,113,.2);border-radius:10px;padding:1rem 1.25rem;margin-top:1rem">
+        <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Exemplo de registro de desistência</div>
+        <div style="font-size:12px;color:var(--text2);font-style:italic">"Desistência – Preço com markup mínimo 1,30 acima do valor estimado do edital."</div>
+      </div>
+    </div>
+  </div>
+</div><!-- fim fase 3 -->
+
+
+<!-- ════════════════ FASE 4 — LANCE ════════════════ -->
+<div class="fase-panel" id="fase-4" style="--fase-cor:var(--f4);--fase-cor-bg:var(--f4-bg)">
+
+  <div class="fase-header" style="background:var(--f4-bg);border:1px solid var(--f4-glow)">
+    <div class="fase-header-icon" style="background:var(--f4)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    </div>
+    <div>
+      <h2>Fase 4 — Lance e Disputa</h2>
+      <p>Executar a fase de lances no módulo Disputar da Effecti de forma estratégica, respeitando o markup mínimo de 1,30 e registrando o resultado.</p>
+      <div class="fase-header-tags">
+        <span class="fase-header-tag">Effecti — Disputar</span><span class="fase-header-tag">Markup mín. 1,30</span><span class="fase-header-tag">Planilha de Gestão</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-bar" id="tabs-f4">
+    <button class="tab-btn active" onclick="tabFase(4,'etapas',this)">Etapas</button>
+    <button class="tab-btn" onclick="tabFase(4,'estrategia',this)">Estratégia</button>
+    <button class="tab-btn" onclick="tabFase(4,'markup',this)">Regra de Markup</button>
+    <button class="tab-btn" onclick="tabFase(4,'resultado',this)">Resultado</button>
+  </div>
+
+  <div class="tab-panel active" id="f4-etapas">
+    <div class="section">
+      <div class="section-label">Condições obrigatórias para início da disputa</div>
+      <div class="alert alert-info">
+        <div class="alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <p>Fase de cotação concluída · Produto, fabricante e preço máximo viável definidos · Dados registrados na Planilha de Gestão · O analista de lance não redefine produto nem custo.</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-label">Passo a passo da disputa</div>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f4);color:#fff">1</div>
+          <div class="flow-step-body"><h4>Cadastro no Módulo Disputar (Effecti)</h4><p>Acessar "Disputar" na Effecti → "Nova disputa" → Selecionar portal e empresa → Carregar a licitação → Confirmar inclusão na lista de disputas ativas.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f4);color:#fff">2</div>
+          <div class="flow-step-body"><h4>Configuração da Estratégia</h4><p>Definir: valor limite (mínimo da cotação), estratégia principal, arredondamento (2 casas decimais), variação mínima/máxima por lance e prorrogação automática.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f4);color:#fff">3</div>
+          <div class="flow-step-body"><h4>Atuação Durante a Disputa</h4><p>Acompanhar movimentação dos concorrentes, observar padrões de redução e decidir estratégia: buscar o 1º lugar ou manter posição estratégica (2º/3º) preservando margem.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="flow-step-body"><h4>Registro do Resultado</h4><p>Classificar o resultado (Ganho / Monitoramento Pós / Perdido) e registrar na Planilha de Gestão com colocação, valor final e observações.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="f4-estrategia">
+    <div class="section">
+      <div class="section-label">Configurações da disputa — Effecti</div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Configuração</th><th>Instrução</th></tr></thead>
+          <tbody>
+            <tr><td>Estratégia principal</td><td>Disputar a melhor posição possível (padrão recomendado)</td></tr>
+            <tr><td>Valor limite</td><td>Estabelecer o mínimo predefinido durante a fase de cotação</td></tr>
+            <tr><td>Lance no valor limite</td><td>Habilitar somente quando a estratégia justificar</td></tr>
+            <tr><td>Arredondamento</td><td>Padrão de duas casas decimais</td></tr>
+            <tr><td>Variação mínima/máxima</td><td>Conforme regras específicas do edital</td></tr>
+            <tr><td>Prorrogação automática</td><td>Configurar tempo de envio do lance final</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert alert-info" style="margin-top:1rem">
+        <div class="alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <p><strong>Nem toda disputa exige o 1º lugar.</strong> Há cenários em que não é estratégico reduzir além do necessário, evitando "queima" de margem sem ganho real de probabilidade de vitória.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="f4-markup">
+    <div class="section">
+      <div class="section-label">Regra de markup mínimo — inviolável</div>
+      <div class="markup-rule" style="background:var(--red-bg);border-color:var(--red)">
+        <div class="mkp-valor" style="color:var(--red)">1,30</div>
+        <div class="mkp-label" style="color:var(--red)">Markup mínimo permitido — nenhum lance abaixo deste limite</div>
+      </div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--red-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
+          <div class="info-body"><strong>Nenhum lance abaixo do limite</strong><p>O preço de venda mínimo = Custo Total × 1,30. Qualquer lance abaixo deste valor é proibido.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--green-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="info-body"><strong>Valores acima de 1,30 = maior rentabilidade</strong><p>Markup maior significa maior margem, maior rentabilidade e maior comissionamento para o analista.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--amber-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div class="info-body"><strong>Ao atingir o limite — parar</strong><p>Se o preço necessário para disputar atingir o limite mínimo: interromper a escalada de lances imediatamente.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="f4-resultado">
+    <div class="section">
+      <div class="section-label">Classificação do resultado da disputa</div>
+      <div class="info-grid">
+        <div class="info-card" style="border-color:var(--green-glow)">
+          <div class="info-icon" style="background:var(--green-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <div class="info-body">
+            <strong><span class="status-ganho">Ganho</span></strong>
+            <p style="margin-top:6px">1ª colocação. Seguir para habilitação e aguardar a Nota de Empenho — início da Fase 6.</p>
+          </div>
+        </div>
+        <div class="info-card" style="border-color:rgba(251,191,36,.2)">
+          <div class="info-icon" style="background:var(--amber-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="info-body">
+            <strong><span class="status-monitor">Monitoramento Pós</span></strong>
+            <p style="margin-top:6px">2º ao 10º colocado. Acompanhar desclassificações e convocações — Fase 5.</p>
+          </div>
+        </div>
+        <div class="info-card" style="border-color:rgba(248,113,113,.2)">
+          <div class="info-icon" style="background:var(--red-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
+          <div class="info-body">
+            <strong><span class="status-perdido">Perdido</span></strong>
+            <p style="margin-top:6px">Fora da faixa de monitoramento. Encerrar o processo mantendo registro histórico.</p>
+          </div>
+        </div>
+      </div>
+      <div style="height:1rem"></div>
+      <div class="section-label">Registro obrigatório na Planilha de Gestão</div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Campo</th><th>O que registrar</th></tr></thead>
+          <tbody>
+            <tr><td>Colocação final</td><td>Posição obtida na disputa (1º, 2º, 5º, etc.)</td></tr>
+            <tr><td>Valor final do lance</td><td>Último preço enviado na sessão</td></tr>
+            <tr><td>Status</td><td>Ganha · Monitoramento Pós · Perdida</td></tr>
+            <tr><td>Observações</td><td>Informações relevantes: comportamento dos concorrentes, estratégia adotada, etc.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div><!-- fim fase 4 -->
+
+
+<!-- ════════════════ FASE 5 — MONITORAMENTO ════════════════ -->
+<div class="fase-panel" id="fase-5" style="--fase-cor:var(--f5);--fase-cor-bg:var(--f5-bg)">
+
+  <div class="fase-header" style="background:var(--f5-bg);border:1px solid var(--f5-glow)">
+    <div class="fase-header-icon" style="background:var(--f5)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    </div>
+    <div>
+      <h2>Fase 5 — Monitoramento Pós-Pregão</h2>
+      <p>Acompanhar licitações em que a empresa ficou entre 2º e 10º colocado, aguardando convocação por desclassificação do vencedor original.</p>
+      <div class="fase-header-tags">
+        <span class="fase-header-tag">Effecti — Monitorar</span><span class="fase-header-tag">2º–10º colocado</span><span class="fase-header-tag">Planilha de Gestão</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-bar" id="tabs-f5">
+    <button class="tab-btn active" onclick="tabFase(5,'etapas',this)">Etapas</button>
+    <button class="tab-btn" onclick="tabFase(5,'encerramento',this)">Encerramento</button>
+  </div>
+
+  <div class="tab-panel active" id="f5-etapas">
+    <div class="section">
+      <div class="section-label">O que é o Monitoramento Pós-Pregão</div>
+      <div style="background:var(--f5-bg);border:1px solid var(--f5-glow);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1rem">
+        <p style="font-size:13px;color:var(--text2);line-height:1.7">Quando a empresa obtém colocação entre 2º e 10º, mantém chance real de convocação futura caso o vencedor seja <strong style="color:var(--text)">desclassificado</strong>, <strong style="color:var(--text)">descumpra prazo de entrega</strong>, <strong style="color:var(--text)">apresente documentação irregular</strong> ou <strong style="color:var(--text)">desista do contrato</strong>. Cada colocação nessa faixa deve ser monitorada diariamente.</p>
+      </div>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f5);color:#fff">1</div>
+          <div class="flow-step-body">
+            <h4>Acompanhamento Diário das Convocações</h4>
+            <p>Acessar o módulo Monitorar no Effecti diariamente para cada licitação com status "Monitoramento Pós". Verificar mensagens do pregoeiro, comunicados no chat e movimentações no portal oficial (ComprasNet, PNCP, BLL).</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f5);color:#fff">2</div>
+          <div class="flow-step-body">
+            <h4>Resposta à Convocação</h4>
+            <p>Ao ser convocado: confirmar a aceitação no prazo estipulado pelo pregoeiro, acionar imediatamente o analista de habilitação e atualizar o status na planilha para "Convocado".</p>
+            <div class="alert alert-warn" style="margin-top:.75rem">
+              <div class="alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+              <p>A recusa em responder à convocação dentro do prazo pode resultar em desclassificação e penalidades. Monitorar com atenção diária.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="f5-encerramento">
+    <div class="section">
+      <div class="section-label">Critérios de encerramento do monitoramento</div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Situação</th><th>Ação</th></tr></thead>
+          <tbody>
+            <tr><td>Convocado e habilitado</td><td>Seguir para a Fase 6 — Compras (pós-empenho)</td></tr>
+            <tr><td>Vencedor mantido / sem convocação após 90 dias</td><td>Encerrar monitoramento — registrar como "Encerrado s/ convocação"</td></tr>
+            <tr><td>Licitação cancelada ou deserta</td><td>Registrar na planilha e arquivar no OptiWork</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div><!-- fim fase 5 -->
+
+
+<!-- ════════════════ FASE 6 — COMPRAS ════════════════ -->
+<div class="fase-panel" id="fase-6" style="--fase-cor:var(--f6);--fase-cor-bg:var(--f6-bg)">
+
+  <div class="fase-header" style="background:var(--f6-bg);border:1px solid var(--f6-glow)">
+    <div class="fase-header-icon" style="background:var(--f6)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+    </div>
+    <div>
+      <h2>Fase 6 — Compras (Pós-Empenho)</h2>
+      <p>Receber a Nota de Empenho, validar, aprovar internamente (Financeiro → Diretoria) e executar a compra dentro do prazo contratual.</p>
+      <div class="fase-header-tags">
+        <span class="fase-header-tag">OptiWork</span><span class="fase-header-tag">OMIE</span><span class="fase-header-tag">Planilha — aba Compras</span><span class="fase-header-tag">Markup individual</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-bar" id="tabs-f6">
+    <button class="tab-btn active" onclick="tabFase(6,'etapas',this)">Etapas</button>
+    <button class="tab-btn" onclick="tabFase(6,'conferencia',this)">Conferência do Empenho</button>
+    <button class="tab-btn" onclick="tabFase(6,'aprovacao',this)">Aprovações Internas</button>
+    <button class="tab-btn" onclick="tabFase(6,'execucao',this)">Execução e Faturamento</button>
+  </div>
+
+  <div class="tab-panel active" id="f6-etapas">
+    <div class="section">
+      <div class="section-label">Fluxo consolidado da Fase de Compras</div>
+      <div style="background:var(--f6-bg);border:1px solid var(--f6-glow);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:12px;color:var(--text2);line-height:2">
+        <span style="font-weight:700;color:var(--text)">Recebimento do Empenho</span> → <span style="font-weight:700;color:var(--text)">Conferência Técnica</span> → <span style="font-weight:700;color:var(--text)">Registro OptiWork</span> → <span style="font-weight:700;color:var(--text)">Registro Planilha</span> → <span style="font-weight:700;color:var(--text)">Markup</span> → <span style="font-weight:700;color:var(--green)">Aprov. Financeiro</span> → <span style="font-weight:700;color:var(--green)">Aprov. Diretoria</span> → <span style="font-weight:700;color:var(--f6)">Comprar</span> → <span style="font-weight:700;color:var(--f6)">Logística</span> → <span style="font-weight:700;color:var(--f6)">Faturamento</span>
+      </div>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f6);color:#fff">1</div>
+          <div class="flow-step-body"><h4>Recebimento e Conferência do Empenho</h4><p>Receber via e-mail, portal oficial ou ComprasNet. Verificar: número, órgão, CNPJ, valor total e objeto. Valor divergente → suspender e formalizar com o órgão.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f6);color:#fff">2</div>
+          <div class="flow-step-body"><h4>Catalogação no OptiWork</h4><p>Criar cartão no projeto "Contratos &amp; Empenhos" com título padrão: <strong>[ÓRGÃO] – EMPENHO [NÚMERO]</strong>. Anexar PDF, inserir etiquetas e definir status "EMPENHO RECEBIDO".</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f6);color:#fff">3</div>
+          <div class="flow-step-body"><h4>Validação Técnica e Elaboração do Markup</h4><p>Cruzar itens com a planilha e proposta vencedora. Elaborar Planilha de Markup individual: custo real atualizado, frete, tributos, DIFAL e margem líquida.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f6);color:#fff">4</div>
+          <div class="flow-step-body"><h4>Aprovação Financeiro → Diretoria</h4><p>Tramitar pelo fluxo interno do OptiWork. Sem aprovação formal, não há autorização de compra.</p></div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="flow-step-body"><h4>Compra → Logística → Faturamento</h4><p>Emitir pedido ao fornecedor, monitorar entrega e registrar NF, data, protocolo e status de pagamento.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="f6-conferencia">
+    <div class="section">
+      <div class="section-label">O que verificar ao receber o empenho</div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Campo</th><th>O que verificar</th></tr></thead>
+          <tbody>
+            <tr><td>Número do empenho</td><td>Conferir com o número do processo na planilha de gestão</td></tr>
+            <tr><td>Órgão emitente</td><td>Confirmar identidade do órgão contratante</td></tr>
+            <tr><td>CNPJ favorecido</td><td>Deve ser o CNPJ correto da empresa participante</td></tr>
+            <tr><td>Valor total empenhado</td><td>Deve coincidir integralmente com o valor adjudicado na disputa</td></tr>
+            <tr><td>Objeto</td><td>Confirmar que corresponde ao item vencedor — sem substituições</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert alert-rule" style="margin-top:1rem">
+        <div class="alert-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
+        <p><strong>Divergência de valor:</strong> suspender o processo e formalizar validação com o órgão emitente antes de qualquer ação interna.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="f6-aprovacao">
+    <div class="section">
+      <div class="section-label">Fluxo de aprovações internas</div>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--green);color:#fff">F</div>
+          <div class="flow-step-body">
+            <h4>Aprovação Financeiro</h4>
+            <p>Validar: disponibilidade de caixa, impacto no fluxo, prazo de pagamento ao fornecedor e prazo de recebimento do órgão.</p>
+            <div class="step-tags"><span class="step-tag" style="background:var(--red-bg);color:var(--red)">Sem aprovação → sem autorização de compra</span></div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--f6);color:#fff">D</div>
+          <div class="flow-step-body">
+            <h4>Aprovação Diretoria</h4>
+            <p>Avaliar: margem final, risco operacional, risco logístico e estratégia comercial. Apenas após aprovação formal a compra pode ser iniciada.</p>
+            <div class="step-tags"><span class="step-tag" style="background:var(--red-bg);color:var(--red)">Sem aprovação → sem autorização de compra</span></div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="flow-step-body"><h4>Status: COMPRAR</h4><p>Com dupla aprovação registrada no cartão, alterar o status para COMPRAR e iniciar o processo de aquisição.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="f6-execucao">
+    <div class="section">
+      <div class="section-label">Execução, logística e faturamento</div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Status</th><th>Ação obrigatória</th></tr></thead>
+          <tbody>
+            <tr><td>COMPRAR</td><td>Emitir pedido ao fornecedor · Anexar pedido no cartão · Registrar prazo acordado · Atualizar planilha com custo real</td></tr>
+            <tr><td>EM TRÂNSITO</td><td>Monitorar: data limite contratual, prazo do fornecedor, emissão de NF, envio e confirmação de entrega</td></tr>
+            <tr><td>ENTREGUE</td><td>Registrar: Nº NF, data de entrega no órgão, protocolo de recebimento, status de pagamento</td></tr>
+            <tr><td>FATURADO</td><td>Atualizar planilha: lead time, data de faturamento, status financeiro</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div><!-- fim fase 6 -->
+
+</main>
+
+<footer>
+  <p>Manual Operacional &middot; Licitações &middot; Croma Tecnologia &middot; v1.0 &middot; Março 2026</p>
+  <a href="index.html" class="btn">&larr; Voltar ao hub</a>
+</footer>
+
+<script>
+// ============================================================
+// NAVEGAÇÃO DE FASES
+// Cada fase tem seu próprio painel e conjunto de abas.
+// ============================================================
+function setFase(n) {
+  document.querySelectorAll('.fase-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.fase-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('fase-' + n).classList.add('active');
+  document.querySelector(`.fase-btn[data-fase="${n}"]`).classList.add('active');
+  // Scroll suave ao topo do conteúdo
+  document.querySelector('.page').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ============================================================
+// ABAS POR FASE
+// Namespace por fase: f1-*, f2-*, etc.
+// ============================================================
+function tabFase(fase, id, btn) {
+  const prefix = 'f' + fase + '-';
+  // Desativar todas as abas da fase
+  document.querySelectorAll('#tabs-f' + fase + ' .tab-btn').forEach(b => b.classList.remove('active'));
+  // Desativar todos os painéis da fase
+  document.querySelectorAll('[id^="' + prefix + '"]').forEach(p => p.classList.remove('active'));
+  // Ativar o par correto
+  document.getElementById(prefix + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ============================================================
+// TOGGLE DE TEMA — persiste no localStorage
+// ============================================================
+function toggleTheme() {
+  const html = document.documentElement;
+  const novo = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', novo);
+  try { localStorage.setItem('croma-tema', novo); } catch(e) {}
+}
+
+(function() {
+  try {
+    const salvo = localStorage.getItem('croma-tema');
+    if (salvo) { document.documentElement.setAttribute('data-theme', salvo); }
+    else if (window.matchMedia('(prefers-color-scheme: light)').matches) { document.documentElement.setAttribute('data-theme', 'light'); }
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>
