@@ -3,266 +3,263 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Comercial — Manual Operacional · Croma Tecnologia</title>
+<title>Comercial &mdash; Manual Operacional &middot; Croma Tecnologia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    TOKENS DE TEMA
-   Purple é a cor do setor Comercial. Segue o mesmo sistema
-   de tokens dos outros manuais — só o --accent muda.
+   Purple é a cor do Comercial — mesma estrutura dos outros
+   setores, só o --accent muda por setor.
 ============================================================ */
-:root { --transition-theme: background .3s ease, color .3s ease, border-color .3s ease; }
-
-[data-theme="dark"] {
-  --bg:#0d1117; --bg2:#161b27; --bg3:#1e2535; --bg4:#252f42;
-  --text:#e8edf5; --text2:#8b98b1; --text3:#4a5568;
-  --border:#1e2535; --border2:#2a3654;
-  --accent:#a78bfa; --accent2:#c4b5fd; --accent-bg:#1a1040; --accent-glow:rgba(167,139,250,.15);
-  --blue:#4f8ef7;   --blue-bg:#0f2347;  --blue-glow:rgba(79,142,247,.15);
-  --green:#34d399;  --green-bg:#052e1c; --green-glow:rgba(52,211,153,.15);
-  --teal:#2dd4bf;   --teal-bg:#0a2e2b;  --teal-glow:rgba(45,212,191,.15);
-  --amber:#fbbf24;  --amber-bg:#2d1a00;
-  --red:#f87171;    --red-bg:#2d0a0a;
-  --shadow:0 2px 8px rgba(0,0,0,.4); --shadow-md:0 8px 24px rgba(0,0,0,.5);
+:root{--transition-theme:background .3s ease,color .3s ease,border-color .3s ease}
+[data-theme="dark"]{
+  --bg:#0d1117;--bg2:#161b27;--bg3:#1e2535;--bg4:#252f42;
+  --text:#e8edf5;--text2:#8b98b1;--text3:#4a5568;
+  --border:#1e2535;--border2:#2a3654;
+  --accent:#a78bfa;--accent2:#c4b5fd;--accent-bg:#1a1040;--accent-glow:rgba(167,139,250,.15);
+  --blue:#4f8ef7;--blue-bg:#0f2347;--blue-glow:rgba(79,142,247,.15);
+  --green:#34d399;--green-bg:#052e1c;--green-glow:rgba(52,211,153,.15);
+  --teal:#2dd4bf;--teal-bg:#0a2e2b;
+  --amber:#fbbf24;--amber-bg:#2d1a00;
+  --red:#f87171;--red-bg:#2d0a0a;
+  --shadow:0 2px 8px rgba(0,0,0,.4);--shadow-md:0 8px 24px rgba(0,0,0,.5);
 }
-[data-theme="light"] {
-  --bg:#f8faff; --bg2:#ffffff; --bg3:#eef2fa; --bg4:#e4eaf8;
-  --text:#111827; --text2:#4b5563; --text3:#9ca3af;
-  --border:#e5e9f5; --border2:#cdd5ef;
-  --accent:#6d28d9; --accent2:#7c3aed; --accent-bg:#f5f3ff; --accent-glow:rgba(109,40,217,.08);
-  --blue:#1e40af;   --blue-bg:#eff6ff;  --blue-glow:rgba(30,64,175,.08);
-  --green:#059669;  --green-bg:#ecfdf5; --green-glow:rgba(5,150,105,.08);
-  --teal:#0d9488;   --teal-bg:#f0fdfa;  --teal-glow:rgba(13,148,136,.08);
-  --amber:#b45309;  --amber-bg:#fffbeb;
-  --red:#dc2626;    --red-bg:#fef2f2;
-  --shadow:0 1px 4px rgba(0,0,0,.06); --shadow-md:0 4px 16px rgba(0,0,0,.08);
+[data-theme="light"]{
+  --bg:#f8faff;--bg2:#ffffff;--bg3:#eef2fa;--bg4:#e4eaf8;
+  --text:#111827;--text2:#4b5563;--text3:#9ca3af;
+  --border:#e5e9f5;--border2:#cdd5ef;
+  --accent:#6d28d9;--accent2:#7c3aed;--accent-bg:#f5f3ff;--accent-glow:rgba(109,40,217,.08);
+  --blue:#1e40af;--blue-bg:#eff6ff;--blue-glow:rgba(30,64,175,.08);
+  --green:#059669;--green-bg:#ecfdf5;--green-glow:rgba(5,150,105,.08);
+  --teal:#0d9488;--teal-bg:#f0fdfa;
+  --amber:#b45309;--amber-bg:#fffbeb;
+  --red:#dc2626;--red-bg:#fef2f2;
+  --shadow:0 1px 4px rgba(0,0,0,.06);--shadow-md:0 4px 16px rgba(0,0,0,.08);
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.65;transition:var(--transition-theme)}
 
-*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-html { scroll-behavior:smooth; }
-body { font-family:'DM Sans',-apple-system,sans-serif; background:var(--bg); color:var(--text); font-size:14px; line-height:1.65; transition:var(--transition-theme); }
-
-/* ============================================================
-   TOPBAR — mesma ordem fixa de todas as páginas
-   Inicio · Financeiro · Compras · Logistica · Comercial ·
-   Licitacao · E-commerce · Outsourcing
-============================================================ */
-.topbar { position:sticky; top:0; z-index:300; height:56px; display:flex; align-items:center; gap:12px; padding:0 1.5rem; background:var(--bg2); border-bottom:1px solid var(--border); box-shadow:var(--shadow); backdrop-filter:blur(12px); transition:var(--transition-theme); }
-.topbar-logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
-.logo-fallback { font-size:16px; font-weight:700; color:var(--accent); letter-spacing:-.03em; }
-.topbar-divider { width:1px; height:22px; background:var(--border2); flex-shrink:0; }
-.topbar-title { font-size:13px; color:var(--text2); white-space:nowrap; }
-.topbar-title strong { color:var(--text); font-weight:600; }
-.topbar-nav { display:flex; gap:2px; margin-left:auto; }
-.topbar-nav a { font-size:12px; color:var(--text2); text-decoration:none; padding:5px 10px; border-radius:7px; transition:all .15s; font-weight:500; white-space:nowrap; }
-.topbar-nav a:hover { background:var(--bg3); color:var(--text); }
-.topbar-nav a.active { background:var(--accent-bg); color:var(--accent); }
-.theme-toggle { width:36px; height:36px; border-radius:10px; border:1px solid var(--border2); background:var(--bg3); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; flex-shrink:0; color:var(--text2); margin-left:6px; }
-.theme-toggle:hover { background:var(--bg4); color:var(--text); border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-glow); }
-.theme-toggle svg { transition:transform .4s ease; }
-.theme-toggle:hover svg { transform:rotate(20deg); }
-.icon-sun { display:none; } .icon-moon { display:block; }
-[data-theme="light"] .icon-sun { display:block; }
-[data-theme="light"] .icon-moon { display:none; }
-@media(max-width:900px) { .topbar-nav { display:none; } }
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:300;height:56px;display:flex;align-items:center;gap:12px;padding:0 1.5rem;background:var(--bg2);border-bottom:1px solid var(--border);box-shadow:var(--shadow);backdrop-filter:blur(12px);transition:var(--transition-theme)}
+.topbar-logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
+.logo-fallback{font-size:16px;font-weight:700;color:var(--accent);letter-spacing:-.03em}
+.topbar-divider{width:1px;height:22px;background:var(--border2);flex-shrink:0}
+.topbar-title{font-size:13px;color:var(--text2);white-space:nowrap}
+.topbar-title strong{color:var(--text);font-weight:600}
+.topbar-nav{display:flex;gap:2px;margin-left:auto}
+.topbar-nav a{font-size:12px;color:var(--text2);text-decoration:none;padding:5px 10px;border-radius:7px;transition:all .15s;font-weight:500;white-space:nowrap}
+.topbar-nav a:hover{background:var(--bg3);color:var(--text)}
+.topbar-nav a.active{background:var(--accent-bg);color:var(--accent)}
+.theme-toggle{width:36px;height:36px;border-radius:10px;border:1px solid var(--border2);background:var(--bg3);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;color:var(--text2);margin-left:6px}
+.theme-toggle:hover{background:var(--bg4);color:var(--text);border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.theme-toggle svg{transition:transform .4s ease}
+.theme-toggle:hover svg{transform:rotate(20deg)}
+.icon-sun{display:none}.icon-moon{display:block}
+[data-theme="light"] .icon-sun{display:block}
+[data-theme="light"] .icon-moon{display:none}
+@media(max-width:900px){.topbar-nav{display:none}}
 
 /* HERO */
-.hero { background:var(--bg2); border-bottom:1px solid var(--border); padding:2.5rem 1.5rem 2rem; position:relative; overflow:hidden; }
-.hero::before { content:''; position:absolute; top:-60px; right:-60px; width:300px; height:300px; background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%); pointer-events:none; }
-.hero-inner { max-width:1000px; margin:0 auto; position:relative; }
-.hero-badge { display:inline-flex; align-items:center; gap:6px; background:var(--accent-bg); color:var(--accent); font-size:11px; font-weight:600; padding:4px 12px; border-radius:20px; margin-bottom:1rem; border:1px solid var(--accent-glow); letter-spacing:.03em; text-transform:uppercase; }
-.hero h1 { font-size:28px; font-weight:700; letter-spacing:-.03em; margin-bottom:.5rem; line-height:1.2; }
-.hero p { font-size:14px; color:var(--text2); max-width:580px; line-height:1.7; }
-.hero-meta { display:flex; gap:1.5rem; margin-top:1.25rem; flex-wrap:wrap; }
-.hero-meta span { font-size:11px; color:var(--text3); display:flex; align-items:center; gap:5px; font-weight:500; }
-.hero-meta span::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--border2); display:inline-block; }
+.hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:2.5rem 1.5rem 2rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:1000px;margin:0 auto;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-bg);color:var(--accent);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:1rem;border:1px solid var(--accent-glow);letter-spacing:.03em;text-transform:uppercase}
+.hero h1{font-size:28px;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem;line-height:1.2}
+.hero p{font-size:14px;color:var(--text2);max-width:580px;line-height:1.7}
+.hero-meta{display:flex;gap:1.5rem;margin-top:1.25rem;flex-wrap:wrap}
+.hero-meta span{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:5px;font-weight:500}
+.hero-meta span::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--border2);display:inline-block}
 
 /* ROLE BAR */
-.role-bar { background:var(--bg2); border-bottom:1px solid var(--border); padding:.875rem 1.5rem; transition:var(--transition-theme); }
-.role-inner { max-width:1000px; margin:0 auto; display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; }
-.role-label { font-size:10px; color:var(--text3); font-weight:700; text-transform:uppercase; letter-spacing:.08em; white-space:nowrap; }
-.role-btn { font-size:12px; font-weight:600; padding:7px 18px; border-radius:20px; border:1px solid var(--border2); background:var(--bg3); color:var(--text2); cursor:pointer; transition:all .15s; display:flex; align-items:center; gap:7px; font-family:inherit; white-space:nowrap; }
-.role-btn:hover { background:var(--bg4); color:var(--text); }
-.role-btn.active-cons { background:var(--accent-bg); color:var(--accent); border-color:var(--accent-glow); }
-.role-btn.active-gest { background:var(--blue-bg); color:var(--blue); border-color:var(--blue-glow); }
+.role-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:.875rem 1.5rem;transition:var(--transition-theme)}
+.role-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.role-label{font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.role-btn{font-size:12px;font-weight:600;padding:7px 18px;border-radius:20px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px;font-family:inherit;white-space:nowrap}
+.role-btn:hover{background:var(--bg4);color:var(--text)}
+.role-btn.active-cons{background:var(--accent-bg);color:var(--accent);border-color:var(--accent-glow)}
+.role-btn.active-gest{background:var(--blue-bg);color:var(--blue);border-color:var(--blue-glow)}
 
-/* LAYOUT PRINCIPAL */
-.page { max-width:1000px; margin:0 auto; padding:2rem 1.5rem 5rem; }
-.section { margin-bottom:2rem; }
-.section-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--text3); margin-bottom:1rem; display:flex; align-items:center; gap:10px; }
-.section-label::after { content:''; flex:1; height:1px; background:var(--border); }
-.role-panel { display:none; }
-.role-panel.active { display:block; animation:fadeIn .2s ease; }
-@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+/* LAYOUT */
+.page{max-width:1000px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.section{margin-bottom:2rem}
+.section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.role-panel{display:none}
+.role-panel.active{display:block;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* ABAS */
-.tab-bar { display:flex; gap:2px; border-bottom:1px solid var(--border); margin-bottom:2rem; overflow-x:auto; scrollbar-width:none; }
-.tab-bar::-webkit-scrollbar { height:0; }
-.tab-btn { font-size:12px; font-weight:600; padding:10px 18px; border:none; background:none; color:var(--text3); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; white-space:nowrap; transition:all .15s; border-radius:8px 8px 0 0; font-family:inherit; }
-.tab-btn:hover { color:var(--text); background:var(--bg3); }
-.tab-btn.active-cons { color:var(--accent); border-bottom-color:var(--accent); background:var(--accent-bg); }
-.tab-btn.active-gest { color:var(--blue); border-bottom-color:var(--blue); background:var(--blue-bg); }
-.tab-panel { display:none; }
-.tab-panel.active { display:block; animation:fadeIn .2s ease; }
+/* ABAS — versão single-cargo: tab() simples como compras.html */
+.tab-bar{display:flex;gap:2px;border-bottom:1px solid var(--border);margin-bottom:2rem;overflow-x:auto;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{height:0}
+.tab-btn{font-size:12px;font-weight:600;padding:10px 18px;border:none;background:none;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .15s;border-radius:8px 8px 0 0;font-family:inherit}
+.tab-btn:hover{color:var(--text);background:var(--bg3)}
+.tab-btn.active-cons{color:var(--accent);border-bottom-color:var(--accent);background:var(--accent-bg)}
+.tab-btn.active-gest{color:var(--blue);border-bottom-color:var(--blue);background:var(--blue-bg)}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fadeIn .2s ease}
 
 /* ROLE INTRO */
-.role-intro { background:var(--bg2); border:1px solid var(--border); border-radius:14px; padding:1.5rem; margin-bottom:2rem; display:flex; gap:16px; align-items:flex-start; }
-.role-intro-icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
-.role-intro h2 { font-size:16px; font-weight:700; color:var(--text); margin-bottom:4px; }
-.role-intro p { font-size:13px; color:var(--text2); line-height:1.7; }
-.role-intro-tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
-.role-intro-tag { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; background:var(--bg3); color:var(--text2); border:1px solid var(--border2); }
+.role-intro{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:2rem;display:flex;gap:16px;align-items:flex-start}
+.role-intro-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.role-intro h2{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px}
+.role-intro p{font-size:13px;color:var(--text2);line-height:1.7}
+.role-intro-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.role-intro-tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;background:var(--bg3);color:var(--text2);border:1px solid var(--border2)}
 
-/* NIVEL GRID (Júnior / Pleno / Sênior) */
-.nivel-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px; margin-bottom:1.5rem; }
-.nivel-card { padding:16px 18px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; transition:all .15s; }
-.nivel-card:hover { border-color:var(--border2); box-shadow:var(--shadow); }
-.nivel-badge { font-size:10px; font-weight:700; padding:3px 10px; border-radius:20px; display:inline-block; margin-bottom:8px; text-transform:uppercase; letter-spacing:.05em; }
-.nivel-card h4 { font-size:13px; font-weight:700; color:var(--text); margin-bottom:5px; }
-.nivel-card p { font-size:12px; color:var(--text2); line-height:1.6; }
+/* NÍVEL GRID — Junior / Pleno / Senior */
+.nivel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:1.5rem}
+.nivel-card{padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;transition:all .15s}
+.nivel-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.nivel-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:7px;text-transform:uppercase;letter-spacing:.05em}
+.nivel-card h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.nivel-card p{font-size:12px;color:var(--text2);line-height:1.6}
 
 /* SCOPE GRID */
-.scope-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:10px; }
-.scope-card { padding:16px 18px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; transition:all .15s; display:flex; gap:14px; align-items:flex-start; }
-.scope-card:hover { border-color:var(--border2); box-shadow:var(--shadow); }
-.scope-icon { width:36px; height:36px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.scope-body h4 { font-size:13px; font-weight:700; color:var(--text); margin-bottom:4px; }
-.scope-body p { font-size:12px; color:var(--text2); line-height:1.6; }
+.scope-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
+.scope-card{padding:16px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;transition:all .15s;display:flex;gap:14px;align-items:flex-start}
+.scope-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.scope-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.scope-body h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.scope-body p{font-size:12px;color:var(--text2);line-height:1.6}
 
 /* INFO GRID */
-.info-grid { display:grid; gap:8px; }
-.info-card { display:flex; gap:14px; align-items:flex-start; padding:14px 16px; background:var(--bg2); border:1px solid var(--border); border-radius:10px; transition:all .15s; }
-.info-card:hover { border-color:var(--border2); box-shadow:var(--shadow); }
-.info-icon { width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.info-body strong { font-size:12px; font-weight:600; color:var(--text); display:block; margin-bottom:3px; }
-.info-body p { font-size:12px; color:var(--text2); line-height:1.6; margin:0; }
+.info-grid{display:grid;gap:8px}
+.info-card{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .15s}
+.info-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.info-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.info-body strong{font-size:12px;font-weight:600;color:var(--text);display:block;margin-bottom:3px}
+.info-body p{font-size:12px;color:var(--text2);line-height:1.6;margin:0}
 
 /* FLOW STEPS */
-.flow-steps { display:grid; gap:0; }
-.flow-step { display:flex; gap:16px; align-items:flex-start; position:relative; padding-bottom:4px; }
-.flow-step:not(:last-child)::before { content:''; position:absolute; left:15px; top:34px; bottom:-4px; width:2px; background:var(--border2); z-index:0; }
-.flow-step-n { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; position:relative; z-index:1; margin-top:10px; }
-.flow-step-body { flex:1; padding:12px 16px; background:var(--bg2); border:1px solid var(--border); border-radius:10px; margin-bottom:8px; transition:all .15s; }
-.flow-step-body:hover { border-color:var(--border2); }
-.flow-step-body h4 { font-size:13px; font-weight:600; color:var(--text); margin-bottom:4px; }
-.flow-step-body p { font-size:12px; color:var(--text2); line-height:1.6; margin:0; }
-.step-tags { display:flex; gap:5px; flex-wrap:wrap; margin-top:8px; }
-.step-tag { font-size:10px; font-weight:600; padding:2px 8px; border-radius:20px; }
+.flow-steps{display:grid;gap:0}
+.flow-step{display:flex;gap:16px;align-items:flex-start;position:relative;padding-bottom:4px}
+.flow-step:not(:last-child)::before{content:'';position:absolute;left:15px;top:34px;bottom:-4px;width:2px;background:var(--border2);z-index:0}
+.flow-step-n{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;position:relative;z-index:1;margin-top:10px}
+.flow-step-body{flex:1;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:all .15s}
+.flow-step-body:hover{border-color:var(--border2)}
+.flow-step-body h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.flow-step-body p{font-size:12px;color:var(--text2);line-height:1.6;margin:0}
+.step-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.step-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px}
 
-/* PLACEHOLDER — conteúdo a ser definido com o Gestor */
-.placeholder-block { background:var(--bg2); border:1.5px dashed var(--border2); border-radius:10px; padding:1.25rem 1.5rem; display:flex; align-items:center; gap:14px; margin-top:.875rem; }
-.placeholder-icon { width:32px; height:32px; border-radius:8px; background:var(--amber-bg); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.placeholder-body strong { font-size:12px; font-weight:600; color:var(--amber); display:block; margin-bottom:3px; }
-.placeholder-body p { font-size:11px; color:var(--text3); line-height:1.6; margin:0; }
-
-/* SISTEMAS */
-.systems-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; }
-.system-card { padding:14px 16px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; transition:all .15s; }
-.system-card:hover { border-color:var(--border2); box-shadow:var(--shadow); }
-.system-name { font-size:13px; font-weight:700; color:var(--text); margin-bottom:6px; display:flex; align-items:center; gap:8px; }
-.system-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
-.system-use { font-size:11px; color:var(--text2); line-height:1.6; }
-.system-actions { display:grid; gap:3px; margin-top:8px; }
-.system-action { font-size:11px; color:var(--text3); padding:3px 0; border-top:1px solid var(--border); display:flex; gap:6px; align-items:center; }
-.system-action::before { content:'›'; color:var(--accent); font-weight:700; font-size:13px; }
+/* SYSTEMS */
+.systems-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.system-card{padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;transition:all .15s}
+.system-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.system-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.system-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.system-use{font-size:11px;color:var(--text2);line-height:1.6}
+.system-actions{display:grid;gap:3px;margin-top:8px}
+.system-action{font-size:11px;color:var(--text3);padding:3px 0;border-top:1px solid var(--border);display:flex;gap:6px;align-items:center}
+.system-action::before{content:'›';color:var(--accent);font-weight:700;font-size:13px}
 
 /* RELACIONAMENTOS */
-.rel-grid { display:grid; gap:8px; }
-.rel-card { display:grid; grid-template-columns:170px 1fr; gap:14px; padding:12px 16px; background:var(--bg2); border:1px solid var(--border); border-radius:10px; align-items:start; transition:all .15s; }
-.rel-card:hover { border-color:var(--border2); }
-@media(max-width:500px) { .rel-card { grid-template-columns:1fr; gap:6px; } }
-.rel-fase { font-size:11px; font-weight:700; color:var(--text); }
-.rel-fase small { display:block; font-size:10px; font-weight:400; color:var(--text3); margin-top:2px; }
-.rel-quem { display:flex; flex-wrap:wrap; gap:5px; }
-.rel-pill { font-size:10px; font-weight:600; padding:3px 10px; border-radius:20px; }
+.rel-grid{display:grid;gap:8px}
+.rel-card{display:grid;grid-template-columns:170px 1fr;gap:14px;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;align-items:start;transition:all .15s}
+.rel-card:hover{border-color:var(--border2)}
+@media(max-width:500px){.rel-card{grid-template-columns:1fr;gap:6px}}
+.rel-fase{font-size:11px;font-weight:700;color:var(--text)}
+.rel-fase small{display:block;font-size:10px;font-weight:400;color:var(--text3);margin-top:2px}
+.rel-quem{display:flex;flex-wrap:wrap;gap:5px}
+.rel-pill{font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px}
 
 /* ALERTAS */
-.alert { border-radius:10px; padding:12px 16px; margin-top:1rem; display:flex; gap:10px; align-items:flex-start; }
-.alert-icon { width:20px; height:20px; flex-shrink:0; margin-top:1px; display:flex; align-items:center; justify-content:center; }
-.alert p { font-size:12px; line-height:1.65; margin:0; }
-.alert-warn  { background:var(--amber-bg); border:1px solid rgba(251,191,36,.2); }
-.alert-warn p { color:var(--amber); }
-.alert-ok    { background:var(--green-bg); border:1px solid var(--green-glow); }
-.alert-ok p  { color:var(--green); }
-.alert-rule  { background:var(--red-bg); border:1px solid rgba(248,113,113,.2); }
-.alert-rule p { color:var(--red); }
-.alert-info  { background:var(--accent-bg); border:1px solid var(--accent-glow); }
-.alert-info p { color:var(--accent2); }
+.alert{border-radius:10px;padding:12px 16px;margin-top:1rem;display:flex;gap:10px;align-items:flex-start}
+.alert-icon{width:20px;height:20px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center}
+.alert p{font-size:12px;line-height:1.65;margin:0}
+.alert-warn{background:var(--amber-bg);border:1px solid rgba(251,191,36,.2)}
+.alert-warn p{color:var(--amber)}
+.alert-ok{background:var(--green-bg);border:1px solid var(--green-glow)}
+.alert-ok p{color:var(--green)}
+.alert-rule{background:var(--red-bg);border:1px solid rgba(248,113,113,.2)}
+.alert-rule p{color:var(--red)}
+.alert-info{background:var(--accent-bg);border:1px solid var(--accent-glow)}
+.alert-info p{color:var(--accent2)}
+
+/* POLICY GRID */
+.policy-grid{display:grid;gap:8px}
+.policy-card{display:grid;grid-template-columns:120px 1fr 1.4fr;gap:14px;align-items:start;padding:14px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .15s}
+.policy-card:hover{border-color:var(--border2)}
+@media(max-width:600px){.policy-card{grid-template-columns:1fr;gap:6px}}
+.policy-badge{font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;text-align:center;display:inline-block;text-transform:uppercase;letter-spacing:.04em}
+.policy-cond{font-size:13px;font-weight:600;color:var(--text);padding-top:2px}
+.policy-obs{font-size:12px;color:var(--text2);line-height:1.6;padding-top:2px}
 
 /* MARKUP TABLE */
-.markup-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--border); }
-.markup-table { width:100%; border-collapse:collapse; font-size:12px; }
-.markup-table th { background:var(--bg3); padding:10px 13px; text-align:left; font-weight:700; font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:var(--text2); border-bottom:1px solid var(--border); white-space:nowrap; }
-.markup-table td { padding:10px 13px; border-bottom:1px solid var(--border); color:var(--text2); vertical-align:top; font-size:12px; }
-.markup-table tr:last-child td { border-bottom:none; }
-.markup-table tr:hover td { background:var(--bg3); }
-.markup-table td:first-child { font-weight:600; color:var(--text); white-space:nowrap; }
-.obrig-badge { font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px; }
+.markup-table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border)}
+.markup-table{width:100%;border-collapse:collapse;font-size:12px}
+.markup-table th{background:var(--bg3);padding:10px 13px;text-align:left;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--text2);border-bottom:1px solid var(--border);white-space:nowrap}
+.markup-table td{padding:10px 13px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+.markup-table tr:last-child td{border-bottom:none}
+.markup-table tr:hover td{background:var(--bg3)}
+.markup-table td:first-child{font-weight:600;color:var(--text);white-space:nowrap}
+.badge-resp{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
+
+/* SLA */
+.sla-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.sla-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;transition:all .15s}
+.sla-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.sla-card label{font-size:10px;color:var(--text3);display:block;margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.sla-card span{font-size:13px;font-weight:500;color:var(--text)}
+.sla-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:middle}
 
 /* RACI */
-.raci-wrap { overflow-x:auto; border-radius:12px; }
-.raci-table { width:100%; border-collapse:collapse; font-size:12px; }
-.raci-table th { background:var(--bg3); padding:10px 12px; text-align:left; font-weight:700; font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:var(--text2); border-bottom:1px solid var(--border); white-space:nowrap; }
-.raci-table td { padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:middle; font-size:12px; }
-.raci-table tr:last-child td { border-bottom:none; }
-.raci-table tr:hover td { background:var(--bg3); }
-.raci-table td:first-child { font-weight:500; color:var(--text); }
-.raci-pill { display:inline-block; font-size:10px; font-weight:800; padding:3px 9px; border-radius:20px; text-align:center; min-width:28px; }
-[data-theme="dark"] .r-R { background:rgba(167,139,250,.2); color:#c4b5fd; }
-[data-theme="dark"] .r-A { background:rgba(52,211,153,.2);  color:#34d399; }
-[data-theme="dark"] .r-C { background:rgba(251,191,36,.2);  color:#fbbf24; }
-[data-theme="dark"] .r-I { background:rgba(148,163,184,.1); color:#64748b; }
-[data-theme="light"] .r-R { background:#ede9fe; color:#6d28d9; }
-[data-theme="light"] .r-A { background:#dcfce7; color:#166534; }
-[data-theme="light"] .r-C { background:#fef9c3; color:#854d0e; }
-[data-theme="light"] .r-I { background:#f3f4f6; color:#6b7280; }
+.raci-wrap{overflow-x:auto;border-radius:12px}
+.raci-table{width:100%;border-collapse:collapse;font-size:12px}
+.raci-table th{background:var(--bg3);padding:10px 12px;text-align:left;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--text2);border-bottom:1px solid var(--border);white-space:nowrap}
+.raci-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle;font-size:12px}
+.raci-table tr:last-child td{border-bottom:none}
+.raci-table tr:hover td{background:var(--bg3)}
+.raci-table td:first-child{font-weight:500;color:var(--text)}
+.raci-pill{display:inline-block;font-size:10px;font-weight:800;padding:3px 9px;border-radius:20px;text-align:center;min-width:28px}
+[data-theme="dark"] .r-R{background:rgba(167,139,250,.2);color:#c4b5fd}
+[data-theme="dark"] .r-A{background:rgba(52,211,153,.2);color:#34d399}
+[data-theme="dark"] .r-C{background:rgba(251,191,36,.2);color:#fbbf24}
+[data-theme="dark"] .r-I{background:rgba(148,163,184,.1);color:#64748b}
+[data-theme="light"] .r-R{background:#ede9fe;color:#6d28d9}
+[data-theme="light"] .r-A{background:#dcfce7;color:#166534}
+[data-theme="light"] .r-C{background:#fef9c3;color:#854d0e}
+[data-theme="light"] .r-I{background:#f3f4f6;color:#6b7280}
 
 /* GLOSSÁRIO */
-.glossary { display:grid; gap:5px; }
-.gitem { display:grid; grid-template-columns:180px 1fr; gap:16px; padding:11px 14px; background:var(--bg2); border:1px solid var(--border); border-radius:10px; transition:all .15s; }
-.gitem:hover { border-color:var(--border2); background:var(--bg3); }
-@media(max-width:500px) { .gitem { grid-template-columns:1fr; gap:4px; } }
-.gterm { font-size:12px; font-weight:700; color:var(--text); }
-.gdef  { font-size:12px; color:var(--text2); line-height:1.6; }
+.glossary{display:grid;gap:5px}
+.gitem{display:grid;grid-template-columns:190px 1fr;gap:16px;padding:11px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .15s}
+.gitem:hover{border-color:var(--border2);background:var(--bg3)}
+@media(max-width:500px){.gitem{grid-template-columns:1fr;gap:4px}}
+.gterm{font-size:12px;font-weight:700;color:var(--text)}
+.gdef{font-size:12px;color:var(--text2);line-height:1.6}
 
-.btn { display:inline-flex; align-items:center; gap:6px; font-size:12px; padding:7px 14px; border-radius:8px; border:1px solid var(--border2); background:var(--bg2); color:var(--text2); cursor:pointer; text-decoration:none; transition:all .15s; font-weight:500; font-family:inherit; }
-.btn:hover { background:var(--bg3); color:var(--text); }
-footer { border-top:1px solid var(--border); padding:1.25rem 1.5rem; max-width:1000px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
-footer p { font-size:11px; color:var(--text3); }
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:7px 14px;border-radius:8px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);cursor:pointer;text-decoration:none;transition:all .15s;font-weight:500;font-family:inherit}
+.btn:hover{background:var(--bg3);color:var(--text)}
+footer{border-top:1px solid var(--border);padding:1.25rem 1.5rem;max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+footer p{font-size:11px;color:var(--text3)}
 
-/* UTILITÁRIOS DE COR — substituem inline styles repetidos de step-tag, rel-pill e obrig-badge */
-.c-accent { background:var(--accent-bg); color:var(--accent); }
-.c-blue   { background:var(--blue-bg);   color:var(--blue);   }
-.c-green  { background:var(--green-bg);  color:var(--green);  }
-.c-amber  { background:var(--amber-bg);  color:var(--amber);  }
-.c-red    { background:var(--red-bg);    color:var(--red);    }
-.c-teal   { background:var(--teal-bg);   color:var(--teal);   }
-/* Variações do obrig-badge — cores definidas por modificador, sem inline style */
-.obrig-red   { background:var(--red-bg);   color:var(--red);   }
-.obrig-amber { background:var(--amber-bg); color:var(--amber); }
-
-/* HAMBURGER — botão que substitui o menu de nav no mobile */
-.hamburger { display:none; width:36px; height:36px; border-radius:10px; border:1px solid var(--border2); background:var(--bg3); cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:5px; flex-shrink:0; margin-left:6px; transition:all .2s; }
-.hamburger:hover { background:var(--bg4); border-color:var(--accent); }
-.hamburger span { display:block; width:16px; height:2px; background:var(--text2); border-radius:2px; transition:all .3s; }
-.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity:0; }
-.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
-@media(max-width:900px) {
-  .hamburger { display:flex; }
-  .topbar-nav { display:none; position:absolute; top:56px; left:0; right:0; background:var(--bg2); border-bottom:1px solid var(--border); box-shadow:var(--shadow-md); padding:.75rem 1rem; flex-direction:column; gap:2px; z-index:299; }
-  .topbar-nav.open { display:flex; }
-  .topbar-nav a { padding:9px 14px; border-radius:9px; font-size:13px; }
-}
-
-/* FOCO VISÍVEL — garante indicador de foco em navegação por teclado */
-:focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:4px; }
+/* ============================================================
+   VIDEO PLAYER — componente reutilizável para tutoriais em MP4.
+   Carregamento lazy: o vídeo só é buscado quando o accordion
+   abre, preservando performance em conexões lentas.
+============================================================ */
+.video-tutorial{margin-top:1rem;border-radius:12px;overflow:hidden;border:1px solid var(--border2);background:var(--bg3);transition:all .2s}
+.video-tutorial-header{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;user-select:none;transition:background .15s}
+.video-tutorial-header:hover{background:var(--bg4)}
+.video-tutorial-icon{width:32px;height:32px;border-radius:8px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.video-tutorial-meta{flex:1}
+.video-tutorial-meta strong{font-size:12px;font-weight:700;color:var(--text);display:block}
+.video-tutorial-meta span{font-size:11px;color:var(--text3)}
+.video-tutorial-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-glow)}
+.video-tutorial-chevron{color:var(--text3);transition:transform .25s}
+.video-tutorial.open .video-tutorial-chevron{transform:rotate(180deg)}
+.video-tutorial-body{display:none;padding:0 12px 12px}
+.video-tutorial.open .video-tutorial-body{display:block;animation:fadeIn .2s ease}
+.video-tutorial-body video{width:100%;border-radius:8px;display:block;background:#000;max-height:420px}
+.video-tutorial-caption{font-size:11px;color:var(--text3);margin-top:8px;text-align:center;line-height:1.5}
 </style>
 </head>
 <body>
 
-<!-- TOPBAR — ordem fixa em todos os arquivos do projeto -->
+<!-- TOPBAR — ordem fixa: Inicio · Financeiro · Compras · Logistica · Comercial · Licitacao · E-commerce · Outsourcing -->
 <header class="topbar">
   <a href="index.html" class="topbar-logo">
     <img src="logo-branco.png" alt="Croma Tecnologia" height="28"
@@ -271,7 +268,7 @@ footer p { font-size:11px; color:var(--text3); }
   </a>
   <div class="topbar-divider"></div>
   <span class="topbar-title">Manual Operacional <strong>/ Comercial</strong></span>
-  <nav class="topbar-nav" id="topbar-nav" role="navigation" aria-label="Menu principal">
+  <nav class="topbar-nav">
     <a href="index.html">Inicio</a>
     <a href="financeiro.html">Financeiro</a>
     <a href="compras.html">Compras</a>
@@ -281,9 +278,6 @@ footer p { font-size:11px; color:var(--text3); }
     <a href="ecommerce.html">E-commerce</a>
     <a href="outsourcing.html">Outsourcing</a>
   </nav>
-  <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="topbar-nav" onclick="toggleNav()">
-    <span></span><span></span><span></span>
-  </button>
   <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
     <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <svg class="icon-sun"  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -297,13 +291,10 @@ footer p { font-size:11px; color:var(--text3); }
       <svg width="6" height="6" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="currentColor"/></svg>
       Setor Comercial
     </div>
-    <h1>Vendas B2B — Ciclo Comercial Completo</h1>
-    <p>Da captação ao pós-venda. Selecione seu cargo para ver o escopo, o passo a passo do processo comercial, os sistemas que você usa e com quem você se relaciona em cada etapa.</p>
+    <h1>Vendas B2B &mdash; Ciclo Comercial Completo</h1>
+    <p>Da captacao ao pos-venda. Selecione seu cargo para ver o escopo, o passo a passo do processo, os sistemas e com quem voce se relaciona em cada etapa.</p>
     <div class="hero-meta">
-      <span>Versão 1.0</span>
-      <span>Março 2026</span>
-      <span>Documento Interno</span>
-      <span>Sistemas: OMIE CRM · OptiWork</span>
+      <span>Versao 1.0</span><span>Marco 2026</span><span>Documento Interno</span><span>Sistemas: OMIE CRM &middot; OptiWork</span>
     </div>
   </div>
 </section>
@@ -312,12 +303,12 @@ footer p { font-size:11px; color:var(--text3); }
 <div class="role-bar">
   <div class="role-inner">
     <span class="role-label">Seu cargo:</span>
-    <button class="role-btn active-cons" id="rbtn-cons" aria-pressed="true" onclick="setRole('cons')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <button class="role-btn active-cons" id="rbtn-cons" onclick="setRole('cons')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       Consultor de Vendas
     </button>
-    <button class="role-btn" id="rbtn-gest" aria-pressed="false" onclick="setRole('gest')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <button class="role-btn" id="rbtn-gest" onclick="setRole('gest')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       Gestor Comercial
     </button>
   </div>
@@ -325,9 +316,9 @@ footer p { font-size:11px; color:var(--text3); }
 
 <main class="page">
 
-<!-- ═══════════════════════════════════════════════════
+<!-- ════════════════════════════════════════════
      PERFIL: CONSULTOR DE VENDAS
-═══════════════════════════════════════════════════ -->
+════════════════════════════════════════════ -->
 <div class="role-panel active" id="role-cons">
 
   <div class="role-intro">
@@ -336,7 +327,7 @@ footer p { font-size:11px; color:var(--text3); }
     </div>
     <div>
       <h2>Consultor de Vendas</h2>
-      <p>Você é o ponto de contato do cliente com a Croma. Sua atuação começa na captação e vai até o pós-venda — garantindo que a operação aconteça corretamente do início ao fim. O crescimento de nível (Júnior → Pleno → Sênior) está atrelado à sua produtividade e consistência em vendas.</p>
+      <p>Voce e o ponto de contato da Croma com o mercado. Sua atuacao vai da prospeccao ativa ate o pos-venda &mdash; garantindo que a operacao aconteca corretamente do inicio ao fim. O crescimento de nivel esta atrelado diretamente a sua produtividade e consistencia em vendas.</p>
       <div class="role-intro-tags">
         <span class="role-intro-tag">OMIE CRM</span>
         <span class="role-intro-tag">OptiWork</span>
@@ -346,117 +337,110 @@ footer p { font-size:11px; color:var(--text3); }
     </div>
   </div>
 
-  <!-- Níveis de progressão -->
+  <!-- Niveis de progressao -->
   <div class="section">
-    <div class="section-label">Níveis e progressão de carreira</div>
+    <div class="section-label">Niveis e progressao de carreira</div>
     <div class="nivel-grid">
       <div class="nivel-card">
-        <span class="nivel-badge" style="background:var(--green-bg);color:var(--green)">Júnior</span>
+        <span class="nivel-badge" style="background:var(--green-bg);color:var(--green)">Junior</span>
         <h4>Consultor em desenvolvimento</h4>
-        <p>Aprendendo o processo comercial, construindo carteira inicial e recebendo acompanhamento próximo do Gestor. Metas e benefícios no nível inicial.</p>
+        <p>Construindo carteira inicial, aprendendo o processo ponta a ponta e recebendo acompanhamento proximo do Gestor. Metas e comissionamento no nivel inicial.</p>
       </div>
       <div class="nivel-card">
         <span class="nivel-badge" style="background:var(--accent-bg);color:var(--accent)">Pleno</span>
         <h4>Consultor consolidado</h4>
-        <p>Domina o processo de ponta a ponta, tem carteira ativa e atinge metas com consistência. Maior autonomia e benefícios financeiros proporcionais à produtividade.</p>
+        <p>Domina o ciclo completo, tem carteira ativa e atinge metas com consistencia. Maior autonomia operacional e beneficios financeiros proporcionais a producao.</p>
       </div>
       <div class="nivel-card">
-        <span class="nivel-badge" style="background:var(--amber-bg);color:var(--amber)">Sênior</span>
+        <span class="nivel-badge" style="background:var(--amber-bg);color:var(--amber)">Senior</span>
         <h4>Consultor de alta performance</h4>
-        <p>Referência comercial da equipe. Carteira sólida, resultados consistentes acima das metas. Maiores benefícios de ganhos financeiros e autonomia operacional.</p>
+        <p>Referencia comercial da equipe. Carteira solida, ticket medio elevado e resultados consistentes acima das metas. Maiores beneficios e autonomia na operacao.</p>
       </div>
     </div>
   </div>
 
-  <div class="tab-bar" id="tabs-cons" role="tablist" aria-label="Abas Consultor de Vendas">
-    <button class="tab-btn active-cons" role="tab" aria-selected="true"  aria-controls="tab-cons-escopo"         id="tbtn-cons-escopo"         onclick="tabRole('cons','escopo',this)">Escopo</button>
-    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-cons-fluxo"           id="tbtn-cons-fluxo"          onclick="tabRole('cons','fluxo',this)">Fluxo Operacional</button>
-    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-cons-markup"          id="tbtn-cons-markup"         onclick="tabRole('cons','markup',this)">Planilha de Markup</button>
-    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-cons-sistemas"        id="tbtn-cons-sistemas"       onclick="tabRole('cons','sistemas',this)">Sistemas</button>
-    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-cons-relacionamentos" id="tbtn-cons-relacionamentos" onclick="tabRole('cons','relacionamentos',this)">Relacionamentos</button>
-    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-cons-regras"          id="tbtn-cons-regras"         onclick="tabRole('cons','regras',this)">Regras</button>
-    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-cons-glossario"       id="tbtn-cons-glossario"      onclick="tabRole('cons','glossario',this)">Glossário</button>
+  <div class="tab-bar" id="tabs-cons">
+    <button class="tab-btn active-cons" onclick="tabCons('escopo',this)">Escopo</button>
+    <button class="tab-btn" onclick="tabCons('fluxo',this)">Fluxo Operacional</button>
+    <button class="tab-btn" onclick="tabCons('markup',this)">Planilha de Markup</button>
+    <button class="tab-btn" onclick="tabCons('sistemas',this)">Sistemas</button>
+    <button class="tab-btn" onclick="tabCons('relacionamentos',this)">Relacionamentos</button>
+    <button class="tab-btn" onclick="tabCons('regras',this)">Regras e Politicas</button>
+    <button class="tab-btn" onclick="tabCons('glossario',this)">Glossario</button>
   </div>
 
-  <!-- ABA: ESCOPO CONSULTOR -->
-  <div class="tab-panel active" id="tab-cons-escopo" role="tabpanel" aria-labelledby="tbtn-cons-escopo">
+  <!-- ── ESCOPO CONSULTOR ── -->
+  <div class="tab-panel active" id="cons-escopo">
     <div class="section">
-      <div class="section-label">O que é sua responsabilidade</div>
+      <div class="section-label">Responsabilidades do Consultor de Vendas</div>
       <div class="scope-grid">
-
         <div class="scope-card">
           <div class="scope-icon" style="background:var(--accent-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </div>
           <div class="scope-body">
-            <h4>Captação de clientes</h4>
-            <p>Prospectar ativamente por ligações e e-mails. Registrar todo contato no CRM do OMIE — cadastro de cliente e tarefas de acompanhamento. Apresentar portfólio e a empresa conforme modelo padrão.</p>
+            <h4>Captacao de clientes</h4>
+            <p>Prospectar ativamente por ligacoes e e-mails conforme meta diaria. Registrar todo contato no CRM do OMIE: cadastro do cliente, historico da interacao e proxima tarefa de acompanhamento.</p>
           </div>
         </div>
-
         <div class="scope-card">
           <div class="scope-icon" style="background:var(--accent-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </div>
           <div class="scope-body">
-            <h4>Manutenção da carteira</h4>
-            <p>Manter contato constante com os clientes ativos. Antecipar necessidades, registrar interações no CRM e garantir recorrência de compras. Identificar e reativar clientes que estão sem comprar.</p>
+            <h4>Manutencao da carteira ativa</h4>
+            <p>Manter contato regular com clientes da carteira. Registrar todas as interacoes no CRM, antecipar necessidades e identificar clientes sem compra recente para reativacao proativa.</p>
           </div>
         </div>
-
         <div class="scope-card">
           <div class="scope-icon" style="background:var(--accent-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           </div>
           <div class="scope-body">
-            <h4>Negociação e fechamento</h4>
-            <p>Elaborar propostas com Markup correto e integral. Negociar dentro dos limites definidos. Coletar a Ordem de Compra do cliente antes de iniciar qualquer processo interno.</p>
+            <h4>Negociacao e fechamento</h4>
+            <p>Elaborar propostas com Markup correto e integral. Negociar dentro dos limites definidos. Obter a Ordem de Compra do cliente antes de qualquer acao interna.</p>
           </div>
         </div>
-
         <div class="scope-card">
           <div class="scope-icon" style="background:var(--accent-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
           </div>
           <div class="scope-body">
             <h4>Abertura do ticket de compra</h4>
-            <p>Criar o ticket no OptiWork com todas as informações obrigatórias, Markup integral preenchido e OC anexada. O Markup é imutável após abertura — preencher corretamente na primeira vez.</p>
+            <p>Criar o ticket no OptiWork com todas as informacoes obrigatorias, Markup e OC anexados. O Markup e imutavel apos abertura &mdash; preencher corretamente na primeira vez.</p>
           </div>
         </div>
-
         <div class="scope-card">
           <div class="scope-icon" style="background:var(--accent-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
           <div class="scope-body">
             <h4>Acompanhamento do processo</h4>
-            <p>Monitorar o andamento do pedido após abrir o ticket. Acompanhar o prazo de entrega ao cliente. Comunicar proativamente qualquer atraso. Acionar o Gestor se o card parar em Pendentes.</p>
+            <p>Monitorar o card no kanban ate a confirmacao de entrega. Comunicar proativamente ao cliente qualquer alteracao de prazo. Em caso de Pendentes, acionar o Gestor &mdash; nunca o comprador diretamente.</p>
           </div>
         </div>
-
         <div class="scope-card">
           <div class="scope-icon" style="background:var(--accent-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           </div>
           <div class="scope-body">
-            <h4>Pós-venda e inadimplência</h4>
-            <p>Verificar satisfação do cliente após entrega. Registrar no CRM. Monitorar o pagamento e acionar o Gestor imediatamente se identificar inadimplência. Não aguardar o prazo vencer sem agir.</p>
+            <h4>Pos-venda e inadimplencia</h4>
+            <p>Verificar satisfacao apos a entrega. Registrar no CRM. Monitorar o pagamento e acionar o Gestor imediatamente se o prazo vencer sem quitacao.</p>
           </div>
         </div>
-
       </div>
     </div>
 
     <div class="section">
-      <div class="section-label">O que NÃO é responsabilidade do consultor</div>
+      <div class="section-label">O que NAO e responsabilidade do consultor</div>
       <div class="info-grid">
         <div class="info-card">
           <div class="info-icon" style="background:var(--red-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
           </div>
           <div class="info-body">
-            <strong>Alterar o Markup após abertura do ticket</strong>
-            <p>Imutável. Qualquer mudança reinicia o fluxo completo: Gestor → Financeiro → Diretoria. Preencha certo na primeira vez.</p>
+            <strong>Alterar o Markup apos abertura do ticket</strong>
+            <p>Qualquer alteracao invalida o processo e exige reinicio completo: Gestor &rarr; Financeiro &rarr; Diretoria. Preencha certo na primeira vez.</p>
           </div>
         </div>
         <div class="info-card">
@@ -465,7 +449,7 @@ footer p { font-size:11px; color:var(--text3); }
           </div>
           <div class="info-body">
             <strong>Contatar o comprador diretamente para cobrar prazos</strong>
-            <p>Em caso de Pendentes, o Gestor Comercial é o ponto de contato com Compras. Nunca acionar o comprador diretamente.</p>
+            <p>Quando um card vai para Pendentes, o Gestor Comercial assume a comunicacao com Compras. Nunca acionar o comprador diretamente.</p>
           </div>
         </div>
         <div class="info-card">
@@ -473,8 +457,8 @@ footer p { font-size:11px; color:var(--text3); }
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
           </div>
           <div class="info-body">
-            <strong>Emitir NF sem documentação completa no OptiWork</strong>
-            <p>OC do cliente e Markup aprovado são obrigatórios. Sem os dois documentos no card, o processo não avança.</p>
+            <strong>Solicitar emissao de NF sem documentacao no OptiWork</strong>
+            <p>OC e Markup aprovado sao obrigatorios. Sem os dois arquivados no sistema, nenhuma NF e emitida &mdash; sem excecao.</p>
           </div>
         </div>
         <div class="info-card">
@@ -482,199 +466,251 @@ footer p { font-size:11px; color:var(--text3); }
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
           </div>
           <div class="info-body">
-            <strong>Negociar condição fora da política sem autorização</strong>
-            <p>Descontos ou prazos especiais precisam de autorização prévia do Gestor antes de serem comunicados ao cliente.</p>
+            <strong>Negociar condicao fora da politica sem autorizacao previa</strong>
+            <p>Descontos ou prazos especiais precisam de autorizacao do Gestor antes de serem comunicados ao cliente. Nunca prometer o que nao foi aprovado.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ABA: FLUXO OPERACIONAL CONSULTOR -->
-  <div class="tab-panel" id="tab-cons-fluxo" role="tabpanel" aria-labelledby="tbtn-cons-fluxo">
+  <!-- ── FLUXO CONSULTOR ── -->
+  <div class="tab-panel" id="cons-fluxo">
     <div class="section">
       <div class="section-label">As 6 etapas do ciclo comercial</div>
       <div class="flow-steps">
 
-        <!-- ETAPA 1: CAPTAÇÃO -->
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">1</div>
           <div class="flow-step-body">
-            <h4>Captação — primeiro contato com o cliente</h4>
-            <p>Prospectar por ligações e e-mails conforme a meta diária definida pelo Gestor. Usar o script de ligação e o modelo de e-mail padrão. Apresentar a empresa e o portfólio de produtos. Todo contato deve ser registrado no CRM do OMIE imediatamente: cadastro do cliente, histórico da interação e próxima tarefa de acompanhamento.</p>
+            <h4>Captacao &mdash; primeiro contato com o cliente</h4>
+            <p>Prospectar por ligacoes e e-mails com base na meta diaria de contatos definida pelo Gestor. Na abordagem: apresentar brevemente a Croma, o portfolio de produtos B2B e identificar uma necessidade real do cliente. Todo contato deve ser registrado no CRM do OMIE imediatamente: criar ou localizar o cadastro do cliente, registrar o historico da interacao e criar a tarefa de proximo contato com data. Nenhum contato fica sem registro.</p>
             <div class="step-tags">
-              <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">CRM obrigatório</span>
-              <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Script e modelo padrão</span>
+              <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">CRM obrigatorio</span>
+              <span class="step-tag" style="background:var(--blue-bg);color:var(--blue)">Meta diaria definida pelo Gestor</span>
             </div>
-            <div class="placeholder-block">
-              <div class="placeholder-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+
+            <!-- Player de tutorial: cadastro de novo cliente no OMIE (empresa ESFERA)
+                 Vídeo referenciado por path relativo — precisa estar na mesma pasta no Netlify.
+                 O accordion mantém o carregamento lazy: o browser só baixa o vídeo quando abrir. -->
+            <div class="video-tutorial" id="vid-cadastro-omie">
+              <div class="video-tutorial-header" onclick="toggleVideo('vid-cadastro-omie')" aria-expanded="false" aria-controls="vid-cadastro-omie-body">
+                <div class="video-tutorial-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+                <div class="video-tutorial-meta">
+                  <strong>Tutorial em vídeo — Cadastro de Novo Cliente no OMIE</strong>
+                  <span>Empresa: ESFERA &middot; 1 min &middot; Passo a passo completo</span>
+                </div>
+                <span class="video-tutorial-badge">MP4</span>
+                <svg class="video-tutorial-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
-              <div class="placeholder-body">
-                <strong>Em elaboração — a definir com o Gestor</strong>
-                <p>Meta diária de ligações e e-mails, script de ligação, modelo de e-mail e portfólio de produtos serão adicionados aqui após alinhamento.</p>
+              <div class="video-tutorial-body" id="vid-cadastro-omie-body">
+                <video
+                  controls
+                  preload="none"
+                  src="Cadastro_de_novo_cliente_-_OMIE.mp4"
+                  aria-label="Tutorial: cadastro de novo cliente no OMIE — empresa ESFERA">
+                  Seu navegador não suporta reprodução de vídeo HTML5.
+                </video>
+                <p class="video-tutorial-caption">
+                  Acesse o OMIE pela empresa <strong>ESFERA</strong>, vá em CRM &rarr; Clientes &rarr; Novo cliente e preencha os dados conforme o vídeo.
+                </p>
               </div>
             </div>
+
           </div>
         </div>
 
-        <!-- ETAPA 2: CONSTÂNCIA -->
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">2</div>
           <div class="flow-step-body">
-            <h4>Constância em contato — manutenção da carteira</h4>
-            <p>Clientes ativos precisam de contato regular para manter relacionamento e garantir recorrência de compras. Registrar toda interação no CRM: ligações, e-mails, visitas e propostas enviadas. Identificar clientes que estão sem comprar há muito tempo e reativar proativamente com o apoio do Gestor.</p>
+            <h4>Constancia em contato &mdash; manutencao da carteira</h4>
+            <p>Clientes da carteira precisam de contato regular para manter relacionamento e garantir recorrencia. Registrar toda interacao no CRM: ligacao feita, proposta enviada, e-mail respondido. Monitorar quais clientes estao ativos (compraram nos ultimos 30&ndash;60 dias) e quais estao em risco de inativacao. Clientes sem compra ha mais de 60 dias entram em fila de reativacao &mdash; comunicar ao Gestor para estrategia em conjunto.</p>
             <div class="step-tags">
-              <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">CRM obrigatório</span>
-            </div>
-            <div class="placeholder-block">
-              <div class="placeholder-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-              </div>
-              <div class="placeholder-body">
-                <strong>Em elaboração — a definir com o Gestor</strong>
-                <p>Frequência de contato por perfil de cliente, critérios de reativação e estratégia de controle da carteira ativa serão definidos em alinhamento com o Gestor.</p>
-              </div>
+              <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">CRM como central de controle</span>
+              <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">+60 dias sem compra &rarr; sinalizar ao Gestor</span>
             </div>
           </div>
         </div>
 
-        <!-- ETAPA 3: VENDA -->
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">3</div>
           <div class="flow-step-body">
-            <h4>Venda — do fechamento ao ticket de compra</h4>
-            <p>Ao fechar a venda: <strong>(1)</strong> Obter a Ordem de Compra do cliente em PDF. <strong>(2)</strong> Solicitar cotação de frete à Logística via OptiWork antes de preencher o Markup. <strong>(3)</strong> Preencher a Planilha de Markup corretamente e integralmente. <strong>(4)</strong> Abrir o ticket no OptiWork com todas as informações e os dois documentos anexados. <strong>(5)</strong> Acompanhar o andamento do card até a confirmação de entrega ao cliente.</p>
+            <h4>Venda &mdash; do fechamento ao ticket de compra</h4>
+            <p><strong>(1)</strong> Solicitar cotacao de frete a Logistica via OptiWork antes de fechar o preco final com o cliente. <strong>(2)</strong> Obter a Ordem de Compra do cliente em PDF. <strong>(3)</strong> Preencher a Planilha de Markup corretamente e integralmente com os dados reais. <strong>(4)</strong> Abrir o ticket no OptiWork com todas as informacoes obrigatorias e os dois documentos (Markup + OC) anexados. <strong>(5)</strong> Acompanhar o card no kanban ate a confirmacao de entrega ao cliente.</p>
             <div class="step-tags">
-              <span class="step-tag" style="background:var(--red-bg);color:var(--red)">OC obrigatória antes do ticket</span>
-              <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Markup integral e correto</span>
-              <span class="step-tag c-teal">Frete cotado pela Logística</span>
+              <span class="step-tag" style="background:var(--red-bg);color:var(--red)">OC obrigatoria antes do ticket</span>
+              <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Frete cotado pela Logistica</span>
+              <span class="step-tag" style="background:var(--teal-bg);color:var(--teal)">Markup integral antes de abrir</span>
             </div>
           </div>
         </div>
 
-        <!-- ETAPA 4: MARKUP -->
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">4</div>
           <div class="flow-step-body">
-            <h4>Planilha de Markup — preenchimento obrigatório e integral</h4>
-            <p>O Markup é a análise de viabilidade financeira da venda. Preencher com: custo real cotado com o fornecedor, MKP aplicado (mínimo 1,35 para parceiros), preço de venda ao cliente, tributos (DIFAL quando interestadual), frete cotado pela Logística, empresa faturadora (CNPJ) e margem líquida. Verificar a lista de parceiros e principais fornecedores por tipo de produto — disponível no Drive — para garantir custo competitivo.</p>
+            <h4>Planilha de Markup &mdash; preenchimento obrigatorio e integral</h4>
+            <p>Preencher todos os campos antes de abrir o ticket: custo real cotado com o fornecedor, MKP aplicado (minimo 1,35 para parceiros), preco de venda ao cliente, tributos, DIFAL quando a entrega e fora do DF, frete cotado pela Logistica, empresa faturadora (CNPJ) e margem liquida. Consultar a lista de parceiros e fornecedores no Drive para garantir custo competitivo. O Gestor analisa cada campo minuciosamente &mdash; qualquer inconsistencia retorna o ticket ao consultor.</p>
             <div class="step-tags">
-              <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Imutável após abertura do ticket</span>
-              <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">Gestor analisa minuciosamente</span>
-              <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">MKP mínimo 1,35 para parceiros</span>
-            </div>
-            <div class="placeholder-block">
-              <div class="placeholder-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-              </div>
-              <div class="placeholder-body">
-                <strong>Em elaboração — a definir com o Gestor</strong>
-                <p>Lista completa de parceiros e principais fornecedores por tipo de produto será disponibilizada no Drive após alinhamento.</p>
-              </div>
+              <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Imutavel apos abertura</span>
+              <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">Gestor analisa campo a campo</span>
+              <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">MKP minimo 1,35 para parceiros</span>
             </div>
           </div>
         </div>
 
-        <!-- ETAPA 5: CRM -->
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">5</div>
           <div class="flow-step-body">
-            <h4>CRM (OMIE) — registro obrigatório de todas as oportunidades</h4>
-            <p>Toda oportunidade conquistada deve ser registrada no CRM do OMIE. Este registro é a base que permite à Diretoria visualizar o faturamento real e ao Gestor acompanhar o desempenho individual e da equipe. Não registrar no CRM equivale a uma venda invisível para a gestão. O Gestor confere o preenchimento regularmente — manter o CRM atualizado é obrigação do consultor, não opção.</p>
+            <h4>CRM (OMIE) &mdash; registro de oportunidades conquistadas</h4>
+            <p>Toda venda fechada deve ser registrada como oportunidade ganha no CRM do OMIE. Este registro e a base que permite a Diretoria visualizar o faturamento real da empresa e ao Gestor acompanhar o desempenho individual e da equipe. Nao registrar no CRM e o mesmo que ter uma venda invisivel para a gestao. O Gestor confere o preenchimento regularmente &mdash; manter o CRM atualizado nao e opcional.</p>
             <div class="step-tags">
-              <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Obrigatório em toda venda</span>
-              <span class="step-tag" style="background:var(--blue-bg);color:var(--blue)">Base do faturamento real da Diretoria</span>
+              <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Obrigatorio em toda venda</span>
+              <span class="step-tag" style="background:var(--blue-bg);color:var(--blue)">Base do faturamento real</span>
             </div>
           </div>
         </div>
 
-        <!-- ETAPA 6: ESTRATÉGIAS INTERNAS -->
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">6</div>
           <div class="flow-step-body">
-            <h4>Estratégias internas — carteira e arquivo de documentos</h4>
-            <p><strong>Carteira ativa:</strong> saber quais clientes estão ativos, quais estão em risco e qual é o volume de compras de cada um. Manter esse controle no CRM com tarefas e histórico atualizado. <strong>Arquivo de documentos no OptiWork:</strong> dados de cliente, tabelas de preços e Ordens de Compra devem estar sempre arquivados e acessíveis. A NF só é emitida com documentação completa — sem OC no OptiWork, sem NF. Essa disciplina protege o consultor e a empresa.</p>
+            <h4>Pos-venda &mdash; satisfacao, pagamento e carteira</h4>
+            <p>Apos confirmacao de entrega: entrar em contato com o cliente para verificar satisfacao com o produto e o processo. Registrar o feedback no CRM. Monitorar o pagamento &mdash; ao identificar que o prazo venceu sem quitacao, acionar o Gestor imediatamente. Nao aguardar o cliente entrar em contato. O Gestor aciona o Financeiro e pode requisitar bloqueio para novas vendas se necessario.</p>
             <div class="step-tags">
-              <span class="step-tag" style="background:var(--green-bg);color:var(--green)">CRM como centro de controle</span>
-              <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Sem OC no OptiWork → sem NF</span>
+              <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Satisfacao do cliente</span>
+              <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">CRM obrigatorio</span>
+              <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Inadimplencia &rarr; Gestor imediato</span>
             </div>
           </div>
         </div>
 
       </div>
     </div>
+
+    <div class="section">
+      <div class="section-label">Checklist do ticket de compra &mdash; antes de abrir</div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--accent-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="info-body"><strong>Ordem de Compra do cliente (.pdf) em maos</strong><p>Documento formal do cliente autorizando a compra. Em licitacoes, equivale a Nota de Empenho. Sem OC, sem ticket.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--accent-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div class="info-body"><strong>Markup (.xlsx) preenchido integralmente</strong><p>Todos os campos com valores reais: custo cotado, MKP, preco, tributos, frete e margem.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--accent-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="info-body"><strong>Frete cotado pela Logistica via OptiWork</strong><p>O valor do frete deve constar no Markup antes de abrir o ticket. Solicitar cotacao com antecedencia.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--accent-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="info-body"><strong>Endereco de entrega completo confirmado</strong><p>CEP, logradouro, numero, bairro, cidade e UF. Triangulada: endereco do cliente final &mdash; nao da Croma.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--accent-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          </div>
+          <div class="info-body"><strong>Empresa faturadora definida no Markup</strong><p>O CNPJ que esta no Markup e o mesmo de compra e de venda. Venda interna e proibida &mdash; definir antes de abrir o ticket.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--accent-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/></svg>
+          </div>
+          <div class="info-body"><strong>Tipo de entrega: padrao ou triangulada</strong><p>Padrao = estoque Croma ao cliente. Triangulada = fornecedor direto ao cliente. Impacta logistica e etiquetagem.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">SLA &mdash; prazos que o consultor deve respeitar</div>
+      <div class="sla-grid">
+        <div class="sla-card"><label>Resposta a cliente</label><span><span class="sla-dot" style="background:var(--green)"></span>Mesmo dia util</span></div>
+        <div class="sla-card"><label>Envio de proposta</label><span><span class="sla-dot" style="background:var(--accent)"></span>Ate 24h apos solicitacao</span></div>
+        <div class="sla-card"><label>Abertura do ticket</label><span><span class="sla-dot" style="background:var(--amber)"></span>Mesmo dia do fechamento</span></div>
+        <div class="sla-card"><label>Registro no CRM</label><span><span class="sla-dot" style="background:var(--teal)"></span>Imediato apos cada contato</span></div>
+        <div class="sla-card"><label>Inadimplencia</label><span><span class="sla-dot" style="background:var(--red)"></span>Acionar Gestor no vencimento</span></div>
+      </div>
+    </div>
   </div>
 
-  <!-- ABA: PLANILHA DE MARKUP -->
-  <div class="tab-panel" id="tab-cons-markup" role="tabpanel" aria-labelledby="tbtn-cons-markup">
+  <!-- ── PLANILHA DE MARKUP ── -->
+  <div class="tab-panel" id="cons-markup">
     <div class="section">
-      <div class="section-label">O que é o Markup e por que ele é crítico</div>
+      <div class="section-label">O que e o Markup e por que e critico</div>
       <div class="alert alert-info" style="margin-top:0;margin-bottom:1.5rem">
         <div class="alert-icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         </div>
-        <p>O Markup é a análise de viabilidade financeira de cada venda. Você preenche antes de abrir o ticket no OptiWork. O Gestor analisa minuciosamente cada campo — custos, MKP, convergência com a OC e risco do cliente — antes de aprovar. Um Markup incompleto ou incorreto bloqueia a venda e atrasa o prazo de entrega.</p>
+        <p>A Planilha de Markup e a analise de viabilidade financeira da venda. Voce preenche antes de abrir o ticket. O Gestor analisa cada campo minuciosamente para garantir que os custos nao comprometem a saude da operacao e que as informacoes convergem com a OC do cliente. Um Markup incompleto ou incorreto bloqueia a venda e atrasa o prazo de entrega ao cliente.</p>
       </div>
 
-      <div class="markup-wrap">
+      <div class="markup-table-wrap">
         <table class="markup-table">
           <thead>
             <tr>
               <th>Campo</th>
               <th>O que preencher</th>
               <th>Por que importa</th>
-              <th>Status</th>
+              <th>Responsavel</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Custo do produto</td>
-              <td>Valor de custo real cotado com o fornecedor — não estimado</td>
-              <td>Base de cálculo de toda a margem. Custo errado = margem errada</td>
-              <td><span class="obrig-badge obrig-red">Obrigatório</span></td>
+              <td>Valor real cotado com o fornecedor &mdash; nao estimado</td>
+              <td>Base de calculo de toda a margem. Custo errado = margem errada = aprovacao incorreta</td>
+              <td><span class="badge-resp" style="background:var(--accent-bg);color:var(--accent)">Consultor</span></td>
             </tr>
             <tr>
               <td>MKP (Markup)</td>
-              <td>Índice multiplicador. Mínimo 1,35 para tabelas de fabricantes parceiros</td>
-              <td>Define o preço mínimo de venda. Abaixo do mínimo: Gestor reprova automaticamente</td>
-              <td><span class="obrig-badge obrig-red">Obrigatório</span></td>
+              <td>Indice multiplicador sobre o custo. Minimo 1,35 para fabricantes parceiros</td>
+              <td>Define o preco minimo de venda. MKP abaixo do minimo: Gestor reprova automaticamente</td>
+              <td><span class="badge-resp" style="background:var(--accent-bg);color:var(--accent)">Consultor</span></td>
             </tr>
             <tr>
-              <td>Preço de venda</td>
-              <td>Valor final acordado com o cliente</td>
-              <td>Deve convergir com o que está na OC do cliente. Divergência = reprovado</td>
-              <td><span class="obrig-badge obrig-red">Obrigatório</span></td>
+              <td>Preco de venda</td>
+              <td>Valor final acordado com o cliente na negociacao</td>
+              <td>Deve convergir exatamente com o valor na OC. Divergencia = reprovado pelo Gestor</td>
+              <td><span class="badge-resp" style="background:var(--accent-bg);color:var(--accent)">Consultor</span></td>
             </tr>
             <tr>
               <td>Tributos (ICMS, PIS, COFINS)</td>
-              <td>Tributos da operação conforme natureza da venda</td>
-              <td>Impacta a margem real. Erro aqui distorce o resultado e pode levar a venda com prejuízo</td>
-              <td><span class="obrig-badge obrig-red">Obrigatório</span></td>
+              <td>Impostos da operacao conforme natureza da venda e perfil do cliente</td>
+              <td>Tributos errados distorcem a margem real. Pode gerar venda com prejuizo sem que apareca no Markup</td>
+              <td><span class="badge-resp" style="background:var(--accent-bg);color:var(--accent)">Consultor</span></td>
             </tr>
             <tr>
               <td>DIFAL</td>
-              <td>Diferencial de ICMS — incide em vendas interestaduais</td>
-              <td>Obrigatório quando a venda é para fora do DF. Omitir reduz a margem real</td>
-              <td><span class="obrig-badge obrig-amber">Quando aplicável</span></td>
+              <td>Diferencial de ICMS &mdash; incide em vendas para clientes fora do DF</td>
+              <td>Obrigatorio para entregas interestaduais. Omitir reduz a margem real sem que o Markup mostre</td>
+              <td><span class="badge-resp" style="background:var(--amber-bg);color:var(--amber)">Quando aplicavel</span></td>
             </tr>
             <tr>
               <td>Frete</td>
-              <td>Valor cotado pela Logística via OptiWork antes do fechamento</td>
-              <td>Frete não considerado reduz a margem real da operação. Cotar antes de preencher</td>
-              <td><span class="obrig-badge obrig-red">Obrigatório</span></td>
+              <td>Valor cotado pela Logistica via OptiWork antes do fechamento da venda</td>
+              <td>Frete nao incluido reduz a margem real. Solicitar cotacao antes de preencher o Markup</td>
+              <td><span class="badge-resp" style="background:var(--teal-bg);color:var(--teal)">Logistica cota</span></td>
             </tr>
             <tr>
-              <td>Margem líquida</td>
-              <td>Resultado final após todos os custos e tributos</td>
-              <td>Número que a Diretoria e o Financeiro analisam para aprovar. Margem negativa = reprovado</td>
-              <td><span class="obrig-badge obrig-red">Obrigatório</span></td>
+              <td>Margem liquida</td>
+              <td>Resultado final apos todos os custos, tributos e frete</td>
+              <td>Numero analisado pelo Financeiro e pela Diretoria para aprovacao. Margem negativa = reprovado</td>
+              <td><span class="badge-resp" style="background:var(--accent-bg);color:var(--accent)">Calculado automaticamente</span></td>
             </tr>
             <tr>
               <td>Empresa faturadora</td>
-              <td>Qual CNPJ do grupo emitirá a NF ao cliente</td>
-              <td>É o mesmo CNPJ pelo qual a compra será feita. Venda interna é proibida — definir antes de abrir o ticket</td>
-              <td><span class="obrig-badge obrig-red">Obrigatório</span></td>
+              <td>Qual CNPJ do grupo emitira a NF ao cliente</td>
+              <td>Define o CNPJ de compra (que e o mesmo de venda). Imutavel &mdash; venda interna e proibida</td>
+              <td><span class="badge-resp" style="background:var(--accent-bg);color:var(--accent)">Consultor</span></td>
             </tr>
           </tbody>
         </table>
@@ -682,64 +718,102 @@ footer p { font-size:11px; color:var(--text3); }
     </div>
 
     <div class="section">
-      <div class="section-label">Regra de imutabilidade — o que acontece se errar</div>
+      <div class="section-label">Regra de imutabilidade &mdash; o que acontece se precisar alterar</div>
       <div class="alert alert-rule" style="margin-top:0">
         <div class="alert-icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
         </div>
-        <p><strong>O Markup não pode ser alterado após a abertura do ticket.</strong> Qualquer modificação — custo, MKP, preço ou empresa faturadora — invalida o processo e exige reinício completo do fluxo: Gestor Comercial → Financeiro → Diretoria. Isso atrasa a operação e pode comprometer o prazo de entrega prometido ao cliente.</p>
+        <p><strong>O Markup nao pode ser alterado apos a abertura do ticket.</strong> Qualquer modificacao &mdash; custo, MKP, preco, empresa faturadora ou margem &mdash; invalida o processo e exige reinicio completo do fluxo de aprovacao: Gestor &rarr; Financeiro &rarr; Diretoria. Isso atrasa a operacao inteira e pode comprometer o prazo prometido ao cliente.</p>
       </div>
-      <div class="alert alert-warn">
+      <div class="alert alert-warn" style="margin-top:.75rem">
         <div class="alert-icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </div>
-        <p><strong>Checklist antes de abrir o ticket:</strong> o custo cotado é real (não estimado)? O frete foi cotado pela Logística? O MKP está acima do mínimo? A empresa faturadora está correta? A OC do cliente está em mãos e os dados batem com o Markup? Somente com tudo confirmado abrir o ticket.</p>
+        <p><strong>Antes de abrir o ticket, verifique:</strong> o custo e real (nao estimado)? O frete foi cotado pela Logistica? O MKP esta acima do minimo? A empresa faturadora esta correta? Os dados batem com a OC do cliente? Somente com tudo confirmado abrir o ticket.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Fluxo de reinicio apos erro no Markup</div>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--red-bg);color:var(--red)">1</div>
+          <div class="flow-step-body">
+            <h4>Consultor identifica necessidade de alteracao</h4>
+            <p>Comunicar ao Gestor imediatamente. Nao tentar alterar o arquivo diretamente &mdash; o Gestor precisa ser informado antes de qualquer acao.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--amber-bg);color:var(--amber)">2</div>
+          <div class="flow-step-body">
+            <h4>Gestor cancela o ticket atual e devolve ao consultor</h4>
+            <p>O card retorna para o consultor com comentario explicando o que precisa ser corrigido no Markup.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">3</div>
+          <div class="flow-step-body">
+            <h4>Consultor corrige e reabre novo ticket</h4>
+            <p>Novo arquivo de Markup com os dados corrigidos e todos os documentos novamente. O ciclo reinicia do zero pela coluna Aprov. Gestor.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="flow-step-body">
+            <h4>Fluxo retoma normalmente</h4>
+            <p>Gestor &rarr; Financeiro &rarr; Diretoria &rarr; Compras. Nenhuma etapa e pulada mesmo que o ticket anterior ja tivesse passado por algumas delas.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ABA: SISTEMAS CONSULTOR -->
-  <div class="tab-panel" id="tab-cons-sistemas" role="tabpanel" aria-labelledby="tbtn-cons-sistemas">
+  <!-- ── SISTEMAS CONSULTOR ── -->
+  <div class="tab-panel" id="cons-sistemas">
     <div class="section">
-      <div class="section-label">Sistemas que você usa e para quê</div>
+      <div class="section-label">Sistemas que voce usa e para que</div>
       <div class="systems-grid">
         <div class="system-card">
-          <div class="system-name"><span class="system-dot" style="background:var(--accent)"></span>OMIE — CRM</div>
+          <div class="system-name"><span class="system-dot" style="background:var(--accent)"></span>OMIE &mdash; CRM</div>
           <div class="system-use">Central de relacionamento com o cliente. Tudo que envolve cliente vive aqui.</div>
           <div class="system-actions">
             <span class="system-action">Cadastrar cliente e criar tarefas de follow-up</span>
-            <span class="system-action">Registrar ligações, e-mails e reuniões</span>
+            <span class="system-action">Registrar ligacoes, e-mails e propostas enviadas</span>
             <span class="system-action">Registrar oportunidades conquistadas</span>
-            <span class="system-action">Acompanhar histórico de compras do cliente</span>
-            <span class="system-action">Monitorar pagamentos e vencimentos</span>
+            <span class="system-action">Consultar historico de compras do cliente</span>
+            <span class="system-action">Monitorar pagamentos e vencimentos em aberto</span>
           </div>
         </div>
         <div class="system-card">
           <div class="system-name"><span class="system-dot" style="background:var(--blue)"></span>OptiWork</div>
-          <div class="system-use">Onde o ciclo de compra vive. Você cria o ticket e acompanha o kanban.</div>
+          <div class="system-use">Onde o ciclo de compra vive. Voce cria o ticket e acompanha o kanban.</div>
           <div class="system-actions">
             <span class="system-action">Abrir ticket de pedido de compra</span>
             <span class="system-action">Anexar Markup (.xlsx) e OC (.pdf)</span>
-            <span class="system-action">Acompanhar card no kanban de Compras</span>
-            <span class="system-action">Solicitar cotação de frete à Logística</span>
+            <span class="system-action">Acompanhar card nas colunas do kanban</span>
+            <span class="system-action">Solicitar cotacao de frete a Logistica</span>
+            <span class="system-action">Receber notificacoes de Pendentes</span>
           </div>
         </div>
         <div class="system-card">
           <div class="system-name"><span class="system-dot" style="background:var(--green)"></span>Drive OptiWork</div>
-          <div class="system-use">Repositório de arquivos da equipe comercial.</div>
+          <div class="system-use">Repositorio de arquivos da equipe comercial.</div>
           <div class="system-actions">
-            <span class="system-action">Tabelas de parceiros e fornecedores</span>
-            <span class="system-action">Modelos de proposta e e-mail</span>
-            <span class="system-action">Dados de cliente, contratos e OCs</span>
-            <span class="system-action">Tabelas de preços (MKP 1,35)</span>
+            <span class="system-action">Salvar OCs dos clientes (.pdf)</span>
+            <span class="system-action">Acessar tabelas de parceiros e fornecedores</span>
+            <span class="system-action">Modelos de proposta e e-mail padrao</span>
+            <span class="system-action">Tabelas de precos de fabricantes (MKP 1,35)</span>
           </div>
         </div>
         <div class="system-card">
-          <div class="system-name"><span class="system-dot" style="background:var(--amber)"></span>Planilha de Markup</div>
-          <div class="system-use">Análise de viabilidade de cada venda. Você preenche antes do ticket.</div>
+          <div class="system-name"><span class="system-dot" style="background:var(--amber)"></span>Excel &mdash; Planilha de Markup</div>
+          <div class="system-use">Analise de viabilidade de cada venda. Voce preenche antes de abrir o ticket.</div>
           <div class="system-actions">
-            <span class="system-action">Custo, MKP, preço de venda, tributos, frete</span>
-            <span class="system-action">Calcular margem líquida da operação</span>
+            <span class="system-action">Custo cotado, MKP, preco de venda</span>
+            <span class="system-action">Tributos, DIFAL e frete</span>
+            <span class="system-action">Calcular margem liquida da operacao</span>
             <span class="system-action">Definir empresa faturadora (CNPJ)</span>
           </div>
         </div>
@@ -747,36 +821,36 @@ footer p { font-size:11px; color:var(--text3); }
     </div>
   </div>
 
-  <!-- ABA: RELACIONAMENTOS CONSULTOR -->
-  <div class="tab-panel" id="tab-cons-relacionamentos" role="tabpanel" aria-labelledby="tbtn-cons-relacionamentos">
+  <!-- ── RELACIONAMENTOS CONSULTOR ── -->
+  <div class="tab-panel" id="cons-relacionamentos">
     <div class="section">
-      <div class="section-label">Com quem você interage em cada fase</div>
+      <div class="section-label">Com quem voce interage em cada fase</div>
       <div class="rel-grid">
         <div class="rel-card">
-          <div class="rel-fase">Captação e prospecção</div>
+          <div class="rel-fase">Captacao e proposta<small>Antes do fechamento</small></div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você prospecta</span>
-            <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Gestor monitora e orienta</span>
+            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Voce prospecta</span>
+            <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Gestor monitora</span>
           </div>
         </div>
         <div class="rel-card">
-          <div class="rel-fase">Cotação de frete<small>Antes do Markup</small></div>
+          <div class="rel-fase">Cotacao de frete<small>Antes do Markup</small></div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você solicita via OptiWork</span>
-            <span class="rel-pill c-teal">Logística responde com valor</span>
+            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Voce solicita via OptiWork</span>
+            <span class="rel-pill" style="background:var(--teal-bg);color:var(--teal)">Logistica responde com valor</span>
           </div>
         </div>
         <div class="rel-card">
-          <div class="rel-fase">Abertura do ticket<small>Após fechamento da venda</small></div>
+          <div class="rel-fase">Abertura do ticket<small>Apos fechamento da venda</small></div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você cria o ticket</span>
+            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Voce cria o ticket</span>
             <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Gestor analisa Markup e OC</span>
           </div>
         </div>
         <div class="rel-card">
-          <div class="rel-fase">Fluxo de aprovações<small>Gestor → Financeiro → Diretoria</small></div>
+          <div class="rel-fase">Fluxo de aprovacoes<small>Gestor &rarr; Financeiro &rarr; Diretoria</small></div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--bg3);color:var(--text2)">Você monitora</span>
+            <span class="rel-pill" style="background:var(--bg3);color:var(--text2)">Voce monitora</span>
             <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Gestor aprova primeiro</span>
             <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Financeiro depois</span>
           </div>
@@ -784,28 +858,29 @@ footer p { font-size:11px; color:var(--text3); }
         <div class="rel-card">
           <div class="rel-fase">Card em Pendentes</div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você é informado</span>
+            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Voce e informado</span>
             <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Gestor trata com Compras</span>
           </div>
         </div>
         <div class="rel-card">
           <div class="rel-fase">Acompanhamento de entrega</div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você monitora via OptiWork</span>
-            <span class="rel-pill c-teal">Logística confirma a entrega</span>
+            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Voce monitora pelo OptiWork</span>
+            <span class="rel-pill" style="background:var(--teal-bg);color:var(--teal)">Logistica confirma a entrega</span>
           </div>
         </div>
         <div class="rel-card">
-          <div class="rel-fase">Inadimplência identificada</div>
+          <div class="rel-fase">Inadimplencia identificada</div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você identifica e aciona o Gestor</span>
-            <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Gestor aciona o Financeiro</span>
+            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Voce identifica e aciona</span>
+            <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Gestor aciona Financeiro</span>
+            <span class="rel-pill" style="background:var(--red-bg);color:var(--red)">Financeiro bloqueia</span>
           </div>
         </div>
         <div class="rel-card">
-          <div class="rel-fase">Liberação de crédito (boleto)<small>Cliente novo ou revisão</small></div>
+          <div class="rel-fase">Liberacao de credito &mdash; boleto<small>Cliente novo ou revisao</small></div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Você solicita ao Gestor</span>
+            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Voce solicita ao Gestor</span>
             <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Gestor avalia com Financeiro</span>
           </div>
         </div>
@@ -813,119 +888,81 @@ footer p { font-size:11px; color:var(--text3); }
     </div>
   </div>
 
-  <!-- ABA: REGRAS CONSULTOR -->
-  <div class="tab-panel" id="tab-cons-regras" role="tabpanel" aria-labelledby="tbtn-cons-regras">
+  <!-- ── REGRAS E POLITICAS CONSULTOR ── -->
+  <div class="tab-panel" id="cons-regras">
+    <div class="section">
+      <div class="section-label">Politica de credito e condicoes de pagamento ao cliente</div>
+      <div class="policy-grid">
+        <div class="policy-card">
+          <span class="policy-badge" style="background:var(--green-bg);color:var(--green)">Padrao</span>
+          <span class="policy-cond">A vista &mdash; PIX ou transferencia</span>
+          <span class="policy-obs">Condicao padrao para novos clientes sem historico. Sem risco de inadimplencia. Nao requer aprovacao adicional.</span>
+        </div>
+        <div class="policy-card">
+          <span class="policy-badge" style="background:var(--accent-bg);color:var(--accent)">Avaliado</span>
+          <span class="policy-cond">Boleto a prazo &mdash; clientes com historico</span>
+          <span class="policy-obs">Disponivel para clientes com historico de pagamento regular. O Gestor verifica no CRM antes de autorizar. Nao prometer ao cliente antes da autorizacao do Gestor.</span>
+        </div>
+        <div class="policy-card" style="border-color:rgba(248,113,113,.3)">
+          <span class="policy-badge" style="background:var(--red-bg);color:var(--red)">Restricao</span>
+          <span class="policy-cond">Boleto &mdash; cliente novo</span>
+          <span class="policy-obs">Requer avaliacao de credito pelo Financeiro antes de qualquer promessa ao cliente. Solicitar ao Gestor com antecedencia. Nunca oferecer prazo sem aprovacao previa.</span>
+        </div>
+      </div>
+    </div>
 
     <div class="section">
-      <div class="section-label">Checklist obrigatório antes de abrir o ticket de compra</div>
+      <div class="section-label">Regra de venda interna &mdash; proibida</div>
+      <div class="alert alert-rule" style="margin-top:0">
+        <div class="alert-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        </div>
+        <p><strong>Venda interna esta proibida.</strong> O CNPJ definido no Markup como empresa faturadora e o mesmo pelo qual a compra sera feita &mdash; e pelo qual a NF sera emitida ao cliente. Nao e permitido comprar por um CNPJ do grupo e faturar por outro. Esta decisao e imutavel apos a abertura do ticket &mdash; definir corretamente antes.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Regras de arquivo de documentos</div>
       <div class="info-grid">
         <div class="info-card">
           <div class="info-icon" style="background:var(--accent-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
-          <div class="info-body">
-            <strong>Ordem de Compra do cliente (.pdf) em mãos</strong>
-            <p>Documento formal do cliente autorizando a compra. Em licitações, equivale à Nota de Empenho. Sem OC, sem ticket.</p>
+          <div class="info-body"><strong>OC do cliente no Drive OptiWork</strong><p>Toda Ordem de Compra recebida deve ser salva no Drive do OptiWork assim que chegar. Sem OC arquivada no sistema, nenhuma NF e emitida.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--accent-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
           </div>
+          <div class="info-body"><strong>Dados do cliente sempre atualizados</strong><p>CNPJ, razao social, endereco de entrega e contato do responsavel devem estar cadastrados e atualizados no CRM do OMIE antes de qualquer venda.</p></div>
         </div>
         <div class="info-card">
           <div class="info-icon" style="background:var(--accent-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
           </div>
-          <div class="info-body">
-            <strong>Markup (.xlsx) preenchido integralmente</strong>
-            <p>Todos os campos obrigatórios preenchidos com valores reais: custo, MKP, preço, tributos, frete e margem.</p>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="info-icon" style="background:var(--accent-bg)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          </div>
-          <div class="info-body">
-            <strong>Frete cotado pela Logística via OptiWork</strong>
-            <p>O valor do frete deve constar no Markup antes de abrir o ticket. Solicitar cotação com antecedência para não atrasar o processo.</p>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="info-icon" style="background:var(--accent-bg)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div class="info-body">
-            <strong>Endereço de entrega completo confirmado</strong>
-            <p>Logradouro, número, bairro, cidade, UF e CEP. Se triangulada: endereço do cliente final (não da Croma).</p>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="info-icon" style="background:var(--accent-bg)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-          </div>
-          <div class="info-body">
-            <strong>Empresa faturadora definida no Markup</strong>
-            <p>O CNPJ que aparece no Markup é o mesmo que comprará e que faturará ao cliente. Venda interna é proibida.</p>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="info-icon" style="background:var(--accent-bg)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/></svg>
-          </div>
-          <div class="info-body">
-            <strong>Tipo de entrega: padrão ou triangulada</strong>
-            <p>Padrão = produto passa pelo estoque da Croma antes de ir ao cliente. Triangulada = fornecedor entrega direto ao cliente.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-label">Regra de venda interna — proibida</div>
-      <div class="alert alert-rule" style="margin-top:0">
-        <div class="alert-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
-        </div>
-        <p><strong>Venda interna está proibida.</strong> O CNPJ definido no Markup como empresa faturadora é o mesmo pelo qual a compra será feita — e pelo qual a NF será emitida ao cliente. Não é permitido comprar por um CNPJ do grupo e faturar ao cliente por outro. Definir o CNPJ correto antes de abrir o ticket, pois é imutável.</p>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-label">Crédito, boleto e inadimplência</div>
-      <div class="info-grid">
-        <div class="info-card">
-          <div class="info-icon" style="background:var(--accent-bg)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-          </div>
-          <div class="info-body">
-            <strong>Cliente novo que quer pagar em boleto — pedir avaliação antes de prometer</strong>
-            <p>Solicitar análise de crédito ao Gestor antes de oferecer prazo ao cliente novo. Gestor avalia junto ao Financeiro e comunica a decisão.</p>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="info-icon" style="background:var(--red-bg)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          </div>
-          <div class="info-body">
-            <strong>Pagamento venceu sem quitação — acionar o Gestor imediatamente</strong>
-            <p>Não aguardar o cliente entrar em contato. Ao identificar inadimplência, acionar o Gestor que aciona o Financeiro. Pode resultar em bloqueio para novas vendas.</p>
-          </div>
+          <div class="info-body"><strong>Tabelas de precos de fabricantes no Drive</strong><p>Consultar sempre a tabela atualizada do Drive antes de cotar. Nunca usar valores de memoria &mdash; fornecedores alteram precos com frequencia.</p></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ABA: GLOSSÁRIO CONSULTOR -->
-  <div class="tab-panel" id="tab-cons-glossario" role="tabpanel" aria-labelledby="tbtn-cons-glossario">
+  <!-- ── GLOSSARIO CONSULTOR ── -->
+  <div class="tab-panel" id="cons-glossario">
     <div class="section">
-      <div class="section-label">Termos que você precisa conhecer</div>
+      <div class="section-label">Termos que voce precisa conhecer</div>
       <div class="glossary">
-        <div class="gitem"><span class="gterm">Ordem de Compra (OC)</span><span class="gdef">Documento formal emitido pelo cliente B2B autorizando a compra. Em licitações, equivale à Nota de Empenho. Deve estar anexada ao ticket antes de qualquer ação no processo.</span></div>
-        <div class="gitem"><span class="gterm">Planilha de Markup</span><span class="gdef">Análise de viabilidade financeira da venda. Preenchida pelo consultor antes de abrir o ticket. Imutável após abertura — qualquer alteração exige reinício do fluxo completo.</span></div>
-        <div class="gitem"><span class="gterm">MKP / Markup</span><span class="gdef">Índice multiplicador aplicado sobre o custo para definir o preço de venda. MKP 1,35 significa custo × 1,35. Tabelas de fabricantes parceiros usam mínimo de 1,35.</span></div>
-        <div class="gitem"><span class="gterm">DIFAL</span><span class="gdef">Diferencial de Alíquota do ICMS. Incide em vendas interestaduais para consumidor final não contribuinte. Deve constar no Markup quando a entrega é fora do DF.</span></div>
-        <div class="gitem"><span class="gterm">Triangulação</span><span class="gdef">Entrega em que o fornecedor despacha direto ao cliente final, sem passar pelo estoque da Croma. O endereço informado ao fornecedor é o do cliente — não o da Croma.</span></div>
-        <div class="gitem"><span class="gterm">Venda Interna</span><span class="gdef">Operação proibida: comprar por um CNPJ do grupo e faturar ao cliente por outro CNPJ. O CNPJ de compra é sempre o mesmo de venda — definido no Markup antes do ticket.</span></div>
-        <div class="gitem"><span class="gterm">CRM (OMIE)</span><span class="gdef">Customer Relationship Management — módulo do OMIE para gestão de clientes, contatos, oportunidades e histórico. Base para o faturamento real que a Diretoria visualiza.</span></div>
-        <div class="gitem"><span class="gterm">Carteira de clientes</span><span class="gdef">Conjunto de clientes atribuídos ao consultor. Inclui ativos (compraram recentemente) e em risco (sem compra há muito tempo). Controlada no CRM.</span></div>
-        <div class="gitem"><span class="gterm">OptiWork</span><span class="gdef">Sistema de gestão de projetos e fluxos internos. Onde o ticket de pedido de compra é criado e acompanhado. Também usado para solicitar cotação de frete à Logística.</span></div>
-        <div class="gitem"><span class="gterm">Nota de Empenho</span><span class="gdef">Documento oficial do governo formalizando o pedido em licitações. Equivale à OC no contexto do setor público — deve estar arquivado no OptiWork antes da emissão da NF.</span></div>
+        <div class="gitem"><span class="gterm">Ordem de Compra (OC)</span><span class="gdef">Documento formal emitido pelo cliente B2B autorizando a compra. Em licitacoes, equivale a Nota de Empenho. Deve estar no OptiWork antes de qualquer emissao de NF.</span></div>
+        <div class="gitem"><span class="gterm">Planilha de Markup</span><span class="gdef">Analise de viabilidade financeira da venda. Preenchida pelo consultor antes de abrir o ticket. Imutavel apos abertura &mdash; qualquer alteracao reinicia o fluxo completo.</span></div>
+        <div class="gitem"><span class="gterm">MKP 1,35</span><span class="gdef">Indice multiplicador padrao para tabelas de fabricantes parceiros. Custo &times; 1,35 = preco de venda minimo. Abaixo disso, o Gestor reprova automaticamente.</span></div>
+        <div class="gitem"><span class="gterm">DIFAL</span><span class="gdef">Diferencial de Aliquota do ICMS. Incide em vendas interestaduais para consumidor final nao contribuinte. Deve constar no Markup quando a entrega e fora do DF.</span></div>
+        <div class="gitem"><span class="gterm">Triangulacao</span><span class="gdef">Entrega em que o fornecedor despacha direto ao cliente final, sem passar pelo estoque da Croma. O endereco informado ao fornecedor e o do cliente &mdash; nunca o da Croma.</span></div>
+        <div class="gitem"><span class="gterm">Venda Interna</span><span class="gdef">Operacao proibida: comprar por um CNPJ do grupo e faturar ao cliente por outro CNPJ. O CNPJ de compra e sempre o mesmo de venda &mdash; definido no Markup antes do ticket.</span></div>
+        <div class="gitem"><span class="gterm">CRM (OMIE)</span><span class="gdef">Customer Relationship Management &mdash; modulo do OMIE para clientes, contatos, oportunidades e historico. Base que a Diretoria usa para visualizar o faturamento real.</span></div>
+        <div class="gitem"><span class="gterm">Carteira ativa</span><span class="gdef">Conjunto de clientes que compraram nos ultimos 30&ndash;60 dias. Clientes acima de 60 dias sem compra entram em fila de reativacao e devem ser comunicados ao Gestor.</span></div>
+        <div class="gitem"><span class="gterm">OptiWork</span><span class="gdef">Sistema de gestao de projetos e fluxos internos. Onde o ticket de pedido de compra e criado, documentos sao anexados e o card percorre o kanban de aprovacoes.</span></div>
+        <div class="gitem"><span class="gterm">Nota de Empenho</span><span class="gdef">Documento oficial do governo formalizando pedido em licitacoes. Equivale a OC no contexto publico &mdash; deve estar arquivado no Drive antes da emissao de NF.</span></div>
+        <div class="gitem"><span class="gterm">Coord. Gestor Comercial</span><span class="gdef">Responsavel pela gestao da equipe, aprovacao dos tickets, analise de risco de clientes e comunicacao com Compras quando um card vai para Pendentes.</span></div>
+        <div class="gitem"><span class="gterm">SLA</span><span class="gdef">Service Level Agreement &mdash; prazo maximo para conclusao de uma etapa. No Comercial: resposta ao cliente no mesmo dia, proposta em ate 24h, ticket aberto no dia do fechamento.</span></div>
       </div>
     </div>
   </div>
@@ -933,9 +970,9 @@ footer p { font-size:11px; color:var(--text3); }
 </div><!-- fim role-cons -->
 
 
-<!-- ═══════════════════════════════════════════════════
+<!-- ════════════════════════════════════════════
      PERFIL: GESTOR COMERCIAL
-═══════════════════════════════════════════════════ -->
+════════════════════════════════════════════ -->
 <div class="role-panel" id="role-gest">
 
   <div class="role-intro" style="border-color:var(--blue-glow)">
@@ -944,96 +981,89 @@ footer p { font-size:11px; color:var(--text3); }
     </div>
     <div>
       <h2>Gestor Comercial</h2>
-      <p>Você lidera a equipe de vendas e garante que cada operação é viável financeiramente, que os clientes são confiáveis e que o processo interno funciona no prazo. Sua aprovação é o primeiro nível de controle antes do Financeiro e da Diretoria.</p>
+      <p>Voce lidera a equipe de vendas e garante que cada operacao e viavel financeiramente, que os clientes sao confiaveis e que o processo interno funciona no prazo. Sua aprovacao e o primeiro nivel de controle antes do Financeiro e da Diretoria &mdash; e a mais importante, pois voce conhece o cliente e a operacao.</p>
       <div class="role-intro-tags">
         <span class="role-intro-tag">OMIE CRM</span>
         <span class="role-intro-tag">OptiWork</span>
-        <span class="role-intro-tag">Análise de Markup</span>
-        <span class="role-intro-tag">Gestão de equipe</span>
+        <span class="role-intro-tag">Analise de Markup</span>
+        <span class="role-intro-tag">Gestao de equipe</span>
       </div>
     </div>
   </div>
 
-  <div class="tab-bar" id="tabs-gest" role="tablist" aria-label="Abas Gestor Comercial">
-    <button class="tab-btn active-gest" role="tab" aria-selected="true"  aria-controls="tab-gest-escopo"          id="tbtn-gest-escopo"          onclick="tabRole('gest','escopo',this)">Escopo</button>
-    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-gest-aprovacao"         id="tbtn-gest-aprovacao"       onclick="tabRole('gest','aprovacao',this)">Aprovação de Vendas</button>
-    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-gest-monitoramento"     id="tbtn-gest-monitoramento"   onclick="tabRole('gest','monitoramento',this)">Monitoramento</button>
-    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-gest-relacionamentos"   id="tbtn-gest-relacionamentos"  onclick="tabRole('gest','relacionamentos',this)">Relacionamentos</button>
-    <button class="tab-btn"            role="tab" aria-selected="false" aria-controls="tab-gest-raci"              id="tbtn-gest-raci"            onclick="tabRole('gest','raci',this)">Matriz RACI</button>
+  <div class="tab-bar" id="tabs-gest">
+    <button class="tab-btn active-gest" onclick="tabGest('escopo',this)">Escopo</button>
+    <button class="tab-btn" onclick="tabGest('aprovacao',this)">Aprovacao de Vendas</button>
+    <button class="tab-btn" onclick="tabGest('monitoramento',this)">Monitoramento</button>
+    <button class="tab-btn" onclick="tabGest('relacionamentos',this)">Relacionamentos</button>
+    <button class="tab-btn" onclick="tabGest('raci',this)">Matriz RACI</button>
   </div>
 
-  <!-- ABA: ESCOPO GESTOR -->
-  <div class="tab-panel active" id="tab-gest-escopo" role="tabpanel" aria-labelledby="tbtn-gest-escopo">
+  <!-- ── ESCOPO GESTOR ── -->
+  <div class="tab-panel active" id="gest-escopo">
     <div class="section">
       <div class="section-label">Responsabilidades do Gestor Comercial</div>
       <div class="scope-grid">
-
         <div class="scope-card">
           <div class="scope-icon" style="background:var(--blue-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           </div>
           <div class="scope-body">
             <h4>Aprovar vendas no OptiWork</h4>
-            <p>Analisar minuciosamente a Planilha de Markup e a Ordem de Compra de cada ticket. Verificar convergência dos dois documentos e saúde financeira da operação antes de aprovar o avanço ao Financeiro.</p>
+            <p>Analisar minuciosamente a Planilha de Markup e a OC de cada ticket. Verificar convergencia dos dois documentos e saude financeira da operacao antes de aprovar o avanco ao Financeiro.</p>
           </div>
         </div>
-
         <div class="scope-card">
           <div class="scope-icon" style="background:var(--blue-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
           <div class="scope-body">
-            <h4>Análise de risco e histórico do cliente</h4>
-            <p>Avaliar histórico do cliente junto ao Financeiro para mitigar fraudes e golpes. Verificar débitos em aberto antes de aprovar operações a prazo. Cliente com histórico ruim = restrição ou recusa.</p>
+            <h4>Analise de risco e historico do cliente</h4>
+            <p>Avaliar historico de pagamento e reputacao do cliente junto ao Financeiro para mitigar fraudes e golpes. Cliente com historico ruim = restricao ou recusa da operacao.</p>
           </div>
         </div>
-
         <div class="scope-card">
           <div class="scope-icon" style="background:var(--blue-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           </div>
           <div class="scope-body">
             <h4>Monitorar cronograma de compras</h4>
-            <p>Garantir que os tickets dos consultores avançam no prazo e que os prazos prometidos ao cliente não serão comprometidos por atrasos internos. Intervir proativamente quando detectar risco.</p>
+            <p>Garantir que os tickets aprovados avancam no prazo e que os prazos prometidos ao cliente nao serao comprometidos. Voce e o unico ponto de contato com Compras em casos de Pendentes.</p>
           </div>
         </div>
-
         <div class="scope-card">
           <div class="scope-icon" style="background:var(--blue-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
           </div>
           <div class="scope-body">
             <h4>Monitorar CRM da equipe</h4>
-            <p>Garantir que todos os consultores registram as vendas corretamente no CRM do OMIE. O CRM é a base do faturamento real que a Diretoria visualiza. CRM desatualizado = dados incorretos para a gestão.</p>
+            <p>Garantir que todos os consultores registram as vendas no CRM do OMIE corretamente. CRM desatualizado = dados incorretos para a Diretoria visualizar o faturamento real.</p>
           </div>
         </div>
-
         <div class="scope-card">
           <div class="scope-icon" style="background:var(--blue-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
           </div>
           <div class="scope-body">
-            <h4>Crédito e inadimplência</h4>
-            <p>Acompanhar liberação de crédito (boleto) para clientes novos e reavaliações periódicas. Monitorar pagamentos junto ao Financeiro e aos consultores. Requisitar bloqueio de clientes inadimplentes quando necessário.</p>
+            <h4>Credito, inadimplencia e bloqueio</h4>
+            <p>Acompanhar liberacao de credito (boleto) para clientes novos e reavaliacao de clientes antigos. Monitorar pagamentos junto ao Financeiro e requisitar bloqueio de clientes inadimplentes.</p>
           </div>
         </div>
-
         <div class="scope-card">
           <div class="scope-icon" style="background:var(--blue-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
           <div class="scope-body">
-            <h4>Pós-venda e satisfação do cliente</h4>
-            <p>Acompanhar satisfação end-to-end, especialmente em vendas de maior valor. Intervir quando necessário para resolver problemas de entrega, produto ou relacionamento com o cliente.</p>
+            <h4>Pos-venda e satisfacao end-to-end</h4>
+            <p>Acompanhar satisfacao do cliente especialmente em vendas de maior valor. Intervir quando necessario para resolver problemas de entrega, produto ou relacionamento com o cliente.</p>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 
-  <!-- ABA: APROVAÇÃO GESTOR -->
-  <div class="tab-panel" id="tab-gest-aprovacao" role="tabpanel" aria-labelledby="tbtn-gest-aprovacao">
+  <!-- ── APROVACAO DE VENDAS ── -->
+  <div class="tab-panel" id="gest-aprovacao">
     <div class="section">
       <div class="section-label">O que o Gestor verifica em cada ticket</div>
       <div class="flow-steps">
@@ -1041,10 +1071,10 @@ footer p { font-size:11px; color:var(--text3); }
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--blue-bg);color:var(--blue)">1</div>
           <div class="flow-step-body">
-            <h4>Os dois documentos estão anexados?</h4>
-            <p>Planilha de Markup (.xlsx) e Ordem de Compra do cliente (.pdf) devem estar presentes no card. Sem os dois, devolver ao consultor com comentário claro explicando a pendência.</p>
+            <h4>Os dois documentos estao anexados?</h4>
+            <p>Markup (.xlsx) e OC do cliente (.pdf) devem estar presentes no card. Sem os dois, devolver ao consultor com comentario claro indicando o que falta.</p>
             <div class="step-tags">
-              <span class="step-tag" style="background:var(--blue-bg);color:var(--blue)">Markup + OC obrigatórios</span>
+              <span class="step-tag" style="background:var(--blue-bg);color:var(--blue)">Markup + OC obrigatorios</span>
             </div>
           </div>
         </div>
@@ -1053,10 +1083,11 @@ footer p { font-size:11px; color:var(--text3); }
           <div class="flow-step-n" style="background:var(--blue-bg);color:var(--blue)">2</div>
           <div class="flow-step-body">
             <h4>Analisar o Markup campo a campo</h4>
-            <p>Verificar: custo real (não estimado), MKP acima do mínimo, preço de venda compatível com a OC, tributos corretos (DIFAL quando interestadual), frete incluído e margem líquida positiva dentro do patamar mínimo. Qualquer inconsistência: reprovar e devolver ao consultor com comentário detalhado indicando o problema.</p>
+            <p>Verificar: custo real (nao estimado), MKP acima do minimo (1,35 para parceiros), preco de venda compativel com a OC, tributos corretos, DIFAL quando interestadual, frete incluido e margem liquida positiva e acima do patamar minimo. Qualquer inconsistencia: reprovar e devolver ao consultor com comentario detalhado indicando exatamente o problema.</p>
             <div class="step-tags">
               <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Margem negativa = reprovar</span>
-              <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">MKP abaixo do mínimo = reprovar</span>
+              <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">MKP abaixo do minimo = reprovar</span>
+              <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Frete ausente = reprovar</span>
             </div>
           </div>
         </div>
@@ -1064,19 +1095,19 @@ footer p { font-size:11px; color:var(--text3); }
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--blue-bg);color:var(--blue)">3</div>
           <div class="flow-step-body">
-            <h4>Verificar convergência entre Markup e OC</h4>
-            <p>Itens, quantidades, valores e empresa faturadora no Markup devem coincidir com o que está na OC do cliente. Divergências podem indicar erro do consultor ou, em casos extremos, manipulação. Reprovar e investigar antes de avançar.</p>
+            <h4>Verificar convergencia entre Markup e OC</h4>
+            <p>Itens, quantidades, valores e empresa faturadora no Markup devem coincidir exatamente com o que esta na OC do cliente. Divergencias podem indicar erro do consultor ou &mdash; em casos extremos &mdash; manipulacao. Reprovar e investigar antes de qualquer avanco.</p>
           </div>
         </div>
 
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--blue-bg);color:var(--blue)">4</div>
           <div class="flow-step-body">
-            <h4>Verificar histórico e risco do cliente</h4>
-            <p>Para vendas a prazo (boleto): verificar no CRM se o cliente tem histórico de pagamento confiável. Cliente novo solicitando boleto: solicitar avaliação de crédito ao Financeiro antes de aprovar. Vendas de alto valor: análise de risco mais detalhada é obrigatória.</p>
+            <h4>Verificar historico e risco do cliente</h4>
+            <p>Para vendas a prazo (boleto): verificar no CRM do OMIE se o cliente tem historico de pagamento confiavel. Cliente novo solicitando boleto: solicitar avaliacao de credito ao Financeiro antes de aprovar. Vendas de alto valor: analise de risco mais detalhada e obrigatoria &mdash; cruzar historico de compras com situacao cadastral e referencias comerciais quando necessario.</p>
             <div class="step-tags">
-              <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Cliente novo + boleto → avaliar crédito</span>
-              <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Inadimplente → consultar Financeiro</span>
+              <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Novo + boleto &rarr; avaliacao de credito</span>
+              <span class="step-tag" style="background:var(--red-bg);color:var(--red)">Inadimplente &rarr; consultar Financeiro</span>
             </div>
           </div>
         </div>
@@ -1086,10 +1117,10 @@ footer p { font-size:11px; color:var(--text3); }
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <div class="flow-step-body">
-            <h4>Aprovar e avançar para o Financeiro</h4>
-            <p>Tudo verificado e consistente: adicionar comentário de aprovação no card e mover para a coluna Aprov. Financeiro. O Financeiro prossegue com análise de viabilidade de caixa e depois a Diretoria aprova a margem.</p>
+            <h4>Aprovar e avancar para o Financeiro</h4>
+            <p>Tudo verificado e consistente: adicionar comentario de aprovacao no card e mover para a coluna Aprov. Financeiro. O Financeiro prossegue com analise de viabilidade de caixa e depois a Diretoria aprova a margem.</p>
             <div class="step-tags">
-              <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Aprovado → Financeiro</span>
+              <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Aprovado &rarr; Financeiro</span>
             </div>
           </div>
         </div>
@@ -1098,137 +1129,130 @@ footer p { font-size:11px; color:var(--text3); }
     </div>
   </div>
 
-  <!-- ABA: MONITORAMENTO GESTOR -->
-  <div class="tab-panel" id="tab-gest-monitoramento" role="tabpanel" aria-labelledby="tbtn-gest-monitoramento">
+  <!-- ── MONITORAMENTO ── -->
+  <div class="tab-panel" id="gest-monitoramento">
     <div class="section">
-      <div class="section-label">Rotina de monitoramento da equipe e da operação</div>
+      <div class="section-label">Rotina de monitoramento &mdash; equipe e operacao</div>
       <div class="info-grid">
-
         <div class="info-card">
           <div class="info-icon" style="background:var(--blue-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
           </div>
           <div class="info-body">
-            <strong>CRM da equipe — conferência regular</strong>
-            <p>Verificar se todos os consultores registram as vendas no CRM do OMIE corretamente. Oportunidade sem registro = faturamento invisível para a Diretoria. Cobrar padronização ativamente.</p>
+            <strong>CRM da equipe &mdash; conferencia regular</strong>
+            <p>Verificar se todos os consultores registram as vendas no CRM do OMIE corretamente e no mesmo dia do fechamento. Oportunidade sem registro = faturamento invisivel para a Diretoria. Cobrar padronizacao ativamente.</p>
           </div>
         </div>
-
         <div class="info-card">
           <div class="info-icon" style="background:var(--blue-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           </div>
           <div class="info-body">
-            <strong>Cronograma de compras — monitorar prazos</strong>
-            <p>Verificar diariamente se os tickets aprovados avançam no prazo. Card parado além do previsto: acionar o setor responsável. O consultor não entra em contato com o Comprador — essa comunicação passa pelo Gestor.</p>
+            <strong>Cronograma de compras &mdash; monitorar prazos</strong>
+            <p>Verificar diariamente se os tickets aprovados avancam no prazo. Card parado alem do previsto: acionar o setor responsavel. Nunca esperar o consultor reclamar &mdash; o Gestor e proativo nesse controle.</p>
           </div>
         </div>
-
         <div class="info-card">
           <div class="info-icon" style="background:var(--blue-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
           </div>
           <div class="info-body">
-            <strong>Inadimplência — monitorar junto ao Financeiro</strong>
-            <p>Acompanhar regularmente os boletos em aberto com o Financeiro e os consultores. Acionar consultores para contato com os clientes inadimplentes. Requisitar bloqueio formal quando necessário.</p>
+            <strong>Inadimplencia &mdash; acompanhar junto ao Financeiro</strong>
+            <p>Monitorar regularmente os boletos em aberto com o Financeiro e os consultores. Acionar consultores para contato com os clientes. Requisitar bloqueio formal ao Financeiro quando necessario.</p>
           </div>
         </div>
-
         <div class="info-card">
           <div class="info-icon" style="background:var(--blue-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="2"/></svg>
           </div>
           <div class="info-body">
-            <strong>Carteira ativa — controle e reativação</strong>
-            <p>Identificar quais clientes estão ativos e quais estão em risco de inativação. Orientar consultores sobre quais clientes precisam de ação prioritária. Definir estratégia de reativação com a equipe.</p>
+            <strong>Carteira ativa &mdash; controle e reativacao</strong>
+            <p>Identificar clientes ativos e clientes em risco (+60 dias sem compra). Orientar consultores sobre acoes prioritarias. Definir estrategia de reativacao para clientes inativos com potencial.</p>
           </div>
         </div>
-
         <div class="info-card">
           <div class="info-icon" style="background:var(--blue-bg)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
           <div class="info-body">
-            <strong>Arquivo de documentos — disciplina no OptiWork</strong>
-            <p>Garantir que dados de clientes, tabelas de preços e Ordens de Compra estão arquivados no Drive do OptiWork. Cobrar documentação completa antes de qualquer emissão de NF. Sem OC no sistema, sem NF.</p>
+            <strong>Arquivo de documentos &mdash; disciplina no OptiWork</strong>
+            <p>Garantir que OCs, tabelas de precos e dados de clientes estao arquivados no Drive do OptiWork. Cobrar documentacao completa antes de qualquer emissao de NF. Sem OC no sistema, sem NF.</p>
           </div>
         </div>
-
         <div class="info-card">
           <div class="info-icon" style="background:var(--blue-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           </div>
           <div class="info-body">
-            <strong>Desempenho da equipe — acompanhar individualmente</strong>
-            <p>Monitorar produtividade de cada consultor: volume de prospecções, taxa de conversão, ticket médio e recorrência de clientes. Usar esses dados para orientar o desenvolvimento de cada nível.</p>
+            <strong>Desempenho individual da equipe</strong>
+            <p>Monitorar volume de prospecoes, taxa de conversao, ticket medio e recorrencia de clientes por consultor. Usar esses dados para orientar o desenvolvimento de nivel e metas individuais.</p>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 
-  <!-- ABA: RELACIONAMENTOS GESTOR -->
-  <div class="tab-panel" id="tab-gest-relacionamentos" role="tabpanel" aria-labelledby="tbtn-gest-relacionamentos">
+  <!-- ── RELACIONAMENTOS GESTOR ── -->
+  <div class="tab-panel" id="gest-relacionamentos">
     <div class="section">
-      <div class="section-label">Com quem o Gestor interage em cada situação</div>
+      <div class="section-label">Com quem o Gestor interage em cada situacao</div>
       <div class="rel-grid">
         <div class="rel-card">
-          <div class="rel-fase">Análise de tickets<small>Diariamente</small></div>
+          <div class="rel-fase">Analise de tickets<small>Diariamente</small></div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Você aprova ou devolve</span>
+            <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Voce aprova ou devolve</span>
             <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Consultor criou o ticket</span>
           </div>
         </div>
         <div class="rel-card">
-          <div class="rel-fase">Histórico e risco do cliente</div>
+          <div class="rel-fase">Historico e risco do cliente</div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Você avalia</span>
+            <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Voce avalia</span>
             <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Financeiro consulta junto</span>
           </div>
         </div>
         <div class="rel-card">
-          <div class="rel-fase">Cronograma de compras</div>
+          <div class="rel-fase">Card em Pendentes<small>Compras com impedimento</small></div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Você monitora e intervém</span>
-            <span class="rel-pill" style="background:var(--amber-bg);color:var(--amber)">Compras recebe demanda</span>
-            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Consultor é informado</span>
+            <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Voce e o ponto de contato</span>
+            <span class="rel-pill" style="background:var(--amber-bg);color:var(--amber)">Compras reporta ao Gestor</span>
+            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Consultor nao contata Compras</span>
           </div>
         </div>
         <div class="rel-card">
-          <div class="rel-fase">Avaliação de crédito — boleto</div>
+          <div class="rel-fase">Avaliacao de credito &mdash; boleto</div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Você solicita</span>
+            <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Voce solicita ao Financeiro</span>
             <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Financeiro avalia e decide</span>
           </div>
         </div>
         <div class="rel-card">
-          <div class="rel-fase">Inadimplência e bloqueio</div>
+          <div class="rel-fase">Inadimplencia e bloqueio</div>
           <div class="rel-quem">
             <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Consultor identifica</span>
-            <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Você requisita bloqueio</span>
+            <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Voce requisita bloqueio</span>
             <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Financeiro executa</span>
           </div>
         </div>
         <div class="rel-card">
-          <div class="rel-fase">Pendentes em Compras</div>
+          <div class="rel-fase">Aprovacao de margem<small>Pos aprovacao do Gestor</small></div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Você é o ponto de contato</span>
-            <span class="rel-pill" style="background:var(--amber-bg);color:var(--amber)">Compras reporta impedimento</span>
-            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Consultor não contata Compras</span>
+            <span class="rel-pill" style="background:var(--blue-bg);color:var(--blue)">Voce aprova primeiro</span>
+            <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Financeiro avalia caixa</span>
+            <span class="rel-pill" style="background:var(--bg3);color:var(--text2)">Diretoria aprova margem</span>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ABA: RACI GESTOR -->
-  <div class="tab-panel" id="tab-gest-raci" role="tabpanel" aria-labelledby="tbtn-gest-raci">
+  <!-- ── RACI GESTOR ── -->
+  <div class="tab-panel" id="gest-raci">
     <div class="section">
-      <div class="section-label">Matriz RACI — Setor Comercial</div>
+      <div class="section-label">Matriz RACI &mdash; Setor Comercial completo</div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center">
-        <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-R">R</span>Responsável — executa</span>
-        <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-A">A</span>Aprovador — responde</span>
+        <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-R">R</span>Responsavel &mdash; executa</span>
+        <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-A">A</span>Aprovador &mdash; responde</span>
         <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-C">C</span>Consultado</span>
         <span style="font-size:12px;display:flex;align-items:center;gap:6px"><span class="raci-pill r-I">I</span>Informado</span>
       </div>
@@ -1242,23 +1266,24 @@ footer p { font-size:11px; color:var(--text3); }
               <th>Financeiro</th>
               <th>Diretoria</th>
               <th>Compras</th>
-              <th>Logística</th>
+              <th>Logistica</th>
             </tr>
           </thead>
           <tbody>
             <tr><td>Prospectar e captar clientes</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td>&ndash;</td></tr>
-            <tr><td>Registrar interações no CRM</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td>&ndash;</td></tr>
-            <tr><td>Solicitar cotação de frete</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-A">A</span></td></tr>
+            <tr><td>Registrar interacoes no CRM do OMIE</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr><td>Solicitar cotacao de frete</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-A">A</span></td></tr>
             <tr><td>Preencher Planilha de Markup</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td><span class="raci-pill r-C">C</span></td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td></tr>
             <tr><td>Abrir ticket no OptiWork</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td></tr>
-            <tr><td>Aprovar ticket (Gestor)</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-C">C</span></td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr><td>Aprovar ticket &mdash; coluna Gestor</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-C">C</span></td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td></tr>
             <tr><td>Analisar viabilidade financeira</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td></tr>
-            <tr><td>Aprovar margem (Diretoria)</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-R">R</span></td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr><td>Aprovar margem &mdash; Diretoria</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-R">R</span></td><td>&ndash;</td><td>&ndash;</td></tr>
             <tr><td>Monitorar CRM da equipe</td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-R">R</span></td><td>&ndash;</td><td><span class="raci-pill r-I">I</span></td><td>&ndash;</td><td>&ndash;</td></tr>
             <tr><td>Monitorar cronograma de compras</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-R">R</span></td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-C">C</span></td><td>&ndash;</td></tr>
-            <tr><td>Avaliar crédito de cliente</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td></tr>
-            <tr><td>Requisitar bloqueio por inadimplência</td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td></tr>
-            <tr><td>Acompanhar pós-venda e satisfação</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr><td>Avaliar credito de cliente novo</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr><td>Requisitar bloqueio por inadimplencia</td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr><td>Acompanhar pos-venda e satisfacao</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr><td>Comunicar Pendentes ao consultor</td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-R">R</span></td><td>&ndash;</td><td>&ndash;</td><td><span class="raci-pill r-A">A</span></td><td>&ndash;</td></tr>
           </tbody>
         </table>
       </div>
@@ -1270,68 +1295,76 @@ footer p { font-size:11px; color:var(--text3); }
 </main>
 
 <footer>
-  <p>Manual Operacional · Comercial · Croma Tecnologia · v1.0 · Março 2026</p>
+  <p>Manual Operacional &middot; Setor Comercial &middot; Croma Tecnologia &middot; v1.0 &middot; Marco 2026</p>
   <a href="index.html" class="btn">&larr; Voltar ao hub</a>
 </footer>
 
 <script>
 // ============================================================
-// RESTAURAÇÃO DE TEMA — roda imediatamente, antes do
-// DOMContentLoaded, para evitar flash de tema incorreto.
+// TOGGLE VIDEO TUTORIAL
+// Abre e fecha o accordion de vídeo. Lazy-load: o atributo
+// src só é atribuído ao <video> na primeira abertura — assim
+// o browser não baixa o MP4 enquanto o accordion está fechado,
+// o que faz diferença em conexões mais lentas.
 // ============================================================
-(function() {
-  try {
-    const salvo = localStorage.getItem('croma-tema');
-    if (salvo) {
-      document.documentElement.setAttribute('data-theme', salvo);
-    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-      document.documentElement.setAttribute('data-theme', 'light');
-    }
-  } catch(e) {}
-})();
+function toggleVideo(id) {
+  const wrap   = document.getElementById(id);
+  const header = wrap.querySelector('.video-tutorial-header');
+  const body   = document.getElementById(id + '-body');
+  const video  = body.querySelector('video');
+  const isOpen = wrap.classList.toggle('open');
 
-// ============================================================
-// SELETOR DE CARGO — Purple para Consultor, Azul para Gestor.
-// Persiste no localStorage para manter a seleção ao recarregar.
-// ============================================================
-function setRole(r) {
-  document.querySelectorAll('.role-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.role-btn').forEach(b => {
-    b.classList.remove('active-cons', 'active-gest');
-    b.setAttribute('aria-pressed', 'false');
-  });
+  header.setAttribute('aria-expanded', isOpen);
 
-  document.getElementById('role-' + r).classList.add('active');
-  const btn = document.getElementById('rbtn-' + r);
-  btn.classList.add(r === 'cons' ? 'active-cons' : 'active-gest');
-  btn.setAttribute('aria-pressed', 'true');
-  try { localStorage.setItem('croma-cargo', r); } catch(e) {}
+  // Lazy-load: atribui o src somente na primeira abertura
+  if (isOpen && video && video.dataset.src && !video.src) {
+    video.src = video.dataset.src;
+  }
+
+  // Pausa o vídeo ao fechar o accordion para não ficar tocando em background
+  if (!isOpen && video) {
+    video.pause();
+  }
 }
 
 // ============================================================
-// TROCA DE ABAS — namespace por cargo (cons / gest).
-// Cada cargo tem seu conjunto isolado de abas e painéis,
-// identificados por prefixo para não colidir entre si.
+// SELETOR DE CARGO
+// Purple para Consultor, Azul para Gestor.
+// Ao trocar, o painel anterior fica oculto e o novo aparece.
 // ============================================================
-function tabRole(role, id, btn) {
-  const activeClass = role === 'cons' ? 'active-cons' : 'active-gest';
+function setRole(r) {
+  document.querySelectorAll('.role-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active-cons','active-gest'));
+  document.getElementById('role-' + r).classList.add('active');
+  document.getElementById('rbtn-' + r).classList.add(r === 'cons' ? 'active-cons' : 'active-gest');
+}
 
-  // Desativa todos os botões e painéis do cargo em questão
-  document.querySelectorAll('#tabs-' + role + ' .tab-btn').forEach(b => {
-    b.classList.remove('active-cons', 'active-gest');
-    b.setAttribute('aria-selected', 'false');
-  });
-  document.querySelectorAll('[id^="tab-' + role + '-"]').forEach(p => p.classList.remove('active'));
+// ============================================================
+// ABAS DO CONSULTOR
+// Namespace isolado: todos os ids comecam com "cons-"
+// ============================================================
+function tabCons(id, btn) {
+  document.querySelectorAll('#tabs-cons .tab-btn').forEach(b => b.classList.remove('active-cons'));
+  document.querySelectorAll('[id^="cons-"]').forEach(p => p.classList.remove('active'));
+  document.getElementById('cons-' + id).classList.add('active');
+  btn.classList.add('active-cons');
+}
 
-  // Ativa o par botão + painel corretos
-  document.getElementById('tab-' + role + '-' + id).classList.add('active');
-  btn.classList.add(activeClass);
-  btn.setAttribute('aria-selected', 'true');
+// ============================================================
+// ABAS DO GESTOR
+// Namespace isolado: todos os ids comecam com "gest-"
+// ============================================================
+function tabGest(id, btn) {
+  document.querySelectorAll('#tabs-gest .tab-btn').forEach(b => b.classList.remove('active-gest'));
+  document.querySelectorAll('[id^="gest-"]').forEach(p => p.classList.remove('active'));
+  document.getElementById('gest-' + id).classList.add('active');
+  btn.classList.add('active-gest');
 }
 
 // ============================================================
 // TOGGLE DE TEMA CLARO/ESCURO
-// Salvo no localStorage para persistir entre páginas.
+// Persiste no localStorage para ser coerente entre todas
+// as paginas do manual.
 // ============================================================
 function toggleTheme() {
   const html = document.documentElement;
@@ -1340,65 +1373,13 @@ function toggleTheme() {
   try { localStorage.setItem('croma-tema', novo); } catch(e) {}
 }
 
-// ============================================================
-// HAMBURGER — abre/fecha o menu de navegação no mobile.
-// Também fecha ao clicar fora da topbar.
-// ============================================================
-function toggleNav() {
-  const nav = document.getElementById('topbar-nav');
-  const btn = document.getElementById('hamburger');
-  const open = nav.classList.toggle('open');
-  btn.classList.toggle('open', open);
-  btn.setAttribute('aria-expanded', open);
-}
-
-document.addEventListener('click', function(e) {
-  const nav = document.getElementById('topbar-nav');
-  const btn = document.getElementById('hamburger');
-  if (nav && nav.classList.contains('open') && !nav.contains(e.target) && !btn.contains(e.target)) {
-    nav.classList.remove('open');
-    btn.classList.remove('open');
-    btn.setAttribute('aria-expanded', 'false');
-  }
-});
-
-// ============================================================
-// NAVEGAÇÃO POR TECLADO nas abas — ← / → movem entre abas,
-// Home vai para a primeira, End para a última.
-// ============================================================
-document.addEventListener('keydown', function(e) {
-  const focused = document.activeElement;
-  if (!focused || focused.getAttribute('role') !== 'tab') return;
-
-  const tablist = focused.closest('[role="tablist"]');
-  if (!tablist) return;
-
-  const tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
-  const idx  = tabs.indexOf(focused);
-  let next = -1;
-
-  if (e.key === 'ArrowRight') next = (idx + 1) % tabs.length;
-  if (e.key === 'ArrowLeft')  next = (idx - 1 + tabs.length) % tabs.length;
-  if (e.key === 'Home')       next = 0;
-  if (e.key === 'End')        next = tabs.length - 1;
-
-  if (next >= 0) {
-    e.preventDefault();
-    tabs[next].focus();
-    tabs[next].click();
-  }
-});
-
-// ============================================================
-// RESTAURAÇÃO DE CARGO — ao recarregar, retorna ao cargo
-// que o usuário usou na última visita a esta página.
-// ============================================================
-document.addEventListener('DOMContentLoaded', function() {
+(function() {
   try {
-    const cargo = localStorage.getItem('croma-cargo');
-    if (cargo && (cargo === 'cons' || cargo === 'gest')) setRole(cargo);
+    const salvo = localStorage.getItem('croma-tema');
+    if (salvo) { document.documentElement.setAttribute('data-theme', salvo); }
+    else if (window.matchMedia('(prefers-color-scheme: light)').matches) { document.documentElement.setAttribute('data-theme', 'light'); }
   } catch(e) {}
-});
+})();
 </script>
 </body>
 </html>
