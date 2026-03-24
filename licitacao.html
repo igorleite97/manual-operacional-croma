@@ -349,7 +349,7 @@ footer p{font-size:11px;color:var(--text3)}
 .video-tutorial-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-glow)}
 .video-tutorial-chevron{color:var(--text3);transition:transform .3s cubic-bezier(.4,0,.2,1)}
 .video-tutorial.open .video-tutorial-chevron{transform:rotate(180deg)}
-.video-tutorial-body{display:block;padding:0 12px 14px}
+.video-tutorial-body{display:none;padding:0 12px 14px}
 .video-tutorial.open .video-tutorial-body{display:block;animation:accordionOpen .25s cubic-bezier(.4,0,.2,1)}
 @keyframes accordionOpen{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .video-tutorial-body video{width:100%;border-radius:8px;display:block;background:#000;max-height:440px}
@@ -499,10 +499,34 @@ footer p{font-size:11px;color:var(--text3)}
               <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Salvar filtros frequentes como padrão</span>
             </div>
 
+            <!-- Critérios de avaliação em cards informativos -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-top:12px">
+              <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
+                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Portal de compras</div>
+                <div style="font-size:11px;color:var(--text2);line-height:1.6">Verificar se o portal (ComprasNet, BLL, PNCP etc.) é compatível com a estrutura operacional da empresa.</div>
+              </div>
+              <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
+                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Data e hora da disputa</div>
+                <div style="font-size:11px;color:var(--text2);line-height:1.6">Conferir se o prazo é viável para concluir análise, cotação e cadastro de proposta com antecedência.</div>
+              </div>
+              <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
+                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Capacidade do órgão (<abbr class="tooltip" data-tip="Capacidade de Pagamento do ente federativo — avaliação do Tesouro Nacional sobre a saúde fiscal do órgão contratante." tabindex="0">CAPAG</abbr>)</div>
+                <div style="font-size:11px;color:var(--text2);line-height:1.6">Avaliar o rating do órgão para estimar risco de inadimplência no pagamento. Órgãos com <abbr class="tooltip" data-tip="Capacidade de Pagamento do ente federativo — avaliação do Tesouro Nacional sobre a saúde fiscal do órgão contratante." tabindex="0">CAPAG</abbr> baixo exigem cautela.</div>
+              </div>
+              <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
+                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Compatibilidade de produtos</div>
+                <div style="font-size:11px;color:var(--text2);line-height:1.6">Confirmar se os itens licitados se encaixam no portfólio de produtos que a empresa fornece.</div>
+              </div>
+              <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
+                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Quantidades e escala</div>
+                <div style="font-size:11px;color:var(--text2);line-height:1.6">Verificar se as quantidades solicitadas são operacionalmente viáveis para fornecimento no prazo contratual.</div>
+              </div>
+            </div>
+
             <!-- Tutorial em vídeo: cobre acesso ao painel, configuração de
                  filtros e navegação inicial — unifica o que eram dois passos. -->
             <div class="video-tutorial" id="vid-captacao-effecti">
-              <  class="video-tutorial-header" onclick="toggleVideo('vid-captacao-effecti')" aria-expanded="false" aria-controls="vid-captacao-effecti-body">
+              <div class="video-tutorial-header" onclick="toggleVideo('vid-captacao-effecti')" aria-expanded="false" aria-controls="vid-captacao-effecti-body">
                 <div class="video-tutorial-icon">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </div>
@@ -515,9 +539,11 @@ footer p{font-size:11px;color:var(--text3)}
               </div>
               <div class="video-tutorial-body" id="vid-captacao-effecti-body">
                 <div class="video-pip-wrap">
-                <video id="video-captacao-effecti" controls preload="metadata" loading="lazy">
-                  <source src="captacao_de_oportunidade_effecti.mp4" type="video/mp4">
-                  Seu navegador não suporta reprodução de vídeo.
+                <video id="video-captacao" controls preload="none"
+                  src="Captacao_de_oportunidade_-_Effecti.mp4"
+                  poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%230d1117'/%3E%3Ccircle cx='480' cy='270' r='56' fill='%231e1040' stroke='%23b07ef8' stroke-width='2'/%3E%3Cpolygon points='466,248 466,292 506,270' fill='%23b07ef8'/%3E%3Ctext x='480' y='360' font-family='sans-serif' font-size='16' fill='%234a5568' text-anchor='middle'%3EClique para reproduzir%3C/text%3E%3C/svg%3E"
+                  aria-label="Tutorial: acesso ao Effecti e pesquisa de oportunidades com filtros">
+                  Seu navegador não suporta reprodução de vídeo HTML5.
                 </video>
                 <button class="pip-btn" onclick="openPiP('video-captacao')" title="Abrir em Picture-in-Picture" aria-label="Abrir vídeo em modo flutuante">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="11" width="9" height="6" rx="1"/></svg>
@@ -557,29 +583,7 @@ footer p{font-size:11px;color:var(--text3)}
               <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">"Próxima ao vencimento" → urgência</span>
             </div>
 
-            <!-- Critérios de avaliação em cards informativos -->
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-top:12px">
-              <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
-                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Portal de compras</div>
-                <div style="font-size:11px;color:var(--text2);line-height:1.6">Verificar se o portal (ComprasNet, BLL, PNCP etc.) é compatível com a estrutura operacional da empresa.</div>
-              </div>
-              <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
-                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Data e hora da disputa</div>
-                <div style="font-size:11px;color:var(--text2);line-height:1.6">Conferir se o prazo é viável para concluir análise, cotação e cadastro de proposta com antecedência.</div>
-              </div>
-              <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
-                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Capacidade do órgão (<abbr class="tooltip" data-tip="Capacidade de Pagamento do ente federativo — avaliação do Tesouro Nacional sobre a saúde fiscal do órgão contratante." tabindex="0">CAPAG</abbr>)</div>
-                <div style="font-size:11px;color:var(--text2);line-height:1.6">Avaliar o rating do órgão para estimar risco de inadimplência no pagamento. Órgãos com <abbr class="tooltip" data-tip="Capacidade de Pagamento do ente federativo — avaliação do Tesouro Nacional sobre a saúde fiscal do órgão contratante." tabindex="0">CAPAG</abbr> baixo exigem cautela.</div>
-              </div>
-              <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
-                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Compatibilidade de produtos</div>
-                <div style="font-size:11px;color:var(--text2);line-height:1.6">Confirmar se os itens licitados se encaixam no portfólio de produtos que a empresa fornece.</div>
-              </div>
-              <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
-                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Quantidades e escala</div>
-                <div style="font-size:11px;color:var(--text2);line-height:1.6">Verificar se as quantidades solicitadas são operacionalmente viáveis para fornecimento no prazo contratual.</div>
-              </div>
-            </div>
+            
 
             <!-- Tutorial: avaliação real de uma oportunidade no Effecti -->
             <div class="video-tutorial" id="vid-avaliacao-effecti" style="margin-top:14px">
@@ -596,10 +600,12 @@ footer p{font-size:11px;color:var(--text3)}
               </div>
               <div class="video-tutorial-body" id="vid-avaliacao-effecti-body">
                 <div class="video-pip-wrap">
-                <video id="video-avaliacao-oportunidade-effecti" controls preload="metadata" loading="lazy">
-                  <source src="avaliacao_oportunidade_effecti.mp4" type="video/mp4">
-                  Seu navegador não suporta reprodução de vídeo.
-                </video> 
+                <video id="video-avaliacao" controls preload="none"
+                  src="avaliacao-oportunidade-effecti.mp4"
+                  poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%230d1117'/%3E%3Ccircle cx='480' cy='270' r='56' fill='%231e1040' stroke='%23b07ef8' stroke-width='2'/%3E%3Cpolygon points='466,248 466,292 506,270' fill='%23b07ef8'/%3E%3Ctext x='480' y='360' font-family='sans-serif' font-size='16' fill='%234a5568' text-anchor='middle'%3EClique para reproduzir%3C/text%3E%3C/svg%3E"
+                  aria-label="Tutorial: avaliacao de oportunidade no Effecti - portal, capag, produtos e prazos">
+                  Seu navegador não suporta reprodução de vídeo HTML5.
+                </video>
                 <button class="pip-btn" onclick="openPiP('video-avaliacao')" title="Abrir em Picture-in-Picture" aria-label="Abrir vídeo em modo flutuante">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="11" width="9" height="6" rx="1"/></svg>
                   PiP
@@ -669,9 +675,11 @@ footer p{font-size:11px;color:var(--text3)}
               </div>
               <div class="video-tutorial-body" id="vid-card-optiwork-body">
                 <div class="video-pip-wrap">
-                <video id="video-card-optiwork" controls preload="metadata" loading="lazy">
-                  <source src="criacao_card_optiwork.mp4" type="video/mp4">
-                  Seu navegador não suporta reprodução de vídeo.
+                <video id="video-card-optiwork" controls preload="none"
+                  src="criacao_card_OptiWork.mp4"
+                  poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%230d1117'/%3E%3Ccircle cx='480' cy='270' r='56' fill='%231e1040' stroke='%23b07ef8' stroke-width='2'/%3E%3Cpolygon points='466,248 466,292 506,270' fill='%23b07ef8'/%3E%3Ctext x='480' y='360' font-family='sans-serif' font-size='16' fill='%234a5568' text-anchor='middle'%3EClique para reproduzir%3C/text%3E%3C/svg%3E"
+                  aria-label="Tutorial: criacao do card no banco de editais do OptiWork com nomenclatura padronizada">
+                  Seu navegador não suporta reprodução de vídeo HTML5.
                 </video>
                 <button class="pip-btn" onclick="openPiP('video-card-optiwork')" title="Abrir em Picture-in-Picture" aria-label="Abrir vídeo em modo flutuante">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="11" width="9" height="6" rx="1"/></svg>
