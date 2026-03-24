@@ -6,6 +6,7 @@
 <title>Comercial &mdash; Manual Operacional &middot; Croma Tecnologia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="robots" content="noindex, nofollow">
 <style>
 /* ============================================================
    TOKENS DE TEMA
@@ -279,11 +280,139 @@ footer p{font-size:11px;color:var(--text3)}
 .video-tutorial-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-glow)}
 .video-tutorial-chevron{color:var(--text3);transition:transform .3s cubic-bezier(.4,0,.2,1)}
 .video-tutorial.open .video-tutorial-chevron{transform:rotate(180deg)}
-.video-tutorial-body{display:block;padding:0 12px 14px}
+.video-tutorial-body{display:none;padding:0 12px 14px}
 .video-tutorial.open .video-tutorial-body{display:block;animation:accordionOpen .25s cubic-bezier(.4,0,.2,1)}
 @keyframes accordionOpen{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .video-tutorial-body video{width:100%;border-radius:8px;display:block;background:#000;max-height:440px}
 .video-tutorial-caption{font-size:11px;color:var(--text3);margin-top:8px;text-align:center;line-height:1.5}
+
+/* ============================================================
+   BUSCA GLOBAL — campo + dropdown de resultados.
+   Fuse.js faz a busca fuzzy no índice em memória.
+   O campo fica sempre visível na topbar, colapsando em mobile.
+============================================================ */
+.search-wrap{position:relative;flex-shrink:0;margin-left:auto}
+.search-input{width:200px;height:34px;padding:0 34px 0 32px;background:var(--bg3);border:1px solid var(--border2);border-radius:9px;font-size:12px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:all .2s cubic-bezier(.4,0,.2,1)}
+.search-input::placeholder{color:var(--text3)}
+.search-input:focus{width:260px;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);background:var(--bg2)}
+.search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none;transition:color .2s}
+.search-input:focus~.search-clear,.search-input:not(:placeholder-shown)~.search-clear{display:flex}
+.search-clear{display:none;position:absolute;right:8px;top:50%;transform:translateY(-50%);width:18px;height:18px;border-radius:50%;background:var(--bg4);border:none;cursor:pointer;align-items:center;justify-content:center;color:var(--text3);transition:all .15s}
+.search-clear:hover{background:var(--border2);color:var(--text)}
+.search-input:focus~.search-icon,.search-input:not(:placeholder-shown)~.search-icon{color:var(--accent)}
+.search-dropdown{display:none;position:absolute;top:calc(100% + 8px);right:0;width:340px;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow-md);z-index:400;overflow:hidden;max-height:380px;overflow-y:auto;scrollbar-width:thin}
+.search-dropdown.open{display:block;animation:fadeIn .15s ease}
+.search-result-item{display:flex;gap:12px;align-items:flex-start;padding:10px 14px;cursor:pointer;transition:background .12s;border-bottom:1px solid var(--border);text-decoration:none}
+.search-result-item:last-child{border-bottom:none}
+.search-result-item:hover,.search-result-item.active{background:var(--bg3)}
+.sri-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.sri-body{flex:1;min-width:0}
+.sri-title{font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sri-title mark{background:none;color:var(--accent);font-weight:700}
+.sri-path{font-size:10px;color:var(--text3);margin-top:2px;display:flex;align-items:center;gap:4px}
+.sri-path span{padding:1px 5px;border-radius:4px;background:var(--bg3);border:1px solid var(--border)}
+.search-empty{padding:20px 14px;text-align:center;font-size:12px;color:var(--text3)}
+.search-hint{padding:8px 14px;font-size:10px;color:var(--text3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
+.search-hint kbd{font-size:9px;padding:1px 5px;background:var(--bg3);border:1px solid var(--border2);border-radius:4px;font-family:'DM Mono',monospace}
+@media(max-width:900px){.search-input{width:140px}.search-input:focus{width:180px}}
+@media(max-width:600px){.search-wrap{display:none}}
+
+/* ============================================================
+   BREADCRUMBS DINÂMICOS — topbar-title se torna um breadcrumb
+   que reflete setor > fase > aba ativa em tempo real.
+============================================================ */
+.topbar-breadcrumb{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text3);white-space:nowrap;overflow:hidden}
+.bc-sep{opacity:.4;font-size:11px;flex-shrink:0}
+.bc-sector{color:var(--text2);font-weight:600;flex-shrink:0}
+.bc-fase{color:var(--text2);transition:color .2s;flex-shrink:0;cursor:pointer}
+.bc-fase:hover{color:var(--text)}
+.bc-tab{color:var(--accent);font-weight:600;overflow:hidden;text-overflow:ellipsis;transition:color .2s}
+@media(max-width:600px){.bc-fase,.bc-sep:nth-child(3),.bc-tab{display:none}}
+
+/* ============================================================
+   TOOLTIPS DE TERMOS TÉCNICOS — aparece no hover/focus.
+   Definição breve do termo, sem precisar abrir o glossário.
+============================================================ */
+/* ============================================================
+   TOOLTIPS -- visíveis ao hover E ao foco por teclado.
+   tabindex="0" no .tooltip garante que Tab chega até ele.
+   O JS (initTooltips) adiciona role="tooltip" + aria-describedby
+   para que screen readers leiam a definição ao focar.
+   display:inline-block é necessário para position:relative funcionar
+   corretamente em elementos inline sem quebrar o fluxo do texto.
+============================================================ */
+.tooltip{position:relative;display:inline-block;border-bottom:1px dotted var(--text3);cursor:help;color:inherit;vertical-align:baseline}
+.tooltip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--bg4);color:var(--text2);font-size:11px;line-height:1.55;padding:8px 11px;border-radius:8px;border:1px solid var(--border2);box-shadow:var(--shadow-md);width:260px;white-space:normal;z-index:500;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;font-weight:400;font-style:normal;font-family:'DM Sans',sans-serif;transform:translateX(-50%) translateY(4px)}
+.tooltip::before{content:'';position:absolute;bottom:calc(100% + 3px);left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--border2);z-index:501;opacity:0;pointer-events:none;transition:opacity .18s ease}
+.tooltip:hover::after,.tooltip:focus-visible::after,.tooltip:focus::after{opacity:1;transform:translateX(-50%) translateY(0)}
+.tooltip:hover::before,.tooltip:focus-visible::before,.tooltip:focus::before{opacity:1}
+/* Indicador de foco visível (acessibilidade por teclado) */
+.tooltip:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+/* Span de suporte ao screen reader -- visualmente oculto mas lido em voz alta */
+.tooltip-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ============================================================
+   PiP BUTTON — botão de Picture-in-Picture no player de vídeo.
+   Flutua no canto superior direito do player, só aparece
+   quando o accordion está aberto.
+============================================================ */
+.video-pip-wrap{position:relative}
+.pip-btn{position:absolute;top:8px;right:8px;z-index:10;display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;padding:5px 9px;border-radius:7px;background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.15);cursor:pointer;backdrop-filter:blur(4px);transition:all .18s;font-family:'DM Sans',sans-serif}
+.pip-btn:hover{background:rgba(0,0,0,.85);border-color:rgba(255,255,255,.35);transform:scale(1.05)}
+.pip-btn svg{flex-shrink:0}
+
+/* ============================================================
+   BOTÕES DE AÇÃO — teoria → prática.
+   Effecti (purple), OptiWork (blue), OMIE (green-accent).
+   Cada fase tem seus botões no final dos steps relevantes.
+============================================================ */
+.action-buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.action-btn{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;padding:7px 14px;border-radius:8px;border:none;cursor:pointer;text-decoration:none;font-family:inherit;transition:all .22s cubic-bezier(.4,0,.2,1);letter-spacing:.02em}
+.action-btn svg{flex-shrink:0;transition:transform .2s}
+.action-btn:hover svg{transform:translateX(2px)}
+.action-btn-effecti{background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-glow)}
+.action-btn-effecti:hover{background:var(--accent);color:#fff;box-shadow:0 4px 14px var(--accent-glow);transform:translateY(-2px)}
+.action-btn-opti{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-glow)}
+.action-btn-opti:hover{background:var(--blue);color:#fff;box-shadow:0 4px 14px var(--blue-glow);transform:translateY(-2px)}
+.action-btn-omie{background:var(--green-bg);color:var(--green);border:1px solid var(--green-glow)}
+.action-btn-omie:hover{background:var(--green);color:#fff;box-shadow:0 4px 14px var(--green-glow);transform:translateY(-2px)}
+.action-divider{display:flex;align-items:center;gap:8px;margin-top:12px;margin-bottom:4px}
+.action-divider-line{flex:1;height:1px;background:var(--border)}
+.action-divider span{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+
+/* ============================================================
+   VIDEO PLAYER — accordion com lazy-load e fade suave.
+   O vídeo só é carregado quando o accordion é aberto pela
+   primeira vez — preserva performance em conexões lentas.
+============================================================ */
+.video-tutorial{margin-top:1rem;border-radius:12px;overflow:hidden;border:1px solid var(--border2);background:var(--bg3);transition:all .25s cubic-bezier(.4,0,.2,1)}
+.video-tutorial-header{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;user-select:none;transition:background .15s}
+.video-tutorial-header:hover{background:var(--bg4)}
+.video-tutorial-icon{width:32px;height:32px;border-radius:8px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s}
+.video-tutorial-header:hover .video-tutorial-icon{transform:scale(1.1)}
+.video-tutorial-meta{flex:1}
+.video-tutorial-meta strong{font-size:12px;font-weight:700;color:var(--text);display:block}
+.video-tutorial-meta span{font-size:11px;color:var(--text3)}
+.video-tutorial-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-glow)}
+.video-tutorial-chevron{color:var(--text3);transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.video-tutorial.open .video-tutorial-chevron{transform:rotate(180deg)}
+.video-tutorial-body{display:none;padding:0 12px 14px}
+.video-tutorial.open .video-tutorial-body{display:block;animation:accordionOpen .25s cubic-bezier(.4,0,.2,1)}
+@keyframes accordionOpen{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.video-tutorial-body video{width:100%;border-radius:8px;display:block;background:#000;max-height:440px}
+.video-tutorial-caption{font-size:11px;color:var(--text3);margin-top:8px;text-align:center;line-height:1.5}
+
+/* ============================================================
+   PLAY OVERLAY -- botao central de play sobre o poster.
+   Resolve o problema de preload=none onde o clique no poster
+   nao aciona o play em todos os browsers.
+   Some automaticamente ao iniciar a reproducao.
+============================================================ */
+.play-overlay{position:absolute;top:0;left:0;right:0;bottom:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .2s ease;border-radius:8px 8px 0 0;z-index:5;background:transparent;pointer-events:auto}
+.play-overlay.hidden{opacity:0;pointer-events:none}
+.play-overlay-btn{width:64px;height:64px;border-radius:50%;background:rgba(176,126,248,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,.5);transition:transform .15s ease,background .15s ease;border:2px solid rgba(255,255,255,.25)}
+.play-overlay:hover .play-overlay-btn{transform:scale(1.1);background:rgba(176,126,248,1)}
+.play-overlay-btn svg{margin-left:4px;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -296,8 +425,15 @@ footer p{font-size:11px;color:var(--text3)}
     <span class="logo-fallback" style="display:none">CROMA</span>
   </a>
   <div class="topbar-divider"></div>
-  <span class="topbar-title">Manual Operacional <strong>/ Comercial</strong></span>
-  <nav class="topbar-nav">
+  <!-- Breadcrumb dinâmico — atualizado via JS a cada mudança de fase/aba -->
+  <div class="topbar-breadcrumb" id="topbar-breadcrumb" aria-label="Localização atual">
+    <span class="bc-sector">Comercial</span>
+    <span class="bc-sep" aria-hidden="true">›</span>
+    <span class="bc-fase" id="bc-fase" onclick="document.querySelector('.role-bar').scrollIntoView({behavior:'smooth'})">Consultor</span>
+    <span class="bc-sep" aria-hidden="true">›</span>
+    <span class="bc-tab" id="bc-tab">Escopo</span>
+  </div>
+  <nav class="topbar-nav" aria-label="Navegação entre setores">
     <a href="index.html">Inicio</a>
     <a href="financeiro.html">Financeiro</a>
     <a href="compras.html">Compras</a>
@@ -307,6 +443,24 @@ footer p{font-size:11px;color:var(--text3)}
     <a href="ecommerce.html">E-commerce</a>
     <a href="outsourcing.html">Outsourcing</a>
   </nav>
+  <!-- Campo de busca global com Fuse.js — busca fuzzy em memória, sem servidor -->
+  <div class="search-wrap" id="search-wrap" role="search" aria-label="Busca global no manual">
+    <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="search" class="search-input" id="search-input"
+      placeholder="Buscar... (ex: Markup)"
+      autocomplete="off" autocorrect="off" spellcheck="false"
+      aria-label="Buscar no manual" aria-haspopup="listbox" aria-expanded="false"
+      aria-controls="search-dropdown"
+      oninput="onSearch(this.value)"
+      onkeydown="onSearchKey(event)"
+      onfocus="if(this.value) onSearch(this.value)"
+    />
+    <button class="search-clear" aria-label="Limpar busca" onclick="clearSearch()" tabindex="-1">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="search-dropdown" id="search-dropdown" role="listbox" aria-label="Resultados da busca"></div>
+  </div>
+
   <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
     <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <svg class="icon-sun"  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -535,13 +689,24 @@ footer p{font-size:11px;color:var(--text3)}
                 <svg class="video-tutorial-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
               <div class="video-tutorial-body" id="vid-cadastro-omie-body">
-                <video
-                  controls
-                  preload="none"
-                  src="cadastro_de_novo_cliente_omie.mp4"
-                  aria-label="Tutorial: cadastro de novo cliente no OMIE — empresa ESFERA">
-                  Seu navegador não suporta reprodução de vídeo HTML5.
+                <div class="video-pip-wrap">
+                <video id="video-cadastro-omie" controls preload="metadata"
+                  src="Cadastro_de_novo_cliente_-_OMIE.mp4"
+                  poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%230d1117'/%3E%3Ccircle cx='480' cy='270' r='56' fill='%231a1040' stroke='%23a78bfa' stroke-width='2'/%3E%3Cpolygon points='466,248 466,292 506,270' fill='%23a78bfa'/%3E%3Ctext x='480' y='360' font-family='sans-serif' font-size='16' fill='%234a5568' text-anchor='middle'%3EClique para reproduzir%3C/text%3E%3C/svg%3E"
+                  aria-label="Tutorial: cadastro de novo cliente no OMIE - empresa ESFERA">
+                  Seu navegador nao suporta reproducao de video HTML5.
                 </video>
+                <!-- Overlay de play central -- some ao iniciar reproducao -->
+                <div class="play-overlay" onclick="playVideoOverlay(this)">
+                  <div class="play-overlay-btn">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </div>
+                </div>
+                <button class="pip-btn" onclick="openPiP('video-cadastro-omie')" title="Abrir em Picture-in-Picture" aria-label="Abrir video em modo flutuante">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="11" width="9" height="6" rx="1"/></svg>
+                  PiP
+                </button>
+              </div>
                 <p class="video-tutorial-caption">
                   Acesse o OMIE pela empresa <strong>ESFERA</strong>, vá em CRM &rarr; Clientes &rarr; Novo cliente e preencha os dados conforme o vídeo.
                 </p>
@@ -1362,12 +1527,236 @@ footer p{font-size:11px;color:var(--text3)}
 </footer>
 
 <script>
+const SEARCH_INDEX = [
+  // Consultor de Vendas
+  {role:"cons",tab:"escopo",title:"Escopo do Consultor",section:"Consultor",kw:"escopo responsabilidades captacao carteira negociacao ticket pos-venda"},
+  {role:"cons",tab:"fluxo",title:"Fluxo Operacional - Captacao",section:"Consultor",kw:"captacao prospeccao CRM OMIE ligacoes emails contato registro tarefa"},
+  {role:"cons",tab:"fluxo",title:"Fluxo Operacional - Carteira",section:"Consultor",kw:"carteira ativa manutencao reativacao 60 dias inativacao historico"},
+  {role:"cons",tab:"fluxo",title:"Fluxo Operacional - Venda e Ticket",section:"Consultor",kw:"venda fechamento OC ordem compra ticket OptiWork frete Markup abertura"},
+  {role:"cons",tab:"fluxo",title:"Fluxo Operacional - CRM OMIE",section:"Consultor",kw:"CRM oportunidade ganha registro obrigatorio faturamento Diretoria OMIE"},
+  {role:"cons",tab:"fluxo",title:"Fluxo Operacional - Pos-Venda",section:"Consultor",kw:"pos-venda satisfacao pagamento inadimplencia vencimento Gestor bloqueio"},
+  {role:"cons",tab:"markup",title:"Planilha de Markup",section:"Consultor",kw:"markup MKP 1.35 custo preco venda tributos DIFAL frete margem empresa faturadora"},
+  {role:"cons",tab:"markup",title:"Markup - Regra de Imutabilidade",section:"Consultor",kw:"imutavel alterar reinicio fluxo aprovacao erro correto primeira vez"},
+  {role:"cons",tab:"sistemas",title:"Sistemas - OMIE CRM",section:"Consultor",kw:"OMIE CRM cadastro cliente historico oportunidade tarefa follow-up"},
+  {role:"cons",tab:"sistemas",title:"Sistemas - OptiWork",section:"Consultor",kw:"OptiWork ticket kanban card Markup OC frete Pendentes notificacao"},
+  {role:"cons",tab:"relacionamentos",title:"Relacionamentos do Consultor",section:"Consultor",kw:"Gestor Financeiro Logistica cotacao frete Pendentes inadimplencia"},
+  {role:"cons",tab:"regras",title:"Regras e Politicas",section:"Consultor",kw:"politica credito boleto a vista prazo venda interna proibida CNPJ"},
+  {role:"cons",tab:"glossario",title:"Glossario Comercial",section:"Consultor",kw:"OC Markup DIFAL triangulacao venda interna CRM carteira OptiWork Nota Empenho SLA"},
+  // Gestor Comercial
+  {role:"gest",tab:"escopo",title:"Escopo do Gestor",section:"Gestor",kw:"escopo aprovacao analise risco cliente historico cronograma CRM equipe credito"},
+  {role:"gest",tab:"aprovacao",title:"Aprovacao de Tickets",section:"Gestor",kw:"aprovacao ticket Markup OC convergencia margem MKP reprova devolve Financeiro"},
+  {role:"gest",tab:"monitoramento",title:"Monitoramento da Equipe",section:"Gestor",kw:"monitoramento CRM cronograma inadimplencia carteira arquivo documentos desempenho"},
+  {role:"gest",tab:"relacionamentos",title:"Relacionamentos do Gestor",section:"Gestor",kw:"Consultor Financeiro Compras Logistica Pendentes bloqueio credito aprovacao"},
+  {role:"gest",tab:"raci",title:"Matriz RACI Comercial",section:"Gestor",kw:"RACI responsavel aprovador consultado informado captacao CRM ticket Markup"},
+];
+
+const ROLE_LABELS  = {cons:"Consultor", gest:"Gestor"};
+const TAB_LABELS_COM = {
+  escopo:"Escopo", fluxo:"Fluxo Operacional", markup:"Planilha de Markup",
+  sistemas:"Sistemas", relacionamentos:"Relacionamentos", regras:"Regras e Politicas",
+  glossario:"Glossario", aprovacao:"Aprovacao de Vendas", monitoramento:"Monitoramento",
+  raci:"Matriz RACI",
+};
+
 // ============================================================
-// TOGGLE VIDEO TUTORIAL
-// Abre e fecha o accordion de vídeo. Lazy-load: o atributo
-// src só é atribuído ao <video> na primeira abertura — assim
-// o browser não baixa o MP4 enquanto o accordion está fechado,
-// o que faz diferença em conexões mais lentas.
+// BUSCA GLOBAL COM FUSE.JS -- adaptada para o Comercial
+// Busca em roles e tabs em vez de fases
+// ============================================================
+let _fuse = null;
+let _searchIdx = -1;
+
+function initSearch() {
+  if (typeof Fuse === 'undefined') { setTimeout(initSearch, 100); return; }
+  _fuse = new Fuse(SEARCH_INDEX, {
+    keys: [
+      { name: 'title',   weight: 0.6 },
+      { name: 'kw',      weight: 0.4 },
+      { name: 'section', weight: 0.2 },
+    ],
+    threshold: 0.35,
+    includeScore: true,
+    includeMatches: true,
+    minMatchCharLength: 2,
+  });
+}
+
+function onSearch(q) {
+  const input = document.getElementById('search-input');
+  const drop  = document.getElementById('search-dropdown');
+  _searchIdx  = -1;
+  input.setAttribute('aria-expanded', q.length > 0);
+  if (!q || q.length < 2) { drop.classList.remove('open'); drop.innerHTML = ''; return; }
+  if (!_fuse) { initSearch(); return; }
+
+  const results = _fuse.search(q, { limit: 7 });
+  if (!results.length) {
+    drop.innerHTML = `<div class="search-empty">Nenhum resultado para "<strong>${escHtml(q)}</strong>"</div>`;
+    drop.classList.add('open'); return;
+  }
+
+  const highlight = (str, matches) => {
+    if (!matches) return escHtml(str);
+    const chars = new Set();
+    matches.forEach(m => { if(m.key==='title') m.indices.forEach(([a,b])=>{ for(let x=a;x<=b;x++) chars.add(x); }); });
+    let out = ''; [...str].forEach((c,i) => { out += chars.has(i) ? `<mark>${escHtml(c)}</mark>` : escHtml(c); });
+    return out;
+  };
+
+  const hint = `<div class="search-hint"><kbd>&uarr;&darr;</kbd> navegar&nbsp; <kbd>&crarr;</kbd> abrir&nbsp; <kbd>Esc</kbd> fechar</div>`;
+  const items = results.map((r, i) => {
+    const item  = r.item;
+    const color = item.role === 'cons' ? 'var(--accent)' : 'var(--blue)';
+    const titleHL = highlight(item.title, r.matches);
+    return `<a class="search-result-item" role="option" data-i="${i}"
+        onclick="goToResult('${item.role}','${item.tab}')" onmouseover="setSearchIdx(${i})">
+      <div class="sri-icon" style="background:${color}22">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div class="sri-body">
+        <div class="sri-title">${titleHL}</div>
+        <div class="sri-path">
+          <span>${item.section}</span>
+          <span>${TAB_LABELS_COM[item.tab] || item.tab}</span>
+        </div>
+      </div>
+    </a>`;
+  }).join('');
+
+  drop.innerHTML = hint + items;
+  drop.classList.add('open');
+}
+
+function setSearchIdx(i) { _searchIdx = i; }
+
+function goToResult(role, tab) {
+  setRole(role);
+  if (role === 'cons') {
+    const btn = [...document.querySelectorAll('#tabs-cons .tab-btn')].find(b =>
+      b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + tab + "'"));
+    if (btn) btn.click();
+  } else {
+    const btn = [...document.querySelectorAll('#tabs-gest .tab-btn')].find(b =>
+      b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + tab + "'"));
+    if (btn) btn.click();
+  }
+  clearSearch();
+}
+
+function onSearchKey(e) {
+  const drop  = document.getElementById('search-dropdown');
+  const items = drop.querySelectorAll('.search-result-item');
+  if (!drop.classList.contains('open') || !items.length) return;
+  if (e.key === 'ArrowDown') { e.preventDefault(); _searchIdx = Math.min(_searchIdx+1, items.length-1); highlightSearchItem(items); }
+  else if (e.key === 'ArrowUp')  { e.preventDefault(); _searchIdx = Math.max(_searchIdx-1, 0); highlightSearchItem(items); }
+  else if (e.key === 'Enter' && _searchIdx >= 0) { e.preventDefault(); items[_searchIdx].click(); }
+  else if (e.key === 'Escape') { clearSearch(); }
+}
+
+function highlightSearchItem(items) {
+  items.forEach((el,i) => el.classList.toggle('active', i === _searchIdx));
+  if (_searchIdx >= 0) items[_searchIdx].scrollIntoView({block:'nearest'});
+}
+
+function clearSearch() {
+  const input = document.getElementById('search-input');
+  const drop  = document.getElementById('search-dropdown');
+  input.value = '';
+  drop.classList.remove('open'); drop.innerHTML = '';
+  input.setAttribute('aria-expanded', 'false');
+  _searchIdx = -1;
+}
+
+document.addEventListener('click', e => {
+  const wrap = document.getElementById('search-wrap');
+  if (wrap && !wrap.contains(e.target)) document.getElementById('search-dropdown').classList.remove('open');
+});
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ============================================================
+// BREADCRUMB DINAMICO -- atualiza ao trocar role/tab
+// ============================================================
+function updateBreadcrumb(role, tab) {
+  const bcFase = document.getElementById('bc-fase');
+  const bcTab  = document.getElementById('bc-tab');
+  if (bcFase) bcFase.textContent = ROLE_LABELS[role] || role;
+  if (bcTab)  bcTab.textContent  = TAB_LABELS_COM[tab] || tab;
+  document.title = 'Comercial | ' + (ROLE_LABELS[role]||role) + ' | ' + (TAB_LABELS_COM[tab]||tab) + ' | Manual Croma';
+}
+
+// ============================================================
+// PICTURE-IN-PICTURE
+// ============================================================
+async function openPiP(videoId) {
+  const video = document.getElementById(videoId);
+  if (!video) return;
+  try {
+    if (document.pictureInPictureElement === video) await document.exitPictureInPicture();
+    else await video.requestPictureInPicture();
+  } catch(err) {
+    window.open(video.currentSrc || video.src, '_blank', 'noopener');
+  }
+}
+
+// ============================================================
+// PLAY OVERLAY -- botao central de play
+// ============================================================
+function playVideoOverlay(overlay) {
+  const wrap  = overlay.closest('.video-pip-wrap');
+  const video = wrap.querySelector('video');
+  if (!video) return;
+  overlay.classList.add('hidden');
+  video.play().then(function() {
+    overlay.remove();
+  }).catch(function() {
+    overlay.classList.remove('hidden');
+  });
+}
+
+// ============================================================
+// SELETOR DE CARGO
+// ============================================================
+function setRole(r) {
+  document.querySelectorAll('.role-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active-cons','active-gest'));
+  document.getElementById('role-' + r).classList.add('active');
+  document.getElementById('rbtn-' + r).classList.add(r === 'cons' ? 'active-cons' : 'active-gest');
+  // Inferir tab ativa
+  const activeTab = r === 'cons'
+    ? document.querySelector('#tabs-cons .tab-btn.active-cons')
+    : document.querySelector('#tabs-gest .tab-btn.active-gest');
+  const tabLabel = activeTab ? activeTab.textContent.trim().toLowerCase().replace(/ /g,'') : r === 'cons' ? 'escopo' : 'escopo';
+  // Encontrar o tab id
+  const tabId = Object.keys(TAB_LABELS_COM).find(k => TAB_LABELS_COM[k].toLowerCase().replace(/ /g,'') === tabLabel) || 'escopo';
+  updateBreadcrumb(r, tabId);
+}
+
+// ============================================================
+// ABAS DO CONSULTOR
+// ============================================================
+function tabCons(id, btn) {
+  document.querySelectorAll('#tabs-cons .tab-btn').forEach(b => b.classList.remove('active-cons'));
+  document.querySelectorAll('[id^="cons-"]').forEach(p => p.classList.remove('active'));
+  document.getElementById('cons-' + id).classList.add('active');
+  btn.classList.add('active-cons');
+  updateBreadcrumb('cons', id);
+}
+
+// ============================================================
+// ABAS DO GESTOR
+// ============================================================
+function tabGest(id, btn) {
+  document.querySelectorAll('#tabs-gest .tab-btn').forEach(b => b.classList.remove('active-gest'));
+  document.querySelectorAll('[id^="gest-"]').forEach(p => p.classList.remove('active'));
+  document.getElementById('gest-' + id).classList.add('active');
+  btn.classList.add('active-gest');
+  updateBreadcrumb('gest', id);
+}
+
+// ============================================================
+// TOGGLE VIDEO TUTORIAL -- accordion com lazy-load
 // ============================================================
 function toggleVideo(id) {
   const wrap   = document.getElementById(id);
@@ -1375,58 +1764,15 @@ function toggleVideo(id) {
   const body   = document.getElementById(id + '-body');
   const video  = body.querySelector('video');
   const isOpen = wrap.classList.toggle('open');
-
   header.setAttribute('aria-expanded', isOpen);
-
-  // Lazy-load: atribui o src somente na primeira abertura
-  if (isOpen && video && video.dataset.src && !video.src) {
+  if (isOpen && video && video.dataset.src && !video.getAttribute('src')) {
     video.src = video.dataset.src;
   }
-
-  // Pausa o vídeo ao fechar o accordion para não ficar tocando em background
-  if (!isOpen && video) {
-    video.pause();
-  }
+  if (!isOpen && video) { video.pause(); }
 }
 
 // ============================================================
-// SELETOR DE CARGO
-// Purple para Consultor, Azul para Gestor.
-// Ao trocar, o painel anterior fica oculto e o novo aparece.
-// ============================================================
-function setRole(r) {
-  document.querySelectorAll('.role-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active-cons','active-gest'));
-  document.getElementById('role-' + r).classList.add('active');
-  document.getElementById('rbtn-' + r).classList.add(r === 'cons' ? 'active-cons' : 'active-gest');
-}
-
-// ============================================================
-// ABAS DO CONSULTOR
-// Namespace isolado: todos os ids comecam com "cons-"
-// ============================================================
-function tabCons(id, btn) {
-  document.querySelectorAll('#tabs-cons .tab-btn').forEach(b => b.classList.remove('active-cons'));
-  document.querySelectorAll('[id^="cons-"]').forEach(p => p.classList.remove('active'));
-  document.getElementById('cons-' + id).classList.add('active');
-  btn.classList.add('active-cons');
-}
-
-// ============================================================
-// ABAS DO GESTOR
-// Namespace isolado: todos os ids comecam com "gest-"
-// ============================================================
-function tabGest(id, btn) {
-  document.querySelectorAll('#tabs-gest .tab-btn').forEach(b => b.classList.remove('active-gest'));
-  document.querySelectorAll('[id^="gest-"]').forEach(p => p.classList.remove('active'));
-  document.getElementById('gest-' + id).classList.add('active');
-  btn.classList.add('active-gest');
-}
-
-// ============================================================
-// TOGGLE DE TEMA CLARO/ESCURO
-// Persiste no localStorage para ser coerente entre todas
-// as paginas do manual.
+// TOGGLE DE TEMA
 // ============================================================
 function toggleTheme() {
   const html = document.documentElement;
@@ -1442,6 +1788,30 @@ function toggleTheme() {
     else if (window.matchMedia('(prefers-color-scheme: light)').matches) { document.documentElement.setAttribute('data-theme', 'light'); }
   } catch(e) {}
 })();
+
+// ============================================================
+// INICIALIZACAO
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  initSearch();
+  updateBreadcrumb('cons', 'escopo');
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      const drop = document.getElementById('search-dropdown');
+      if (drop && drop.classList.contains('open')) clearSearch();
+    }
+  });
+  document.addEventListener('keydown', e => {
+    const inp = document.getElementById('search-input');
+    if (!inp) return;
+    if ((e.key === '/' && document.activeElement !== inp) || (e.ctrlKey && e.key === 'k')) {
+      e.preventDefault(); inp.focus(); inp.select();
+    }
+  });
+});
 </script>
+<!-- Fuse.js carregado aqui, apos o HTML -- sem render-blocking.
+     initSearch() usa setTimeout como fallback para conexoes lentas. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>
 </body>
 </html>
