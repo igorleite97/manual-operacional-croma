@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Manual Operacional Interno — Licitações — Croma Tecnologia. Documento confidencial.">
 <title>Licitação &mdash; Manual Operacional &middot; Croma Tecnologia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -238,6 +240,81 @@ footer{border-top:1px solid var(--border);padding:1.25rem 2rem;max-width:1180px;
 footer p{font-size:11px;color:var(--text3)}
 
 /* ============================================================
+   BUSCA GLOBAL — campo + dropdown de resultados.
+   Fuse.js faz a busca fuzzy no índice em memória.
+   O campo fica sempre visível na topbar, colapsando em mobile.
+============================================================ */
+.search-wrap{position:relative;flex-shrink:0;margin-left:auto}
+.search-input{width:200px;height:34px;padding:0 34px 0 32px;background:var(--bg3);border:1px solid var(--border2);border-radius:9px;font-size:12px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:all .2s cubic-bezier(.4,0,.2,1)}
+.search-input::placeholder{color:var(--text3)}
+.search-input:focus{width:260px;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);background:var(--bg2)}
+.search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none;transition:color .2s}
+.search-input:focus~.search-clear,.search-input:not(:placeholder-shown)~.search-clear{display:flex}
+.search-clear{display:none;position:absolute;right:8px;top:50%;transform:translateY(-50%);width:18px;height:18px;border-radius:50%;background:var(--bg4);border:none;cursor:pointer;align-items:center;justify-content:center;color:var(--text3);transition:all .15s}
+.search-clear:hover{background:var(--border2);color:var(--text)}
+.search-input:focus~.search-icon,.search-input:not(:placeholder-shown)~.search-icon{color:var(--accent)}
+.search-dropdown{display:none;position:absolute;top:calc(100% + 8px);right:0;width:340px;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow-md);z-index:400;overflow:hidden;max-height:380px;overflow-y:auto;scrollbar-width:thin}
+.search-dropdown.open{display:block;animation:fadeIn .15s ease}
+.search-result-item{display:flex;gap:12px;align-items:flex-start;padding:10px 14px;cursor:pointer;transition:background .12s;border-bottom:1px solid var(--border);text-decoration:none}
+.search-result-item:last-child{border-bottom:none}
+.search-result-item:hover,.search-result-item.active{background:var(--bg3)}
+.sri-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.sri-body{flex:1;min-width:0}
+.sri-title{font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sri-title mark{background:none;color:var(--accent);font-weight:700}
+.sri-path{font-size:10px;color:var(--text3);margin-top:2px;display:flex;align-items:center;gap:4px}
+.sri-path span{padding:1px 5px;border-radius:4px;background:var(--bg3);border:1px solid var(--border)}
+.search-empty{padding:20px 14px;text-align:center;font-size:12px;color:var(--text3)}
+.search-hint{padding:8px 14px;font-size:10px;color:var(--text3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
+.search-hint kbd{font-size:9px;padding:1px 5px;background:var(--bg3);border:1px solid var(--border2);border-radius:4px;font-family:'DM Mono',monospace}
+@media(max-width:900px){.search-input{width:140px}.search-input:focus{width:180px}}
+@media(max-width:600px){.search-wrap{display:none}}
+
+/* ============================================================
+   BREADCRUMBS DINÂMICOS — topbar-title se torna um breadcrumb
+   que reflete setor > fase > aba ativa em tempo real.
+============================================================ */
+.topbar-breadcrumb{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text3);white-space:nowrap;overflow:hidden}
+.bc-sep{opacity:.4;font-size:11px;flex-shrink:0}
+.bc-sector{color:var(--text2);font-weight:600;flex-shrink:0}
+.bc-fase{color:var(--text2);transition:color .2s;flex-shrink:0;cursor:pointer}
+.bc-fase:hover{color:var(--text)}
+.bc-tab{color:var(--accent);font-weight:600;overflow:hidden;text-overflow:ellipsis;transition:color .2s}
+@media(max-width:600px){.bc-fase,.bc-sep:nth-child(3),.bc-tab{display:none}}
+
+/* ============================================================
+   TOOLTIPS DE TERMOS TÉCNICOS — aparece no hover/focus.
+   Definição breve do termo, sem precisar abrir o glossário.
+============================================================ */
+/* ============================================================
+   TOOLTIPS -- visíveis ao hover E ao foco por teclado.
+   tabindex="0" no .tooltip garante que Tab chega até ele.
+   O JS (initTooltips) adiciona role="tooltip" + aria-describedby
+   para que screen readers leiam a definição ao focar.
+   display:inline-block é necessário para position:relative funcionar
+   corretamente em elementos inline sem quebrar o fluxo do texto.
+============================================================ */
+.tooltip{position:relative;display:inline-block;border-bottom:1px dotted var(--text3);cursor:help;color:inherit;vertical-align:baseline}
+.tooltip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--bg4);color:var(--text2);font-size:11px;line-height:1.55;padding:8px 11px;border-radius:8px;border:1px solid var(--border2);box-shadow:var(--shadow-md);width:260px;white-space:normal;z-index:500;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;font-weight:400;font-style:normal;font-family:'DM Sans',sans-serif;transform:translateX(-50%) translateY(4px)}
+.tooltip::before{content:'';position:absolute;bottom:calc(100% + 3px);left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--border2);z-index:501;opacity:0;pointer-events:none;transition:opacity .18s ease}
+.tooltip:hover::after,.tooltip:focus-visible::after,.tooltip:focus::after{opacity:1;transform:translateX(-50%) translateY(0)}
+.tooltip:hover::before,.tooltip:focus-visible::before,.tooltip:focus::before{opacity:1}
+/* Indicador de foco visível (acessibilidade por teclado) */
+.tooltip:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+/* Span de suporte ao screen reader -- visualmente oculto mas lido em voz alta */
+.tooltip-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ============================================================
+   PiP BUTTON — botão de Picture-in-Picture no player de vídeo.
+   Flutua no canto superior direito do player, só aparece
+   quando o accordion está aberto.
+============================================================ */
+.video-pip-wrap{position:relative}
+.pip-btn{position:absolute;top:8px;right:8px;z-index:10;display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;padding:5px 9px;border-radius:7px;background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.15);cursor:pointer;backdrop-filter:blur(4px);transition:all .18s;font-family:'DM Sans',sans-serif}
+.pip-btn:hover{background:rgba(0,0,0,.85);border-color:rgba(255,255,255,.35);transform:scale(1.05)}
+.pip-btn svg{flex-shrink:0}
+
+/* ============================================================
    BOTÕES DE AÇÃO — teoria → prática.
    Effecti (purple), OptiWork (blue), OMIE (green-accent).
    Cada fase tem seus botões no final dos steps relevantes.
@@ -288,8 +365,15 @@ footer p{font-size:11px;color:var(--text3)}
     <span class="logo-fallback" style="display:none">CROMA</span>
   </a>
   <div class="topbar-divider"></div>
-  <span class="topbar-title">Manual Operacional <strong>/ Licitação</strong></span>
-  <nav class="topbar-nav">
+  <!-- Breadcrumb dinâmico — atualizado via JS a cada mudança de fase/aba -->
+  <div class="topbar-breadcrumb" id="topbar-breadcrumb" aria-label="Localização atual">
+    <span class="bc-sector">Licitação</span>
+    <span class="bc-sep" aria-hidden="true">›</span>
+    <span class="bc-fase" id="bc-fase" onclick="document.querySelector('.fase-nav').scrollIntoView({behavior:'smooth'})">Fase 1</span>
+    <span class="bc-sep" aria-hidden="true">›</span>
+    <span class="bc-tab" id="bc-tab">Etapas</span>
+  </div>
+  <nav class="topbar-nav" aria-label="Navegação entre setores">
     <a href="index.html">Inicio</a>
     <a href="financeiro.html">Financeiro</a>
     <a href="compras.html">Compras</a>
@@ -299,6 +383,24 @@ footer p{font-size:11px;color:var(--text3)}
     <a href="ecommerce.html">E-commerce</a>
     <a href="outsourcing.html">Outsourcing</a>
   </nav>
+  <!-- Campo de busca global com Fuse.js — busca fuzzy em memória, sem servidor -->
+  <div class="search-wrap" id="search-wrap" role="search" aria-label="Busca global no manual">
+    <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="search" class="search-input" id="search-input"
+      placeholder="Buscar... (ex: Markup)"
+      autocomplete="off" autocorrect="off" spellcheck="false"
+      aria-label="Buscar no manual" aria-haspopup="listbox" aria-expanded="false"
+      aria-controls="search-dropdown"
+      oninput="onSearch(this.value)"
+      onkeydown="onSearchKey(event)"
+      onfocus="if(this.value) onSearch(this.value)"
+    />
+    <button class="search-clear" aria-label="Limpar busca" onclick="clearSearch()" tabindex="-1">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="search-dropdown" id="search-dropdown" role="listbox" aria-label="Resultados da busca"></div>
+  </div>
+
   <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
     <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <svg class="icon-sun"  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -369,7 +471,7 @@ footer p{font-size:11px;color:var(--text3)}
     </div>
   </div>
 
-  <div class="tab-bar" id="tabs-f1">
+  <div class="tab-bar" id="tabs-f1" role="tablist" aria-label="Seções da Fase 1">
     <button class="tab-btn active" onclick="tabFase(1,'etapas',this)">Etapas</button>
     <button class="tab-btn" onclick="tabFase(1,'modulos',this)">Módulos Effecti</button>
     <button class="tab-btn" onclick="tabFase(1,'filtros',this)">Filtros e Avaliação</button>
@@ -412,10 +514,18 @@ footer p{font-size:11px;color:var(--text3)}
                 <svg class="video-tutorial-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
               <div class="video-tutorial-body" id="vid-captacao-effecti-body">
-                <video controls preload="none" src="Captação_de_oportunidade_-_Effecti.mp4"
+                <div class="video-pip-wrap">
+                <video id="video-captacao" controls preload="none"
+                  src="Captação_de_oportunidade_-_Effecti.mp4"
+                  poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%230d1117'/%3E%3Ccircle cx='480' cy='270' r='56' fill='%231e1040' stroke='%23b07ef8' stroke-width='2'/%3E%3Cpolygon points='466,248 466,292 506,270' fill='%23b07ef8'/%3E%3Ctext x='480' y='360' font-family='sans-serif' font-size='16' fill='%234a5568' text-anchor='middle'%3EClique para reproduzir%3C/text%3E%3C/svg%3E"
                   aria-label="Tutorial: acesso ao Effecti e pesquisa de oportunidades com filtros">
                   Seu navegador não suporta reprodução de vídeo HTML5.
                 </video>
+                <button class="pip-btn" onclick="openPiP('video-captacao')" title="Abrir em Picture-in-Picture" aria-label="Abrir vídeo em modo flutuante">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="11" width="9" height="6" rx="1"/></svg>
+                  PiP
+                </button>
+              </div>
                 <p class="video-tutorial-caption">
                   Effecti → Encontrar → Todos os avisos · Configure os filtros e localize oportunidades compatíveis com o portfólio da empresa.
                 </p>
@@ -460,8 +570,8 @@ footer p{font-size:11px;color:var(--text3)}
                 <div style="font-size:11px;color:var(--text2);line-height:1.6">Conferir se o prazo é viável para concluir análise, cotação e cadastro de proposta com antecedência.</div>
               </div>
               <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
-                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Capacidade do órgão (CAPAG)</div>
-                <div style="font-size:11px;color:var(--text2);line-height:1.6">Avaliar o rating do órgão para estimar risco de inadimplência no pagamento. Órgãos com CAPAG baixo exigem cautela.</div>
+                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Capacidade do órgão (<abbr class="tooltip" data-tip="Capacidade de Pagamento do ente federativo — avaliação do Tesouro Nacional sobre a saúde fiscal do órgão contratante." tabindex="0">CAPAG</abbr>)</div>
+                <div style="font-size:11px;color:var(--text2);line-height:1.6">Avaliar o rating do órgão para estimar risco de inadimplência no pagamento. Órgãos com <abbr class="tooltip" data-tip="Capacidade de Pagamento do ente federativo — avaliação do Tesouro Nacional sobre a saúde fiscal do órgão contratante." tabindex="0">CAPAG</abbr> baixo exigem cautela.</div>
               </div>
               <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
                 <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Compatibilidade de produtos</div>
@@ -487,10 +597,18 @@ footer p{font-size:11px;color:var(--text3)}
                 <svg class="video-tutorial-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
               <div class="video-tutorial-body" id="vid-avaliacao-effecti-body">
-                <video controls preload="none" src="Avaliação_de_oportunidade_-_Effecti.mp4"
+                <div class="video-pip-wrap">
+                <video id="video-avaliacao" controls preload="none"
+                  src="avaliacao-oportunidade-effecti.mp4"
+                  poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%230d1117'/%3E%3Ccircle cx='480' cy='270' r='56' fill='%231e1040' stroke='%23b07ef8' stroke-width='2'/%3E%3Cpolygon points='466,248 466,292 506,270' fill='%23b07ef8'/%3E%3Ctext x='480' y='360' font-family='sans-serif' font-size='16' fill='%234a5568' text-anchor='middle'%3EClique para reproduzir%3C/text%3E%3C/svg%3E"
                   aria-label="Tutorial: avaliação de oportunidade no Effecti — portal, capag, produtos e prazos">
                   Seu navegador não suporta reprodução de vídeo HTML5.
                 </video>
+                <button class="pip-btn" onclick="openPiP('video-avaliacao')" title="Abrir em Picture-in-Picture" aria-label="Abrir vídeo em modo flutuante">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="11" width="9" height="6" rx="1"/></svg>
+                  PiP
+                </button>
+              </div>
                 <p class="video-tutorial-caption">
                   Abrir a licitação no Effecti e avaliar: portal, data da disputa, CAPAG do órgão, relação de produtos e quantidades. Somente após aprovação nessa triagem baixar o edital.
                 </p>
@@ -554,10 +672,18 @@ footer p{font-size:11px;color:var(--text3)}
                 <svg class="video-tutorial-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
               <div class="video-tutorial-body" id="vid-card-optiwork-body">
-                <video controls preload="none" src="Criação_card_OptiWork_.mp4"
+                <div class="video-pip-wrap">
+                <video id="video-card-optiwork" controls preload="none"
+                  src="criacao_card_OptiWork.mp4"
+                  poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%230d1117'/%3E%3Ccircle cx='480' cy='270' r='56' fill='%231e1040' stroke='%23b07ef8' stroke-width='2'/%3E%3Cpolygon points='466,248 466,292 506,270' fill='%23b07ef8'/%3E%3Ctext x='480' y='360' font-family='sans-serif' font-size='16' fill='%234a5568' text-anchor='middle'%3EClique para reproduzir%3C/text%3E%3C/svg%3E"
                   aria-label="Tutorial: criação do card no banco de editais do OptiWork com nomenclatura padronizada">
                   Seu navegador não suporta reprodução de vídeo HTML5.
                 </video>
+                <button class="pip-btn" onclick="openPiP('video-card-optiwork')" title="Abrir em Picture-in-Picture" aria-label="Abrir vídeo em modo flutuante">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="11" width="9" height="6" rx="1"/></svg>
+                  PiP
+                </button>
+              </div>
                 <p class="video-tutorial-caption">
                   OptiWork → Banco de Editais · Criar cartão, fazer upload do edital e anexos com o padrão de nomenclatura obrigatório antes de avançar para a análise.
                 </p>
@@ -703,7 +829,7 @@ footer p{font-size:11px;color:var(--text3)}
     </div>
   </div>
 
-  <div class="tab-bar" id="tabs-f2">
+  <div class="tab-bar" id="tabs-f2" role="tablist" aria-label="Seções da Fase 2">
     <button class="tab-btn active" onclick="tabFase(2,'etapas',this)">Etapas</button>
     <button class="tab-btn" onclick="tabFase(2,'leitura',this)">Leitura Técnica</button>
     <button class="tab-btn" onclick="tabFase(2,'eliminatorios',this)">Critérios Eliminatórios</button>
@@ -828,7 +954,7 @@ footer p{font-size:11px;color:var(--text3)}
     </div>
   </div>
 
-  <div class="tab-bar" id="tabs-f3">
+  <div class="tab-bar" id="tabs-f3" role="tablist" aria-label="Seções da Fase 3">
     <button class="tab-btn active" onclick="tabFase(3,'etapas',this)">Etapas</button>
     <button class="tab-btn" onclick="tabFase(3,'viabilidade',this)">Viabilidade Técnica</button>
     <button class="tab-btn" onclick="tabFase(3,'formula',this)">Fórmula de Decisão</button>
@@ -866,7 +992,7 @@ footer p{font-size:11px;color:var(--text3)}
         </div>
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--f3);color:#fff">3</div>
-          <div class="flow-step-body"><h4>Formação do Custo Total do Item</h4><p>Custo de aquisição + frete (CIF/FOB/triangulado) + demais custos diretos. Todos os valores registrados na planilha.</p></div>
+          <div class="flow-step-body"><h4>Formação do Custo Total do Item</h4><p>Custo de aquisição + frete (<abbr class="tooltip" data-tip="Cost, Insurance &amp; Freight — frete por conta do fornecedor até o destino final." tabindex="0">CIF</abbr>/<abbr class="tooltip" data-tip="Free On Board — frete por conta da empresa a partir da origem do produto." tabindex="0">FOB</abbr>/<abbr class="tooltip" data-tip="Entrega direta: fornecedor despacha ao cliente final sem passar pelo estoque da empresa." tabindex="0">triangulado</abbr>) + demais custos diretos. Todos os valores registrados na planilha.</p></div>
         </div>
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--f3);color:#fff">4</div>
@@ -909,7 +1035,7 @@ footer p{font-size:11px;color:var(--text3)}
             <tr><td>Fabricante e produto</td><td>Confiabilidade, disponibilidade no mercado, histórico de fornecimento</td></tr>
             <tr><td>Garantia</td><td>Balcão ou on-site · Prazo exigido no edital · Viabilidade frente às políticas do fabricante</td></tr>
             <tr><td>Prazo de entrega</td><td>Compatibilidade com o edital considerando produção, aquisição e logística</td></tr>
-            <tr><td>Impacto do frete</td><td>CIF (fornecedor paga até destino) · FOB (empresa paga da origem) · Triangulado</td></tr>
+            <tr><td>Impacto do frete</td><td><abbr class="tooltip" data-tip="Cost, Insurance &amp; Freight — frete por conta do fornecedor até o destino final." tabindex="0">CIF</abbr> (fornecedor paga até destino) · <abbr class="tooltip" data-tip="Free On Board — frete por conta da empresa a partir da origem do produto." tabindex="0">FOB</abbr> (empresa paga da origem) · Triangulado</td></tr>
             <tr><td>Risco logístico</td><td>Viabilidade de entrega na região especificada — Norte e Nordeste têm critérios específicos</td></tr>
             <tr><td>Atendimento ao TR</td><td>Nenhum requisito técnico pode ser parcialmente atendido — é tudo ou nada</td></tr>
           </tbody>
@@ -980,7 +1106,7 @@ footer p{font-size:11px;color:var(--text3)}
     </div>
   </div>
 
-  <div class="tab-bar" id="tabs-f4">
+  <div class="tab-bar" id="tabs-f4" role="tablist" aria-label="Seções da Fase 4">
     <button class="tab-btn active" onclick="tabFase(4,'etapas',this)">Etapas</button>
     <button class="tab-btn" onclick="tabFase(4,'estrategia',this)">Estratégia</button>
     <button class="tab-btn" onclick="tabFase(4,'markup',this)">Regra de Markup</button>
@@ -1087,7 +1213,7 @@ footer p{font-size:11px;color:var(--text3)}
           <div class="info-icon" style="background:var(--green-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
           <div class="info-body">
             <strong><span class="status-ganho">Ganho</span></strong>
-            <p style="margin-top:6px">1ª colocação. Seguir para habilitação e aguardar a Nota de Empenho — início da Fase 6.</p>
+            <p style="margin-top:6px">1ª colocação. Seguir para habilitação e aguardar a <abbr class="tooltip" data-tip="Documento oficial que autoriza a despesa e formaliza o pedido ao fornecedor vencedor da licitação." tabindex="0">Nota de Empenho</abbr> — início da Fase 6.</p>
           </div>
         </div>
         <div class="info-card" style="border-color:rgba(251,191,36,.2)">
@@ -1139,7 +1265,7 @@ footer p{font-size:11px;color:var(--text3)}
     </div>
   </div>
 
-  <div class="tab-bar" id="tabs-f5">
+  <div class="tab-bar" id="tabs-f5" role="tablist" aria-label="Seções da Fase 5">
     <button class="tab-btn active" onclick="tabFase(5,'etapas',this)">Etapas</button>
     <button class="tab-btn" onclick="tabFase(5,'encerramento',this)">Encerramento</button>
   </div>
@@ -1200,14 +1326,14 @@ footer p{font-size:11px;color:var(--text3)}
     </div>
     <div>
       <h2>Fase 6 — Compras (Pós-Empenho)</h2>
-      <p>Receber a Nota de Empenho, validar, aprovar internamente (Financeiro → Diretoria) e executar a compra dentro do prazo contratual.</p>
+      <p>Receber a <abbr class="tooltip" data-tip="Documento oficial que autoriza a despesa e formaliza o pedido ao fornecedor vencedor da licitação." tabindex="0">Nota de Empenho</abbr>, validar, aprovar internamente (Financeiro → Diretoria) e executar a compra dentro do prazo contratual.</p>
       <div class="fase-header-tags">
         <span class="fase-header-tag">OptiWork</span><span class="fase-header-tag">OMIE</span><span class="fase-header-tag">Planilha — aba Compras</span><span class="fase-header-tag">Markup individual</span>
       </div>
     </div>
   </div>
 
-  <div class="tab-bar" id="tabs-f6">
+  <div class="tab-bar" id="tabs-f6" role="tablist" aria-label="Seções da Fase 6">
     <button class="tab-btn active" onclick="tabFase(6,'etapas',this)">Etapas</button>
     <button class="tab-btn" onclick="tabFase(6,'conferencia',this)">Conferência do Empenho</button>
     <button class="tab-btn" onclick="tabFase(6,'aprovacao',this)">Aprovações Internas</button>
@@ -1243,7 +1369,7 @@ footer p{font-size:11px;color:var(--text3)}
         </div>
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--f6);color:#fff">3</div>
-          <div class="flow-step-body"><h4>Validação Técnica e Elaboração do Markup</h4><p>Cruzar itens com a planilha e proposta vencedora. Elaborar Planilha de Markup individual: custo real atualizado, frete, tributos, DIFAL e margem líquida.</p></div>
+          <div class="flow-step-body"><h4>Validação Técnica e Elaboração do Markup</h4><p>Cruzar itens com a planilha e proposta vencedora. Elaborar Planilha de Markup individual: custo real atualizado, frete, tributos, <abbr class="tooltip" data-tip="Diferencial de Alíquota do ICMS — tributo adicional em vendas interestaduais para consumidor final não contribuinte." tabindex="0">DIFAL</abbr> e margem líquida.</p></div>
         </div>
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--f6);color:#fff">4</div>
@@ -1348,6 +1474,13 @@ footer p{font-size:11px;color:var(--text3)}
 
 </main>
 
+<!-- ============================================================
+     NOTA PARA DESENVOLVEDORES:
+     O VS Code Preview pode parecer "truncar" este arquivo pois
+     tem ~126 KB. Isso é limitacao do editor, nao do arquivo.
+     Abrir no browser (Chrome/Edge) para visualizacao correta.
+     Todas as tags estao fechadas e o JS esta completo.
+============================================================ -->
 <footer>
   <p>Manual Operacional &middot; Licitações &middot; Croma Tecnologia &middot; v1.0 &middot; Março 2026</p>
   <a href="index.html" class="btn">&larr; Voltar ao hub</a>
@@ -1355,14 +1488,297 @@ footer p{font-size:11px;color:var(--text3)}
 
 <script>
 // ============================================================
-// NAVEGAÇÃO DE FASES
-// Cada fase tem seu próprio painel e conjunto de abas.
+// INDICE DE BUSCA -- mapeamento completo de fase/aba/conteudo.
+// Cada entrada tem: fase, tab, titulo e palavras-chave.
+// O Fuse.js faz busca fuzzy sobre title+kw sem servidor.
 // ============================================================
+const SEARCH_INDEX = [
+  // Fase 1 -- Captacao
+  {fase:1,tab:"etapas",title:"Acesso e Pesquisa no Effecti",section:"Captacao",kw:"effecti acesso login pesquisa filtros avisos portal modalidade pregao dispensa"},
+  {fase:1,tab:"etapas",title:"Avaliacao da Oportunidade",section:"Captacao",kw:"avaliacao oportunidade capag produtos quantidades portal disputa data hora triagem"},
+  {fase:1,tab:"etapas",title:"Acesso ao Edital e Arquivamento",section:"Captacao",kw:"edital download arquivamento optiwork nomenclatura banco editais termo referencia TR anexos minutas"},
+  {fase:1,tab:"modulos",title:"Modulos do Effecti",section:"Captacao",kw:"encontrar cadastrar disputar monitorar modulos effecti painel"},
+  {fase:1,tab:"filtros",title:"Filtros e Avaliacao de Oportunidades",section:"Captacao",kw:"filtros compras publicas comprasnet BLL PNCP palavras-chave orgao estado municipio data"},
+  {fase:1,tab:"arquivo",title:"Arquivo e Nomenclatura Obrigatoria",section:"Captacao",kw:"nomenclatura Edital_ arquivo padrao rastreabilidade banco editais"},
+  // Fase 2 -- Analise
+  {fase:2,tab:"etapas",title:"Analise de Edital",section:"Analise",kw:"analise edital ficha leitura tecnica juridica IA chatgpt gemini deepseek validacao"},
+  {fase:2,tab:"leitura",title:"Leitura Tecnica do Edital",section:"Analise",kw:"objeto prazos criterio julgamento habilitacao pagamento garantia penalidades contrato vigencia"},
+  {fase:2,tab:"eliminatorios",title:"Criterios Eliminatorios",section:"Analise",kw:"eliminatorio caucao garantia proposta prazo entrega amostra multa penalidade norte nordeste 7 dias 15 dias"},
+  {fase:2,tab:"decisao",title:"Decisao de Viabilidade",section:"Analise",kw:"aprovado reprovado decisao arquivar motivo viabilidade cotacao"},
+  // Fase 3 -- Cotacao
+  {fase:3,tab:"etapas",title:"Cotacao por Item",section:"Cotacao",kw:"cotacao item fabricante custo frete CIF FOB triangulado planilha gestao"},
+  {fase:3,tab:"viabilidade",title:"Viabilidade Tecnica por Item",section:"Cotacao",kw:"viabilidade tecnica garantia balcao on-site prazo risco logistico termo referencia"},
+  {fase:3,tab:"formula",title:"Formula de Decisao Markup 1,30",section:"Cotacao",kw:"markup 1.30 formula preco minimo custo desistencia por preco margem"},
+  {fase:3,tab:"registro",title:"Registro na Planilha de Gestao",section:"Cotacao",kw:"planilha gestao registro fabricante aprovado desistencia status"},
+  // Fase 4 -- Lance
+  {fase:4,tab:"etapas",title:"Lance e Disputa",section:"Lance",kw:"lance disputa disputar effecti nova disputa portal empresa sessao"},
+  {fase:4,tab:"estrategia",title:"Estrategia de Lances",section:"Lance",kw:"estrategia valor limite arredondamento prorrogacao variacao posicao concorrente margem"},
+  {fase:4,tab:"markup",title:"Regra de Markup Minimo 1,30",section:"Lance",kw:"markup 1.30 minimo margem rentabilidade comissionamento limite parar lance"},
+  {fase:4,tab:"resultado",title:"Resultado da Disputa",section:"Lance",kw:"resultado ganho monitoramento pos perdido colocacao valor final registro planilha"},
+  // Fase 5 -- Monitoramento
+  {fase:5,tab:"etapas",title:"Monitoramento Pos-Pregao",section:"Monitoramento",kw:"monitoramento pos-pregao convocacao desclassificacao pregoeiro 2 10 habilitacao chat"},
+  {fase:5,tab:"encerramento",title:"Encerramento do Monitoramento",section:"Monitoramento",kw:"encerramento 90 dias cancelada deserta habilitado arquivar sem convocacao"},
+  // Fase 6 -- Compras
+  {fase:6,tab:"etapas",title:"Compras Pos-Empenho",section:"Compras",kw:"empenho nota de empenho compras pos-empenho optiwork markup aprovacao logistica faturamento"},
+  {fase:6,tab:"conferencia",title:"Conferencia do Empenho",section:"Compras",kw:"conferencia numero empenho orgao CNPJ valor objeto divergencia UASG"},
+  {fase:6,tab:"aprovacao",title:"Aprovacoes Financeiro e Diretoria",section:"Compras",kw:"aprovacao financeiro diretoria caixa fluxo margem risco comprar status"},
+  {fase:6,tab:"execucao",title:"Execucao e Faturamento",section:"Compras",kw:"execucao faturamento comprar em transito entregue NF nota fiscal protocolo lead time"},
+];
+
+// Mapa de nomes legiveis para breadcrumb e resultados de busca
+const FASE_LABELS = {1:"Fase 1 \u00b7 Captacao",2:"Fase 2 \u00b7 Analise",3:"Fase 3 \u00b7 Cotacao",4:"Fase 4 \u00b7 Lance",5:"Fase 5 \u00b7 Monitoramento",6:"Fase 6 \u00b7 Compras"};
+const FASE_SHORT  = {1:"Captacao",2:"Analise",3:"Cotacao",4:"Lance",5:"Monitoramento",6:"Compras"};
+const FASE_COLORS = {1:"var(--f1)",2:"var(--f2)",3:"var(--f3)",4:"var(--f4)",5:"var(--f5)",6:"var(--f6)"};
+// Mapa tab id -> label legivel
+const TAB_LABELS  = {
+  etapas:"Etapas", modulos:"Modulos Effecti", filtros:"Filtros e Avaliacao",
+  arquivo:"Arquivo e Nomenclatura", leitura:"Leitura Tecnica",
+  eliminatorios:"Criterios Eliminatorios", decisao:"Decisao Final",
+  viabilidade:"Viabilidade Tecnica", formula:"Formula de Decisao",
+  registro:"Registro na Planilha", estrategia:"Estrategia",
+  markup:"Regra de Markup", resultado:"Resultado",
+  encerramento:"Encerramento", conferencia:"Conferencia do Empenho",
+  aprovacao:"Aprovacoes Internas", execucao:"Execucao e Faturamento",
+};
+
+// Estado do breadcrumb
+let _currentFase = 1;
+let _currentTab  = "etapas";
+
 // ============================================================
-// TOGGLE VIDEO TUTORIAL — accordion com lazy-load.
-// O src do <video> só é atribuído na primeira abertura,
-// então o browser não baixa o MP4 enquanto está fechado.
-// Ao fechar, pausa o vídeo para não tocar em background.
+// BUSCA GLOBAL COM FUSE.JS
+// Inicializada depois que o DOM e o script Fuse carregam.
+// Busca fuzzy em title+kw com threshold permissivo.
+// ============================================================
+let _fuse = null;
+let _searchIdx = -1; // indice do item selecionado com teclado
+
+function initSearch() {
+  // Aguarda o Fuse.js estar disponivel (carregado via defer)
+  if (typeof Fuse === 'undefined') { setTimeout(initSearch, 100); return; }
+  _fuse = new Fuse(SEARCH_INDEX, {
+    keys: [
+      { name: 'title', weight: 0.6 },
+      { name: 'kw',    weight: 0.4 },
+      { name: 'section', weight: 0.2 },
+    ],
+    threshold: 0.35,    // 0=exato, 1=qualquer coisa -- 0.35 e tolerante mas relevante
+    includeScore: true,
+    includeMatches: true,
+    minMatchCharLength: 2,
+  });
+
+  // Adicionar aria-role="tab" e aria-selected em todos os tab-btn via JS
+  document.querySelectorAll('.tab-bar .tab-btn').forEach(btn => {
+    if (!btn.getAttribute('role')) {
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
+    }
+  });
+}
+
+function onSearch(q) {
+  const input  = document.getElementById('search-input');
+  const drop   = document.getElementById('search-dropdown');
+  _searchIdx   = -1;
+
+  input.setAttribute('aria-expanded', q.length > 0);
+
+  if (!q || q.length < 2) {
+    drop.classList.remove('open');
+    drop.innerHTML = '';
+    return;
+  }
+  if (!_fuse) { initSearch(); return; }
+
+  const results = _fuse.search(q, { limit: 7 });
+  if (!results.length) {
+    drop.innerHTML = `<div class="search-empty">Nenhum resultado para "<strong>${escHtml(q)}</strong>"</div>`;
+    drop.classList.add('open');
+    return;
+  }
+
+  // Realcar os caracteres que fizeram match no titulo
+  const highlight = (str, matches) => {
+    if (!matches) return escHtml(str);
+    let out = '', i = 0;
+    const chars = new Set();
+    matches.forEach(m => { if(m.key==='title') m.indices.forEach(([a,b])=>{ for(let x=a;x<=b;x++) chars.add(x); }); });
+    [...str].forEach((c,idx) => {
+      out += chars.has(idx) ? `<mark>${escHtml(c)}</mark>` : escHtml(c);
+    });
+    return out;
+  };
+
+  const hint = `<div class="search-hint"><kbd>&uarr;&darr;</kbd> navegar&nbsp; <kbd>&crarr;</kbd> abrir&nbsp; <kbd>Esc</kbd> fechar</div>`;
+  const items = results.map((r, i) => {
+    const item = r.item;
+    const color = FASE_COLORS[item.fase] || 'var(--accent)';
+    const titleHL = highlight(item.title, r.matches);
+    return `<a class="search-result-item" role="option" data-i="${i}" data-fase="${item.fase}" data-tab="${item.tab}"
+        onclick="goToResult(${item.fase},'${item.tab}')" onmouseover="setSearchIdx(${i})">
+      <div class="sri-icon" style="background:${color}22">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div class="sri-body">
+        <div class="sri-title">${titleHL}</div>
+        <div class="sri-path">
+          <span>${item.section}</span>
+          <span>${TAB_LABELS[item.tab] || item.tab}</span>
+        </div>
+      </div>
+    </a>`;
+  }).join('');
+
+  drop.innerHTML = hint + items;
+  drop.classList.add('open');
+}
+
+function setSearchIdx(i) { _searchIdx = i; }
+
+function goToResult(fase, tab) {
+  setFase(fase);
+  // Encontrar o botao de aba correto e clicar
+  const tabBar = document.getElementById('tabs-f' + fase);
+  if (tabBar) {
+    const btn = [...tabBar.querySelectorAll('.tab-btn')].find(b => {
+      return b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + tab + "'");
+    });
+    if (btn) btn.click();
+  }
+  clearSearch();
+  // Focar o painel ativado para acessibilidade
+  setTimeout(() => {
+    const el = document.getElementById('f' + fase + '-' + tab);
+    if (el) el.focus?.() || el.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 80);
+}
+
+function onSearchKey(e) {
+  const drop  = document.getElementById('search-dropdown');
+  const items = drop.querySelectorAll('.search-result-item');
+  if (!drop.classList.contains('open') || !items.length) return;
+
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    _searchIdx = Math.min(_searchIdx + 1, items.length - 1);
+    highlightSearchItem(items);
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    _searchIdx = Math.max(_searchIdx - 1, 0);
+    highlightSearchItem(items);
+  } else if (e.key === 'Enter' && _searchIdx >= 0) {
+    e.preventDefault();
+    items[_searchIdx].click();
+  } else if (e.key === 'Escape') {
+    clearSearch();
+  }
+}
+
+function highlightSearchItem(items) {
+  items.forEach((el, i) => el.classList.toggle('active', i === _searchIdx));
+  if (_searchIdx >= 0) items[_searchIdx].scrollIntoView({block:'nearest'});
+}
+
+function clearSearch() {
+  const input = document.getElementById('search-input');
+  const drop  = document.getElementById('search-dropdown');
+  input.value = '';
+  drop.classList.remove('open');
+  drop.innerHTML = '';
+  input.setAttribute('aria-expanded', 'false');
+  _searchIdx = -1;
+}
+
+// Fechar dropdown ao clicar fora
+document.addEventListener('click', e => {
+  const wrap = document.getElementById('search-wrap');
+  if (wrap && !wrap.contains(e.target)) {
+    document.getElementById('search-dropdown').classList.remove('open');
+  }
+});
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ============================================================
+// BREADCRUMBS DINAMICOS
+// Atualizado sempre que setFase() ou tabFase() e chamado.
+// ============================================================
+function updateBreadcrumb(fase, tab) {
+  _currentFase = fase;
+  _currentTab  = tab;
+  const bcFase = document.getElementById('bc-fase');
+  const bcTab  = document.getElementById('bc-tab');
+  if (bcFase) bcFase.textContent = FASE_SHORT[fase] || ('Fase ' + fase);
+  if (bcTab)  bcTab.textContent  = TAB_LABELS[tab]  || tab;
+  // Tambem atualiza o title do documento para ajudar na navegacao por abas do browser
+  document.title = 'Licitacao | ' + (FASE_SHORT[fase]||'') + ' | ' + (TAB_LABELS[tab]||tab) + ' | Manual Croma';
+}
+
+// ============================================================
+// PICTURE-IN-PICTURE
+// Usa a API nativa do browser. Funciona no Chrome/Edge/Safari.
+// Fallback: abre em nova aba se a API nao estiver disponivel.
+// ============================================================
+async function openPiP(videoId) {
+  const video = document.getElementById(videoId);
+  if (!video) return;
+  try {
+    if (document.pictureInPictureElement === video) {
+      await document.exitPictureInPicture();
+    } else {
+      await video.requestPictureInPicture();
+    }
+  } catch (err) {
+    // Fallback: abrir o video em nova aba
+    window.open(video.currentSrc || video.src, '_blank', 'noopener');
+  }
+}
+
+// ============================================================
+// NAVEGACAO DE FASES -- atualiza breadcrumb ao trocar de fase
+// ============================================================
+function setFase(n) {
+  document.querySelectorAll('.fase-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.fase-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('fase-' + n).classList.add('active');
+  document.querySelector(`.fase-btn[data-fase="${n}"]`).classList.add('active');
+  // Inferir a aba ativa dentro da fase que esta sendo ativada
+  const activeTab = document.querySelector(`#fase-${n} .tab-panel.active`);
+  const activeTabId = activeTab ? activeTab.id.replace('f' + n + '-', '') : 'etapas';
+  updateBreadcrumb(n, activeTabId);
+  document.querySelector('.page').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ============================================================
+// ABAS POR FASE -- namespace por fase: f1-*, f2-*, etc.
+// ============================================================
+function tabFase(fase, id, btn) {
+  const prefix = 'f' + fase + '-';
+  // Desativar e atualizar aria
+  document.querySelectorAll('#tabs-f' + fase + ' .tab-btn').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-selected', 'false');
+  });
+  document.querySelectorAll('[id^="' + prefix + '"]').forEach(p => p.classList.remove('active'));
+  // Ativar
+  document.getElementById(prefix + id).classList.add('active');
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected', 'true');
+  updateBreadcrumb(fase, id);
+}
+
+// ============================================================
+// TOGGLE VIDEO TUTORIAL -- accordion com lazy-load.
+// O src do <video> so e atribuido na primeira abertura,
+// entao o browser nao baixa o MP4 enquanto esta fechado.
+// Ao fechar, pausa o video para nao tocar em background.
+// ============================================================
+// O src do <video> so e atribuido na primeira abertura,
+// entao o browser nao baixa o MP4 enquanto esta fechado.
+// Ao fechar, pausa o video para nao tocar em background.
 // ============================================================
 function toggleVideo(id) {
   const wrap   = document.getElementById(id);
@@ -1377,32 +1793,13 @@ function toggleVideo(id) {
   if (!isOpen && video) { video.pause(); }
 }
 
-function setFase(n) {
-  document.querySelectorAll('.fase-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.fase-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('fase-' + n).classList.add('active');
-  document.querySelector(`.fase-btn[data-fase="${n}"]`).classList.add('active');
-  // Scroll suave ao topo do conteúdo
-  document.querySelector('.page').scrollIntoView({behavior:'smooth',block:'start'});
-}
-
 // ============================================================
 // ABAS POR FASE
 // Namespace por fase: f1-*, f2-*, etc.
 // ============================================================
-function tabFase(fase, id, btn) {
-  const prefix = 'f' + fase + '-';
-  // Desativar todas as abas da fase
-  document.querySelectorAll('#tabs-f' + fase + ' .tab-btn').forEach(b => b.classList.remove('active'));
-  // Desativar todos os painéis da fase
-  document.querySelectorAll('[id^="' + prefix + '"]').forEach(p => p.classList.remove('active'));
-  // Ativar o par correto
-  document.getElementById(prefix + id).classList.add('active');
-  btn.classList.add('active');
-}
 
 // ============================================================
-// TOGGLE DE TEMA — persiste no localStorage
+// TOGGLE DE TEMA -- persiste no localStorage
 // ============================================================
 function toggleTheme() {
   const html = document.documentElement;
@@ -1418,6 +1815,67 @@ function toggleTheme() {
     else if (window.matchMedia('(prefers-color-scheme: light)').matches) { document.documentElement.setAttribute('data-theme', 'light'); }
   } catch(e) {}
 })();
+
+// ============================================================
+// TOOLTIPS ACESSIVEIS (initTooltips)
+// Para cada .tooltip no documento:
+//   1. Gera um id unico
+//   2. Cria um <span role="tooltip"> oculto com o texto (lido por screen reader)
+//   3. Adiciona aria-describedby no elemento pai
+// Sem isso, usuarios de leitor de tela nao ouvem a definicao.
+// ============================================================
+function initTooltips() {
+  document.querySelectorAll('.tooltip').forEach(function(el, idx) {
+    const tip = el.getAttribute('data-tip');
+    if (!tip) return;
+    const id = 'tt-' + idx;
+    // Criar o span invisivel para screen readers
+    const sr = document.createElement('span');
+    sr.id        = id;
+    sr.className = 'tooltip-sr';
+    sr.setAttribute('role', 'tooltip');
+    sr.textContent = tip;
+    el.appendChild(sr);
+    // Apontar o elemento para o tooltip via aria-describedby
+    el.setAttribute('aria-describedby', id);
+    // Garantir que o elemento receba foco por teclado
+    if (!el.getAttribute('tabindex')) {
+      el.setAttribute('tabindex', '0');
+    }
+  });
+}
+
+// ============================================================
+// INICIALIZACAO -- apos DOM pronto.
+// Inicia busca + enriquece aria dos tabs.
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  initSearch();
+  initTooltips();
+  // Breadcrumb inicial -- Fase 1 / Etapas
+  updateBreadcrumb(1, 'etapas');
+  // Fechar dropdown de busca com Escape em qualquer lugar
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      const drop = document.getElementById('search-dropdown');
+      if (drop && drop.classList.contains('open')) { clearSearch(); }
+    }
+  });
+  // Shortcut: '/' ou Ctrl+K focam na busca
+  document.addEventListener('keydown', e => {
+    const inp = document.getElementById('search-input');
+    if (!inp) return;
+    if ((e.key === '/' && document.activeElement !== inp) ||
+        (e.ctrlKey && e.key === 'k')) {
+      e.preventDefault();
+      inp.focus();
+      inp.select();
+    }
+  });
+});
 </script>
+<!-- Fuse.js carregado aqui, apos o HTML -- sem render-blocking.
+     initSearch() usa setTimeout como fallback para conexoes lentas. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>
 </body>
 </html>
