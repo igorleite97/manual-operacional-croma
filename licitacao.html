@@ -380,41 +380,48 @@ footer p{font-size:11px;color:var(--text3)}
     <div class="section">
       <div class="section-label">Passo a passo da captação</div>
       <div class="flow-steps">
+
+        <!-- ────────────────────────────────────────────────────
+             STEP 1 — Acesso e Pesquisa no Effecti
+             Era dois steps separados (Acesso + Pesquisa), mas
+             o vídeo já cobre os dois de ponta a ponta, então
+             unificamos aqui para reduzir fricção no fluxo.
+        ──────────────────────────────────────────────────── -->
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--f1);color:#fff">1</div>
           <div class="flow-step-body">
-            <h4>Acesso ao Painel Effecti</h4>
-            <p>Acesse <strong>https://app.effecti.com.br</strong> com o e-mail corporativo e senha cadastrada. Você será direcionado ao Painel Inicial com as quatro opções de módulo.</p>
+            <h4>Acesso ao Effecti e Pesquisa de Oportunidades</h4>
+            <p>Acesse <strong>https://minha.effecti.com.br</strong> com o e-mail corporativo. No painel inicial, clique em <strong>"Encontrar"</strong> e acesse a aba <strong>"Todos os avisos"</strong>. Configure os filtros obrigatórios: portal de compras, modalidade (Pregão Eletrônico ou Dispensa), datas, estado/município e palavras-chave relevantes ao portfólio.</p>
             <div class="step-tags">
               <span class="step-tag" style="background:var(--f1-bg);color:var(--f1)">Login corporativo</span>
+              <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Salvar filtros frequentes como padrão</span>
             </div>
 
-            <!-- Tutorial em vídeo: captação de oportunidade no Effecti.
-                 Lazy-load real — o browser não busca o MP4 até o accordion abrir. -->
+            <!-- Tutorial em vídeo: cobre acesso ao painel, configuração de
+                 filtros e navegação inicial — unifica o que eram dois passos. -->
             <div class="video-tutorial" id="vid-captacao-effecti">
               <div class="video-tutorial-header" onclick="toggleVideo('vid-captacao-effecti')" aria-expanded="false" aria-controls="vid-captacao-effecti-body">
                 <div class="video-tutorial-icon">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </div>
                 <div class="video-tutorial-meta">
-                  <strong>Tutorial em vídeo — Captação de Oportunidade no Effecti</strong>
-                  <span>Plataforma Effecti · 31 seg · Pesquisa, filtros e avaliação</span>
+                  <strong>Tutorial em vídeo — Acesso e Pesquisa no Effecti</strong>
+                  <span>Plataforma Effecti · 31 seg · Painel, filtros e navegação</span>
                 </div>
                 <span class="video-tutorial-badge">MP4</span>
                 <svg class="video-tutorial-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
               <div class="video-tutorial-body" id="vid-captacao-effecti-body">
                 <video controls preload="none" src="Captação_de_oportunidade_-_Effecti.mp4"
-                  aria-label="Tutorial: captação de oportunidade no Effecti — filtros, avaliação e download do edital">
+                  aria-label="Tutorial: acesso ao Effecti e pesquisa de oportunidades com filtros">
                   Seu navegador não suporta reprodução de vídeo HTML5.
                 </video>
                 <p class="video-tutorial-caption">
-                  Effecti → Encontrar → Todos os avisos · Configure os filtros, avalie a oportunidade e faça o download do edital conforme o vídeo.
+                  Effecti → Encontrar → Todos os avisos · Configure os filtros e localize oportunidades compatíveis com o portfólio da empresa.
                 </p>
               </div>
             </div>
 
-            <!-- Botão de ação: teoria vista, hora de abrir o Effecti -->
             <div class="action-divider"><div class="action-divider-line"></div><span>abrir ferramenta</span><div class="action-divider-line"></div></div>
             <div class="action-buttons">
               <a href="https://minha.effecti.com.br/#/" target="_blank" rel="noopener" class="action-btn action-btn-effecti">
@@ -425,37 +432,138 @@ footer p{font-size:11px;color:var(--text3)}
             </div>
           </div>
         </div>
+
+        <!-- ────────────────────────────────────────────────────
+             STEP 2 — Avaliação da Oportunidade
+             O analista avalia prospectos com base em critérios
+             objetivos ANTES de baixar o edital. Essa triagem
+             evita trabalho desnecessário com licitações inviáveis.
+        ──────────────────────────────────────────────────── -->
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--f1);color:#fff">2</div>
           <div class="flow-step-body">
-            <h4>Pesquisa de Oportunidades</h4>
-            <p>No menu lateral, clique em <strong>"Avisos" ou "Encontrar"</strong> e acesse a aba <strong>"Todos os avisos"</strong>. Configure os filtros obrigatórios: portal, modalidade, datas, estado/município e palavras-chave.</p>
-            <div class="step-tags">
-              <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Salvar filtros frequentes como padrão</span>
-            </div>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-step-n" style="background:var(--f1);color:#fff">3</div>
-          <div class="flow-step-body">
             <h4>Avaliação da Oportunidade</h4>
-            <p>Clique no título para abrir os detalhes. Verificar: órgão, modalidade, data final, ID Effecti, local e objeto da licitação. Confirmar se o objeto se enquadra no portfólio da empresa.</p>
+            <p>Ao identificar uma licitação de interesse, avaliar os critérios abaixo <strong>antes de baixar o edital</strong>. Essa triagem objetiva evita trabalho desnecessário com processos inviáveis desde o início.</p>
             <div class="step-tags">
+              <span class="step-tag" style="background:var(--f1-bg);color:var(--f1)">Triagem antes do edital</span>
               <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">"Próxima ao vencimento" → urgência</span>
             </div>
+
+            <!-- Critérios de avaliação em cards informativos -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-top:12px">
+              <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
+                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Portal de compras</div>
+                <div style="font-size:11px;color:var(--text2);line-height:1.6">Verificar se o portal (ComprasNet, BLL, PNCP etc.) é compatível com a estrutura operacional da empresa.</div>
+              </div>
+              <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
+                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Data e hora da disputa</div>
+                <div style="font-size:11px;color:var(--text2);line-height:1.6">Conferir se o prazo é viável para concluir análise, cotação e cadastro de proposta com antecedência.</div>
+              </div>
+              <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
+                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Capacidade do órgão (CAPAG)</div>
+                <div style="font-size:11px;color:var(--text2);line-height:1.6">Avaliar o rating do órgão para estimar risco de inadimplência no pagamento. Órgãos com CAPAG baixo exigem cautela.</div>
+              </div>
+              <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
+                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Compatibilidade de produtos</div>
+                <div style="font-size:11px;color:var(--text2);line-height:1.6">Confirmar se os itens licitados se encaixam no portfólio de produtos que a empresa fornece.</div>
+              </div>
+              <div style="padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px">
+                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px">Quantidades e escala</div>
+                <div style="font-size:11px;color:var(--text2);line-height:1.6">Verificar se as quantidades solicitadas são operacionalmente viáveis para fornecimento no prazo contratual.</div>
+              </div>
+            </div>
+
+            <!-- Tutorial: avaliação real de uma oportunidade no Effecti -->
+            <div class="video-tutorial" id="vid-avaliacao-effecti" style="margin-top:14px">
+              <div class="video-tutorial-header" onclick="toggleVideo('vid-avaliacao-effecti')" aria-expanded="false" aria-controls="vid-avaliacao-effecti-body">
+                <div class="video-tutorial-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+                <div class="video-tutorial-meta">
+                  <strong>Tutorial em vídeo — Avaliação de Oportunidade no Effecti</strong>
+                  <span>Plataforma Effecti · 30 seg · Portal, capag, produtos e prazos</span>
+                </div>
+                <span class="video-tutorial-badge">MP4</span>
+                <svg class="video-tutorial-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="video-tutorial-body" id="vid-avaliacao-effecti-body">
+                <video controls preload="none" src="Avaliação_de_oportunidade_-_Effecti.mp4"
+                  aria-label="Tutorial: avaliação de oportunidade no Effecti — portal, capag, produtos e prazos">
+                  Seu navegador não suporta reprodução de vídeo HTML5.
+                </video>
+                <p class="video-tutorial-caption">
+                  Abrir a licitação no Effecti e avaliar: portal, data da disputa, CAPAG do órgão, relação de produtos e quantidades. Somente após aprovação nessa triagem baixar o edital.
+                </p>
+              </div>
+            </div>
+
+            <div class="action-divider"><div class="action-divider-line"></div><span>abrir ferramenta</span><div class="action-divider-line"></div></div>
+            <div class="action-buttons">
+              <a href="https://minha.effecti.com.br/#/" target="_blank" rel="noopener" class="action-btn action-btn-effecti">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                Abrir Effecti
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
           </div>
         </div>
+
+        <!-- ────────────────────────────────────────────────────
+             STEP 3 — Acesso ao Edital e Arquivamento no OptiWork
+             Somente chega aqui quem passou pela triagem do step 2.
+             Nomenclatura padronizada é obrigatória — sem exceção.
+        ──────────────────────────────────────────────────── -->
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <div class="flow-step-body">
-            <h4>Download e Arquivamento</h4>
-            <p>Baixar Edital, Termo de Referência e todos os Anexos. Salvar no Banco de Editais do OptiWork com a <strong>nomenclatura padrão obrigatória</strong>.</p>
-            <div class="step-tags">
+            <h4>Acesso ao Edital e Arquivamento no OptiWork</h4>
+            <p>Na tela da licitação no Effecti, faça download do <strong>Edital completo</strong> e de todos os Anexos: Termo de Referência, Planilhas de itens e Minutas contratuais. Em seguida, crie o cartão no banco de editais do OptiWork e salve todos os arquivos com a <strong>nomenclatura padronizada obrigatória</strong>.</p>
+
+            <!-- Padrão de nomenclatura em destaque -->
+            <div style="background:var(--f1-bg);border:1px solid var(--f1-glow);border-radius:10px;padding:12px 16px;margin-top:12px">
+              <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Padrão de nomenclatura obrigatório</div>
+              <div style="font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:var(--accent);margin-bottom:6px">Edital_[NÚMERO]-[ANO]_[MUNICÍPIO].pdf</div>
+              <div style="font-size:11px;color:var(--text3)">Exemplo: <span style="color:var(--text2);font-weight:600">Edital_120-2025_Palmas.pdf</span></div>
+            </div>
+
+            <!-- Alerta de nomenclatura obrigatória -->
+            <div class="alert alert-warn" style="margin-top:10px">
+              <div class="alert-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </div>
+              <p>Nomenclatura padronizada é obrigatória. Manter o padrão garante rastreabilidade e evita duplicações no banco de editais do OptiWork.</p>
+            </div>
+
+            <div class="step-tags" style="margin-top:10px">
               <span class="step-tag" style="background:var(--f1-bg);color:var(--f1)">→ Fase 2: Análise de Edital</span>
             </div>
-            <!-- Arquivar o edital no OptiWork antes de avançar -->
+
+            <!-- Tutorial: criação do card no OptiWork com edital e anexos -->
+            <div class="video-tutorial" id="vid-card-optiwork" style="margin-top:14px">
+              <div class="video-tutorial-header" onclick="toggleVideo('vid-card-optiwork')" aria-expanded="false" aria-controls="vid-card-optiwork-body">
+                <div class="video-tutorial-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+                <div class="video-tutorial-meta">
+                  <strong>Tutorial em vídeo — Criação do Card no OptiWork</strong>
+                  <span>OptiWork · 31 seg · Banco de editais, arquivamento e nomenclatura</span>
+                </div>
+                <span class="video-tutorial-badge">MP4</span>
+                <svg class="video-tutorial-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="video-tutorial-body" id="vid-card-optiwork-body">
+                <video controls preload="none" src="Criação_card_OptiWork_.mp4"
+                  aria-label="Tutorial: criação do card no banco de editais do OptiWork com nomenclatura padronizada">
+                  Seu navegador não suporta reprodução de vídeo HTML5.
+                </video>
+                <p class="video-tutorial-caption">
+                  OptiWork → Banco de Editais · Criar cartão, fazer upload do edital e anexos com o padrão de nomenclatura obrigatório antes de avançar para a análise.
+                </p>
+              </div>
+            </div>
+
             <div class="action-divider"><div class="action-divider-line"></div><span>abrir ferramenta</span><div class="action-divider-line"></div></div>
             <div class="action-buttons">
               <a href="https://work.optidata.cloud/login" target="_blank" rel="noopener" class="action-btn action-btn-opti">
@@ -466,6 +574,7 @@ footer p{font-size:11px;color:var(--text3)}
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
