@@ -17,9 +17,9 @@
   --text:#e8edf5;--text2:#8b98b1;--text3:#4a5568;
   --border:#1e2535;--border2:#2a3654;
   --accent:#b07ef8;--accent2:#cba8ff;--accent-bg:#1e1040;--accent-glow:rgba(176,126,248,.15);
-  --blue:#4f8ef7;--blue-bg:#0f2347;--blue-glow:rgba(79,142,247,.15);
+  --blue:#4f8ef7;--blue-bg:#0f2347;
   --green:#34d399;--green-bg:#052e1c;--green-glow:rgba(52,211,153,.15);
-  --teal:#2dd4bf;--teal-bg:#0a2e2b;--teal-glow:rgba(45,212,191,.15);
+  --teal:#2dd4bf;--teal-bg:#0a2e2b;
   --amber:#fbbf24;--amber-bg:#2d1a00;
   --red:#f87171;--red-bg:#2d0a0a;
   --shadow:0 2px 8px rgba(0,0,0,.4);--shadow-md:0 8px 24px rgba(0,0,0,.5);
@@ -36,9 +36,9 @@
   --text:#111827;--text2:#4b5563;--text3:#9ca3af;
   --border:#e5e9f5;--border2:#cdd5ef;
   --accent:#6d28d9;--accent2:#7c3aed;--accent-bg:#f5f3ff;--accent-glow:rgba(109,40,217,.08);
-  --blue:#1e40af;--blue-bg:#eff6ff;--blue-glow:rgba(30,64,175,.08);
+  --blue:#1e40af;--blue-bg:#eff6ff;
   --green:#059669;--green-bg:#ecfdf5;--green-glow:rgba(5,150,105,.08);
-  --teal:#0d9488;--teal-bg:#f0fdfa;--teal-glow:rgba(13,148,136,.08);
+  --teal:#0d9488;--teal-bg:#f0fdfa;
   --amber:#b45309;--amber-bg:#fffbeb;
   --red:#dc2626;--red-bg:#fef2f2;
   --shadow:0 1px 4px rgba(0,0,0,.06);--shadow-md:0 4px 16px rgba(0,0,0,.08);
@@ -54,45 +54,47 @@ html{scroll-behavior:smooth}
 body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.65;transition:var(--transition-theme)}
 
 /* TOPBAR */
-.topbar{position:sticky;top:0;z-index:300;height:56px;display:flex;align-items:center;gap:12px;padding:0 1.5rem;background:var(--bg2);border-bottom:1px solid var(--border);box-shadow:var(--shadow);backdrop-filter:blur(12px);transition:var(--transition-theme)}
+.topbar{position:sticky;top:0;z-index:300;height:56px;display:flex;align-items:center;gap:12px;padding:0 2rem;background:var(--bg2);border-bottom:1px solid var(--border);box-shadow:var(--shadow);backdrop-filter:blur(12px);transition:var(--transition-theme)}
 .topbar-logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
 .logo-fallback{font-size:16px;font-weight:700;color:var(--accent);letter-spacing:-.03em}
 .topbar-divider{width:1px;height:22px;background:var(--border2);flex-shrink:0}
 .topbar-title{font-size:13px;color:var(--text2);white-space:nowrap}
 .topbar-title strong{color:var(--text);font-weight:600}
 .topbar-nav{display:flex;gap:2px;margin-left:auto}
-.topbar-nav a{font-size:12px;color:var(--text2);text-decoration:none;padding:5px 10px;border-radius:7px;transition:all .15s;font-weight:500;white-space:nowrap}
-.topbar-nav a:hover{background:var(--bg3);color:var(--text)}
+.topbar-nav a{font-size:12px;color:var(--text2);text-decoration:none;padding:5px 10px;border-radius:7px;transition:all .2s;font-weight:500;white-space:nowrap}
+.topbar-nav a:hover{background:var(--bg3);color:var(--text);transform:translateY(-1px)}
 .topbar-nav a.active{background:var(--accent-bg);color:var(--accent)}
-.theme-toggle{width:36px;height:36px;border-radius:10px;border:1px solid var(--border2);background:var(--bg3);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;color:var(--text2);margin-left:6px}
-.theme-toggle:hover{background:var(--bg4);color:var(--text);border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.theme-toggle{width:40px;height:40px;border-radius:10px;border:1px solid var(--border2);background:var(--bg3);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0;color:var(--text2);margin-left:8px;position:relative}
+.theme-toggle:hover{background:var(--accent-bg);color:var(--accent);border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);transform:scale(1.08)}
 .theme-toggle svg{transition:transform .4s ease}
-.theme-toggle:hover svg{transform:rotate(20deg)}
+.theme-toggle:hover svg{transform:rotate(22deg)}
+.theme-toggle::after{content:'Alternar tema';position:absolute;bottom:-34px;right:0;background:var(--bg4);color:var(--text2);font-size:10px;font-weight:600;padding:4px 8px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;border:1px solid var(--border2);font-family:'DM Sans',sans-serif}
+.theme-toggle:hover::after{opacity:1}
 .icon-sun{display:none}.icon-moon{display:block}
 [data-theme="light"] .icon-sun{display:block}[data-theme="light"] .icon-moon{display:none}
 @media(max-width:900px){.topbar-nav{display:none}}
 
 /* HERO */
-.hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:2.5rem 1.5rem 2rem;position:relative;overflow:hidden}
+.hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:2.5rem 2rem 2rem;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none}
-.hero-inner{max-width:1060px;margin:0 auto;position:relative}
+.hero-inner{max-width:1180px;margin:0 auto;position:relative}
 .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-bg);color:var(--accent);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:1rem;border:1px solid var(--accent-glow);letter-spacing:.03em;text-transform:uppercase}
-.hero h1{font-size:28px;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem;line-height:1.2}
+.hero h1{font-size:30px;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem;line-height:1.2}
 .hero p{font-size:14px;color:var(--text2);max-width:600px;line-height:1.7}
 .hero-meta{display:flex;gap:1.5rem;margin-top:1.25rem;flex-wrap:wrap}
 .hero-meta span{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:5px;font-weight:500}
 .hero-meta span::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--border2);display:inline-block}
 
 /* FLUXO MACRO — navegação de fases */
-.fase-nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:.875rem 1.5rem;transition:var(--transition-theme)}
-.fase-nav-inner{max-width:1060px;margin:0 auto}
+.fase-nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:.875rem 2rem;transition:var(--transition-theme)}
+.fase-nav-inner{max-width:1180px;margin:0 auto}
 .fase-track{display:flex;gap:0;align-items:stretch;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
 .fase-track::-webkit-scrollbar{height:0}
-.fase-btn{flex:1;min-width:120px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 12px;border:none;background:none;cursor:pointer;font-family:inherit;position:relative;transition:all .15s;border-radius:10px}
-.fase-btn:hover{background:var(--bg3)}
+.fase-btn{flex:1;min-width:120px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 12px;border:none;background:none;cursor:pointer;font-family:inherit;position:relative;transition:all .2s cubic-bezier(.4,0,.2,1);border-radius:10px}
+.fase-btn:hover{background:var(--bg3);transform:translateY(-1px)}
 .fase-btn::after{content:'';position:absolute;right:0;top:20%;height:60%;width:1px;background:var(--border2)}
 .fase-btn:last-child::after{display:none}
-.fase-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:var(--bg3);color:var(--text3);transition:all .2s}
+.fase-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:var(--bg3);color:var(--text3);transition:all .25s cubic-bezier(.4,0,.2,1)}
 .fase-label{font-size:10px;font-weight:600;color:var(--text3);text-align:center;white-space:nowrap;transition:all .2s}
 .fase-btn.active .fase-num{color:#fff}
 .fase-btn.active .fase-label{font-weight:700}
@@ -110,10 +112,10 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 .fase-btn[data-fase="6"].active .fase-label{color:var(--f6)}
 
 /* LAYOUT */
-.page{max-width:1060px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.page{max-width:1180px;margin:0 auto;padding:2.5rem 2rem 5rem}
 .fase-panel{display:none}
-.fase-panel.active{display:block;animation:fadeIn .2s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.fase-panel.active{display:block;animation:fadeIn .25s cubic-bezier(.4,0,.2,1)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .section{margin-bottom:2rem}
 .section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
 .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
@@ -129,17 +131,19 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 /* ABAS */
 .tab-bar{display:flex;gap:2px;border-bottom:1px solid var(--border);margin-bottom:2rem;overflow-x:auto;scrollbar-width:none}
 .tab-bar::-webkit-scrollbar{height:0}
-.tab-btn{font-size:12px;font-weight:600;padding:10px 18px;border:none;background:none;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .15s;border-radius:8px 8px 0 0;font-family:inherit}
-.tab-btn:hover{color:var(--text);background:var(--bg3)}
+.tab-btn{font-size:12px;font-weight:600;padding:10px 18px;border:none;background:none;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .2s cubic-bezier(.4,0,.2,1);border-radius:8px 8px 0 0;font-family:inherit}
+.tab-btn:hover{color:var(--text);background:var(--bg3);transform:translateY(-1px)}
 .tab-btn.active{color:var(--fase-cor,var(--accent));border-bottom-color:var(--fase-cor,var(--accent));background:var(--fase-cor-bg,var(--accent-bg))}
 .tab-panel{display:none}
-.tab-panel.active{display:block;animation:fadeIn .2s ease}
+.tab-panel.active{display:block;animation:tabFadeIn .22s cubic-bezier(.4,0,.2,1)}
+@keyframes tabFadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
 
 /* SCOPE GRID */
 .scope-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
-.scope-card{padding:16px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;transition:all .15s;display:flex;gap:14px;align-items:flex-start}
-.scope-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
-.scope-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.scope-card{padding:16px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;transition:all .22s cubic-bezier(.4,0,.2,1);display:flex;gap:14px;align-items:flex-start}
+.scope-card:hover{border-color:var(--border2);box-shadow:var(--shadow-md);transform:translateY(-3px) scale(1.01)}
+.scope-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s}
+.scope-card:hover .scope-icon{transform:scale(1.1)}
 .scope-body h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
 .scope-body p{font-size:12px;color:var(--text2);line-height:1.6}
 
@@ -147,18 +151,19 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 .flow-steps{display:grid;gap:0}
 .flow-step{display:flex;gap:16px;align-items:flex-start;position:relative;padding-bottom:4px}
 .flow-step:not(:last-child)::before{content:'';position:absolute;left:15px;top:34px;bottom:-4px;width:2px;background:var(--border2);z-index:0}
-.flow-step-n{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;position:relative;z-index:1;margin-top:10px}
-.flow-step-body{flex:1;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:all .15s}
-.flow-step-body:hover{border-color:var(--border2)}
-.flow-step-body h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.flow-step-n{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;position:relative;z-index:1;margin-top:10px;transition:transform .2s}
+.flow-step:hover .flow-step-n{transform:scale(1.12)}
+.flow-step-body{flex:1;padding:14px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:all .2s cubic-bezier(.4,0,.2,1)}
+.flow-step-body:hover{border-color:var(--border2);box-shadow:var(--shadow);transform:translateX(3px)}
+.flow-step-body h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px}
 .flow-step-body p{font-size:12px;color:var(--text2);line-height:1.6;margin:0}
 .step-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
 .step-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px}
 
 /* INFO GRID */
 .info-grid{display:grid;gap:8px}
-.info-card{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .15s}
-.info-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.info-card{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .2s cubic-bezier(.4,0,.2,1)}
+.info-card:hover{border-color:var(--border2);box-shadow:var(--shadow);transform:translateX(3px)}
 .info-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .info-body strong{font-size:12px;font-weight:600;color:var(--text);display:block;margin-bottom:3px}
 .info-body p{font-size:12px;color:var(--text2);line-height:1.6;margin:0}
@@ -215,8 +220,8 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 
 /* GLOSSÁRIO */
 .glossary{display:grid;gap:5px}
-.gitem{display:grid;grid-template-columns:200px 1fr;gap:16px;padding:11px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .15s}
-.gitem:hover{border-color:var(--border2);background:var(--bg3)}
+.gitem{display:grid;grid-template-columns:200px 1fr;gap:16px;padding:11px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .2s cubic-bezier(.4,0,.2,1)}
+.gitem:hover{border-color:var(--border2);background:var(--bg3);transform:translateX(3px)}
 @media(max-width:500px){.gitem{grid-template-columns:1fr;gap:4px}}
 .gterm{font-size:12px;font-weight:700;color:var(--text)}
 .gdef{font-size:12px;color:var(--text2);line-height:1.6}
@@ -229,8 +234,49 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 
 .btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:7px 14px;border-radius:8px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);cursor:pointer;text-decoration:none;transition:all .15s;font-weight:500;font-family:inherit}
 .btn:hover{background:var(--bg3);color:var(--text)}
-footer{border-top:1px solid var(--border);padding:1.25rem 1.5rem;max-width:1060px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+footer{border-top:1px solid var(--border);padding:1.25rem 2rem;max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
 footer p{font-size:11px;color:var(--text3)}
+
+/* ============================================================
+   BOTÕES DE AÇÃO — teoria → prática.
+   Effecti (purple), OptiWork (blue), OMIE (green-accent).
+   Cada fase tem seus botões no final dos steps relevantes.
+============================================================ */
+.action-buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.action-btn{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;padding:7px 14px;border-radius:8px;border:none;cursor:pointer;text-decoration:none;font-family:inherit;transition:all .22s cubic-bezier(.4,0,.2,1);letter-spacing:.02em}
+.action-btn svg{flex-shrink:0;transition:transform .2s}
+.action-btn:hover svg{transform:translateX(2px)}
+.action-btn-effecti{background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-glow)}
+.action-btn-effecti:hover{background:var(--accent);color:#fff;box-shadow:0 4px 14px var(--accent-glow);transform:translateY(-2px)}
+.action-btn-opti{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-glow)}
+.action-btn-opti:hover{background:var(--blue);color:#fff;box-shadow:0 4px 14px var(--blue-glow);transform:translateY(-2px)}
+.action-btn-omie{background:var(--green-bg);color:var(--green);border:1px solid var(--green-glow)}
+.action-btn-omie:hover{background:var(--green);color:#fff;box-shadow:0 4px 14px var(--green-glow);transform:translateY(-2px)}
+.action-divider{display:flex;align-items:center;gap:8px;margin-top:12px;margin-bottom:4px}
+.action-divider-line{flex:1;height:1px;background:var(--border)}
+.action-divider span{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+
+/* ============================================================
+   VIDEO PLAYER — accordion com lazy-load e fade suave.
+   O vídeo só é carregado quando o accordion é aberto pela
+   primeira vez — preserva performance em conexões lentas.
+============================================================ */
+.video-tutorial{margin-top:1rem;border-radius:12px;overflow:hidden;border:1px solid var(--border2);background:var(--bg3);transition:all .25s cubic-bezier(.4,0,.2,1)}
+.video-tutorial-header{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;user-select:none;transition:background .15s}
+.video-tutorial-header:hover{background:var(--bg4)}
+.video-tutorial-icon{width:32px;height:32px;border-radius:8px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s}
+.video-tutorial-header:hover .video-tutorial-icon{transform:scale(1.1)}
+.video-tutorial-meta{flex:1}
+.video-tutorial-meta strong{font-size:12px;font-weight:700;color:var(--text);display:block}
+.video-tutorial-meta span{font-size:11px;color:var(--text3)}
+.video-tutorial-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-glow)}
+.video-tutorial-chevron{color:var(--text3);transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.video-tutorial.open .video-tutorial-chevron{transform:rotate(180deg)}
+.video-tutorial-body{display:none;padding:0 12px 14px}
+.video-tutorial.open .video-tutorial-body{display:block;animation:accordionOpen .25s cubic-bezier(.4,0,.2,1)}
+@keyframes accordionOpen{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.video-tutorial-body video{width:100%;border-radius:8px;display:block;background:#000;max-height:440px}
+.video-tutorial-caption{font-size:11px;color:var(--text3);margin-top:8px;text-align:center;line-height:1.5}
 </style>
 </head>
 <body>
@@ -342,6 +388,41 @@ footer p{font-size:11px;color:var(--text3)}
             <div class="step-tags">
               <span class="step-tag" style="background:var(--f1-bg);color:var(--f1)">Login corporativo</span>
             </div>
+
+            <!-- Tutorial em vídeo: captação de oportunidade no Effecti.
+                 Lazy-load real — o browser não busca o MP4 até o accordion abrir. -->
+            <div class="video-tutorial" id="vid-captacao-effecti">
+              <div class="video-tutorial-header" onclick="toggleVideo('vid-captacao-effecti')" aria-expanded="false" aria-controls="vid-captacao-effecti-body">
+                <div class="video-tutorial-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+                <div class="video-tutorial-meta">
+                  <strong>Tutorial em vídeo — Captação de Oportunidade no Effecti</strong>
+                  <span>Plataforma Effecti · 31 seg · Pesquisa, filtros e avaliação</span>
+                </div>
+                <span class="video-tutorial-badge">MP4</span>
+                <svg class="video-tutorial-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="video-tutorial-body" id="vid-captacao-effecti-body">
+                <video controls preload="none" src="Captação_de_oportunidade_-_Effecti.mp4"
+                  aria-label="Tutorial: captação de oportunidade no Effecti — filtros, avaliação e download do edital">
+                  Seu navegador não suporta reprodução de vídeo HTML5.
+                </video>
+                <p class="video-tutorial-caption">
+                  Effecti → Encontrar → Todos os avisos · Configure os filtros, avalie a oportunidade e faça o download do edital conforme o vídeo.
+                </p>
+              </div>
+            </div>
+
+            <!-- Botão de ação: teoria vista, hora de abrir o Effecti -->
+            <div class="action-divider"><div class="action-divider-line"></div><span>abrir ferramenta</span><div class="action-divider-line"></div></div>
+            <div class="action-buttons">
+              <a href="https://minha.effecti.com.br/#/" target="_blank" rel="noopener" class="action-btn action-btn-effecti">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                Abrir Effecti
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
           </div>
         </div>
         <div class="flow-step">
@@ -373,6 +454,15 @@ footer p{font-size:11px;color:var(--text3)}
             <p>Baixar Edital, Termo de Referência e todos os Anexos. Salvar no Banco de Editais do OptiWork com a <strong>nomenclatura padrão obrigatória</strong>.</p>
             <div class="step-tags">
               <span class="step-tag" style="background:var(--f1-bg);color:var(--f1)">→ Fase 2: Análise de Edital</span>
+            </div>
+            <!-- Arquivar o edital no OptiWork antes de avançar -->
+            <div class="action-divider"><div class="action-divider-line"></div><span>abrir ferramenta</span><div class="action-divider-line"></div></div>
+            <div class="action-buttons">
+              <a href="https://work.optidata.cloud/login" target="_blank" rel="noopener" class="action-btn action-btn-opti">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                Ir para o OptiWork
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
             </div>
           </div>
         </div>
@@ -677,7 +767,24 @@ footer p{font-size:11px;color:var(--text3)}
           <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
-          <div class="flow-step-body"><h4>Registro na Planilha e Encaminhamento</h4><p>Registrar fabricante, custo, markup, preço final e status. Itens aprovados seguem para a Fase 4 — Lance.</p></div>
+          <div class="flow-step-body">
+            <h4>Registro na Planilha e Encaminhamento</h4>
+            <p>Registrar fabricante, custo, markup, preço final e status. Itens aprovados seguem para a Fase 4 — Lance.</p>
+            <!-- Itens aprovados → verificar no Effecti e registrar no OptiWork -->
+            <div class="action-divider"><div class="action-divider-line"></div><span>abrir ferramenta</span><div class="action-divider-line"></div></div>
+            <div class="action-buttons">
+              <a href="https://minha.effecti.com.br/#/" target="_blank" rel="noopener" class="action-btn action-btn-effecti">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                Abrir Effecti
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+              <a href="https://work.optidata.cloud/login" target="_blank" rel="noopener" class="action-btn action-btn-opti">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                Ir para o OptiWork
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -784,7 +891,19 @@ footer p{font-size:11px;color:var(--text3)}
       <div class="flow-steps">
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--f4);color:#fff">1</div>
-          <div class="flow-step-body"><h4>Cadastro no Módulo Disputar (Effecti)</h4><p>Acessar "Disputar" na Effecti → "Nova disputa" → Selecionar portal e empresa → Carregar a licitação → Confirmar inclusão na lista de disputas ativas.</p></div>
+          <div class="flow-step-body">
+            <h4>Cadastro no Módulo Disputar (Effecti)</h4>
+            <p>Acessar "Disputar" na Effecti → "Nova disputa" → Selecionar portal e empresa → Carregar a licitação → Confirmar inclusão na lista de disputas ativas.</p>
+            <!-- Ir direto para o Effecti e entrar no módulo Disputar -->
+            <div class="action-divider"><div class="action-divider-line"></div><span>abrir ferramenta</span><div class="action-divider-line"></div></div>
+            <div class="action-buttons">
+              <a href="https://minha.effecti.com.br/#/" target="_blank" rel="noopener" class="action-btn action-btn-effecti">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Abrir Effecti — Disputar
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
         </div>
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--f4);color:#fff">2</div>
@@ -999,7 +1118,19 @@ footer p{font-size:11px;color:var(--text3)}
         </div>
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--f6);color:#fff">2</div>
-          <div class="flow-step-body"><h4>Catalogação no OptiWork</h4><p>Criar cartão no projeto "Contratos &amp; Empenhos" com título padrão: <strong>[ÓRGÃO] – EMPENHO [NÚMERO]</strong>. Anexar PDF, inserir etiquetas e definir status "EMPENHO RECEBIDO".</p></div>
+          <div class="flow-step-body">
+            <h4>Catalogação no OptiWork</h4>
+            <p>Criar cartão no projeto "Contratos &amp; Empenhos" com título padrão: <strong>[ÓRGÃO] – EMPENHO [NÚMERO]</strong>. Anexar PDF, inserir etiquetas e definir status "EMPENHO RECEBIDO".</p>
+            <!-- Abrir o OptiWork para registrar o empenho imediatamente -->
+            <div class="action-divider"><div class="action-divider-line"></div><span>abrir ferramenta</span><div class="action-divider-line"></div></div>
+            <div class="action-buttons">
+              <a href="https://work.optidata.cloud/login" target="_blank" rel="noopener" class="action-btn action-btn-opti">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                Ir para o OptiWork
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
         </div>
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--f6);color:#fff">3</div>
@@ -1013,7 +1144,24 @@ footer p{font-size:11px;color:var(--text3)}
           <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
-          <div class="flow-step-body"><h4>Compra → Logística → Faturamento</h4><p>Emitir pedido ao fornecedor, monitorar entrega e registrar NF, data, protocolo e status de pagamento.</p></div>
+          <div class="flow-step-body">
+            <h4>Compra → Logística → Faturamento</h4>
+            <p>Emitir pedido ao fornecedor, monitorar entrega e registrar NF, data, protocolo e status de pagamento.</p>
+            <!-- Dupla aprovação dada: abrir OMIE para emitir a NF e OptiWork para atualizar o card -->
+            <div class="action-divider"><div class="action-divider-line"></div><span>abrir ferramenta</span><div class="action-divider-line"></div></div>
+            <div class="action-buttons">
+              <a href="https://app.omie.com.br/login/" target="_blank" rel="noopener" class="action-btn action-btn-omie">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Abrir OMIE
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+              <a href="https://work.optidata.cloud/login" target="_blank" rel="noopener" class="action-btn action-btn-opti">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                Ver card no OptiWork
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1101,6 +1249,25 @@ footer p{font-size:11px;color:var(--text3)}
 // NAVEGAÇÃO DE FASES
 // Cada fase tem seu próprio painel e conjunto de abas.
 // ============================================================
+// ============================================================
+// TOGGLE VIDEO TUTORIAL — accordion com lazy-load.
+// O src do <video> só é atribuído na primeira abertura,
+// então o browser não baixa o MP4 enquanto está fechado.
+// Ao fechar, pausa o vídeo para não tocar em background.
+// ============================================================
+function toggleVideo(id) {
+  const wrap   = document.getElementById(id);
+  const header = wrap.querySelector('.video-tutorial-header');
+  const body   = document.getElementById(id + '-body');
+  const video  = body.querySelector('video');
+  const isOpen = wrap.classList.toggle('open');
+  header.setAttribute('aria-expanded', isOpen);
+  if (isOpen && video && video.dataset.src && !video.getAttribute('src')) {
+    video.src = video.dataset.src;
+  }
+  if (!isOpen && video) { video.pause(); }
+}
+
 function setFase(n) {
   document.querySelectorAll('.fase-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.fase-btn').forEach(b => b.classList.remove('active'));
