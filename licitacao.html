@@ -354,6 +354,18 @@ footer p{font-size:11px;color:var(--text3)}
 @keyframes accordionOpen{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .video-tutorial-body video{width:100%;border-radius:8px;display:block;background:#000;max-height:440px}
 .video-tutorial-caption{font-size:11px;color:var(--text3);margin-top:8px;text-align:center;line-height:1.5}
+
+/* ============================================================
+   PLAY OVERLAY -- botao central de play sobre o poster.
+   Resolve o problema de preload=none onde o clique no poster
+   nao aciona o play em todos os browsers.
+   Some automaticamente ao iniciar a reproducao.
+============================================================ */
+.play-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .2s ease;border-radius:8px;z-index:5;background:transparent}
+.play-overlay.hidden{opacity:0;pointer-events:none}
+.play-overlay-btn{width:64px;height:64px;border-radius:50%;background:rgba(176,126,248,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,.5);transition:transform .15s ease,background .15s ease;border:2px solid rgba(255,255,255,.25)}
+.play-overlay:hover .play-overlay-btn{transform:scale(1.1);background:rgba(176,126,248,1)}
+.play-overlay-btn svg{margin-left:4px;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -540,11 +552,17 @@ footer p{font-size:11px;color:var(--text3)}
               <div class="video-tutorial-body" id="vid-captacao-effecti-body">
                 <div class="video-pip-wrap">
                 <video id="video-captacao" controls preload="none"
-                  src="captacao_de_oportunidade_effecti.mp4"
+                  src="Captacao_de_oportunidade_-_Effecti.mp4"
                   poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%230d1117'/%3E%3Ccircle cx='480' cy='270' r='56' fill='%231e1040' stroke='%23b07ef8' stroke-width='2'/%3E%3Cpolygon points='466,248 466,292 506,270' fill='%23b07ef8'/%3E%3Ctext x='480' y='360' font-family='sans-serif' font-size='16' fill='%234a5568' text-anchor='middle'%3EClique para reproduzir%3C/text%3E%3C/svg%3E"
                   aria-label="Tutorial: acesso ao Effecti e pesquisa de oportunidades com filtros">
                   Seu navegador não suporta reprodução de vídeo HTML5.
                 </video>
+                <!-- Overlay de play central -- some ao iniciar reproducao -->
+                <div class="play-overlay" onclick="playVideoOverlay(this)">
+                  <div class="play-overlay-btn">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </div>
+                </div>
                 <button class="pip-btn" onclick="openPiP('video-captacao')" title="Abrir em Picture-in-Picture" aria-label="Abrir vídeo em modo flutuante">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="11" width="9" height="6" rx="1"/></svg>
                   PiP
@@ -601,11 +619,17 @@ footer p{font-size:11px;color:var(--text3)}
               <div class="video-tutorial-body" id="vid-avaliacao-effecti-body">
                 <div class="video-pip-wrap">
                 <video id="video-avaliacao" controls preload="none"
-                  src="avaliacao_oportunidade_effecti.mp4"
+                  src="avaliacao-oportunidade-effecti.mp4"
                   poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%230d1117'/%3E%3Ccircle cx='480' cy='270' r='56' fill='%231e1040' stroke='%23b07ef8' stroke-width='2'/%3E%3Cpolygon points='466,248 466,292 506,270' fill='%23b07ef8'/%3E%3Ctext x='480' y='360' font-family='sans-serif' font-size='16' fill='%234a5568' text-anchor='middle'%3EClique para reproduzir%3C/text%3E%3C/svg%3E"
                   aria-label="Tutorial: avaliacao de oportunidade no Effecti - portal, capag, produtos e prazos">
                   Seu navegador não suporta reprodução de vídeo HTML5.
                 </video>
+                <!-- Overlay de play central -- some ao iniciar reproducao -->
+                <div class="play-overlay" onclick="playVideoOverlay(this)">
+                  <div class="play-overlay-btn">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </div>
+                </div>
                 <button class="pip-btn" onclick="openPiP('video-avaliacao')" title="Abrir em Picture-in-Picture" aria-label="Abrir vídeo em modo flutuante">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="11" width="9" height="6" rx="1"/></svg>
                   PiP
@@ -676,11 +700,17 @@ footer p{font-size:11px;color:var(--text3)}
               <div class="video-tutorial-body" id="vid-card-optiwork-body">
                 <div class="video-pip-wrap">
                 <video id="video-card-optiwork" controls preload="none"
-                  src="criacao_card_optiwork.mp4"
+                  src="criacao_card_OptiWork.mp4"
                   poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%230d1117'/%3E%3Ccircle cx='480' cy='270' r='56' fill='%231e1040' stroke='%23b07ef8' stroke-width='2'/%3E%3Cpolygon points='466,248 466,292 506,270' fill='%23b07ef8'/%3E%3Ctext x='480' y='360' font-family='sans-serif' font-size='16' fill='%234a5568' text-anchor='middle'%3EClique para reproduzir%3C/text%3E%3C/svg%3E"
                   aria-label="Tutorial: criacao do card no banco de editais do OptiWork com nomenclatura padronizada">
                   Seu navegador não suporta reprodução de vídeo HTML5.
                 </video>
+                <!-- Overlay de play central -- some ao iniciar reproducao -->
+                <div class="play-overlay" onclick="playVideoOverlay(this)">
+                  <div class="play-overlay-btn">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </div>
+                </div>
                 <button class="pip-btn" onclick="openPiP('video-card-optiwork')" title="Abrir em Picture-in-Picture" aria-label="Abrir vídeo em modo flutuante">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="11" width="9" height="6" rx="1"/></svg>
                   PiP
@@ -1770,6 +1800,33 @@ function tabFase(fase, id, btn) {
   btn.classList.add('active');
   btn.setAttribute('aria-selected', 'true');
   updateBreadcrumb(fase, id);
+}
+
+// ============================================================
+// PLAY OVERLAY -- acionado pelo clique no botao central de play.
+// O overlay some ao iniciar e reaparece ao pausar.
+// Isso resolve o problema de preload=none onde o poster nao
+// responde ao clique em todos os browsers.
+// ============================================================
+function playVideoOverlay(overlay) {
+  const wrap  = overlay.closest('.video-pip-wrap');
+  const video = wrap.querySelector('video');
+  if (!video) return;
+  overlay.classList.add('hidden');
+  video.play().catch(function() {
+    // Se play() falhar (ex: politica de autoplay), mostrar overlay novamente
+    overlay.classList.remove('hidden');
+  });
+  // Ouvir eventos para controlar visibilidade do overlay
+  video.addEventListener('pause', function() {
+    if (!video.ended) overlay.classList.remove('hidden');
+  }, { once: false });
+  video.addEventListener('ended', function() {
+    overlay.classList.remove('hidden');
+  }, { once: false });
+  video.addEventListener('play', function() {
+    overlay.classList.add('hidden');
+  }, { once: false });
 }
 
 // ============================================================
