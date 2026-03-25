@@ -354,6 +354,18 @@ footer p{font-size:11px;color:var(--text3)}
 @keyframes accordionOpen{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .video-tutorial-body video{width:100%;border-radius:8px;display:block;background:#000;max-height:440px}
 .video-tutorial-caption{font-size:11px;color:var(--text3);margin-top:8px;text-align:center;line-height:1.5}
+
+/* ============================================================
+   PLAY OVERLAY -- botao central de play sobre o poster.
+   Resolve o problema de preload=none onde o clique no poster
+   nao aciona o play em todos os browsers.
+   Some automaticamente ao iniciar a reproducao.
+============================================================ */
+.play-overlay{position:absolute;top:0;left:0;right:0;bottom:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .2s ease;border-radius:8px 8px 0 0;z-index:5;background:transparent;pointer-events:auto}
+.play-overlay.hidden{opacity:0;pointer-events:none}
+.play-overlay-btn{width:64px;height:64px;border-radius:50%;background:rgba(176,126,248,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,.5);transition:transform .15s ease,background .15s ease;border:2px solid rgba(255,255,255,.25)}
+.play-overlay:hover .play-overlay-btn{transform:scale(1.1);background:rgba(176,126,248,1)}
+.play-overlay-btn svg{margin-left:4px;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -415,8 +427,7 @@ footer p{font-size:11px;color:var(--text3)}
     </div>
     <h1>Processo Licitatório — Ciclo Completo</h1>
     <p>6 fases compiladas num único manual: da captação do edital na plataforma Effecti até a execução da compra pós-empenho. Selecione a fase no fluxo abaixo para navegar.</p>
-    <div class="hero-meta">
-      <span>Versão 1.0</span><span>Março 2026</span><span>Documento Interno</span><span>Ferramenta: Effecti · OptiWork · OMIE</span>
+    <div class="hero-meta"><span>Março 2026</span><span>Documento Interno</span><span>Ferramenta: Effecti · OptiWork · OMIE</span>
     </div>
   </div>
 </section>
@@ -539,12 +550,18 @@ footer p{font-size:11px;color:var(--text3)}
               </div>
               <div class="video-tutorial-body" id="vid-captacao-effecti-body">
                 <div class="video-pip-wrap">
-                <video id="video-captacao" controls preload="none"
-                  src="captacao_de_oportunidade_effecti.mp4"
+                <video id="video-captacao" controls preload="metadata"
+                  src="Captacao_de_oportunidade_-_Effecti.mp4"
                   poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%230d1117'/%3E%3Ccircle cx='480' cy='270' r='56' fill='%231e1040' stroke='%23b07ef8' stroke-width='2'/%3E%3Cpolygon points='466,248 466,292 506,270' fill='%23b07ef8'/%3E%3Ctext x='480' y='360' font-family='sans-serif' font-size='16' fill='%234a5568' text-anchor='middle'%3EClique para reproduzir%3C/text%3E%3C/svg%3E"
                   aria-label="Tutorial: acesso ao Effecti e pesquisa de oportunidades com filtros">
                   Seu navegador não suporta reprodução de vídeo HTML5.
                 </video>
+                <!-- Overlay de play central -- some ao iniciar reproducao -->
+                <div class="play-overlay" onclick="playVideoOverlay(this)">
+                  <div class="play-overlay-btn">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </div>
+                </div>
                 <button class="pip-btn" onclick="openPiP('video-captacao')" title="Abrir em Picture-in-Picture" aria-label="Abrir vídeo em modo flutuante">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="11" width="9" height="6" rx="1"/></svg>
                   PiP
@@ -600,12 +617,18 @@ footer p{font-size:11px;color:var(--text3)}
               </div>
               <div class="video-tutorial-body" id="vid-avaliacao-effecti-body">
                 <div class="video-pip-wrap">
-                <video id="video-avaliacao" controls preload="none"
-                  src="avaliacao_oportunidade_effecti.mp4"
+                <video id="video-avaliacao" controls preload="metadata"
+                  src="avaliacao-oportunidade-effecti.mp4"
                   poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%230d1117'/%3E%3Ccircle cx='480' cy='270' r='56' fill='%231e1040' stroke='%23b07ef8' stroke-width='2'/%3E%3Cpolygon points='466,248 466,292 506,270' fill='%23b07ef8'/%3E%3Ctext x='480' y='360' font-family='sans-serif' font-size='16' fill='%234a5568' text-anchor='middle'%3EClique para reproduzir%3C/text%3E%3C/svg%3E"
                   aria-label="Tutorial: avaliacao de oportunidade no Effecti - portal, capag, produtos e prazos">
                   Seu navegador não suporta reprodução de vídeo HTML5.
                 </video>
+                <!-- Overlay de play central -- some ao iniciar reproducao -->
+                <div class="play-overlay" onclick="playVideoOverlay(this)">
+                  <div class="play-overlay-btn">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </div>
+                </div>
                 <button class="pip-btn" onclick="openPiP('video-avaliacao')" title="Abrir em Picture-in-Picture" aria-label="Abrir vídeo em modo flutuante">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="11" width="9" height="6" rx="1"/></svg>
                   PiP
@@ -668,19 +691,25 @@ footer p{font-size:11px;color:var(--text3)}
                 </div>
                 <div class="video-tutorial-meta">
                   <strong>Tutorial em vídeo — Criação do Card no OptiWork</strong>
-                  <span>OptiWork · 30 seg · Banco de editais, arquivamento e nomenclatura</span>
+                  <span>OptiWork · 31 seg · Banco de editais, arquivamento e nomenclatura</span>
                 </div>
                 <span class="video-tutorial-badge">MP4</span>
                 <svg class="video-tutorial-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
               <div class="video-tutorial-body" id="vid-card-optiwork-body">
                 <div class="video-pip-wrap">
-                <video id="video-card-optiwork" controls preload="none"
-                  src="criacao_card_optiwork.mp4"
+                <video id="video-card-optiwork" controls preload="metadata"
+                  src="criacao_card_OptiWork.mp4"
                   poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%230d1117'/%3E%3Ccircle cx='480' cy='270' r='56' fill='%231e1040' stroke='%23b07ef8' stroke-width='2'/%3E%3Cpolygon points='466,248 466,292 506,270' fill='%23b07ef8'/%3E%3Ctext x='480' y='360' font-family='sans-serif' font-size='16' fill='%234a5568' text-anchor='middle'%3EClique para reproduzir%3C/text%3E%3C/svg%3E"
                   aria-label="Tutorial: criacao do card no banco de editais do OptiWork com nomenclatura padronizada">
                   Seu navegador não suporta reprodução de vídeo HTML5.
                 </video>
+                <!-- Overlay de play central -- some ao iniciar reproducao -->
+                <div class="play-overlay" onclick="playVideoOverlay(this)">
+                  <div class="play-overlay-btn">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </div>
+                </div>
                 <button class="pip-btn" onclick="openPiP('video-card-optiwork')" title="Abrir em Picture-in-Picture" aria-label="Abrir vídeo em modo flutuante">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="11" width="9" height="6" rx="1"/></svg>
                   PiP
@@ -1131,7 +1160,49 @@ footer p{font-size:11px;color:var(--text3)}
           <div class="flow-step-body">
             <h4>Cadastro no Módulo Disputar (Effecti)</h4>
             <p>Acessar "Disputar" na Effecti → "Nova disputa" → Selecionar portal e empresa → Carregar a licitação → Confirmar inclusão na lista de disputas ativas.</p>
-            <!-- Ir direto para o Effecti e entrar no módulo Disputar -->
+            <div class="step-tags" style="margin-top:8px">
+              <span class="step-tag" style="background:var(--f4-bg);color:var(--f4)">Effecti → Disputar → Nova disputa</span>
+              <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Confirmar licitacao na lista ativa</span>
+            </div>
+
+            <!-- Tutorial: cadastro da licitacao no modulo Disputar do Effecti -->
+            <div class="video-tutorial" id="vid-cadastro-disputar" style="margin-top:14px">
+              <div class="video-tutorial-header" onclick="toggleVideo('vid-cadastro-disputar')" aria-expanded="false" aria-controls="vid-cadastro-disputar-body">
+                <div class="video-tutorial-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+                <div class="video-tutorial-meta">
+                  <strong>Tutorial em vídeo — Cadastro no Módulo Disputar</strong>
+                  <span>Effecti · Disputar · Nova disputa, portal, empresa e confirmação</span>
+                </div>
+                <span class="video-tutorial-badge">MP4</span>
+                <svg class="video-tutorial-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="video-tutorial-body" id="vid-cadastro-disputar-body">
+                <div class="video-pip-wrap">
+                  <video id="video-cadastro-disputar" controls preload="metadata"
+                    src="cadastrar_modulo_disputar_Effecti.mp4"
+                    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%230d1117'/%3E%3Ccircle cx='480' cy='270' r='56' fill='%231e1040' stroke='%23b07ef8' stroke-width='2'/%3E%3Cpolygon points='466,248 466,292 506,270' fill='%23b07ef8'/%3E%3Ctext x='480' y='360' font-family='sans-serif' font-size='16' fill='%234a5568' text-anchor='middle'%3EClique para reproduzir%3C/text%3E%3C/svg%3E"
+                    aria-label="Tutorial: cadastro da licitacao no modulo Disputar do Effecti">
+                    Seu navegador nao suporta reproducao de video HTML5.
+                  </video>
+                  <div class="play-overlay" onclick="playVideoOverlay(this)">
+                    <div class="play-overlay-btn">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    </div>
+                  </div>
+                  <button class="pip-btn" onclick="openPiP('video-cadastro-disputar')" title="Abrir em Picture-in-Picture" aria-label="Abrir video em modo flutuante">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="11" width="9" height="6" rx="1"/></svg>
+                    PiP
+                  </button>
+                </div>
+                <p class="video-tutorial-caption">
+                  Effecti → Disputar → Nova disputa · Selecionar portal, empresa e carregar a licitacao para confirmar inclusao na lista de disputas ativas.
+                </p>
+              </div>
+            </div>
+
+            <!-- Ir direto para o Effecti e entrar no modulo Disputar -->
             <div class="action-divider"><div class="action-divider-line"></div><span>abrir ferramenta</span><div class="action-divider-line"></div></div>
             <div class="action-buttons">
               <a href="https://minha.effecti.com.br/#/" target="_blank" rel="noopener" class="action-btn action-btn-effecti">
@@ -1144,7 +1215,88 @@ footer p{font-size:11px;color:var(--text3)}
         </div>
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--f4);color:#fff">2</div>
-          <div class="flow-step-body"><h4>Configuração da Estratégia</h4><p>Definir: valor limite (mínimo da cotação), estratégia principal, arredondamento (2 casas decimais), variação mínima/máxima por lance e prorrogação automática.</p></div>
+          <div class="flow-step-body">
+            <h4>Configuração da Estratégia de Disputa</h4>
+            <p>Antes de iniciar a sessão, configurar os parâmetros da disputa no Effecti. Cada campo impacta diretamente a margem — revisar sempre com base no <strong>valor limite definido na Fase 3</strong> (Cotação).</p>
+
+            <!-- Modos de disputa — Lei 14.133/2021 -->
+            <div style="margin-top:14px">
+              <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Modos de disputa — Lei 14.133/2021</div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px">
+
+                <div style="padding:11px 13px;background:var(--f4-bg);border:1px solid var(--f4-glow);border-radius:9px">
+                  <div style="font-size:11px;font-weight:700;color:var(--f4);margin-bottom:4px">Aberto</div>
+                  <div style="font-size:11px;color:var(--text2);line-height:1.6">Lances sucessivos e decrescentes visíveis em tempo real. Permite reagir à movimentação dos concorrentes. Fase inicial costuma ser de 10 min + prorrogações de 2 min sempre que houver lance nos 2 min finais.</div>
+                </div>
+
+                <div style="padding:11px 13px;background:var(--bg3);border:1px solid var(--border2);border-radius:9px">
+                  <div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:4px">Fechado</div>
+                  <div style="font-size:11px;color:var(--text2);line-height:1.6">Proposta sigilosa revelada apenas na abertura. Elimina a reação dos concorrentes. Risco: sem referência de mercado durante a disputa — a proposta deve estar fundamentada exclusivamente no custo real.</div>
+                </div>
+
+                <div style="padding:11px 13px;background:var(--bg3);border:1px solid var(--border2);border-radius:9px">
+                  <div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:4px">Aberto + Fechado (combinado)</div>
+                  <div style="font-size:11px;color:var(--text2);line-height:1.6">O mais comum no Pregão Eletrônico. Fase aberta (ex: 15 min) seguida de fase fechada (ex: 5 min) restrita aos licitantes classificados dentro de 10% do menor lance. Na fase fechada, o objetivo é manter-se nessa faixa — não necessariamente ser o menor.</div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Tipos de lance e estratégias -->
+            <div style="margin-top:10px;padding:12px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:9px">
+              <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Tipos de lance e estratégias</div>
+              <div style="display:grid;gap:5px">
+                <div style="font-size:11px;color:var(--text2);display:flex;gap:8px;align-items:baseline"><span style="color:var(--f4);font-weight:700;flex-shrink:0;min-width:120px">Lance sucessivo</span>Competição direta com reduções graduais. Estratégia cautelosa: observar concorrentes e reduzir o mínimo necessário para manter posição.</div>
+                <div style="font-size:11px;color:var(--text2);display:flex;gap:8px;align-items:baseline"><span style="color:var(--f4);font-weight:700;flex-shrink:0;min-width:120px">Lance "quebrado"</span>Uso de centavos (ex: R$ 2.859,73) para dificultar o cálculo rápido dos concorrentes e evitar empate imediato.</div>
+                <div style="font-size:11px;color:var(--text2);display:flex;gap:8px;align-items:baseline"><span style="color:var(--f4);font-weight:700;flex-shrink:0;min-width:120px">Intervalo mínimo</span>Editais definem redução mínima entre lances (valor ou %). Obrigatório respeitar — lances abaixo do intervalo são rejeitados pelo sistema.</div>
+                <div style="font-size:11px;color:var(--text2);display:flex;gap:8px;align-items:baseline"><span style="color:var(--f4);font-weight:700;flex-shrink:0;min-width:120px">Prorrogação auto.</span>Configurar envio do lance final com 1 min e 45 seg restantes (padrão Effecti) para garantir envio antes do fechamento da prorrogação.</div>
+              </div>
+            </div>
+
+            <div class="alert alert-rule" style="margin-top:10px">
+              <div class="alert-icon" style="display:flex;align-items:center;justify-content:center">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+              </div>
+              <p><strong>Valor limite é inviolável.</strong> Representa o custo × 1,30 definido na cotação. Nunca alterar esse parâmetro durante a sessão — qualquer ajuste exige reinício completo do fluxo de aprovação (Financeiro + Diretoria).</p>
+            </div>
+
+            <!-- Tutorial: configuracao da estrategia de disputa no Effecti -->
+            <div class="video-tutorial" id="vid-config-disputa" style="margin-top:14px">
+              <div class="video-tutorial-header" onclick="toggleVideo('vid-config-disputa')" aria-expanded="false" aria-controls="vid-config-disputa-body">
+                <div class="video-tutorial-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+                <div class="video-tutorial-meta">
+                  <strong>Tutorial em vídeo — Configuração da Estratégia de Disputa</strong>
+                  <span>Effecti · Modalidade, inicio de lance, variacao e prorrogacao</span>
+                </div>
+                <span class="video-tutorial-badge">MP4</span>
+                <svg class="video-tutorial-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="video-tutorial-body" id="vid-config-disputa-body">
+                <div class="video-pip-wrap">
+                  <video id="video-config-disputa" controls preload="metadata"
+                    src="configuracao__disputa_effecti.mp4"
+                    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%230d1117'/%3E%3Ccircle cx='480' cy='270' r='56' fill='%231e1040' stroke='%23b07ef8' stroke-width='2'/%3E%3Cpolygon points='466,248 466,292 506,270' fill='%23b07ef8'/%3E%3Ctext x='480' y='360' font-family='sans-serif' font-size='16' fill='%234a5568' text-anchor='middle'%3EClique para reproduzir%3C/text%3E%3C/svg%3E"
+                    aria-label="Tutorial: configuracao da estrategia de disputa no Effecti - modalidade, inicio, variacao e prorrogacao">
+                    Seu navegador nao suporta reproducao de video HTML5.
+                  </video>
+                  <div class="play-overlay" onclick="playVideoOverlay(this)">
+                    <div class="play-overlay-btn">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    </div>
+                  </div>
+                  <button class="pip-btn" onclick="openPiP('video-config-disputa')" title="Abrir em Picture-in-Picture" aria-label="Abrir video em modo flutuante">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="12" y="11" width="9" height="6" rx="1"/></svg>
+                    PiP
+                  </button>
+                </div>
+                <p class="video-tutorial-caption">
+                  Effecti → Disputar → Configuracoes · Definir estrategia, valor limite, arredondamento, variacao por lance e prorrogacao automatica antes de iniciar a sessao.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--f4);color:#fff">3</div>
@@ -1770,6 +1922,30 @@ function tabFase(fase, id, btn) {
   btn.classList.add('active');
   btn.setAttribute('aria-selected', 'true');
   updateBreadcrumb(fase, id);
+}
+
+// ============================================================
+// PLAY OVERLAY -- acionado pelo clique no botao central de play.
+// O overlay some ao iniciar e reaparece ao pausar.
+// Isso resolve o problema de preload=none onde o poster nao
+// responde ao clique em todos os browsers.
+// ============================================================
+function playVideoOverlay(overlay) {
+  const wrap  = overlay.closest('.video-pip-wrap');
+  const video = wrap.querySelector('video');
+  if (!video) return;
+  // Esconder o overlay imediatamente -- o usuario clicou para tocar
+  overlay.classList.add('hidden');
+  // Apos esconder, remover do DOM para nao interferir com os controles nativos
+  video.play().then(function() {
+    // play() bem-sucedido: remover overlay permanentemente
+    // O usuario ja sabe que o video existe, controles nativos assumem
+    overlay.remove();
+  }).catch(function() {
+    // play() falhou (politica de autoplay ou arquivo nao encontrado)
+    // Restaurar overlay para o usuario tentar novamente
+    overlay.classList.remove('hidden');
+  });
 }
 
 // ============================================================

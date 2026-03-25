@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Compras &mdash; Manual Operacional &middot; Croma Tecnologia</title>
+<meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -37,7 +38,7 @@ html{scroll-behavior:smooth}
 body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.65;transition:var(--transition-theme)}
 
 /* TOPBAR */
-.topbar{position:sticky;top:0;z-index:300;height:56px;display:flex;align-items:center;gap:12px;padding:0 1.5rem;background:var(--bg2);border-bottom:1px solid var(--border);box-shadow:var(--shadow);backdrop-filter:blur(12px);transition:var(--transition-theme)}
+.topbar{position:sticky;top:0;z-index:300;height:56px;display:flex;align-items:center;gap:12px;padding:0 2rem;background:var(--bg2);border-bottom:1px solid var(--border);box-shadow:var(--shadow);backdrop-filter:blur(12px);transition:var(--transition-theme)}
 .topbar-logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
 .logo-fallback{font-size:16px;font-weight:700;color:var(--accent);letter-spacing:-.03em}
 .topbar-divider{width:1px;height:22px;background:var(--border2);flex-shrink:0}
@@ -47,19 +48,21 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 .topbar-nav a{font-size:12px;color:var(--text2);text-decoration:none;padding:5px 10px;border-radius:7px;transition:all .15s;font-weight:500;white-space:nowrap}
 .topbar-nav a:hover{background:var(--bg3);color:var(--text)}
 .topbar-nav a.active{background:var(--accent-bg);color:var(--accent)}
-.theme-toggle{width:36px;height:36px;border-radius:10px;border:1px solid var(--border2);background:var(--bg3);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;color:var(--text2);margin-left:6px}
-.theme-toggle:hover{background:var(--bg4);color:var(--text);border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
-.theme-toggle svg{transition:transform .4s ease}
-.theme-toggle:hover svg{transform:rotate(20deg)}
+.theme-toggle{width:40px;height:40px;border-radius:10px;border:1px solid var(--border2);background:var(--bg3);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0;color:var(--text2);margin-left:8px;position:relative}
+.theme-toggle:hover{background:var(--accent-bg);color:var(--accent);border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);transform:scale(1.08)}
+.theme-toggle::after{content:'Alternar tema';position:absolute;bottom:-34px;right:0;background:var(--bg4);color:var(--text2);font-size:10px;font-weight:600;padding:4px 8px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;border:1px solid var(--border2);font-family:'DM Sans',sans-serif}
+.theme-toggle:hover::after{opacity:1}
+.theme-toggle svg{transition:transform .4s ease,opacity .25s}
+.theme-toggle:hover svg{transform:rotate(22deg)}
 .icon-sun{display:none}.icon-moon{display:block}
 [data-theme="light"] .icon-sun{display:block}
 [data-theme="light"] .icon-moon{display:none}
 @media(max-width:900px){.topbar-nav{display:none}}
 
 /* HERO */
-.hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:2.5rem 1.5rem 2rem;position:relative;overflow:hidden}
+.hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:2.5rem 2rem 2rem;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none}
-.hero-inner{max-width:1000px;margin:0 auto;position:relative}
+.hero-inner{max-width:1180px;margin:0 auto;position:relative}
 .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-bg);color:var(--accent);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:1rem;border:1px solid var(--accent-glow);letter-spacing:.03em;text-transform:uppercase}
 .hero h1{font-size:28px;font-weight:700;letter-spacing:-.03em;margin-bottom:.5rem;line-height:1.2}
 .hero p{font-size:14px;color:var(--text2);max-width:580px;line-height:1.7}
@@ -68,7 +71,7 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 .hero-meta span::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--border2);display:inline-block}
 
 /* LAYOUT */
-.page{max-width:1000px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.page{max-width:1180px;margin:0 auto;padding:2.5rem 2rem 5rem}
 .section{margin-bottom:2rem}
 .section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
 .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
@@ -76,8 +79,8 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 /* ABAS */
 .tab-bar{display:flex;gap:2px;border-bottom:1px solid var(--border);margin-bottom:2rem;overflow-x:auto;scrollbar-width:none}
 .tab-bar::-webkit-scrollbar{height:0}
-.tab-btn{font-size:12px;font-weight:600;padding:10px 18px;border:none;background:none;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .15s;border-radius:8px 8px 0 0;font-family:inherit}
-.tab-btn:hover{color:var(--text);background:var(--bg3)}
+.tab-btn{font-size:12px;font-weight:600;padding:10px 18px;border:none;background:none;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .2s cubic-bezier(.4,0,.2,1);border-radius:8px 8px 0 0;font-family:inherit}
+.tab-btn:hover{color:var(--text);background:var(--bg3);transform:translateY(-1px)}
 .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);background:var(--accent-bg)}
 .tab-panel{display:none}
 .tab-panel.active{display:block;animation:fadeIn .2s ease}
@@ -86,15 +89,16 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 /* SCOPE GRID */
 .scope-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
 .scope-card{padding:16px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;transition:all .15s;display:flex;gap:14px;align-items:flex-start}
-.scope-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
-.scope-icon{width:36px;height:36px;border-radius:9px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent)}
+.scope-card:hover{border-color:var(--border2);box-shadow:var(--shadow-md);transform:translateY(-3px) scale(1.01)}
+.scope-icon{width:36px;height:36px;border-radius:9px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent);transition:transform .2s}
+.scope-card:hover .scope-icon{transform:scale(1.1)}
 .scope-body h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
 .scope-body p{font-size:12px;color:var(--text2);line-height:1.6}
 
 /* INFO GRID */
 .info-grid{display:grid;gap:8px}
-.info-card{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .15s}
-.info-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.info-card{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:all .2s cubic-bezier(.4,0,.2,1)}
+.info-card:hover{border-color:var(--border2);box-shadow:var(--shadow);transform:translateX(3px)}
 .info-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .info-body strong{font-size:12px;font-weight:600;color:var(--text);display:block;margin-bottom:3px}
 .info-body p{font-size:12px;color:var(--text2);line-height:1.6;margin:0}
@@ -103,9 +107,10 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 .flow-steps{display:grid;gap:0}
 .flow-step{display:flex;gap:16px;align-items:flex-start;position:relative;padding-bottom:4px}
 .flow-step:not(:last-child)::before{content:'';position:absolute;left:15px;top:34px;bottom:-4px;width:2px;background:var(--border2);z-index:0}
-.flow-step-n{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;position:relative;z-index:1;margin-top:10px}
-.flow-step-body{flex:1;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:all .15s}
-.flow-step-body:hover{border-color:var(--border2)}
+.flow-step-n{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;position:relative;z-index:1;margin-top:10px;transition:transform .2s}
+.flow-step:hover .flow-step-n{transform:scale(1.12)}
+.flow-step-body{flex:1;padding:14px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:all .2s cubic-bezier(.4,0,.2,1)}
+.flow-step-body:hover{border-color:var(--border2);box-shadow:var(--shadow);transform:translateX(3px)}
 .flow-step-body h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
 .flow-step-body p{font-size:12px;color:var(--text2);line-height:1.6;margin:0}
 .step-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
@@ -161,7 +166,7 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 @media(max-width:800px){.kanban{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:500px){.kanban{grid-template-columns:repeat(2,1fr)}}
 .kcol-head{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:7px 10px;border-radius:8px;text-align:center;margin-bottom:8px}
-.kcard{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:11px 13px;margin-bottom:8px;transition:all .18s}
+.kcard{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:11px 13px;margin-bottom:8px;transition:all .2s cubic-bezier(.4,0,.2,1)}
 .kcard:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:var(--shadow-md)}
 .kcard-title{font-size:12px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:3px}
 .kcard-sub{font-size:11px;color:var(--text3);line-height:1.3}
@@ -213,11 +218,147 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 
 .btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:7px 14px;border-radius:8px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);cursor:pointer;text-decoration:none;transition:all .15s;font-weight:500;font-family:inherit}
 .btn:hover{background:var(--bg3);color:var(--text)}
-footer{border-top:1px solid var(--border);padding:1.25rem 1.5rem;max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+footer{border-top:1px solid var(--border);padding:1.25rem 2rem;max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
 footer p{font-size:11px;color:var(--text3)}
 
 /* SVG helpers */
 .ico{display:flex;align-items:center;justify-content:center}
+
+/* ============================================================
+   BUSCA GLOBAL — campo + dropdown de resultados.
+   Fuse.js faz a busca fuzzy no índice em memória.
+   O campo fica sempre visível na topbar, colapsando em mobile.
+============================================================ */
+.search-wrap{position:relative;flex-shrink:0;margin-left:auto}
+.search-input{width:200px;height:34px;padding:0 34px 0 32px;background:var(--bg3);border:1px solid var(--border2);border-radius:9px;font-size:12px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:all .2s cubic-bezier(.4,0,.2,1)}
+.search-input::placeholder{color:var(--text3)}
+.search-input:focus{width:260px;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);background:var(--bg2)}
+.search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none;transition:color .2s}
+.search-input:focus~.search-clear,.search-input:not(:placeholder-shown)~.search-clear{display:flex}
+.search-clear{display:none;position:absolute;right:8px;top:50%;transform:translateY(-50%);width:18px;height:18px;border-radius:50%;background:var(--bg4);border:none;cursor:pointer;align-items:center;justify-content:center;color:var(--text3);transition:all .15s}
+.search-clear:hover{background:var(--border2);color:var(--text)}
+.search-input:focus~.search-icon,.search-input:not(:placeholder-shown)~.search-icon{color:var(--accent)}
+.search-dropdown{display:none;position:absolute;top:calc(100% + 8px);right:0;width:340px;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;box-shadow:var(--shadow-md);z-index:400;overflow:hidden;max-height:380px;overflow-y:auto;scrollbar-width:thin}
+.search-dropdown.open{display:block;animation:fadeIn .15s ease}
+.search-result-item{display:flex;gap:12px;align-items:flex-start;padding:10px 14px;cursor:pointer;transition:background .12s;border-bottom:1px solid var(--border);text-decoration:none}
+.search-result-item:last-child{border-bottom:none}
+.search-result-item:hover,.search-result-item.active{background:var(--bg3)}
+.sri-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.sri-body{flex:1;min-width:0}
+.sri-title{font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sri-title mark{background:none;color:var(--accent);font-weight:700}
+.sri-path{font-size:10px;color:var(--text3);margin-top:2px;display:flex;align-items:center;gap:4px}
+.sri-path span{padding:1px 5px;border-radius:4px;background:var(--bg3);border:1px solid var(--border)}
+.search-empty{padding:20px 14px;text-align:center;font-size:12px;color:var(--text3)}
+.search-hint{padding:8px 14px;font-size:10px;color:var(--text3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
+.search-hint kbd{font-size:9px;padding:1px 5px;background:var(--bg3);border:1px solid var(--border2);border-radius:4px;font-family:'DM Mono',monospace}
+@media(max-width:900px){.search-input{width:140px}.search-input:focus{width:180px}}
+@media(max-width:600px){.search-wrap{display:none}}
+
+/* ============================================================
+   BREADCRUMBS DINÂMICOS — topbar-title se torna um breadcrumb
+   que reflete setor > fase > aba ativa em tempo real.
+============================================================ */
+.topbar-breadcrumb{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text3);white-space:nowrap;overflow:hidden}
+.bc-sep{opacity:.4;font-size:11px;flex-shrink:0}
+.bc-sector{color:var(--text2);font-weight:600;flex-shrink:0}
+.bc-fase{color:var(--text2);transition:color .2s;flex-shrink:0;cursor:pointer}
+.bc-fase:hover{color:var(--text)}
+.bc-tab{color:var(--accent);font-weight:600;overflow:hidden;text-overflow:ellipsis;transition:color .2s}
+@media(max-width:600px){.bc-fase,.bc-sep:nth-child(3),.bc-tab{display:none}}
+
+/* ============================================================
+   TOOLTIPS DE TERMOS TÉCNICOS — aparece no hover/focus.
+   Definição breve do termo, sem precisar abrir o glossário.
+============================================================ */
+/* ============================================================
+   TOOLTIPS -- visíveis ao hover E ao foco por teclado.
+   tabindex="0" no .tooltip garante que Tab chega até ele.
+   O JS (initTooltips) adiciona role="tooltip" + aria-describedby
+   para que screen readers leiam a definição ao focar.
+   display:inline-block é necessário para position:relative funcionar
+   corretamente em elementos inline sem quebrar o fluxo do texto.
+============================================================ */
+.tooltip{position:relative;display:inline-block;border-bottom:1px dotted var(--text3);cursor:help;color:inherit;vertical-align:baseline}
+.tooltip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--bg4);color:var(--text2);font-size:11px;line-height:1.55;padding:8px 11px;border-radius:8px;border:1px solid var(--border2);box-shadow:var(--shadow-md);width:260px;white-space:normal;z-index:500;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;font-weight:400;font-style:normal;font-family:'DM Sans',sans-serif;transform:translateX(-50%) translateY(4px)}
+.tooltip::before{content:'';position:absolute;bottom:calc(100% + 3px);left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--border2);z-index:501;opacity:0;pointer-events:none;transition:opacity .18s ease}
+.tooltip:hover::after,.tooltip:focus-visible::after,.tooltip:focus::after{opacity:1;transform:translateX(-50%) translateY(0)}
+.tooltip:hover::before,.tooltip:focus-visible::before,.tooltip:focus::before{opacity:1}
+/* Indicador de foco visível (acessibilidade por teclado) */
+.tooltip:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+/* Span de suporte ao screen reader -- visualmente oculto mas lido em voz alta */
+.tooltip-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ============================================================
+   PiP BUTTON — botão de Picture-in-Picture no player de vídeo.
+   Flutua no canto superior direito do player, só aparece
+   quando o accordion está aberto.
+============================================================ */
+.video-pip-wrap{position:relative}
+.pip-btn{position:absolute;top:8px;right:8px;z-index:10;display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;padding:5px 9px;border-radius:7px;background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.15);cursor:pointer;backdrop-filter:blur(4px);transition:all .18s;font-family:'DM Sans',sans-serif}
+.pip-btn:hover{background:rgba(0,0,0,.85);border-color:rgba(255,255,255,.35);transform:scale(1.05)}
+.pip-btn svg{flex-shrink:0}
+
+/* ============================================================
+   BOTÕES DE AÇÃO — teoria → prática.
+   Effecti (purple), OptiWork (blue), OMIE (green-accent).
+   Cada fase tem seus botões no final dos steps relevantes.
+============================================================ */
+.action-buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.action-btn{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;padding:7px 14px;border-radius:8px;border:none;cursor:pointer;text-decoration:none;font-family:inherit;transition:all .22s cubic-bezier(.4,0,.2,1);letter-spacing:.02em}
+.action-btn svg{flex-shrink:0;transition:transform .2s}
+.action-btn:hover svg{transform:translateX(2px)}
+.action-btn-effecti{background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-glow)}
+.action-btn-effecti:hover{background:var(--accent);color:#fff;box-shadow:0 4px 14px var(--accent-glow);transform:translateY(-2px)}
+.action-btn-opti{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-glow)}
+.action-btn-opti:hover{background:var(--blue);color:#fff;box-shadow:0 4px 14px var(--blue-glow);transform:translateY(-2px)}
+.action-btn-omie{background:var(--green-bg);color:var(--green);border:1px solid var(--green-glow)}
+.action-btn-omie:hover{background:var(--green);color:#fff;box-shadow:0 4px 14px var(--green-glow);transform:translateY(-2px)}
+.action-divider{display:flex;align-items:center;gap:8px;margin-top:12px;margin-bottom:4px}
+.action-divider-line{flex:1;height:1px;background:var(--border)}
+.action-divider span{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+
+/* ============================================================
+   VIDEO PLAYER — accordion com lazy-load e fade suave.
+   O vídeo só é carregado quando o accordion é aberto pela
+   primeira vez — preserva performance em conexões lentas.
+============================================================ */
+.video-tutorial{margin-top:1rem;border-radius:12px;overflow:hidden;border:1px solid var(--border2);background:var(--bg3);transition:all .25s cubic-bezier(.4,0,.2,1)}
+.video-tutorial-header{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;user-select:none;transition:background .15s}
+.video-tutorial-header:hover{background:var(--bg4)}
+.video-tutorial-icon{width:32px;height:32px;border-radius:8px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s}
+.video-tutorial-header:hover .video-tutorial-icon{transform:scale(1.1)}
+.video-tutorial-meta{flex:1}
+.video-tutorial-meta strong{font-size:12px;font-weight:700;color:var(--text);display:block}
+.video-tutorial-meta span{font-size:11px;color:var(--text3)}
+.video-tutorial-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-glow)}
+.video-tutorial-chevron{color:var(--text3);transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.video-tutorial.open .video-tutorial-chevron{transform:rotate(180deg)}
+.video-tutorial-body{display:none;padding:0 12px 14px}
+.video-tutorial.open .video-tutorial-body{display:block;animation:accordionOpen .25s cubic-bezier(.4,0,.2,1)}
+@keyframes accordionOpen{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.video-tutorial-body video{width:100%;border-radius:8px;display:block;background:#000;max-height:440px}
+.video-tutorial-caption{font-size:11px;color:var(--text3);margin-top:8px;text-align:center;line-height:1.5}
+
+/* ============================================================
+   PLAY OVERLAY -- botao central de play sobre o poster.
+   Resolve o problema de preload=none onde o clique no poster
+   nao aciona o play em todos os browsers.
+   Some automaticamente ao iniciar a reproducao.
+============================================================ */
+.play-overlay{position:absolute;top:0;left:0;right:0;bottom:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .2s ease;border-radius:8px 8px 0 0;z-index:5;background:transparent;pointer-events:auto}
+.play-overlay.hidden{opacity:0;pointer-events:none}
+.play-overlay-btn{width:64px;height:64px;border-radius:50%;background:rgba(176,126,248,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,.5);transition:transform .15s ease,background .15s ease;border:2px solid rgba(255,255,255,.25)}
+.play-overlay:hover .play-overlay-btn{transform:scale(1.1);background:rgba(176,126,248,1)}
+.play-overlay-btn svg{margin-left:4px;flex-shrink:0}
+/* ROLE BAR — cargo do analista */
+.role-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:.875rem 2rem;transition:var(--transition-theme)}
+.role-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.role-label{font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.role-btn{font-size:12px;font-weight:600;padding:7px 18px;border-radius:20px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:7px;font-family:inherit;white-space:nowrap}
+.role-btn:hover{background:var(--bg4);color:var(--text);transform:translateY(-1px)}
+.role-btn.active{background:var(--accent-bg);color:var(--accent);border-color:var(--accent-glow)}
+
 </style>
 </head>
 <body>
@@ -230,8 +371,14 @@ footer p{font-size:11px;color:var(--text3)}
     <span class="logo-fallback" style="display:none">CROMA</span>
   </a>
   <div class="topbar-divider"></div>
-  <span class="topbar-title">Manual Operacional <strong>/ Compras</strong></span>
-  <nav class="topbar-nav">
+  <div class="topbar-breadcrumb" id="topbar-breadcrumb" aria-label="Localizacao atual">
+    <span class="bc-sector">Compras</span>
+    <span class="bc-sep" aria-hidden="true">›</span>
+    <span class="bc-fase" id="bc-fase" onclick="document.querySelector('.role-bar').scrollIntoView({behavior:'smooth'})">Analista de Compras</span>
+    <span class="bc-sep" aria-hidden="true">›</span>
+    <span class="bc-tab" id="bc-tab">Escopo</span>
+  </div>
+  <nav class="topbar-nav" aria-label="Navegacao entre setores">
     <a href="index.html">Inicio</a>
     <a href="financeiro.html">Financeiro</a>
     <a href="compras.html" class="active">Compras</a>
@@ -241,9 +388,25 @@ footer p{font-size:11px;color:var(--text3)}
     <a href="ecommerce.html">E-commerce</a>
     <a href="outsourcing.html">Outsourcing</a>
   </nav>
+  <div class="search-wrap" id="search-wrap" role="search" aria-label="Busca global no manual">
+    <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="search" class="search-input" id="search-input"
+      placeholder="Buscar... (ex: Cotacao)"
+      autocomplete="off" autocorrect="off" spellcheck="false"
+      aria-label="Buscar no manual" aria-haspopup="listbox" aria-expanded="false"
+      aria-controls="search-dropdown"
+      oninput="onSearch(this.value)"
+      onkeydown="onSearchKey(event)"
+      onfocus="if(this.value) onSearch(this.value)"
+    />
+    <button class="search-clear" aria-label="Limpar busca" onclick="clearSearch()" tabindex="-1">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="search-dropdown" id="search-dropdown" role="listbox" aria-label="Resultados da busca"></div>
+  </div>
   <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
     <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <svg class="icon-sun"  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
   </button>
 </header>
 
@@ -257,13 +420,23 @@ footer p{font-size:11px;color:var(--text3)}
     <h1>Ciclo de Compra &mdash; Comercial Privado</h1>
     <p>Manual do Analista de Compras: do recebimento do ticket no OptiWork ate o fechamento do ciclo apos confirmacao de entrega. Toda compra exige aprovacao da Diretoria &mdash; sem excecao.</p>
     <div class="hero-meta">
-      <span>Versao 1.3</span>
       <span>Marco 2026</span>
       <span>Documento Interno</span>
       <span>Sistemas: OptiWork &middot; OMIE</span>
     </div>
   </div>
 </section>
+
+<!-- CARGO — Analista de Compras (único cargo neste setor) -->
+<div class="role-bar">
+  <div class="role-inner">
+    <span class="role-label">Seu cargo:</span>
+    <button class="role-btn active" id="rbtn-analista">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Analista de Compras
+    </button>
+  </div>
+</div>
 
 <main class="page">
 
@@ -274,6 +447,7 @@ footer p{font-size:11px;color:var(--text3)}
     <button class="tab-btn" onclick="tab('relacionamentos',this)">Relacionamentos</button>
     <button class="tab-btn" onclick="tab('regras',this)">Regras e Politicas</button>
     <button class="tab-btn" onclick="tab('markup',this)">Planilha de Markup</button>
+    <button class="tab-btn" onclick="tab('fornecedores',this)">Gestao Fornecedores</button>
     <button class="tab-btn" onclick="tab('raci',this)">Matriz RACI</button>
     <button class="tab-btn" onclick="tab('glossario',this)">Glossario</button>
   </div>
@@ -490,8 +664,15 @@ footer p{font-size:11px;color:var(--text3)}
           <div class="flow-step-n" style="background:var(--teal-bg);color:var(--teal)">7</div>
           <div class="flow-step-body">
             <h4>Registrar no card e mover para COMPRADOS</h4>
-            <p>Adicionar comentario no card: fornecedor escolhido, valor total, prazo de entrega e condicao de pagamento. Se o fornecedor foi diferente do indicado, justificar. Arrastar o card para COMPRADOS.</p>
-            <div class="step-tags">
+            <p>Adicionar comentario no card: fornecedor escolhido, valor total, prazo de entrega e condicao de pagamento. Se o fornecedor foi diferente do indicado, justificar o motivo. Em seguida, <strong>anexar o comprovante do pedido</strong> (print da tela de confirmacao ou PDF do pedido enviado ao fornecedor) diretamente no card antes de mover para COMPRADOS.</p>
+            <div class="alert alert-info" style="margin-top:.75rem">
+              <div class="alert-icon" style="display:flex;align-items:center;justify-content:center">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <p><strong>Comunicacao proativa obrigatoria:</strong> o comprovante anexado elimina a pergunta "ja comprou?" do Comercial antes da NF chegar. Sem o comprovante no card, o card <strong>nao deve ser movido</strong> para COMPRADOS.</p>
+            </div>
+            <div class="step-tags" style="margin-top:.75rem">
+              <span class="step-tag" style="background:var(--teal-bg);color:var(--teal)">Comprovante obrigatorio antes de mover</span>
               <span class="step-tag" style="background:var(--bg3);color:var(--text2)">OptiWork</span>
             </div>
           </div>
@@ -544,6 +725,13 @@ footer p{font-size:11px;color:var(--text3)}
         <div class="sla-card"><label>Ticket apos 12h</label><span><span class="sla-dot" style="background:var(--accent2)"></span>Analise ate 12h do dia seguinte</span></div>
         <div class="sla-card"><label>Prazo max. de compra</label><span><span class="sla-dot" style="background:var(--amber)"></span>24h apos entrar em Comprar</span></div>
         <div class="sla-card"><label>Prazo extrapolado</label><span><span class="sla-dot" style="background:var(--red)"></span>Pendentes + Coord. Comercial</span></div>
+        <div class="sla-card" style="border-color:rgba(248,113,113,.35)"><label style="color:var(--red)">TAG: URGENTE</label><span><span class="sla-dot" style="background:var(--red)"></span>Fura fila &mdash; justificativa obrigatoria</span></div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:.875rem">
+        <div class="alert-icon" style="display:flex;align-items:center;justify-content:center">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <p><strong>Gatilho de Urgencia &mdash; Tag <code style="font-family:'DM Mono',monospace;font-size:11px;background:rgba(248,113,113,.15);padding:1px 5px;border-radius:4px;color:var(--red)">URGENTE - LINHA PARADA</code>:</strong> cards com essa etiqueta no OptiWork furam a fila do SLA de 24h e devem ser tratados imediatamente. O uso da tag e condicionado a uma <strong>justificativa por escrito do solicitante</strong> registrada no proprio card antes da abertura. Sem justificativa registrada, o comprador <strong>nao deve</strong> tratar o card como urgente.</p>
       </div>
     </div>
 
@@ -660,45 +848,45 @@ footer p{font-size:11px;color:var(--text3)}
           </div>
         </div>
         <div class="rel-card">
-          <div class="rel-fase">Análise financeira<small>Coluna: Aprov. Financeiro</small></div>
+          <div class="rel-fase">Analise financeira<small>Coluna: Aprov. Financeiro</small></div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--bg3);color:var(--text2)">Você monitora</span>
+            <span class="rel-pill" style="background:var(--bg3);color:var(--text2)">Voce monitora</span>
             <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">Financeiro age</span>
           </div>
         </div>
         <div class="rel-card">
           <div class="rel-fase">Aprovacao de toda compra<small>Coluna: Aprov. Diretoria</small></div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--bg3);color:var(--text2)">Você monitora</span>
-            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Diretoria age &mdash; obrigatória</span>
+            <span class="rel-pill" style="background:var(--bg3);color:var(--text2)">Voce monitora</span>
+            <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Diretoria age &mdash; obrigatoria</span>
           </div>
         </div>
         <div class="rel-card">
-          <div class="rel-fase">Cotação e compra<small>Coluna: Comprar</small></div>
+          <div class="rel-fase">Cotacao e compra<small>Coluna: Comprar</small></div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--teal-bg);color:var(--teal)">Você é o responsavel</span>
+            <span class="rel-pill" style="background:var(--teal-bg);color:var(--teal)">Voce e o responsavel</span>
             <span class="rel-pill" style="background:var(--amber-bg);color:var(--amber)">Consulta Comercial se necessario</span>
           </div>
         </div>
         <div class="rel-card">
           <div class="rel-fase">Impedimento ativo<small>Coluna: Pendentes</small></div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--red-bg);color:var(--red)">Você registra no card</span>
+            <span class="rel-pill" style="background:var(--red-bg);color:var(--red)">Voce registra no card</span>
             <span class="rel-pill" style="background:var(--purple-bg);color:var(--purple)">Coord. Comercial assume</span>
           </div>
         </div>
         <div class="rel-card">
-          <div class="rel-fase">Validação da NF<small>Após receber NF do fornecedor</small></div>
+          <div class="rel-fase">Validacao da NF<small>Apos receber NF do fornecedor</small></div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--teal-bg);color:var(--teal)">Você confere</span>
+            <span class="rel-pill" style="background:var(--teal-bg);color:var(--teal)">Voce confere</span>
             <span class="rel-pill" style="background:var(--green-bg);color:var(--green)">&rarr; Financeiro recebe</span>
             <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Logistica informada</span>
           </div>
         </div>
         <div class="rel-card">
-          <div class="rel-fase">Planilha de acompanhamento<small>Após compra fechada</small></div>
+          <div class="rel-fase">Planilha de acompanhamento<small>Apos compra fechada</small></div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--teal-bg);color:var(--teal)">Você preenche</span>
+            <span class="rel-pill" style="background:var(--teal-bg);color:var(--teal)">Voce preenche</span>
             <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Logistica usa para etiqueta</span>
             <span class="rel-pill" style="background:var(--purple-bg);color:var(--purple)">Comercial acompanha entrega</span>
           </div>
@@ -706,7 +894,7 @@ footer p{font-size:11px;color:var(--text3)}
         <div class="rel-card">
           <div class="rel-fase">Fechamento do ciclo<small>Confirmacao de entrega</small></div>
           <div class="rel-quem">
-            <span class="rel-pill" style="background:var(--teal-bg);color:var(--teal)">Você fecha o card</span>
+            <span class="rel-pill" style="background:var(--teal-bg);color:var(--teal)">Voce fecha o card</span>
             <span class="rel-pill" style="background:var(--accent-bg);color:var(--accent)">Logistica/Estoque confirmou</span>
             <span class="rel-pill" style="background:var(--purple-bg);color:var(--purple)">Comercial informado</span>
           </div>
@@ -719,22 +907,22 @@ footer p{font-size:11px;color:var(--text3)}
   <div class="tab-panel" id="tab-regras">
 
     <div class="section">
-      <div class="section-label">Política de pagamento a fornecedores</div>
+      <div class="section-label">Politica de pagamento a fornecedores</div>
       <div class="policy-grid">
         <div class="policy-card">
           <span class="policy-badge" style="background:var(--green-bg);color:var(--green)">1. Preferencia</span>
           <span class="policy-cond">Faturado a prazo<br><small style="font-weight:400;color:var(--text2)">Boleto com vencimento futuro</small></span>
-          <span class="policy-obs">Regra padrão &mdash; sempre buscar esta condição primeiro em toda negociação com fornecedor.</span>
+          <span class="policy-obs">Regra padrao &mdash; sempre buscar esta condicao primeiro em toda negociacao com fornecedor.</span>
         </div>
         <div class="policy-card">
           <span class="policy-badge" style="background:var(--accent-bg);color:var(--accent)">2. Preferencia</span>
           <span class="policy-cond">Boleto parcelado</span>
-          <span class="policy-obs">Quando o fornecedor nao oferecer prazo único. Parcelar minimiza impacto no fluxo de caixa.</span>
+          <span class="policy-obs">Quando o fornecedor nao oferecer prazo unico. Parcelar minimiza impacto no fluxo de caixa.</span>
         </div>
         <div class="policy-card" style="border-color:rgba(248,113,113,.3)">
           <span class="policy-badge" style="background:var(--red-bg);color:var(--red)">Excecao</span>
-          <span class="policy-cond">A vista &mdash; PIX, transferência</span>
-          <span class="policy-obs">Requer autorização <strong>adicional</strong> da Diretoria registrada no card. A aprovação padrão do fluxo nao cobre pagamento à vista &mdash; e necessária uma autorização específica.</span>
+          <span class="policy-cond">A vista &mdash; PIX, transferencia</span>
+          <span class="policy-obs">Requer autorizacao <strong>adicional</strong> da Diretoria registrada no card. A aprovacao padrao do fluxo nao cobre pagamento a vista &mdash; e necessaria uma autorizacao especifica.</span>
         </div>
       </div>
     </div>
@@ -742,6 +930,15 @@ footer p{font-size:11px;color:var(--text3)}
     <div class="section">
       <div class="section-label">Regras de validacao de NF do fornecedor</div>
       <div class="info-grid">
+        <div class="info-card" style="border-color:var(--accent-glow)">
+          <div class="info-icon" style="background:var(--accent-bg)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="info-body">
+            <strong>NF conferida contra o Pedido de Compra (OC) original &mdash; regra base</strong>
+            <p>Antes de qualquer outra verificacao, localizar no card do OptiWork o Pedido de Compra (OC) original e comparar <strong>item a item, unidade a unidade e centavo a centavo</strong>. Qualquer divergencia &mdash; mesmo de R$ 0,01 ou 1 unidade &mdash; resulta em: (1) suspensao imediata da NF, (2) notificacao ao fornecedor para emissao de NF correta ou carta de correcao, (3) comunicacao ao Financeiro de que o pagamento esta <strong>bloqueado</strong> ate a correcao ser concluida pelo Compras. O Financeiro nao deve processar o pagamento de NF com divergencia.</p>
+          </div>
+        </div>
         <div class="info-card">
           <div class="info-icon" style="background:var(--accent-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
@@ -776,7 +973,7 @@ footer p{font-size:11px;color:var(--text3)}
           <div class="info-icon" style="background:var(--red-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           </div>
-          <div class="info-body"><strong>NF sem pedido correspondente = alerta máximo</strong><p>NÃO encaminhar ao Financeiro. Suspender e acionar imediatamente. Aceitar NFS indevidas gera risco financeiro e juridico.</p></div>
+          <div class="info-body"><strong>NF sem pedido correspondente = alerta maximo</strong><p>NAO encaminhar ao Financeiro. Suspender e acionar imediatamente. Aceitar NFS indevidas gera risco financeiro e juridico.</p></div>
         </div>
       </div>
     </div>
@@ -788,25 +985,25 @@ footer p{font-size:11px;color:var(--text3)}
           <div class="info-icon" style="background:var(--amber-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
-          <div class="info-body"><strong>Verificar CNPJ na Receita Federal</strong><p>Empresa deve estar ativa, com razão social e situação cadastral regulares.</p></div>
+          <div class="info-body"><strong>Verificar CNPJ na Receita Federal</strong><p>Empresa deve estar ativa, com razao social e situacao cadastral regulares.</p></div>
         </div>
         <div class="info-card">
           <div class="info-icon" style="background:var(--amber-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           </div>
-          <div class="info-body"><strong>Pesquisar reputação</strong><p>Reclame Aqui, avaliações online, referências do mercado. Pedidos de alto valor: solicitar referências comerciais.</p></div>
+          <div class="info-body"><strong>Pesquisar reputacao</strong><p>Reclame Aqui, avaliacoes online, referencias do mercado. Pedidos de alto valor: solicitar referencias comerciais.</p></div>
         </div>
         <div class="info-card">
           <div class="info-icon" style="background:var(--amber-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="m16 8 4 0 3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
           </div>
-          <div class="info-body"><strong>Confirmar capacidade de entrega</strong><p>O fornecedor entrega no prazo exigido pelo cliente? Confirmar antes de fechar &mdash; nÃo depois.</p></div>
+          <div class="info-body"><strong>Confirmar capacidade de entrega</strong><p>O fornecedor entrega no prazo exigido pelo cliente? Confirmar antes de fechar &mdash; nao depois.</p></div>
         </div>
         <div class="info-card">
           <div class="info-icon" style="background:var(--amber-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           </div>
-          <div class="info-body"><strong>Registrar e comunicar</strong><p>Após validar, registrar na lista interna de fornecedores aprovados e comunicar ao Coordenador do Comercial.</p></div>
+          <div class="info-body"><strong>Registrar e comunicar</strong><p>Apos validar, registrar na lista interna de fornecedores aprovados e comunicar ao Coordenador do Comercial.</p></div>
         </div>
       </div>
     </div>
@@ -821,7 +1018,7 @@ footer p{font-size:11px;color:var(--text3)}
         <div class="alert-icon ico">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         </div>
-        <p>A Planilha de Markup e o documento de análise de viabilidade financeira da venda. Ela contem custo, preco, MKP, tributos e margem. É preenchida pelo consultor de vendas antes da abertura do ticket e e compartilhada com todos os setores &mdash; principalmente o Comercial &mdash; como referência da operação.</p>
+        <p>A Planilha de Markup e o documento de analise de viabilidade financeira da venda. Ela contem custo, preco, MKP, tributos e margem. E preenchida pelo consultor/vendedor antes da abertura do ticket e e compartilhada com todos os setores &mdash; principalmente o Comercial &mdash; como referencia da operacao.</p>
       </div>
 
       <div class="markup-table-wrap">
@@ -851,17 +1048,17 @@ footer p{font-size:11px;color:var(--text3)}
               <td>Preco de venda</td>
               <td>Preco final ao cliente, ja com MKP e tributos aplicados</td>
               <td><span class="badge-resp" style="background:var(--purple-bg);color:var(--purple)">Consultor / Vendedor</span></td>
-              <td>Não altera</td>
+              <td>Nao altera</td>
             </tr>
             <tr>
               <td>Tributos e DIFAL</td>
-              <td>Impostos da operação, incluindo DIFAL para vendas interestaduais</td>
+              <td>Impostos da operacao, incluindo DIFAL para vendas interestaduais</td>
               <td><span class="badge-resp" style="background:var(--purple-bg);color:var(--purple)">Consultor / Vendedor</span></td>
-              <td>Não altera</td>
+              <td>Nao altera</td>
             </tr>
             <tr>
-              <td>Margem líquida</td>
-              <td>Resultado final da operação. Base para aprovação do Financeiro e Diretoria</td>
+              <td>Margem liquida</td>
+              <td>Resultado final da operacao. Base para aprovacao do Financeiro e Diretoria</td>
               <td><span class="badge-resp" style="background:var(--purple-bg);color:var(--purple)">Consultor / Vendedor</span></td>
               <td>Nao altera</td>
             </tr>
@@ -869,7 +1066,7 @@ footer p{font-size:11px;color:var(--text3)}
               <td>Frete estimado</td>
               <td>Custo de frete cotado pela Logistica antes do fechamento da venda</td>
               <td><span class="badge-resp" style="background:var(--accent-bg);color:var(--accent)">Logistica</span></td>
-              <td>Não altera</td>
+              <td>Nao altera</td>
             </tr>
           </tbody>
         </table>
@@ -882,13 +1079,13 @@ footer p{font-size:11px;color:var(--text3)}
         <div class="alert-icon ico">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
         </div>
-        <p><strong>A Planilha de Markup não pode ser alterada após a abertura do ticket.</strong> Os dados inseridos pelo consultor comercial são a base contratual da operação. Qualquer necessidade de alteracao &mdash; seja de custo, preço, margem ou condição &mdash; invalida o processo e exige reinicio completo do fluxo de aprovação.</p>
+        <p><strong>A Planilha de Markup nao pode ser alterada apos a abertura do ticket.</strong> Os dados inseridos pelo consultor sao a base contratual da operacao. Qualquer necessidade de alteracao &mdash; seja de custo, preco, margem ou condicao &mdash; invalida o processo e exige reinicio completo do fluxo de aprovacao.</p>
       </div>
       <div class="alert alert-warn" style="margin-top:.75rem">
         <div class="alert-icon ico">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </div>
-        <p><strong>Papel do comprador em relação ao Markup:</strong> verificar apenas se o arquivo está anexado ao card de solicitação de compra e se está de devidamente preenchido pelo consultor comercial. O comprador não preenche e não altera o documento a planilha.</p>
+        <p><strong>Papel do comprador em relacao ao Markup:</strong> verificar apenas se o arquivo esta anexado ao card e se foi aprovado no fluxo. O comprador nao le, nao analisa, nao preenche e nao altera o documento. O conteudo e de responsabilidade exclusiva do consultor e do Comercial.</p>
       </div>
     </div>
 
@@ -898,8 +1095,8 @@ footer p{font-size:11px;color:var(--text3)}
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--red-bg);color:var(--red)">1</div>
           <div class="flow-step-body">
-            <h4>Alteração identificada</h4>
-            <p>Qualquer modificacao nos dados da planilha (custo, preço, MKP, margem) e identificada pelo consultor ou pelo comprador ao conferir o ticket.</p>
+            <h4>Alteracao identificada</h4>
+            <p>Qualquer modificacao nos dados da planilha (custo, preco, MKP, margem) e identificada pelo consultor ou pelo comprador ao conferir o ticket.</p>
           </div>
         </div>
         <div class="flow-step">
@@ -915,7 +1112,7 @@ footer p{font-size:11px;color:var(--text3)}
         <div class="flow-step">
           <div class="flow-step-n" style="background:var(--purple-bg);color:var(--purple)">3</div>
           <div class="flow-step-body">
-            <h4>Nova aprovação: Coordenador do Comercial</h4>
+            <h4>Nova aprovacao: Coordenador do Comercial</h4>
             <p>O Coordenador do Comercial re-analisa os dados atualizados do Markup e confirma a viabilidade da venda com os novos numeros.</p>
           </div>
         </div>
@@ -930,9 +1127,9 @@ footer p{font-size:11px;color:var(--text3)}
           <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">5</div>
           <div class="flow-step-body">
             <h4>Nova aprovacao: Diretoria</h4>
-            <p>A Diretoria re-aprova a margem final com os novos valores. Somente após esta aprovação o card pode avançar para COMPRAR.</p>
+            <p>A Diretoria re-aprova a margem final com os novos valores. Somente apos esta aprovacao o card pode avanar para COMPRAR.</p>
             <div class="step-tags">
-              <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">Aprovação completa = ciclo retomado</span>
+              <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">Aprovacao completa = ciclo retomado</span>
             </div>
           </div>
         </div>
@@ -940,25 +1137,120 @@ footer p{font-size:11px;color:var(--text3)}
     </div>
 
     <div class="section">
-      <div class="section-label">Tabelas de preços de fabricantes parceiros</div>
+      <div class="section-label">Tabelas de precos de fabricantes parceiros</div>
       <div class="info-grid">
         <div class="info-card">
           <div class="info-icon" style="background:var(--accent-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
           </div>
-          <div class="info-body"><strong>Ao receber nova tabela de fabricante</strong><p>Aplicar o MKP padrao de 1,35 sobre os precos de custo. Salvar no Drive OptiWork (pasta COMPRAS) com nome no padrão: FABRICANTE_Tabela_MesAno.xlsx. Ex: Midea_Tabela_Marco2026.xlsx.</p></div>
+          <div class="info-body"><strong>Ao receber nova tabela de fabricante</strong><p>Aplicar o MKP padrao de 1,35 sobre os precos de custo. Salvar no Drive OptiWork (pasta COMPRAS) com nome no padrao: FABRICANTE_Tabela_MesAno.xlsx. Ex: Midea_Tabela_Marco2026.xlsx.</p></div>
         </div>
         <div class="info-card">
           <div class="info-icon" style="background:var(--accent-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
-          <div class="info-body"><strong>Versionamento obrigatório</strong><p>Não substituir o arquivo anterior &mdash; adicionar a nova versão ao lado, preservando o histórico. O time comercial precisa consultar versões anteriores para pedidos em andamento.</p></div>
+          <div class="info-body"><strong>Versionamento obrigatorio</strong><p>Nao substituir o arquivo anterior &mdash; adicionar a nova versao ao lado, preservando o historico. O time comercial precisa consultar versoes anteriores para pedidos em andamento.</p></div>
         </div>
         <div class="info-card">
           <div class="info-icon" style="background:var(--green-bg)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </div>
-          <div class="info-body"><strong>Comunicar o time Comercial</strong><p>Apos salvar a nova tabela, comunicar no canal adequado do OptiWork que a tabela atualizada esta disponível. Indicar o nome do arquivo e o periodo de vigência.</p></div>
+          <div class="info-body"><strong>Comunicar o time Comercial</strong><p>Apos salvar a nova tabela, comunicar no canal adequado do OptiWork que a tabela atualizada esta disponivel. Indicar o nome do arquivo e o periodo de vigencia.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ GESTAO FORNECEDORES ══════════════ -->
+  <div class="tab-panel" id="tab-fornecedores">
+    <div class="section">
+      <div class="section-label">Revisao Semestral de Fornecedores Criticos (MKP 1,35)</div>
+      <div class="alert alert-info" style="margin-top:0;margin-bottom:1.5rem">
+        <div class="alert-icon" style="display:flex;align-items:center;justify-content:center">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <p>Fornecedores com MKP 1,35 sao os fabricantes parceiros cujas tabelas de preco sao usadas como base de custo pelo time Comercial. Se o preco desses fornecedores subir sem que as tabelas sejam atualizadas, o Comercial continua cotando com custo desatualizado e pode vender com prejuizo. A revisao semestral existe para evitar isso.</p>
+      </div>
+      <div class="flow-steps">
+
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">1</div>
+          <div class="flow-step-body">
+            <h4>Calendario de revisao &mdash; Janeiro e Julho</h4>
+            <p>A revisao deve ocorrer obrigatoriamente nos meses de Janeiro e Julho de cada ano. O Analista de Compras e o responsavel por iniciar o processo, solicitando tabelas atualizadas a cada fornecedor critico com MKP 1,35 ativo.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">Janeiro</span>
+              <span class="step-tag" style="background:var(--accent-bg);color:var(--accent)">Julho</span>
+              <span class="step-tag" style="background:var(--bg3);color:var(--text2)">Responsavel: Analista de Compras</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">2</div>
+          <div class="flow-step-body">
+            <h4>Comparar nova tabela com a tabela vigente</h4>
+            <p>Para cada produto critico, calcular a variacao percentual entre o preco anterior e o novo. Registrar a variacao na planilha de acompanhamento do Drive. Limiar de alerta: variacao acima de <strong>5%</strong> em qualquer produto da tabela.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--amber-bg);color:var(--amber)">Alerta: variacao &gt; 5%</span>
+              <span class="step-tag" style="background:var(--bg3);color:var(--text2)">Drive OptiWork</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--amber-bg);color:var(--amber)">3</div>
+          <div class="flow-step-body">
+            <h4>Comunicar o Comercial imediatamente se houver alta relevante</h4>
+            <p>Ao identificar variacao acima de 5%, comunicar o Coordenador do Comercial <strong>antes</strong> de atualizar a tabela no Drive, informando: fornecedor, produto(s) afetado(s), percentual de variacao e data de vigencia da nova tabela. O Comercial precisa revisar propostas abertas e tickets em andamento que usem esse custo.</p>
+            <div class="alert alert-rule" style="margin-top:.75rem">
+              <div class="alert-icon" style="display:flex;align-items:center;justify-content:center">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+              </div>
+              <p><strong>Nunca atualizar a tabela no Drive sem comunicar antes o Comercial.</strong> Atualizar silenciosamente pode fazer o Comercial cotar com o novo preco sem saber &mdash; invalidando propostas ja enviadas ao cliente com o custo antigo.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--accent-bg);color:var(--accent)">4</div>
+          <div class="flow-step-body">
+            <h4>Atualizar a tabela com versionamento e data de vigencia</h4>
+            <p>Salvar a nova tabela no Drive OptiWork com o padrao: <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--accent)">FABRICANTE_Tabela_MesAno.xlsx</span>. Nao substituir a versao anterior &mdash; manter o historico. Registrar a data de vigencia da nova tabela e a data da comunicacao ao Comercial na planilha de acompanhamento.</p>
+            <div class="step-tags">
+              <span class="step-tag" style="background:var(--bg3);color:var(--text2)">Manter versao anterior</span>
+              <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Comunicacao registrada</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-step-n" style="background:var(--green-bg);color:var(--green)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="flow-step-body">
+            <h4>Ticket de revisao encerrado no OptiWork</h4>
+            <p>Apos comunicacao confirmada com o Comercial e tabela atualizada no Drive, registrar a conclusao da revisao semestral no OptiWork (card ou comentario no projeto COMPRAS) com: data da revisao, fornecedores revisados, variacoes identificadas e nome do responsavel.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Criterios para classificar um fornecedor como critico</div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--accent-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <div class="info-body"><strong>MKP 1,35 ativo</strong><p>Fornecedor listado nas tabelas de fabricantes parceiros cujo MKP padrao de 1,35 e usado pelo Comercial para formacao de preco de venda.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--accent-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <div class="info-body"><strong>Alto volume de pedidos</strong><p>Fornecedores que respondem por mais de 20% do volume de pedidos no semestre. Variacao de preco tem impacto direto na margem de um grande numero de vendas.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon" style="background:var(--amber-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div class="info-body"><strong>Produto sem substituto imediato</strong><p>Fornecedor de produto especifico sem alternativa de mercado comparavel no curto prazo. Qualquer alta de preco nao tem saida rapida de cotacao alternativa.</p></div>
         </div>
       </div>
     </div>
@@ -1041,13 +1333,152 @@ footer p{font-size:11px;color:var(--text3)}
 </footer>
 
 <script>
+const SEARCH_INDEX = [
+  {tab:"escopo",      title:"Escopo do Analista de Compras",    kw:"escopo responsabilidades monitorar tickets verificar dados cotar fornecedores executar compra NF planilha"},
+  {tab:"escopo",      title:"O que NAO e responsabilidade",     kw:"markup alterar ticket criar consultor sem aprovacao diretoria cobrar vendedor pendentes"},
+  {tab:"fluxo",       title:"Fluxo Operacional - Aprovacoes",   kw:"fluxo ticket kanban aprovacao coordenador financeiro diretoria obrigatoria toda compra"},
+  {tab:"fluxo",       title:"Fluxo - Cotar Fornecedores",       kw:"cotar cotacao fornecedor preco prazo entrega condicao pagamento autonomia 2 cotacoes"},
+  {tab:"fluxo",       title:"Fluxo - Negociar Pagamento",       kw:"negociar pagamento faturado prazo boleto parcelado a vista autorizacao diretoria antecipado"},
+  {tab:"fluxo",       title:"Fluxo - Fechar Pedido",            kw:"fechar pedido fornecedor triangulada endereco cliente confirmacao rastreamento"},
+  {tab:"fluxo",       title:"Fluxo - Validar NF e Planilha",    kw:"NF nota fiscal validar SEFAZ chave encaminhar financeiro planilha acompanhamento Drive"},
+  {tab:"fluxo",       title:"SLA e Kanban de Referencia",       kw:"SLA prazo 24h kanban colunas comprar comprados pendentes"},
+  {tab:"sistemas",    title:"Sistemas - OptiWork",               kw:"OptiWork kanban cards comentarios mover colunas pendentes monitorar"},
+  {tab:"sistemas",    title:"Sistemas - Drive OMIE SEFAZ",       kw:"Drive planilha fabricantes OMIE ERP NF pedidos SEFAZ chave validar Receita Federal CNPJ"},
+  {tab:"relacionamentos", title:"Relacionamentos do Analista",  kw:"relacionamentos Coord Comercial Financeiro Diretoria Logistica Consultor pendentes NF planilha"},
+  {tab:"regras",      title:"Politica de Pagamento Fornecedores", kw:"politica pagamento faturado prazo boleto parcelado a vista excecao autorizacao diretoria"},
+  {tab:"regras",      title:"Validacao de NF do Fornecedor",    kw:"NF validacao valor itens quantidades CNPJ chave SEFAZ sem pedido alerta suspender"},
+  {tab:"regras",      title:"Regras Fornecedor Novo",           kw:"fornecedor novo CNPJ Receita Federal reputacao Reclame capacidade entrega registrar"},
+  {tab:"markup",      title:"Planilha de Markup - Visao Compras", kw:"markup planilha Excel custo MKP preco tributos margem frete comprador verifica nao altera"},
+  {tab:"markup",      title:"Regra de Imutabilidade do Markup", kw:"imutavel alterar reinicio fluxo aprovacao custo preco margem"},
+  {tab:"markup",      title:"Tabelas de Fabricantes MKP 1,35",  kw:"tabela fabricante MKP 1.35 Drive versionamento comunicar Comercial"},
+  {tab:"raci",        title:"Matriz RACI Compras",               kw:"RACI responsavel aprovador consultado informado comprador coordenador financeiro diretoria logistica"},
+  {tab:"glossario",   title:"Glossario de Compras",              kw:"OC Markup MKP triangulacao CIF FOB DIFAL NF SLA OMIE OptiWork Drive Nota Empenho"},
+  {tab:"fornecedores", title:"Gestao de Fornecedores Criticos",    kw:"fornecedor critico MKP 1.35 revisao semestral Janeiro Julho variacao preco 5% alerta"},
+  {tab:"fornecedores", title:"Comunicar Comercial - Alta de Preco",kw:"comunicar comercial preco subiu variacao tabela vigencia proposta custo desatualizado"},
+  {tab:"fornecedores", title:"Versionamento de Tabelas",           kw:"tabela fabricante versao Drive MesAno historico manter anterior"},
+];
+
+const TAB_LABELS = {
+  escopo:"Escopo", fluxo:"Fluxo Operacional", sistemas:"Sistemas",
+  relacionamentos:"Relacionamentos", regras:"Regras e Politicas",
+  markup:"Planilha de Markup", fornecedores:"Gestao Fornecedores",
+  raci:"Matriz RACI", glossario:"Glossario",
+};
+
+// ============================================================
+// BUSCA GLOBAL FUSE.JS
+// ============================================================
+let _fuse = null;
+let _searchIdx = -1;
+
+function initSearch() {
+  if (typeof Fuse === 'undefined') { setTimeout(initSearch, 100); return; }
+  _fuse = new Fuse(SEARCH_INDEX, {
+    keys: [{name:'title',weight:0.6},{name:'kw',weight:0.4}],
+    threshold: 0.35, includeScore: true, includeMatches: true, minMatchCharLength: 2,
+  });
+}
+
+function onSearch(q) {
+  const input = document.getElementById('search-input');
+  const drop  = document.getElementById('search-dropdown');
+  _searchIdx  = -1;
+  input.setAttribute('aria-expanded', q.length > 0);
+  if (!q || q.length < 2) { drop.classList.remove('open'); drop.innerHTML = ''; return; }
+  if (!_fuse) { initSearch(); return; }
+  const results = _fuse.search(q, {limit: 7});
+  if (!results.length) {
+    drop.innerHTML = `<div class="search-empty">Nenhum resultado para "<strong>${escHtml(q)}</strong>"</div>`;
+    drop.classList.add('open'); return;
+  }
+  const highlight = (str, matches) => {
+    if (!matches) return escHtml(str);
+    const chars = new Set();
+    matches.forEach(m => { if(m.key==='title') m.indices.forEach(([a,b])=>{ for(let x=a;x<=b;x++) chars.add(x); }); });
+    let out = ''; [...str].forEach((c,i) => { out += chars.has(i) ? `<mark>${escHtml(c)}</mark>` : escHtml(c); });
+    return out;
+  };
+  const hint = `<div class="search-hint"><kbd>&uarr;&darr;</kbd> navegar&nbsp; <kbd>&crarr;</kbd> abrir&nbsp; <kbd>Esc</kbd> fechar</div>`;
+  const items = results.map((r,i) => {
+    const item = r.item;
+    return `<a class="search-result-item" role="option"
+        onclick="goToResult('${item.tab}')" onmouseover="setSearchIdx(${i})">
+      <div class="sri-icon" style="background:var(--accent-bg)">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div class="sri-body">
+        <div class="sri-title">${highlight(item.title, r.matches)}</div>
+        <div class="sri-path"><span>Compras</span><span>${TAB_LABELS[item.tab]||item.tab}</span></div>
+      </div>
+    </a>`;
+  }).join('');
+  drop.innerHTML = hint + items;
+  drop.classList.add('open');
+}
+
+function setSearchIdx(i) { _searchIdx = i; }
+
+function goToResult(tabId) {
+  const btn = [...document.querySelectorAll('#main-tabs .tab-btn')]
+    .find(b => b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + tabId + "'"));
+  if (btn) btn.click();
+  clearSearch();
+}
+
+function onSearchKey(e) {
+  const drop  = document.getElementById('search-dropdown');
+  const items = drop.querySelectorAll('.search-result-item');
+  if (!drop.classList.contains('open') || !items.length) return;
+  if (e.key === 'ArrowDown') { e.preventDefault(); _searchIdx = Math.min(_searchIdx+1, items.length-1); highlightSearchItem(items); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); _searchIdx = Math.max(_searchIdx-1, 0); highlightSearchItem(items); }
+  else if (e.key === 'Enter' && _searchIdx >= 0) { e.preventDefault(); items[_searchIdx].click(); }
+  else if (e.key === 'Escape') { clearSearch(); }
+}
+
+function highlightSearchItem(items) {
+  items.forEach((el,i) => el.classList.toggle('active', i === _searchIdx));
+  if (_searchIdx >= 0) items[_searchIdx].scrollIntoView({block:'nearest'});
+}
+
+function clearSearch() {
+  const input = document.getElementById('search-input');
+  const drop  = document.getElementById('search-dropdown');
+  input.value = ''; drop.classList.remove('open'); drop.innerHTML = '';
+  input.setAttribute('aria-expanded', 'false'); _searchIdx = -1;
+}
+
+document.addEventListener('click', e => {
+  const wrap = document.getElementById('search-wrap');
+  if (wrap && !wrap.contains(e.target)) document.getElementById('search-dropdown').classList.remove('open');
+});
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ============================================================
+// BREADCRUMB DINAMICO
+// ============================================================
+function updateBreadcrumb(tab) {
+  const bcTab = document.getElementById('bc-tab');
+  if (bcTab) bcTab.textContent = TAB_LABELS[tab] || tab;
+  document.title = 'Compras | Analista de Compras | ' + (TAB_LABELS[tab]||tab) + ' | Manual Croma';
+}
+
+// ============================================================
+// ABAS
+// ============================================================
 function tab(id, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('#main-tabs .tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
   btn.classList.add('active');
+  updateBreadcrumb(id);
 }
 
+// ============================================================
+// TOGGLE TEMA
+// ============================================================
 function toggleTheme() {
   const html = document.documentElement;
   const novo = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
@@ -1062,6 +1493,30 @@ function toggleTheme() {
     else if (window.matchMedia('(prefers-color-scheme: light)').matches) { document.documentElement.setAttribute('data-theme', 'light'); }
   } catch(e) {}
 })();
+
+// ============================================================
+// INICIALIZACAO
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  initSearch();
+  updateBreadcrumb('escopo');
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      const drop = document.getElementById('search-dropdown');
+      if (drop && drop.classList.contains('open')) clearSearch();
+    }
+  });
+  document.addEventListener('keydown', e => {
+    const inp = document.getElementById('search-input');
+    if (!inp) return;
+    if ((e.key === '/' && document.activeElement !== inp) || (e.ctrlKey && e.key === 'k')) {
+      e.preventDefault(); inp.focus(); inp.select();
+    }
+  });
+});
 </script>
+<!-- Fuse.js carregado aqui, apos o HTML -- sem render-blocking.
+     initSearch() usa setTimeout como fallback para conexoes lentas. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>
 </body>
 </html>
