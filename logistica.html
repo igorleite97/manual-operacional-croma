@@ -3,6 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com;
+  style-src  'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src   'self' https://fonts.gstatic.com;
+  img-src    'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org;
+  connect-src 'none';
+  frame-src  'none';
+  object-src 'none';
+  base-uri   'self';
+">
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Manual Operacional Interno — Logística e Estoque — Croma Tecnologia. Documento confidencial.">
 <title>Logística &mdash; Manual Operacional &middot; Croma Tecnologia</title>
@@ -416,6 +427,39 @@ footer p{font-size:11px;color:var(--text3)}
 .play-overlay:hover .play-overlay-btn{transform:scale(1.1);background:rgba(176,126,248,1)}
 .play-overlay-btn svg{margin-left:4px;flex-shrink:0}
 
+
+/* ============================================================
+   RACI TABLE — mesmo padrão de compras.html e comercial.html
+============================================================ */
+.raci-wrap{overflow-x:auto;border-radius:12px}
+.raci-table{width:100%;border-collapse:collapse;font-size:12px}
+.raci-table th{background:var(--bg3);padding:10px 12px;text-align:left;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--text2);border-bottom:1px solid var(--border);white-space:nowrap}
+.raci-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle;font-size:12px;text-align:center}
+.raci-table td:first-child{text-align:left;font-weight:500;color:var(--text)}
+.raci-table tr:last-child td{border-bottom:none}
+.raci-table tr:hover td{background:var(--bg3)}
+.raci-pill{display:inline-block;font-size:10px;font-weight:800;padding:3px 9px;border-radius:20px;text-align:center;min-width:28px}
+[data-theme="dark"] .r-R{background:rgba(45,212,191,.2);color:#2dd4bf}
+[data-theme="dark"] .r-A{background:rgba(248,113,113,.2);color:#f87171}
+[data-theme="dark"] .r-C{background:rgba(251,191,36,.2);color:#fbbf24}
+[data-theme="dark"] .r-I{background:rgba(148,163,184,.1);color:#64748b}
+[data-theme="light"] .r-R{background:#ccfbf1;color:#0f766e}
+[data-theme="light"] .r-A{background:#fee2e2;color:#dc2626}
+[data-theme="light"] .r-C{background:#fef9c3;color:#854d0e}
+[data-theme="light"] .r-I{background:#f3f4f6;color:#6b7280}
+
+/* ============================================================
+   ROLE-BTN E TAB-BTN ESTADO ATIVO — corrigindo classe .active
+   JS adiciona .active; CSS precisa ter .active definido.
+   Teal (--accent) para Logística, Verde (--green) para Estoque.
+============================================================ */
+.role-btn.active-log{background:var(--accent-bg);color:var(--accent);border-color:var(--accent)}
+.role-btn.active-est{background:var(--green-bg);color:var(--green);border-color:var(--green)}
+.tab-btn.active-log{color:var(--accent);border-bottom-color:var(--accent);background:var(--accent-bg)}
+.tab-btn.active-est{color:var(--green);border-bottom-color:var(--green);background:var(--green-bg)}
+
+/* Z-INDEX STACK — explícito e documentado */
+/* topbar:300 > search-dropdown:400 > tooltip:500 > modal(futuro):600 */
 </style>
 </head>
 <body>
@@ -485,7 +529,7 @@ footer p{font-size:11px;color:var(--text3)}
 <div class="role-bar">
   <div class="role-inner">
     <span class="role-label">Seu cargo:</span>
-    <button class="role-btn active" id="rbtn-log" onclick="setRole('log')">
+    <button class="role-btn active-log" id="rbtn-log" onclick="setRole('log')">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="m16 8 4 0 3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="1.5"/><circle cx="18.5" cy="18.5" r="1.5"/></svg>
       Analista de Logística
     </button>
@@ -520,7 +564,7 @@ footer p{font-size:11px;color:var(--text3)}
   </div>
 
   <div class="tab-bar" id="tabs-log" role="tablist" aria-label="Seções do Analista de Logística">
-    <button class="tab-btn active" onclick="tabRole('log','escopo',this)">Escopo</button>
+    <button class="tab-btn active-log" onclick="tabRole('log','escopo',this)">Escopo</button>
     <button class="tab-btn" onclick="tabRole('log','fluxo',this)">Fluxo Operacional</button>
     <button class="tab-btn" onclick="tabRole('log','sistemas',this)">Sistemas</button>
     <button class="tab-btn" onclick="tabRole('log','relacionamentos',this)">Relacionamentos</button>
@@ -827,19 +871,19 @@ footer p{font-size:11px;color:var(--text3)}
         <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--amber-bg);color:var(--amber);border:1px solid rgba(251,191,36,.2)">C — Consultado</span>
         <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--bg3);color:var(--text2);border:1px solid var(--border2)">I — Informado</span>
       </div>
-      <div class="data-table-wrap">
-        <table class="data-table">
+      <div class="raci-wrap">
+        <table class="raci-table">
           <thead><tr><th>Atividade</th><th>Logística</th><th>Estoque</th><th>Financeiro</th><th>Compras</th><th>Comercial</th><th>Diretoria</th></tr></thead>
           <tbody>
-            <tr><td>Cotar frete para viabilidade comercial</td><td style="font-weight:700;color:var(--accent)">R</td><td></td><td></td><td>I</td><td>C</td><td>C</td></tr>
-            <tr><td>Conferir valor CTE vs. cotação</td><td style="font-weight:700;color:var(--accent)">R</td><td></td><td>C</td><td></td><td></td><td></td></tr>
-            <tr><td>Lançar CTE no OMIE (Contas a Pagar)</td><td>C</td><td></td><td style="font-weight:700;color:var(--accent)">R</td><td></td><td></td><td></td></tr>
-            <tr><td>Suspender CTE divergente</td><td style="font-weight:700;color:var(--accent)">R</td><td></td><td></td><td></td><td></td><td style="color:var(--red);font-weight:700">A</td></tr>
-            <tr><td>Monitorar entregas / rastreamento</td><td style="font-weight:700;color:var(--accent)">R</td><td>R</td><td></td><td>I</td><td>I</td><td></td></tr>
-            <tr><td>Tratar ocorrência com transportadora</td><td style="font-weight:700;color:var(--accent)">R</td><td></td><td></td><td>I</td><td>C</td><td></td></tr>
-            <tr><td>Solicitar/receber comprovante de entrega</td><td>C</td><td style="font-weight:700;color:var(--accent)">R</td><td></td><td></td><td></td><td></td></tr>
-            <tr><td>Sinalizar entrega concluída no OMIE</td><td style="font-weight:700;color:var(--accent)">R</td><td></td><td>C</td><td></td><td></td><td style="color:var(--red);font-weight:700">A</td></tr>
-            <tr><td>Comunicar Financeiro — entrega triangulada</td><td style="font-weight:700;color:var(--accent)">R</td><td></td><td style="color:var(--red);font-weight:700">A</td><td></td><td></td><td></td></tr>
+            <tr><td>Cotar frete para viabilidade comercial</td><td><span class="raci-pill r-R">R</span></td><td></td><td></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-C">C</span></td></tr>
+            <tr><td>Conferir valor CTE vs. cotação</td><td><span class="raci-pill r-R">R</span></td><td></td><td><span class="raci-pill r-C">C</span></td><td></td><td></td><td></td></tr>
+            <tr><td>Lançar CTE no OMIE (Contas a Pagar)</td><td><span class="raci-pill r-C">C</span></td><td></td><td><span class="raci-pill r-R">R</span></td><td></td><td></td><td></td></tr>
+            <tr><td>Suspender CTE divergente</td><td><span class="raci-pill r-R">R</span></td><td></td><td></td><td></td><td></td><td><span class="raci-pill r-A">A</span></td></tr>
+            <tr><td>Monitorar entregas / rastreamento</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-R">R</span></td><td></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-I">I</span></td><td></td></tr>
+            <tr><td>Tratar ocorrência com transportadora</td><td><span class="raci-pill r-R">R</span></td><td></td><td></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-C">C</span></td><td></td></tr>
+            <tr><td>Solicitar/receber comprovante de entrega</td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-R">R</span></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Sinalizar entrega concluída no OMIE</td><td><span class="raci-pill r-R">R</span></td><td></td><td><span class="raci-pill r-C">C</span></td><td></td><td></td><td><span class="raci-pill r-A">A</span></td></tr>
+            <tr><td>Comunicar Financeiro — entrega triangulada</td><td><span class="raci-pill r-R">R</span></td><td></td><td><span class="raci-pill r-A">A</span></td><td></td><td></td><td></td></tr>
           </tbody>
         </table>
       </div>
@@ -871,7 +915,7 @@ footer p{font-size:11px;color:var(--text3)}
   </div>
 
   <div class="tab-bar" id="tabs-est" role="tablist" aria-label="Seções do Analista de Estoque">
-    <button class="tab-btn active" onclick="tabRole('est','escopo',this)">Escopo</button>
+    <button class="tab-btn active-est" onclick="tabRole('est','escopo',this)">Escopo</button>
     <button class="tab-btn" onclick="tabRole('est','fluxo',this)">Fluxo Operacional</button>
     <button class="tab-btn" onclick="tabRole('est','sistemas',this)">Sistemas</button>
     <button class="tab-btn" onclick="tabRole('est','relacionamentos',this)">Relacionamentos</button>
@@ -1172,21 +1216,21 @@ footer p{font-size:11px;color:var(--text3)}
         <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--amber-bg);color:var(--amber);border:1px solid rgba(251,191,36,.2)">C — Consultado</span>
         <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--bg3);color:var(--text2);border:1px solid var(--border2)">I — Informado</span>
       </div>
-      <div class="data-table-wrap">
-        <table class="data-table">
+      <div class="raci-wrap">
+        <table class="raci-table">
           <thead><tr><th>Atividade</th><th>Estoque</th><th>Logística</th><th>Financeiro</th><th>Compras</th><th>E-commerce</th><th>Diretoria</th></tr></thead>
           <tbody>
-            <tr><td>Receber e conferir mercadorias</td><td style="font-weight:700;color:var(--teal)">R</td><td>I</td><td></td><td>I</td><td></td><td></td></tr>
-            <tr><td>Registrar entrada de NF no OMIE</td><td style="font-weight:700;color:var(--teal)">R</td><td></td><td>I</td><td></td><td></td><td style="color:var(--red);font-weight:700">A</td></tr>
-            <tr><td>Planilhar e carimbar NF física</td><td style="font-weight:700;color:var(--teal)">R</td><td></td><td></td><td>C</td><td></td><td></td></tr>
-            <tr><td>Etiquetar e organizar mercadorias</td><td style="font-weight:700;color:var(--teal)">R</td><td>I</td><td></td><td></td><td></td><td></td></tr>
-            <tr><td>Separar e embalar para despacho</td><td style="font-weight:700;color:var(--teal)">R</td><td>I</td><td></td><td>I</td><td></td><td></td></tr>
-            <tr><td>Organizar rota do motorista interno</td><td style="font-weight:700;color:var(--teal)">R</td><td></td><td></td><td></td><td></td><td style="color:var(--red);font-weight:700">A</td></tr>
-            <tr><td>Autorizar liberação sem NF</td><td>I</td><td></td><td></td><td></td><td></td><td style="color:var(--red);font-weight:700">R</td></tr>
-            <tr><td>Contagem física de estoque</td><td style="font-weight:700;color:var(--teal)">R</td><td></td><td></td><td></td><td></td><td style="color:var(--red);font-weight:700">A</td></tr>
-            <tr><td>Consultar relatórios de estoque OMIE</td><td style="font-weight:700;color:var(--teal)">R</td><td>I</td><td>C</td><td>C</td><td></td><td></td></tr>
-            <tr><td>Processar devolução Comercial</td><td style="font-weight:700;color:var(--teal)">R</td><td></td><td>C</td><td></td><td></td><td style="color:var(--red);font-weight:700">A</td></tr>
-            <tr><td>Processar devolução E-commerce</td><td style="font-weight:700;color:var(--teal)">R</td><td></td><td></td><td></td><td>C</td><td style="color:var(--red);font-weight:700">A</td></tr>
+            <tr><td>Receber e conferir mercadorias</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td></td><td><span class="raci-pill r-I">I</span></td><td></td><td></td></tr>
+            <tr><td>Registrar entrada de NF no OMIE</td><td><span class="raci-pill r-R">R</span></td><td></td><td><span class="raci-pill r-I">I</span></td><td></td><td></td><td><span class="raci-pill r-A">A</span></td></tr>
+            <tr><td>Planilhar e carimbar NF física</td><td><span class="raci-pill r-R">R</span></td><td></td><td></td><td><span class="raci-pill r-C">C</span></td><td></td><td></td></tr>
+            <tr><td>Etiquetar e organizar mercadorias</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Separar e embalar para despacho</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td></td><td><span class="raci-pill r-I">I</span></td><td></td><td></td></tr>
+            <tr><td>Organizar rota do motorista interno</td><td><span class="raci-pill r-R">R</span></td><td></td><td></td><td></td><td></td><td><span class="raci-pill r-A">A</span></td></tr>
+            <tr><td>Autorizar liberação sem NF</td><td><span class="raci-pill r-I">I</span></td><td></td><td></td><td></td><td></td><td><span class="raci-pill r-R">R</span></td></tr>
+            <tr><td>Contagem física de estoque</td><td><span class="raci-pill r-R">R</span></td><td></td><td></td><td></td><td></td><td><span class="raci-pill r-A">A</span></td></tr>
+            <tr><td>Consultar relatórios de estoque OMIE</td><td><span class="raci-pill r-R">R</span></td><td><span class="raci-pill r-I">I</span></td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-C">C</span></td><td></td><td></td></tr>
+            <tr><td>Processar devolução Comercial</td><td><span class="raci-pill r-R">R</span></td><td></td><td><span class="raci-pill r-C">C</span></td><td></td><td></td><td><span class="raci-pill r-A">A</span></td></tr>
+            <tr><td>Processar devolução E-commerce</td><td><span class="raci-pill r-R">R</span></td><td></td><td></td><td></td><td><span class="raci-pill r-C">C</span></td><td><span class="raci-pill r-A">A</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -1380,10 +1424,9 @@ function updateBreadcrumb(role, tab) {
 // ============================================================
 function setRole(role) {
   document.querySelectorAll('.role-panel').forEach(function(p) { p.classList.remove('active'); });
-  document.querySelectorAll('.role-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.role-btn').forEach(function(b) { b.classList.remove('active-log','active-est'); });
   document.getElementById('role-' + role).classList.add('active');
-  document.getElementById('rbtn-' + role).classList.add('active');
-  // Ativar a primeira aba do painel
+  document.getElementById('rbtn-' + role).classList.add(role === 'log' ? 'active-log' : 'active-est');
   var firstTab = document.querySelector('#tabs-' + role + ' .tab-btn');
   if (firstTab) firstTab.click();
 }
@@ -1393,13 +1436,14 @@ function setRole(role) {
 // ============================================================
 function tabRole(role, id, btn) {
   var prefix = role + '-';
+  var activeClass = role === 'log' ? 'active-log' : 'active-est';
   document.querySelectorAll('#tabs-' + role + ' .tab-btn').forEach(function(b) {
-    b.classList.remove('active');
+    b.classList.remove('active-log','active-est');
     b.setAttribute('aria-selected','false');
   });
   document.querySelectorAll('[id^="' + prefix + '"]').forEach(function(p) { p.classList.remove('active'); });
   document.getElementById(prefix + id).classList.add('active');
-  btn.classList.add('active');
+  btn.classList.add(activeClass);
   btn.setAttribute('aria-selected','true');
   updateBreadcrumb(role, id);
 }
