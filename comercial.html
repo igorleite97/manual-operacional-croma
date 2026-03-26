@@ -6,6 +6,10 @@
 <title>Comercial &mdash; Manual Operacional &middot; Croma Tecnologia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-J/oW9zN1iZjmis0VXgDRiPqZhyeoU2kUcH5yfSnWaGI=' 'strict-dynamic' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.tile.openstreetmap.org; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="no-referrer">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
 <meta name="robots" content="noindex, nofollow">
 <style>
 /* ============================================================
@@ -690,7 +694,7 @@ footer p{font-size:11px;color:var(--text3)}
               <div class="video-tutorial-body" id="vid-cadastro-omie-body">
                 <div class="video-pip-wrap">
                 <video id="video-cadastro-omie" controls preload="metadata"
-                  src="cadastro_de_novo_cliente_omie.mp4"
+                  src="Cadastro_de_novo_cliente_-_OMIE.mp4"
                   poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='960' height='540'%3E%3Crect width='960' height='540' fill='%230d1117'/%3E%3Ccircle cx='480' cy='270' r='56' fill='%231a1040' stroke='%23a78bfa' stroke-width='2'/%3E%3Cpolygon points='466,248 466,292 506,270' fill='%23a78bfa'/%3E%3Ctext x='480' y='360' font-family='sans-serif' font-size='16' fill='%234a5568' text-anchor='middle'%3EClique para reproduzir%3C/text%3E%3C/svg%3E"
                   aria-label="Tutorial: cadastro de novo cliente no OMIE - empresa ESFERA">
                   Seu navegador nao suporta reproducao de video HTML5.
@@ -1580,48 +1584,45 @@ function initSearch() {
 }
 
 function onSearch(q) {
-  const input = document.getElementById('search-input');
-  const drop  = document.getElementById('search-dropdown');
-  _searchIdx  = -1;
+  var input = document.getElementById('search-input');
+  var drop  = document.getElementById('search-dropdown');
+  _searchIdx = -1;
   input.setAttribute('aria-expanded', q.length > 0);
   if (!q || q.length < 2) { drop.classList.remove('open'); drop.innerHTML = ''; return; }
   if (!_fuse) { initSearch(); return; }
-
-  const results = _fuse.search(q, { limit: 7 });
+  var results = _fuse.search(q, { limit: 7 });
   if (!results.length) {
-    drop.innerHTML = `<div class="search-empty">Nenhum resultado para "<strong>${escHtml(q)}</strong>"</div>`;
+    drop.innerHTML = '<div class="search-empty">Nenhum resultado para "<strong>' + escHtml(q) + '</strong>"</div>';
     drop.classList.add('open'); return;
   }
-
-  const highlight = (str, matches) => {
+  var highlight = function(str, matches) {
     if (!matches) return escHtml(str);
-    const chars = new Set();
-    matches.forEach(m => { if(m.key==='title') m.indices.forEach(([a,b])=>{ for(let x=a;x<=b;x++) chars.add(x); }); });
-    let out = ''; [...str].forEach((c,i) => { out += chars.has(i) ? `<mark>${escHtml(c)}</mark>` : escHtml(c); });
-    return out;
+    var chars = new Set();
+    matches.forEach(function(m) {
+      if (m.key === 'title') m.indices.forEach(function(p) { for (var x = p[0]; x <= p[1]; x++) chars.add(x); });
+    });
+    return [...str].map(function(c, i) { return chars.has(i) ? '<mark>' + escHtml(c) + '</mark>' : escHtml(c); }).join('');
   };
-
-  const hint = `<div class="search-hint"><kbd>&uarr;&darr;</kbd> navegar&nbsp; <kbd>&crarr;</kbd> abrir&nbsp; <kbd>Esc</kbd> fechar</div>`;
-  const items = results.map((r, i) => {
-    const item  = r.item;
-    const color = item.role === 'cons' ? 'var(--accent)' : 'var(--blue)';
-    const titleHL = highlight(item.title, r.matches);
-    return `<a class="search-result-item" role="option" data-i="${i}"
-        onclick="goToResult('${item.role}','${item.tab}')" onmouseover="setSearchIdx(${i})">
-      <div class="sri-icon" style="background:${color}22">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </div>
-      <div class="sri-body">
-        <div class="sri-title">${titleHL}</div>
-        <div class="sri-path">
-          <span>${item.section}</span>
-          <span>${TAB_LABELS_COM[item.tab] || item.tab}</span>
-        </div>
-      </div>
-    </a>`;
+  var hint = '<div class="search-hint"><kbd>&uarr;&darr;</kbd> navegar&nbsp;<kbd>&crarr;</kbd> abrir&nbsp;<kbd>Esc</kbd> fechar</div>';
+  var itemsHTML = results.map(function(r, i) {
+    var item     = r.item;
+    var titleHL  = highlight(item.title, r.matches);
+    var tabLabel = TAB_LABELS_COM[item.tab] || item.tab;
+    return '<a class="search-result-item" role="option" data-i="' + i + '"' +
+      ' data-role="' + item.role + '" data-tab="' + item.tab + '">' +
+      '<div class="sri-icon" style="background:var(--accent-bg)">' +
+        '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>' +
+      '</div>' +
+      '<div class="sri-body">' +
+        '<div class="sri-title">' + titleHL + '</div>' +
+        '<div class="sri-path"><span>' + item.section + '</span><span>' + tabLabel + '</span></div>' +
+      '</div></a>';
   }).join('');
-
-  drop.innerHTML = hint + items;
+  drop.innerHTML = hint + itemsHTML;
+  drop.querySelectorAll('.search-result-item[data-role]').forEach(function(el, i) {
+    el.addEventListener('click', function() { goToResult(el.getAttribute('data-role'), el.getAttribute('data-tab')); });
+    el.addEventListener('mouseover', function() { setSearchIdx(i); });
+  });
   drop.classList.add('open');
 }
 
@@ -1811,6 +1812,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 <!-- Fuse.js carregado aqui, apos o HTML -- sem render-blocking.
      initSearch() usa setTimeout como fallback para conexoes lentas. -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js" integrity="sha384-PCSoOZTpbkikBEtd/+uV3WNdc676i9KUf01KOA8CnJotvlx8rRrETbDuwdjqTYvt" crossorigin="anonymous"></script>
 </body>
 </html>
