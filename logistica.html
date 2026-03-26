@@ -3,17 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="
-  default-src 'self';
-  script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com;
-  style-src  'self' 'unsafe-inline' https://fonts.googleapis.com;
-  font-src   'self' https://fonts.gstatic.com;
-  img-src    'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org;
-  connect-src 'none';
-  frame-src  'none';
-  object-src 'none';
-  base-uri   'self';
-">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.tile.openstreetmap.org; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="no-referrer">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Manual Operacional Interno — Logística e Estoque — Croma Tecnologia. Documento confidencial.">
 <title>Logística &mdash; Manual Operacional &middot; Croma Tecnologia</title>
@@ -454,9 +447,9 @@ footer p{font-size:11px;color:var(--text3)}
    Teal (--accent) para Logística, Verde (--green) para Estoque.
 ============================================================ */
 .role-btn.active-log{background:var(--accent-bg);color:var(--accent);border-color:var(--accent)}
-.role-btn.active-est{background:var(--green-bg);color:var(--green);border-color:var(--green)}
+.role-btn.active-est{background:var(--blue-bg);color:var(--blue);border-color:var(--blue)}
 .tab-btn.active-log{color:var(--accent);border-bottom-color:var(--accent);background:var(--accent-bg)}
-.tab-btn.active-est{color:var(--green);border-bottom-color:var(--green);background:var(--green-bg)}
+.tab-btn.active-est{color:var(--blue);border-bottom-color:var(--blue);background:var(--blue-bg)}
 
 /* Z-INDEX STACK — explícito e documentado */
 /* topbar:300 > search-dropdown:400 > tooltip:500 > modal(futuro):600 */
@@ -898,8 +891,8 @@ footer p{font-size:11px;color:var(--text3)}
 ════════════════════════════════════════════════════════ -->
 <div class="role-panel" id="role-est">
 
-  <div class="role-header" style="background:var(--teal-bg);border:1px solid rgba(45,212,191,.2);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:flex;gap:14px;align-items:flex-start">
-    <div style="width:44px;height:44px;border-radius:11px;background:var(--teal);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+  <div class="role-header" style="background:var(--blue-bg);border:1px solid rgba(79,142,247,.2);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:flex;gap:14px;align-items:flex-start">
+    <div style="width:44px;height:44px;border-radius:11px;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
     </div>
     <div>
@@ -930,31 +923,31 @@ footer p{font-size:11px;color:var(--text3)}
       <div class="section-label">O que é sua responsabilidade</div>
       <div class="scope-grid">
         <div class="scope-card">
-          <div class="scope-icon" style="background:var(--teal-bg)">
+          <div class="scope-icon" style="background:var(--blue-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           </div>
           <div class="scope-body"><h4>Receber e conferir mercadorias</h4><p>Toda mercadoria que chega deve ser conferida no ato da entrega, sem exceções (exceto Mercado Livre). Quantidade, modelo, embalagem e vinculação ao pedido.</p></div>
         </div>
         <div class="scope-card">
-          <div class="scope-icon" style="background:var(--teal-bg)">
+          <div class="scope-icon" style="background:var(--blue-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
           </div>
           <div class="scope-body"><h4>Registrar entrada de NF no OMIE</h4><p>Após conferência física, registrar a entrada usando a chave de acesso de 44 dígitos. Atualiza o estoque e gera o Contas a Pagar automaticamente para o Financeiro.</p></div>
         </div>
         <div class="scope-card">
-          <div class="scope-icon" style="background:var(--teal-bg)">
+          <div class="scope-icon" style="background:var(--blue-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
           </div>
           <div class="scope-body"><h4>Etiquetar e organizar</h4><p>Cada produto recebe etiqueta com produto, NF, consultor/canal, cliente final, data e número do pedido. Exceção: toners e produtos de Outsourcing têm controle próprio.</p></div>
         </div>
         <div class="scope-card">
-          <div class="scope-icon" style="background:var(--teal-bg)">
+          <div class="scope-icon" style="background:var(--blue-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="m16 8 4 0 3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="1.5"/><circle cx="18.5" cy="18.5" r="1.5"/></svg>
           </div>
           <div class="scope-body"><h4>Separar e despachar</h4><p>Separar os produtos por rota do motorista ou modal de entrega. Organizar a sequência de saída conforme os horários padrão estabelecidos.</p></div>
         </div>
         <div class="scope-card">
-          <div class="scope-icon" style="background:var(--teal-bg)">
+          <div class="scope-icon" style="background:var(--blue-bg)">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           </div>
           <div class="scope-body"><h4>Controle de estoque</h4><p>Consultar relatórios de posição, movimentação e produtos abaixo do mínimo no OMIE. Toda contagem física exige autorização da Gestão antes de iniciar.</p></div>
@@ -970,7 +963,7 @@ footer p{font-size:11px;color:var(--text3)}
       <div class="flow-steps">
 
         <div class="flow-step">
-          <div class="flow-step-n" style="background:var(--teal);color:#fff">1</div>
+          <div class="flow-step-n" style="background:var(--blue);color:#fff">1</div>
           <div class="flow-step-body">
             <h4>Receber e conferir a mercadoria no ato</h4>
             <p>Verificar obrigatoriamente antes de assinar o canhoto:</p>
@@ -1000,23 +993,23 @@ footer p{font-size:11px;color:var(--text3)}
         </div>
 
         <div class="flow-step">
-          <div class="flow-step-n" style="background:var(--teal);color:#fff">2</div>
+          <div class="flow-step-n" style="background:var(--blue);color:#fff">2</div>
           <div class="flow-step-body">
             <h4>Registrar entrada de NF no OMIE</h4>
             <p>OMIE → empresa correta → Compras e Estoque → Estoque → Entrada de NF → + Nova Entrada. Inserir a chave de acesso de 44 dígitos do <abbr class="tooltip" data-tip="Documento Auxiliar da Nota Fiscal Eletrônica — impresso que acompanha a mercadoria e contém a chave de 44 dígitos." tabindex="0">DANFE</abbr> para buscar os dados da NF automaticamente.</p>
             <div class="step-tags" style="margin-top:8px">
-              <span class="step-tag" style="background:var(--teal-bg);color:var(--teal)">Selecionar empresa correta sempre</span>
+              <span class="step-tag" style="background:var(--blue-bg);color:var(--teal)">Selecionar empresa correta sempre</span>
               <span class="step-tag" style="background:var(--green-bg);color:var(--green)">Contas a Pagar gerado automaticamente para o Financeiro</span>
             </div>
           </div>
         </div>
 
         <div class="flow-step">
-          <div class="flow-step-n" style="background:var(--teal);color:#fff">3</div>
+          <div class="flow-step-n" style="background:var(--blue);color:#fff">3</div>
           <div class="flow-step-body">
             <h4>Planilhar, carimbar a NF física e etiquetar</h4>
             <p>Registrar na planilha de Compras (Drive OptiWork), carimbar a NF física com data de recebimento e afixar a etiqueta padronizada no produto.</p>
-            <div style="background:var(--teal-bg);border:1px solid rgba(45,212,191,.2);border-radius:10px;padding:12px 16px;margin-top:10px">
+            <div style="background:var(--blue-bg);border:1px solid rgba(79,142,247,.2);border-radius:10px;padding:12px 16px;margin-top:10px">
               <div style="font-size:10px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Padrão obrigatório da etiqueta</div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
                 <div style="font-size:11px;color:var(--text2)">Produto / Modelo</div>
@@ -1032,7 +1025,7 @@ footer p{font-size:11px;color:var(--text3)}
         </div>
 
         <div class="flow-step">
-          <div class="flow-step-n" style="background:var(--teal);color:#fff">4</div>
+          <div class="flow-step-n" style="background:var(--blue);color:#fff">4</div>
           <div class="flow-step-body">
             <h4>Separar, embalar e despachar</h4>
             <p>Separar conforme a rota do motorista interno ou modal de entrega. Embalar adequadamente para o tipo de produto. Organizar as saídas conforme os horários padrão.</p>
@@ -1053,7 +1046,7 @@ footer p{font-size:11px;color:var(--text3)}
         </div>
 
         <div class="flow-step">
-          <div class="flow-step-n" style="background:var(--teal);color:#fff">5</div>
+          <div class="flow-step-n" style="background:var(--blue);color:#fff">5</div>
           <div class="flow-step-body">
             <h4>Registrar despacho e solicitar comprovante</h4>
             <p>Registrar no OptiWork: data do despacho, transportadora/modal utilizado e número de rastreamento. Solicitar o <abbr class="tooltip" data-tip="Proof of Delivery — comprovante de entrega com assinatura do destinatário." tabindex="0">POD</abbr> à transportadora após a entrega e encaminhar à Logística para anexar no OMIE.</p>
@@ -1080,7 +1073,7 @@ footer p{font-size:11px;color:var(--text3)}
       <div class="section-label">Sistemas que você usa e para quê</div>
       <div class="info-grid">
         <div class="info-card">
-          <div class="info-icon" style="background:var(--green-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <div class="info-icon" style="background:var(--blue-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
           <div class="info-body">
             <strong>OMIE — ERP principal</strong>
             <p>Compras e Estoque → Entrada de NF · Verificar se Contas a Pagar foi gerado · Relatórios de posição, movimentação e produtos abaixo do mínimo · Selecionar empresa correta sempre.</p>
@@ -1094,7 +1087,7 @@ footer p{font-size:11px;color:var(--text3)}
           </div>
         </div>
         <div class="info-card">
-          <div class="info-icon" style="background:var(--teal-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="info-icon" style="background:var(--blue-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
           <div class="info-body">
             <strong>Planilha de Compras — Drive OptiWork</strong>
             <p>Referência para etiquetagem — identifica consultor/canal, cliente final e pedido interno de cada produto a ser etiquetado no estoque.</p>
@@ -1110,19 +1103,19 @@ footer p{font-size:11px;color:var(--text3)}
       <div class="section-label">Com quem você interage em cada fase</div>
       <div class="info-grid">
         <div class="info-card">
-          <div class="info-icon" style="background:var(--teal-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/></svg></div>
+          <div class="info-icon" style="background:var(--blue-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/></svg></div>
           <div class="info-body"><strong>Recebimento com avaria</strong><p>Você documenta e fotografa → Compras trata com fornecedor → Logística abre ocorrência com a transportadora.</p></div>
         </div>
         <div class="info-card">
-          <div class="info-icon" style="background:var(--teal-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div>
+          <div class="info-icon" style="background:var(--blue-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div>
           <div class="info-body"><strong>Entrada de NF no OMIE</strong><p>Você lança → Compras verifica a NF física depois → Financeiro recebe Contas a Pagar gerado automaticamente.</p></div>
         </div>
         <div class="info-card">
-          <div class="info-icon" style="background:var(--teal-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/></svg></div>
+          <div class="info-icon" style="background:var(--blue-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/></svg></div>
           <div class="info-body"><strong>Etiquetagem</strong><p>Você etiqueta com base na Planilha de Compras → identifica consultor/canal e cliente final de cada produto.</p></div>
         </div>
         <div class="info-card">
-          <div class="info-icon" style="background:var(--teal-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/></svg></div>
+          <div class="info-icon" style="background:var(--blue-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/></svg></div>
           <div class="info-body"><strong>Despacho e rota</strong><p>Você organiza a rota interna → Logística coordena entregas fora do perímetro do DF. Produto sem NF: aguardar autorização da Diretoria.</p></div>
         </div>
       </div>
@@ -1135,19 +1128,19 @@ footer p{font-size:11px;color:var(--text3)}
       <div class="section-label">O que verificar ao receber uma mercadoria</div>
       <div class="info-grid">
         <div class="info-card">
-          <div class="info-icon" style="background:var(--green-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/></svg></div>
+          <div class="info-icon" style="background:var(--blue-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/></svg></div>
           <div class="info-body"><strong>Quantidade confere com a NF</strong><p>Contar volumes e unidades. Divergência: não assinar o canhoto antes de registrar a ressalva em escrito.</p></div>
         </div>
         <div class="info-card">
-          <div class="info-icon" style="background:var(--green-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/></svg></div>
+          <div class="info-icon" style="background:var(--blue-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/></svg></div>
           <div class="info-body"><strong>Produto e modelo corretos</strong><p>Verificar número de série quando aplicável. Modelo errado = devolução imediata ao fornecedor.</p></div>
         </div>
         <div class="info-card">
-          <div class="info-icon" style="background:var(--green-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/></svg></div>
+          <div class="info-icon" style="background:var(--blue-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/></svg></div>
           <div class="info-body"><strong>Embalagem íntegra</strong><p>Sem amassados, rasgos ou sinais de queda. Dano externo pode indicar dano interno — fotografar antes de mover.</p></div>
         </div>
         <div class="info-card">
-          <div class="info-icon" style="background:var(--green-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/></svg></div>
+          <div class="info-icon" style="background:var(--blue-bg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/></svg></div>
           <div class="info-body"><strong>NF pertence a um pedido registrado</strong><p>Nunca receber mercadoria sem pedido registrado no sistema. CNPJ destinatário deve estar correto.</p></div>
         </div>
       </div>
@@ -1167,11 +1160,11 @@ footer p{font-size:11px;color:var(--text3)}
       <div class="section-label">Devolução originada pelo Comercial</div>
       <div class="flow-steps">
         <div class="flow-step">
-          <div class="flow-step-n" style="background:var(--teal);color:#fff">1</div>
+          <div class="flow-step-n" style="background:var(--blue);color:#fff">1</div>
           <div class="flow-step-body"><h4>Recebimento no Estoque</h4><p>Receber o produto devolvido. Conferir estado físico, número de série e correspondência com a NF de origem. Fotografar e registrar no OptiWork.</p></div>
         </div>
         <div class="flow-step">
-          <div class="flow-step-n" style="background:var(--teal);color:#fff">2</div>
+          <div class="flow-step-n" style="background:var(--blue);color:#fff">2</div>
           <div class="flow-step-body"><h4>Encaminhar ao Financeiro</h4><p>Comunicar o Financeiro com: NF de origem, produto, motivo e estado do produto. O Financeiro inicia o processo de crédito ou estorno conforme a política.</p></div>
         </div>
         <div class="flow-step">
@@ -1186,7 +1179,7 @@ footer p{font-size:11px;color:var(--text3)}
       <div class="section-label">Devolução originada pelo E-commerce</div>
       <div class="flow-steps">
         <div class="flow-step">
-          <div class="flow-step-n" style="background:var(--teal);color:#fff">1</div>
+          <div class="flow-step-n" style="background:var(--blue);color:#fff">1</div>
           <div class="flow-step-body"><h4>Responsável E-commerce recebe e avalia</h4><p>O responsável pelo canal E-commerce recebe o produto devolvido, avalia se há avaria real, registra o estado e comunica o Estoque.</p></div>
         </div>
         <div class="flow-step">
@@ -1211,7 +1204,7 @@ footer p{font-size:11px;color:var(--text3)}
     <div class="section">
       <div class="section-label">Matriz RACI — Estoque</div>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:1rem">
-        <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--teal-bg);color:var(--teal);border:1px solid rgba(45,212,191,.2)">R — Responsável (executa)</span>
+        <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--blue-bg);color:var(--teal);border:1px solid rgba(79,142,247,.2)">R — Responsável (executa)</span>
         <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--red-bg);color:var(--red);border:1px solid rgba(248,113,113,.2)">A — Aprovador (responde)</span>
         <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--amber-bg);color:var(--amber);border:1px solid rgba(251,191,36,.2)">C — Consultado</span>
         <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--bg3);color:var(--text2);border:1px solid var(--border2)">I — Informado</span>
